@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TestingProject</string>
+    <string name="welcome_note">Welcome To\nAcme Media Group</string>
+
+</resources>
