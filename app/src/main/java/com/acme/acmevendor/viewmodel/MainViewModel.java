@@ -1,9 +1,9 @@
-package com.acme.campaignproject.viewmodel;
+package com.acme.acmevendor.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope;
-import com.acme.campaignproject.models.SendOtpModel;
-import com.acme.campaignproject.repository.CampaignRepository;
+import com.acme.acmevendor.models.SendOtpModel;
+import com.acme.acmevendor.repository.CampaignRepository;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.Job;

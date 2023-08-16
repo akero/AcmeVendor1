@@ -1,4 +1,4 @@
-package com.acme.campaignproject.activity.login;
+package com.acme.acmevendor.activity.login;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,10 +12,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.activity.dashboard.ClientDashBoardActivity;
-import com.acme.campaignproject.databinding.ActivityForgotPasswordBinding;
-import com.acme.campaignproject.utility.NetworkUtils;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.databinding.ActivityForgotPasswordBinding;
+import com.acme.acmevendor.utility.NetworkUtils;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 

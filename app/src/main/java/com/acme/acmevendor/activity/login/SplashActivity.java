@@ -1,11 +1,11 @@
-package com.acme.campaignproject.activity.login;
+package com.acme.acmevendor.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
-import com.acme.campaignproject.R;
+import com.acme.acmevendor.R;
 
 public class SplashActivity extends AppCompatActivity {
 

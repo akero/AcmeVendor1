@@ -1,13 +1,13 @@
-package com.acme.campaignproject.activity.login;
+package com.acme.acmevendor.activity.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.databinding.ActivityChangePasswordBinding;
-import com.acme.campaignproject.utility.NetworkUtils;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.databinding.ActivityChangePasswordBinding;
+import com.acme.acmevendor.utility.NetworkUtils;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 

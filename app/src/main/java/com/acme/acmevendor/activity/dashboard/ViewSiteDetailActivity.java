@@ -1,11 +1,11 @@
-package com.acme.campaignproject.activity.dashboard;
+package com.acme.acmevendor.activity.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import androidx.databinding.DataBindingUtil;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.databinding.ActivityViewSiteDetailBinding;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
 
 public class ViewSiteDetailActivity extends AppCompatActivity {
 

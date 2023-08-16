@@ -1,11 +1,11 @@
-package com.acme.campaignproject.activity;
+package com.acme.acmevendor.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Window;
 import androidx.appcompat.app.AlertDialog;
-import com.acme.campaignproject.R;
+import com.acme.acmevendor.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private AlertDialog pDialog;

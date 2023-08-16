@@ -1,4 +1,4 @@
-package com.acme.campaignproject.activity.dashboard;
+package com.acme.acmevendor.activity.dashboard;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.acme.campaignproject.R;
+import com.acme.acmevendor.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

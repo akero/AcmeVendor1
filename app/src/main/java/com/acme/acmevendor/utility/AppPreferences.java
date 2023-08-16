@@ -1,4 +1,4 @@
-package com.acme.campaignproject.utility;
+package com.acme.acmevendor.utility;
 
 import android.app.Activity;
 import android.content.Context;

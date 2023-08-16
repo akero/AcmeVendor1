@@ -1,8 +1,8 @@
-package com.acme.campaignproject.repository
+package com.acme.acmevendor.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.acme.campaignproject.api.CampaignService
-import com.acme.campaignproject.models.SendOtpResponseModel
+import com.acme.acmevendor.api.CampaignService
+import com.acme.acmevendor.models.SendOtpResponseModel
 import retrofit2.Callback
 import retrofit2.Response
 

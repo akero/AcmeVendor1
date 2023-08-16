@@ -1,17 +1,19 @@
-package com.acme.campaignproject.activity.dashboard;
+package com.acme.acmevendor.activity.dashboard;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.databinding.ActivityAddClientBinding;
-import com.acme.campaignproject.utility.NetworkUtils;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.databinding.ActivityAddClientBinding;
+import com.acme.acmevendor.utility.NetworkUtils;
 
 public class AddClientActivity extends AppCompatActivity {
 

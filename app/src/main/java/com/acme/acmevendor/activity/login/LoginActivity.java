@@ -1,4 +1,4 @@
-package com.acme.campaignproject.activity.login;
+package com.acme.acmevendor.activity.login;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,15 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.activity.dashboard.AdminDashboardActivity;
-import com.acme.campaignproject.activity.dashboard.BaseActivity;
-import com.acme.campaignproject.activity.dashboard.ClientDashBoardActivity;
-import com.acme.campaignproject.activity.vender.VenderDashBoardActivity;
-import com.acme.campaignproject.databinding.ActivityLoginBinding;
-import com.acme.campaignproject.utility.AppPreferences;
-import com.acme.campaignproject.utility.NetworkUtils;
-import com.acme.campaignproject.viewmodel.LoginActivityViewModel;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
+import com.acme.acmevendor.activity.dashboard.BaseActivity;
+import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
+import com.acme.acmevendor.databinding.ActivityLoginBinding;
+import com.acme.acmevendor.utility.AppPreferences;
+import com.acme.acmevendor.utility.NetworkUtils;
+import com.acme.acmevendor.viewmodel.LoginActivityViewModel;
 
 public class LoginActivity extends BaseActivity {
 

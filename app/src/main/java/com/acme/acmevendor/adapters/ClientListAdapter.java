@@ -1,4 +1,4 @@
-package com.acme.campaignproject.adapters;
+package com.acme.acmevendor.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.activity.dashboard.CampaignListActivity;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.CampaignListActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

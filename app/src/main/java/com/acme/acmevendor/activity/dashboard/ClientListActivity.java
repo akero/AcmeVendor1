@@ -1,8 +1,8 @@
-package com.acme.campaignproject.activity.dashboard;
+package com.acme.acmevendor.activity.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.acme.campaignproject.R;
+import com.acme.acmevendor.R;
 
 public class ClientListActivity extends AppCompatActivity {
 

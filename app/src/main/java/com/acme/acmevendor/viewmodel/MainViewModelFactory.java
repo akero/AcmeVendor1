@@ -1,8 +1,8 @@
-package com.acme.campaignproject.viewmodel;
+package com.acme.acmevendor.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import com.acme.campaignproject.repository.CampaignRepository;
+import com.acme.acmevendor.repository.CampaignRepository;
 
 public class MainViewModelFactory implements ViewModelProvider.Factory {
     private CampaignRepository repository;

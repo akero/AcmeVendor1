@@ -1,4 +1,4 @@
-package com.acme.campaignproject.models;
+package com.acme.acmevendor.models;
 
 public class SendOtpResponseModel {
     private String message;

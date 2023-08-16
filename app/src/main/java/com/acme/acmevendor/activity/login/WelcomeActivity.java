@@ -1,4 +1,4 @@
-package com.acme.campaignproject.activity.login;
+package com.acme.acmevendor.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.activity.dashboard.BaseActivity;
-import com.acme.campaignproject.databinding.ActivityWelcomeBinding;
-import com.acme.campaignproject.models.SendOtpResponseModel;
-import com.acme.campaignproject.viewmodel.WelcomeActivityViewModel;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.BaseActivity;
+import com.acme.acmevendor.databinding.ActivityWelcomeBinding;
+import com.acme.acmevendor.models.SendOtpResponseModel;
+import com.acme.acmevendor.viewmodel.WelcomeActivityViewModel;
 
 public class WelcomeActivity extends BaseActivity {
 

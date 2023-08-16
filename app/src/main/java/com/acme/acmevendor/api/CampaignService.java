@@ -1,7 +1,7 @@
-package com.acme.campaignproject.api;
+package com.acme.acmevendor.api;
 
-import com.acme.campaignproject.models.SendOtpModel;
-import com.acme.campaignproject.models.SendOtpResponseModel;
+import com.acme.acmevendor.models.SendOtpModel;
+import com.acme.acmevendor.models.SendOtpResponseModel;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;

@@ -1,4 +1,4 @@
-package com.acme.campaignproject.activity.dashboard;
+package com.acme.acmevendor.activity.dashboard;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,10 +11,10 @@ import android.view.animation.TranslateAnimation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.adapters.CampaignListAdapter;
-import com.acme.campaignproject.adapters.ClientListAdapter;
-import com.acme.campaignproject.databinding.ActivityMainBinding;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.adapters.CampaignListAdapter;
+import com.acme.acmevendor.adapters.ClientListAdapter;
+import com.acme.acmevendor.databinding.ActivityMainBinding;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

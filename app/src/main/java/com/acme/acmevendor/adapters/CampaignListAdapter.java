@@ -1,4 +1,4 @@
-package com.acme.campaignproject.adapters;
+package com.acme.acmevendor.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.activity.dashboard.AdminDashboardActivity;
-import com.acme.campaignproject.activity.dashboard.CampaignListActivity;
-import com.acme.campaignproject.activity.dashboard.ClientDashBoardActivity;
-import com.acme.campaignproject.activity.vender.VenderDashBoardActivity;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
+import com.acme.acmevendor.activity.dashboard.CampaignListActivity;
+import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package com.acme.campaignproject.activity.dashboard;
+package com.acme.acmevendor.activity.dashboard;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,9 +7,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.adapters.CampaignListAdapter;
-import com.acme.campaignproject.databinding.ActivityClientDashBoardBinding;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.adapters.CampaignListAdapter;
+import com.acme.acmevendor.databinding.ActivityClientDashBoardBinding;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

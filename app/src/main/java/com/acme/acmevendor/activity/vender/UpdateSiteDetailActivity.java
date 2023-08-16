@@ -1,11 +1,11 @@
-package com.acme.campaignproject.activity.vender;
+package com.acme.acmevendor.activity.vender;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import androidx.databinding.DataBindingUtil;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.databinding.ActivityUpdateSiteDetailBinding;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.databinding.ActivityUpdateSiteDetailBinding;
 
 public class UpdateSiteDetailActivity extends AppCompatActivity {
 

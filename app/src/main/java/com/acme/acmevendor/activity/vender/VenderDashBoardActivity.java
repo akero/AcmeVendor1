@@ -1,13 +1,13 @@
-package com.acme.campaignproject.activity.vender;
+package com.acme.acmevendor.activity.vender;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import com.acme.campaignproject.R;
-import com.acme.campaignproject.adapters.CampaignListAdapter;
-import com.acme.campaignproject.databinding.ActivityVenderDashBoardBinding;
+import com.acme.acmevendor.R;
+import com.acme.acmevendor.adapters.CampaignListAdapter;
+import com.acme.acmevendor.databinding.ActivityVenderDashBoardBinding;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

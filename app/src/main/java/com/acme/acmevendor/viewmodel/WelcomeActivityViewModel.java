@@ -1,9 +1,9 @@
-package com.acme.campaignproject.viewmodel;
+package com.acme.acmevendor.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.acme.campaignproject.api.CampaignService;
-import com.acme.campaignproject.models.SendOtpResponseModel;
+import com.acme.acmevendor.api.CampaignService;
+import com.acme.acmevendor.models.SendOtpResponseModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
