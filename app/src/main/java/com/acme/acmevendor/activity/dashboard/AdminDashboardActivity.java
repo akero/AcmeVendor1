@@ -15,6 +15,8 @@ import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.adapters.ClientListAdapter;
 import com.acme.acmevendor.databinding.ActivityMainBinding;
+import com.acme.acmevendor.viewmodel.MainViewModel;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

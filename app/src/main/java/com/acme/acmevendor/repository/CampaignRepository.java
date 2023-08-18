@@ -1,31 +1,41 @@
-package com.acme.acmevendor.repository
+package com.acme.acmevendor.repository;
 
-import androidx.lifecycle.MutableLiveData
-import com.acme.acmevendor.api.CampaignService
-import com.acme.acmevendor.models.SendOtpResponseModel
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.MutableLiveData;
+import com.acme.acmevendor.api.CampaignService;
+import com.acme.acmevendor.models.SendOtpResponseModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-class CampaignRepository(private val campaignService: CampaignService) {
+public class CampaignRepository {
 
-    val sendotpLiveData = MutableLiveData<SendOtpResponseModel>()
+    private CampaignService campaignService;
+    private MutableLiveData<SendOtpResponseModel> sendotpLiveData;
 
-    fun sendOtp(countrycode: String, mobile: String) {
-        campaignService.sendOtp(countrycode, mobile).enqueue(object: Callback<SendOtpResponseModel> {
-            override fun onResponse(
-                    call: retrofit2.Call<SendOtpResponseModel>,
-            response: Response<SendOtpResponseModel>
-            ) {
-                if (response.isSuccessful && response.body() != null) {
-                    sendotpLiveData.postValue(response.body())
+    public CampaignRepository(CampaignService campaignService) {
+        this.campaignService = campaignService;
+        this.sendotpLiveData = new MutableLiveData<>();
+    }
+
+    public MutableLiveData<SendOtpResponseModel> getSendotpLiveData() {
+        return sendotpLiveData;
+    }
+
+    public void sendOtp(String countrycode, String mobile) {
+        campaignService.sendOtp(countrycode, mobile).enqueue(new Callback<SendOtpResponseModel>() {
+            @Override
+            public void onResponse(Call<SendOtpResponseModel> call, Response<SendOtpResponseModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    sendotpLiveData.postValue(response.body());
                 } else {
                     // Handle the error case. Maybe post a different kind of data to the LiveData.
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<SendOtpResponseModel>, t: Throwable) {
+            @Override
+            public void onFailure(Call<SendOtpResponseModel> call, Throwable t) {
                 // Handle the failure case. Maybe post a different kind of data to the LiveData.
             }
-        })
+        });
     }
 }
