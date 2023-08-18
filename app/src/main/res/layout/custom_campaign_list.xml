@@ -4,7 +4,7 @@
     android:layout_margin="@dimen/_5sdp"
     android:layout_height="@dimen/_120sdp">
 
-    <com.acme.campaignproject.utility.RoundRectCornerImageView
+    <com.acme.acmevendor.utility.RoundRectCornerImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ivCampaign"

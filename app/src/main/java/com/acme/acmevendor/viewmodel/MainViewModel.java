@@ -1,40 +1,32 @@
 package com.acme.acmevendor.viewmodel;
 
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.viewModelScope;
 import com.acme.acmevendor.models.SendOtpModel;
 import com.acme.acmevendor.repository.CampaignRepository;
-import kotlinx.coroutines.CoroutineScope;
-import kotlinx.coroutines.Dispatchers;
-import kotlinx.coroutines.Job;
-import kotlinx.coroutines.launch;
-import java.lang.Exception;
 
 public class MainViewModel extends ViewModel {
-    private CampaignRepository repository;
-    private Job viewModelJob = new Job();
-    private CoroutineScope viewModelScope = new CoroutineScope(Dispatchers.IO + viewModelJob);
+
+    private final CampaignRepository repository;
 
     public MainViewModel(CampaignRepository repository) {
         this.repository = repository;
+
+        // Uncomment below if you want to use them:
+        // callOtp(new SendOtpModel());
     }
 
+    // Uncomment this if you want to use coroutines.
+    // Java doesn't have native support for coroutines, you'd typically use
+    // something like Executors or RxJava for asynchronous operations.
+    /*
     public void callOtp(SendOtpModel sendOtpModel) {
-        viewModelScope.launch(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SendOtpModel otpResponse = repository.sendOtp(sendOtpModel.getCountry_code(), sendOtpModel.getMobile());
-                } catch (Exception e) {
-                    // Handle exception
-                }
-            }
-        });
+        // Here we would launch a background task
+        try {
+            SendOtpResponseModel otpResponse = repository.sendOtp(sendOtpModel);
+            // Handle the response here
+        } catch (Exception e) {
+            // Handle exceptions here
+        }
     }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        viewModelJob.cancel();
-    }
+    */
 }

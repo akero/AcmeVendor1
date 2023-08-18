@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.BaseActivity;
 import com.acme.acmevendor.databinding.ActivityWelcomeBinding;
-import com.acme.acmevendor.models.SendOtpResponseModel;
+import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.WelcomeActivityViewModel;
 
 public class WelcomeActivity extends BaseActivity {
@@ -21,31 +24,25 @@ public class WelcomeActivity extends BaseActivity {
     private WelcomeActivityViewModel welcomeActivityViewModel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
 
         welcomeActivityViewModel = new ViewModelProvider(this).get(WelcomeActivityViewModel.class);
-        welcomeActivityViewModel.getSuccessresponse().observe(this, new Observer<SendOtpResponseModel>() {
-            @Override
-            public void onChanged(SendOtpResponseModel sendOtpResponseModel) {
-                hideProgressDialog();
-                Toast.makeText(WelcomeActivity.this, sendOtpResponseModel.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d("result", "response " + sendOtpResponseModel);
+        welcomeActivityViewModel.successresponse.observe(this, response -> {
+            hideProgressDialog();
+            Toast.makeText(WelcomeActivity.this, response.getMessage(), Toast.LENGTH_LONG).show();
+            Log.d("result", "response " + response);
 
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                intent.putExtra("Email", binding.etEmailId.getText().toString());
-                startActivity(intent);
-            }
+            Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+            intent.putExtra("Email", binding.etEmailId.getText().toString());
+            startActivity(intent);
         });
 
-        welcomeActivityViewModel.getErrorMessage().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                hideProgressDialog();
-                Toast.makeText(WelcomeActivity.this, s, Toast.LENGTH_LONG).show();
-                Log.d("result", "response " + s);
-            }
+        welcomeActivityViewModel.errorMessage.observe(this, errorMessage -> {
+            hideProgressDialog();
+            Toast.makeText(WelcomeActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+            Log.d("result", "response " + errorMessage);
         });
     }
 

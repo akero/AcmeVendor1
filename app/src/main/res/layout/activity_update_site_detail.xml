@@ -82,7 +82,7 @@
                     android:textSize="@dimen/_14ssp" />
 
 
-                <com.acme.campaignproject.utility.RoundRectCornerImageView
+                <com.acme.acmevendor.utility.RoundRectCornerImageView
                     android:id="@+id/ivCampaignImage"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_120sdp"

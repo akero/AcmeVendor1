@@ -6,7 +6,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.acme.campaignproject"
+        applicationId "com.acme.acmevendor"
         minSdk 26
         targetSdk 33
         versionCode 1

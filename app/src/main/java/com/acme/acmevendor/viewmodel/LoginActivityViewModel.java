@@ -22,7 +22,7 @@ public class LoginActivityViewModel extends ViewModel {
     }
 
     public void callLogin(String countrycode, String mobile) {
-        CampaignService.getInstance().loginUser(countrycode, mobile).enqueue(new Callback<SendOtpResponseModel>() {
+        CampaignService.Creator.getInstance().loginUser(countrycode, mobile).enqueue(new Callback<SendOtpResponseModel>() {
             @Override
             public void onResponse(Call<SendOtpResponseModel> call, Response<SendOtpResponseModel> response) {
                 if (response.isSuccessful()) {

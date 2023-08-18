@@ -13,7 +13,7 @@ public class WelcomeActivityViewModel extends ViewModel {
     public MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     public void callOtp(String countrycode, String mobile) {
-        CampaignService.getInstance().sendOtp(countrycode, mobile).enqueue(new Callback<SendOtpResponseModel>() {
+        CampaignService.Creator.getInstance().sendOtp(countrycode, mobile).enqueue(new Callback<SendOtpResponseModel>() {
             @Override
             public void onResponse(Call<SendOtpResponseModel> call, Response<SendOtpResponseModel> response) {
                 if (response.isSuccessful()) {
@@ -21,6 +21,11 @@ public class WelcomeActivityViewModel extends ViewModel {
                 } else {
                     errorMessage.setValue(response.message());
                 }
+            }
+
+
+            public void onSuccess(Call<SendOtpResponseModel> call, Throwable t){
+                errorMessage.setValue(t.toString());
             }
 
             @Override

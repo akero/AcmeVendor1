@@ -104,7 +104,7 @@ public class CampaignListActivity extends AppCompatActivity {
     }
 
     public void onAddSiteClick(View view) {
-        startActivity(new Intent(this, UpdateSiteDetailActivity.class));
+        startActivity(new Intent(this, AddSiteDetailActivity.class));
     }
 
     public void onRedoClientClick(View view) {
