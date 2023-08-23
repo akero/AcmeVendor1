@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id "com.github.ben-manes.versions" version "0.38.0" // Check for the latest version of the plugin
+
 }
 
 android {
@@ -46,8 +48,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+
     // Room
-    implementation 'androidx.room:room-runtime:2.5.2'
+    //implementation 'androidx.room:room-runtime:2.5.2'
     //implementation 'androidx.room:room:2.5.2'
     annotationProcessor 'androidx.room:room-compiler:2.5.2'
 
