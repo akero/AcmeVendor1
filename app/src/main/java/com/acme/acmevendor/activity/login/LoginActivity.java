@@ -1,9 +1,11 @@
 package com.acme.acmevendor.activity.login;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -65,19 +67,22 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void btnloginClick(View view) {
+        Context context= this;
+
         if (binding.etLoginid.getText().toString().isEmpty() || binding.etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
-            new Thread(() -> {
-                showProgressDialog();
+
                 loginActivityViewModel.callLogin(
                         binding.etLoginid.getText().toString(),
-                        binding.etPassword.getText().toString());
-            }).start();
+                        binding.etPassword.getText().toString(),
+                        context);
+
+            }
         }
-    }
+
 
     @SuppressLint("ResourceAsColor")
     public void btnAdminClick(View view) {

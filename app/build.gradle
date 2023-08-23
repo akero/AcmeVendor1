@@ -34,6 +34,10 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.google.android.gms:play-services-cronet:18.0.1'
+
+
     implementation 'androidx.core:core:1.7.0'
     //implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
 
