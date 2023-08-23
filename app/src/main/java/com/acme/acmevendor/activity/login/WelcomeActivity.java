@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AddVenderActivity;
 import com.acme.acmevendor.activity.dashboard.BaseActivity;
 import com.acme.acmevendor.databinding.ActivityWelcomeBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
@@ -48,8 +49,27 @@ public class WelcomeActivity extends BaseActivity {
             Toast.makeText(WelcomeActivity.this, errorMessage, Toast.LENGTH_LONG).show();
 
     //TODO: REMOVE
-            Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
-            intent.putExtra("Email","rish1994@gmail.com");
+            //Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
+             Intent intent = new Intent(WelcomeActivity.this, AddVenderActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, UpdateSiteDetailActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, VenderDashBoardActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, WelcomeActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, ChangePasswordActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, ViewSiteDetailActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, CampaignListActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, AddSiteDetailActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, AddClientActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, ClientDashBoardActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, BaseActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, ForgotPasswordActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, ClientListActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, AdminDashboardActivity.class);
+// Intent intent = new Intent(WelcomeActivity.this, SplashActivity.class);
+
+
+
+            //intent.putExtra("Email","rish1994@gmail.com");
             startActivity(intent);
     //TODO
 
