@@ -36,6 +36,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.etLoginid.setText(getIntent().getStringExtra("Email"));
 
@@ -43,7 +44,7 @@ public class LoginActivity extends BaseActivity {
         loginActivityViewModel.getSuccessresponse().observe(this, response -> {
             hideProgressDialog();
             Toast.makeText(LoginActivity.this, response.getMessage(), Toast.LENGTH_LONG).show();
-            Log.d("result", "response " + response);
+            Log.d("result1", "response " + response);
 
             AppPreferences.getInstance(LoginActivity.this).saveUserData(response.toString());
 
@@ -59,7 +60,7 @@ public class LoginActivity extends BaseActivity {
         loginActivityViewModel.getErrorMessage().observe(this, errorMessage -> {
             hideProgressDialog();
             Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_LONG).show();
-            Log.d("result", "response " + errorMessage);
+            Log.d("result1", "response " + errorMessage);
         });
     }
 

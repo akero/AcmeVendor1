@@ -26,13 +26,17 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("tag2","start of welcomeactivity");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
 
         welcomeActivityViewModel = new ViewModelProvider(this).get(WelcomeActivityViewModel.class);
         welcomeActivityViewModel.successresponse.observe(this, response -> {
             hideProgressDialog();
             Toast.makeText(WelcomeActivity.this, response.getMessage(), Toast.LENGTH_LONG).show();
-            Log.d("result", "response " + response);
+            Log.d("tag2", "response " + response);
+
+
 
             Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
             intent.putExtra("Email", binding.etEmailId.getText().toString());
@@ -42,7 +46,15 @@ public class WelcomeActivity extends BaseActivity {
         welcomeActivityViewModel.errorMessage.observe(this, errorMessage -> {
             hideProgressDialog();
             Toast.makeText(WelcomeActivity.this, errorMessage, Toast.LENGTH_LONG).show();
-            Log.d("result", "response " + errorMessage);
+
+    //TODO: REMOVE
+            Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
+            intent.putExtra("Email","rish1994@gmail.com");
+            startActivity(intent);
+    //TODO
+
+
+            Log.d("tag2", "responseerror " + errorMessage);
         });
     }
 
