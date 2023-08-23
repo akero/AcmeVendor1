@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.AddVenderActivity;
 import com.acme.acmevendor.activity.dashboard.BaseActivity;
+import com.acme.acmevendor.activity.vender.UpdateSiteDetailActivity;
 import com.acme.acmevendor.databinding.ActivityWelcomeBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.WelcomeActivityViewModel;
@@ -50,11 +51,11 @@ public class WelcomeActivity extends BaseActivity {
 
     //TODO: REMOVE
             //Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
-             Intent intent = new Intent(WelcomeActivity.this, AddVenderActivity.class);
-// Intent intent = new Intent(WelcomeActivity.this, UpdateSiteDetailActivity.class);
+             //Intent intent = new Intent(WelcomeActivity.this, AddVenderActivity.class);
+//Intent intent = new Intent(WelcomeActivity.this, UpdateSiteDetailActivity.class);
 // Intent intent = new Intent(WelcomeActivity.this, VenderDashBoardActivity.class);
 // Intent intent = new Intent(WelcomeActivity.this, WelcomeActivity.class);
-// Intent intent = new Intent(WelcomeActivity.this, ChangePasswordActivity.class);
+ Intent intent = new Intent(WelcomeActivity.this, ChangePasswordActivity.class);
 // Intent intent = new Intent(WelcomeActivity.this, ViewSiteDetailActivity.class);
 // Intent intent = new Intent(WelcomeActivity.this, CampaignListActivity.class);
 // Intent intent = new Intent(WelcomeActivity.this, AddSiteDetailActivity.class);
