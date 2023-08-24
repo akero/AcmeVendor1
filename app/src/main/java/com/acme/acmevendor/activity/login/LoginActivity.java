@@ -26,9 +26,10 @@ import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.databinding.ActivityLoginBinding;
 import com.acme.acmevendor.utility.AppPreferences;
 import com.acme.acmevendor.utility.NetworkUtils;
+import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.LoginActivityViewModel;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ApiInterface {
 
     private ActivityLoginBinding binding;
     private boolean hidePassword = true;
@@ -65,6 +66,8 @@ public class LoginActivity extends BaseActivity {
             Log.d("result1", "response " + errorMessage);
         });
     }
+
+
 
     public void btnloginClick(View view) {
         Context context= this;
@@ -122,5 +125,10 @@ try {
             binding.ivHidepassword.setImageResource(R.drawable.ic_eye_hide);
             binding.etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
+    }
+
+    @Override
+    public void onResponseReceived(String response){
+        Log.d("tag10", "response is "+ response);
     }
 }

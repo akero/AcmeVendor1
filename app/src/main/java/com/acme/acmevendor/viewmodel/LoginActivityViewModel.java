@@ -84,7 +84,7 @@ public class LoginActivityViewModel extends ViewModel {
         };
 
         UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                        "https://acme.warburttons.com/api/login", new MyUrlRequestCallback(), cronetExecutor)
+                        "https://acme.warburttons.com/api/login", new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
                 .setHttpMethod("POST")  // Set the method to POST
                 .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
                 .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
@@ -92,11 +92,16 @@ public class LoginActivityViewModel extends ViewModel {
         UrlRequest request = requestBuilder.build();
         request.start();
 
-
         }
 
     class MyUrlRequestCallback extends UrlRequest.Callback {
         private static final String TAG = "MyUrlRequestCallback";
+        ApiInterface ai;
+
+        public MyUrlRequestCallback(ApiInterface logincontext){
+            this.ai= logincontext;
+
+        }
 
         @Override
         public void onRedirectReceived(UrlRequest request, UrlResponseInfo info, String newLocationUrl) {
@@ -152,7 +157,9 @@ public class LoginActivityViewModel extends ViewModel {
 
             // If you also want the UrlResponseInfo as a string:
             String responseInfoString = urlresponseinfotostring(info);
-                
+
+            //sending to interface
+            ai.onResponseReceived(responseBody);
 
 
             Log.d("tag4", responseBody+"------INFO______"+responseInfoString);
