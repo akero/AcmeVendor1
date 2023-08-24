@@ -10,12 +10,20 @@ import com.acme.acmevendor.models.SendOtpResponseModel;
 
 import org.chromium.net.CronetEngine;
 import org.chromium.net.CronetException;
+import org.chromium.net.UploadDataProvider;
+import org.chromium.net.UploadDataSink;
 import org.chromium.net.UrlRequest;
 import org.chromium.net.UrlResponseInfo;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.zip.GZIPOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,34 +45,55 @@ public class LoginActivityViewModel extends ViewModel {
     Executor cronetExecutor= Executors.newSingleThreadExecutor();
 
     public void callLogin(String email, String pass, Context context) {
+        //TODO REMOVE
+        email= "ven@gmail.com";
+        pass = "123456";
+        //TODO
 
-        CronetEngine.Builder builder= new CronetEngine.Builder(context);
-        CronetEngine cronetEngine= builder.build();
+        CronetEngine.Builder builder = new CronetEngine.Builder(context);
+        CronetEngine cronetEngine = builder.build();
+
+        // Create a JSON payload with the email and password
+        String jsonPayload = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\"}";
+
+        // Convert the JSON payload to bytes for uploading
+        final byte[] postData = jsonPayload.getBytes(StandardCharsets.UTF_8);
+
+        // Create an upload data provider to send the POST data
+        UploadDataProvider uploadDataProvider = new UploadDataProvider() {
+            @Override
+            public long getLength() throws IOException {
+                return postData.length;
+            }
+
+            @Override
+            public void read(UploadDataSink uploadDataSink, ByteBuffer byteBuffer) throws IOException {
+                byteBuffer.put(postData);
+                uploadDataSink.onReadSucceeded(false);
+            }
+
+            @Override
+            public void rewind(UploadDataSink uploadDataSink) throws IOException {
+                uploadDataSink.onRewindSucceeded();
+            }
+
+            @Override
+            public void close() throws IOException {
+                // No-op
+            }
+        };
 
         UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                "https://acme.warburttons.com/api/login", new MyUrlRequestCallback(), cronetExecutor);
+                        "https://acme.warburttons.com/api/login", new MyUrlRequestCallback(), cronetExecutor)
+                .setHttpMethod("POST")  // Set the method to POST
+                .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
+                .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
 
         UrlRequest request = requestBuilder.build();
         request.start();
 
 
-        /*
-        CampaignService.Creator.getInstance().loginUser(email, pass).enqueue(new Callback<SendOtpResponseModel>() {
-            @Override
-            public void onResponse(Call<SendOtpResponseModel> call, Response<SendOtpResponseModel> response) {
-                if (response.isSuccessful()) {
-                    successresponse.setValue(response.body());
-                } else {
-                    errorMessage.setValue(response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SendOtpResponseModel> call, Throwable t) {
-                errorMessage.setValue(t.toString());
-            }
-        });
-    */}
+        }
 
     class MyUrlRequestCallback extends UrlRequest.Callback {
         private static final String TAG = "MyUrlRequestCallback";
@@ -93,18 +122,69 @@ public class LoginActivityViewModel extends ViewModel {
             }
         }
 
+
+        ;
+        private final ByteArrayOutputStream outputByte= new ByteArrayOutputStream();
+
         @Override
         public void onReadCompleted(UrlRequest request, UrlResponseInfo info, ByteBuffer byteBuffer) {
             Log.i(TAG, "onReadCompleted method called.");
-            // You should keep reading the request until there's no more data.
-            byteBuffer.clear();
-            request.read(byteBuffer);
+
+            byteBuffer.flip();
+            try {
+                byte[] bytes = new byte[byteBuffer.remaining()];
+                byteBuffer.get(bytes);  // Ensure you get the bytes from the ByteBuffer
+                outputByte.write(bytes, 0, bytes.length);
+
+                byteBuffer.clear();
+                request.read(byteBuffer);
+            } catch (Exception e) {
+                Log.d("tag4", e.toString());
+            }
         }
+
 
         @Override
         public void onSucceeded(UrlRequest request, UrlResponseInfo info) {
-            Log.i(TAG, "onSucceeded method called.");
 
+            String responseBody = new String(outputByte.toByteArray(), StandardCharsets.UTF_8);
+            Log.d("ResponseBody", responseBody);
+
+            // If you also want the UrlResponseInfo as a string:
+            String responseInfoString = urlresponseinfotostring(info);
+
+            Log.d("tag4", responseBody+"------INFO______"+responseInfoString);
+
+        }
+
+        public String urlresponseinfotostring(UrlResponseInfo info){
+            String ret="";
+            StringBuilder sb = new StringBuilder();
+
+            // Append URL chain
+            sb.append("URL Chain: ").append(info.getUrlChain().toString()).append("\n");
+
+            // Append HTTP status code
+            sb.append("HTTP Status: ").append(info.getHttpStatusCode()).append("\n");
+
+            // Append headers
+            sb.append("Headers:\n");
+            for (Map.Entry<String, List<String>> header : info.getAllHeaders().entrySet()) {
+                for (String value : header.getValue()) {
+                    sb.append(header.getKey()).append(": ").append(value).append("\n");
+                }
+
+
+            }
+
+            // Append other details
+            sb.append("Was Cached: ").append(info.wasCached()).append("\n");
+            sb.append("Negotiated Protocol: ").append(info.getNegotiatedProtocol()).append("\n");
+            sb.append("Proxy Server: ").append(info.getProxyServer()).append("\n");
+            sb.append("Received Byte Count: ").append(info.getReceivedByteCount()).append("\n");
+            ret=sb.toString();
+
+            return ret;
         }
 
         @Override

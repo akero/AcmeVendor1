@@ -69,17 +69,22 @@ public class LoginActivity extends BaseActivity {
     public void btnloginClick(View view) {
         Context context= this;
 
+
+
         if (binding.etLoginid.getText().toString().isEmpty() || binding.etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
-
-                loginActivityViewModel.callLogin(
-                        binding.etLoginid.getText().toString(),
-                        binding.etPassword.getText().toString(),
-                        context);
-
+try {
+    loginActivityViewModel.callLogin(
+            binding.etLoginid.getText().toString(),
+            binding.etPassword.getText().toString(),
+            context);
+    Log.d("tag4", "success");
+}catch(Exception e){
+    Log.d("tag4", e.toString());
+}
             }
         }
 
