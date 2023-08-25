@@ -131,7 +131,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
         UrlRequest request = requestBuilder.build();
         request.start();
-        startActivity(new Intent(this, UpdateSiteDetailActivity.class));
     }
 
     @Override
@@ -142,10 +141,10 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         String campaignType="";
         int position= 0;
 
-        Intent intent= new Intent(VenderDashBoardActivity.this, ViewSiteDetailActivity.class);
+        Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
         intent.putExtra("campaigntype", campaignType);
         intent.putExtra("position", position);
-        startActivity(intent);
+        startActivity( intent);
 
 
         //        Intent intent= new Intent(VenderDashBoardActivity.this, VenderDashBoardActivity.class);
