@@ -102,8 +102,6 @@ public class MyUrlRequestCallback extends UrlRequest.Callback {
             for (String value : header.getValue()) {
                 sb.append(header.getKey()).append(": ").append(value).append("\n");
             }
-
-
         }
 
         // Append other details

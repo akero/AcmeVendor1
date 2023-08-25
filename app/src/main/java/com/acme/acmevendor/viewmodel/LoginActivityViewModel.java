@@ -51,6 +51,8 @@ public class LoginActivityViewModel extends ViewModel {
         pass = "123456";
         //TODO
 
+    //adding api here
+
         CronetEngine.Builder builder = new CronetEngine.Builder(context);
         CronetEngine cronetEngine = builder.build();
 
@@ -92,8 +94,5 @@ public class LoginActivityViewModel extends ViewModel {
 
         UrlRequest request = requestBuilder.build();
         request.start();
-
         }
-
-
 }

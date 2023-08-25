@@ -130,7 +130,7 @@ try {
     @Override
     public void onResponseReceived(String response){
         Log.d("tag10", "response is "+ response);
-        Intent intent= new Intent(LoginActivity.this, AdminDashboardActivity.class);
+        Intent intent= new Intent(LoginActivity.this, VenderDashBoardActivity.class);
         startActivity(intent);
     }
 }
