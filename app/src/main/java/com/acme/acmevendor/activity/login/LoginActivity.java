@@ -72,8 +72,6 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
     public void btnloginClick(View view) {
         Context context= this;
 
-
-
         if (binding.etLoginid.getText().toString().isEmpty() || binding.etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {

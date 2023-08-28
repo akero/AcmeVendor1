@@ -33,6 +33,7 @@ public class CampaignListActivity extends AppCompatActivity {
 
         JSONArray jsonArray = new JSONArray();
         try {
+
             JSONObject jsonObjectairbnb = new JSONObject();
             jsonObjectairbnb.put("sitenumber", "001");
             jsonObjectairbnb.put("unitnumber", "#887001");
@@ -52,6 +53,7 @@ public class CampaignListActivity extends AppCompatActivity {
             jsonObjectpatanjli.put("sitenumber", "004");
             jsonObjectpatanjli.put("unitnumber", "#432004");
             jsonArray.put(jsonObjectpatanjli);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
