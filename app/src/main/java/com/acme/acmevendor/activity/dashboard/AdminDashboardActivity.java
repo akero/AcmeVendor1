@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        clientList();
+
         campaignList();
     }
 
@@ -39,36 +40,106 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObjectairbnb = new JSONObject();
-        // ... similar code for other JSON objects...
 
-        // ... rest of your initialization logic ...
+        try {
+            JSONObject jsonObjectairbnb = new JSONObject();
+            jsonObjectairbnb.put("sitenumber", "001");
+            jsonObjectairbnb.put("unitnumber", "#887001");
+            jsonArray.put(jsonObjectairbnb);
+
+            JSONObject jsonObjecthyundai = new JSONObject();
+            jsonObjecthyundai.put("sitenumber", "002");
+            jsonObjecthyundai.put("unitnumber", "#878002");
+            jsonArray.put(jsonObjecthyundai);
+
+            JSONObject jsonObjectford = new JSONObject();
+            jsonObjectford.put("sitenumber", "003");
+            jsonObjectford.put("unitnumber", "#765003");
+            jsonArray.put(jsonObjectford);
+
+            JSONObject jsonObjectpatanjli = new JSONObject();
+            jsonObjectpatanjli.put("sitenumber", "004");
+            jsonObjectpatanjli.put("unitnumber", "#432004");
+            jsonArray.put(jsonObjectpatanjli);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
         binding.rvCampaignList.setAdapter(adapter);
     }
 
     private void clientList() {
-        GridLayoutManager layoutManager1 = new GridLayoutManager(this, 2);
-        GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        binding.rvCampaignList.setLayoutManager(layoutManager);
 
-        binding.rvClientList.setLayoutManager(layoutManager1);
-        binding.rvVenderList.setLayoutManager(layoutManager2);
+        JSONArray jsonArray = new JSONArray();
 
-        jsonArray = new JSONArray();
-        JSONObject jsonObjectairbnb = new JSONObject();
-        // ... similar code for other JSON objects...
+        try {
+            JSONObject jsonObjectairbnb = new JSONObject();
+            jsonObjectairbnb.put("sitenumber", "001");
+            jsonObjectairbnb.put("unitnumber", "#887001");
+            jsonArray.put(jsonObjectairbnb);
 
-        // ... rest of your initialization logic ...
+            JSONObject jsonObjecthyundai = new JSONObject();
+            jsonObjecthyundai.put("sitenumber", "002");
+            jsonObjecthyundai.put("unitnumber", "#878002");
+            jsonArray.put(jsonObjecthyundai);
 
-        ClientListAdapter adapter1 = new ClientListAdapter(this, jsonArray);
-        ClientListAdapter adapter2 = new ClientListAdapter(this, jsonArray);
+            JSONObject jsonObjectford = new JSONObject();
+            jsonObjectford.put("sitenumber", "003");
+            jsonObjectford.put("unitnumber", "#765003");
+            jsonArray.put(jsonObjectford);
 
-        binding.rvVenderList.setAdapter(adapter1);
-        binding.rvClientList.setAdapter(adapter2);
+            JSONObject jsonObjectpatanjli = new JSONObject();
+            jsonObjectpatanjli.put("sitenumber", "006");
+            jsonObjectpatanjli.put("unitnumber", "#432004");
+            jsonArray.put(jsonObjectpatanjli);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
+        binding.rvCampaignList.setAdapter(adapter);
+    }
+
+    private void venderList() {
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        binding.rvCampaignList.setLayoutManager(layoutManager);
+
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            JSONObject jsonObjectairbnb = new JSONObject();
+            jsonObjectairbnb.put("sitenumber", "001");
+            jsonObjectairbnb.put("unitnumber", "#887001");
+            jsonArray.put(jsonObjectairbnb);
+
+            JSONObject jsonObjecthyundai = new JSONObject();
+            jsonObjecthyundai.put("sitenumber", "002");
+            jsonObjecthyundai.put("unitnumber", "#878002");
+            jsonArray.put(jsonObjecthyundai);
+
+            JSONObject jsonObjectford = new JSONObject();
+            jsonObjectford.put("sitenumber", "003");
+            jsonObjectford.put("unitnumber", "#765003");
+            jsonArray.put(jsonObjectford);
+
+            JSONObject jsonObjectpatanjli = new JSONObject();
+            jsonObjectpatanjli.put("sitenumber", "005");
+            jsonObjectpatanjli.put("unitnumber", "#432004");
+            jsonArray.put(jsonObjectpatanjli);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
+        binding.rvCampaignList.setAdapter(adapter);
     }
 
     public void onPlusClick(View view) {
+
+        Log.d("tag20", "onplusclick");
         // ... your logic ...
     }
 
@@ -86,16 +157,21 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     public void btnCompaignClick(View view) {
+        campaignList();
         // ... your logic ...
     }
 
     @SuppressLint("ResourceAsColor")
     public void btnVenderClick(View view) {
+        Log.d("tag20", "btnvenderclick");
+        venderList();
         // ... your logic ...
     }
 
     @SuppressLint("ResourceAsColor")
     public void btnClientClick(View view) {
+        Log.d("tag20", "btnclientclick");
+        clientList();
         // ... your logic ...
     }
 
