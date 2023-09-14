@@ -3,6 +3,7 @@ package com.acme.acmevendor.activity.dashboard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,6 +13,8 @@ import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.databinding.ActivityClientDashBoardBinding;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.FileReader;
 
 public class ClientDashBoardActivity extends AppCompatActivity {
 
@@ -39,6 +42,26 @@ public class ClientDashBoardActivity extends AppCompatActivity {
         binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
         binding.tvLiveCampaign.setTextColor(Color.parseColor("#FFFFFF"));
         binding.tvOldCampaign.setTextColor(Color.parseColor("#0089BE"));
+    }
+
+    String readFile(){
+
+
+        String token="";
+        try {
+            FileReader fr = new FileReader("logintoken");
+            int i=0;
+            String a="";
+            while((i=fr.read())!=-1){
+                a=a+((char)i);
+            }
+
+
+
+        }catch(Exception e){
+            Log.d("tag26", e.toString());
+        }
+        return token;
     }
 
     private void campaignList() {

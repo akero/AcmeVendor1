@@ -29,6 +29,8 @@ import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.LoginActivityViewModel;
 
+import java.io.FileOutputStream;
+
 public class LoginActivity extends BaseActivity implements ApiInterface {
 
     private ActivityLoginBinding binding;
@@ -43,6 +45,7 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.etLoginid.setText(getIntent().getStringExtra("Email"));
 
+
         loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
         loginActivityViewModel.getSuccessresponse().observe(this, response -> {
             hideProgressDialog();
@@ -52,10 +55,18 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
             AppPreferences.getInstance(LoginActivity.this).saveUserData(response.toString());
 
             if (loginType == 0) {
+
+                Log.d("tag23", "0");
                 startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
+
             } else if (loginType == 1) {
+
+                Log.d("tag23", "1");
                 startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
+
             } else {
+
+                Log.d("tag23", "2");
                 startActivity(new Intent(LoginActivity.this, VenderDashBoardActivity.class));
             }
         });
@@ -92,20 +103,50 @@ try {
 
     @SuppressLint("ResourceAsColor")
     public void btnAdminClick(View view) {
+
         loginType = 1;
+
+        binding.tvAdminLogin.setTextColor(Color.WHITE);
+        binding.tvClientLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvVenderLogin.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvAdminLogin.setBackgroundResource(R.drawable.primaryround);
+        binding.tvClientLogin.setBackgroundResource(0);
+        binding.tvVenderLogin.setBackgroundResource(0);
+
         // Set backgrounds and colors similarly for the views as mentioned in the Kotlin code
         // Repeat this for other methods too
     }
 
     @SuppressLint("ResourceAsColor")
     public void btnVenderClick(View view) {
+
         loginType = 2;
+
+        binding.tvAdminLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvClientLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvVenderLogin.setTextColor(Color.WHITE);
+
+        binding.tvAdminLogin.setBackgroundResource(0);
+        binding.tvClientLogin.setBackgroundResource(0);
+        binding.tvVenderLogin.setBackgroundResource(R.drawable.primaryround);
+
         // Set backgrounds and colors similarly for the views as mentioned in the Kotlin code
     }
 
     @SuppressLint("ResourceAsColor")
     public void btnClientClick(View view) {
+
         loginType = 0;
+
+        binding.tvAdminLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvClientLogin.setTextColor(Color.WHITE);
+        binding.tvVenderLogin.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvAdminLogin.setBackgroundResource(0);
+        binding.tvClientLogin.setBackgroundResource(R.drawable.primaryround);
+        binding.tvVenderLogin.setBackgroundResource(0);
+
         // Set backgrounds and colors similarly for the views as mentioned in the Kotlin code
     }
 
@@ -127,8 +168,69 @@ try {
 
     @Override
     public void onResponseReceived(String response){
-        Log.d("tag10", "response is "+ response);
-        Intent intent= new Intent(LoginActivity.this, AdminDashboardActivity.class);
-        startActivity(intent);
+
+        if (loginType == 0) {
+
+            String res="";
+            res=response.replace("{\"success\":true,\"data\":{\"token\":\"","");
+            int a= res.indexOf(",");
+            res=res.substring(0,a-1);
+            writeToFile(res, this);
+
+            Log.d("tag23", "0" +res);
+            startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
+
+        } else if (loginType == 1) {
+
+            String res="";
+            res=response.replace("{\"success\":true,\"data\":{\"token\":\"","");
+            int a= res.indexOf(",");
+            res=res.substring(0,a-1);
+            writeToFile(res, this);
+
+
+            Log.d("tag23", "1"+ res);
+
+            startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
+
+        } else {
+
+            String res="";
+            res=response.replace("{\"success\":true,\"data\":{\"token\":\"","");
+            int a= res.indexOf(",");
+            res=res.substring(0,a-1);
+            writeToFile(res, this);
+
+            Log.d("tag23", "2"+res);
+
+
+            startActivity(new Intent(LoginActivity.this, VenderDashBoardActivity.class));
+        }
+
+    }
+
+    void writeToFile(String response, Context context){
+        String name="logintoken";
+        String content= response;
+        FileOutputStream fostream= null;
+
+        try{
+            fostream= context.openFileOutput(name,Context.MODE_PRIVATE);
+            fostream.write(response.getBytes());
+            fostream.close();
+
+        }catch(Exception e){
+            Log.d("tag24", "error-" +e.toString());
+        }
+        finally{
+            try{
+
+                if(fostream!=null){
+                    fostream.close();
+                }
+            }catch(Exception e){
+                Log.d("tag25","Closing outputstream failed");
+            }
+        }
     }
 }

@@ -17,6 +17,8 @@ import org.chromium.net.UrlRequest;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -43,23 +45,49 @@ public class APIreferenceclass {
 
         //campaign
         if (vendorclientorcampaign == 0) {
-Log.d("tag21","1");
+
+            Log.d("tag21","1");
 
             String url="https://acme.warburttons.com/api/get_campaign_sites/18";
             querytype=0;
-            String jsonPayload = "{\"Authorization\":"+logintoken+"}";
-            callapi(jsonPayload, context, querytype, url);
+            String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            callapi(headers, jsonPayload, context, querytype, url);
         }
 
         //client
         else if (vendorclientorcampaign == 1) {
 
+            String url="https://acme.warburttons.com/api/get_client_campaigns";
+            querytype= 0;
+            String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
+
+            Map<String, String> headers= new HashMap<>();
+            headers.put("Authorization", "bearer"+logintoken);
+            headers.put("Content-Type", "application/json");
+
+            callapi(headers, jsonPayload, context, querytype, url);
         }
 
         //vendor
         else if (vendorclientorcampaign == 2) {
 
-        }
+            String url="https://acme.warburttons.com/api/get_vendor_campaigns";
+
+            querytype=0; //GET
+            String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";
+
+            Map<String, String> headers= new HashMap<>();
+            headers.put("Authorization", "bearer"+logintoken);
+            headers.put("Content-Type", "application/json");
+
+            callapi(headers, jsonPayload, context, querytype, url);
+
+      }
     }
 
 
@@ -69,11 +97,24 @@ Log.d("tag21","1");
     public APIreferenceclass(Context context) {
     }
 
+    public APIreferenceclass(String countrycode, String mobile, Context context){
+
+        //TODO- change
+        String url="https://acme.warburttons.com/api/register";
+        querytype=1; //POST
+        Map<String, String> headers= new HashMap<>();
+        headers.put("Content-Type", "application/json");
+
+
+
+
+    }
+
     public APIreferenceclass(String logintoken, Context context) {
     }
 
 
-    public void callapi(String jsonPayload, Context context, int querytype, String url) {
+    public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
 
         try {
             //adding api here
@@ -123,15 +164,32 @@ Log.d("tag21","1");
                         .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
                         .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
 
-            }else{
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    requestBuilder.addHeader(header.getKey(), header.getValue());
+                }
+
+            }else if (querytype==1){
                 requestBuilder = cronetEngine.newUrlRequestBuilder(
                                 url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
                         .setHttpMethod("POST")  // Set the method to POST
                         .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
                         .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
 
-            }
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    requestBuilder.addHeader(header.getKey(), header.getValue());
+                }
 
+            }else {
+                    requestBuilder = cronetEngine.newUrlRequestBuilder(
+                                    url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
+                            .setHttpMethod("POST")  // Set the method to POST
+                            .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
+                            .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
+
+                    for (Map.Entry<String, String> header : headers.entrySet()) {
+                        requestBuilder.addHeader(header.getKey(), header.getValue());
+                    }
+                }
             UrlRequest request = requestBuilder.build();
             request.start();Log.d("tag21","4");
         } catch (Exception e) {
