@@ -13,6 +13,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity {
     private int position = 0;
     private ActivityViewSiteDetailBinding binding;
 
+    //TODO populate all fields. pass api call data from prev activity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +37,18 @@ public class ViewSiteDetailActivity extends AppCompatActivity {
     }
 
     public void btnNextClick(View view) {
+        //TODO ask what this does
         // finish();
     }
 
+    public void onNotificationClick(View view){
+        //TODO ask lodu what this does
+    }
+
     public void onDownloadClick(View view) {
-        // finish();
+
+        //TODO put shit in a file and download and finish activity
+        finish();
     }
 
     public void oldCampaignClick(View view) {

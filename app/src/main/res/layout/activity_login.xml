@@ -95,7 +95,7 @@
                     android:onClick="btnVenderClick"
                     android:fontFamily="@font/dmsansregular"
                     android:padding="@dimen/_2sdp"
-                    android:text="Vender"
+                    android:text="Vendor"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/_14ssp" />

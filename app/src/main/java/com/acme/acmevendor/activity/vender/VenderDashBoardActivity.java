@@ -36,6 +36,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     private ActivityVenderDashBoardBinding binding;
     Executor cronetExecutor= Executors.newSingleThreadExecutor();
 
+    //TODO add api call and populate
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

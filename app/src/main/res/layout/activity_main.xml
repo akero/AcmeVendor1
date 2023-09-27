@@ -29,6 +29,7 @@
                 android:id="@+id/ivNotification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onNotificationClick"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_10sdp"
@@ -98,7 +99,7 @@
                 android:onClick="btnVenderClick"
                 android:fontFamily="@font/dmsansregular"
                 android:padding="@dimen/_2sdp"
-                android:text="Vender"
+                android:text="Vendor"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/_14ssp" />

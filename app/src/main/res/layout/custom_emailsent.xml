@@ -29,7 +29,7 @@
             android:layout_below="@id/tvSuccess"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/dmsansregular"
-            android:text="Please check your email for create\na new password"
+            android:text="Please check your email to\na change password"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
@@ -42,7 +42,7 @@
             android:layout_below="@id/tvMsg"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/dmsansregular"
-            android:text="Can't get email? Resubmit"
+            android:text="Didn't receive email? Resend"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />

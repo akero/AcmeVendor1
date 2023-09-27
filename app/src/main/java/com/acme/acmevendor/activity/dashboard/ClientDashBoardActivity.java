@@ -21,6 +21,8 @@ public class ClientDashBoardActivity extends AppCompatActivity {
     private ActivityClientDashBoardBinding binding;
     private boolean oldcampaign = true;
 
+    //TODO handle clicks on old and live campaign, make api call, parse data, populate. pass site details api data to viewsitedetailactivity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,10 @@ public class ClientDashBoardActivity extends AppCompatActivity {
         binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
         binding.tvLiveCampaign.setTextColor(Color.parseColor("#FFFFFF"));
         binding.tvOldCampaign.setTextColor(Color.parseColor("#0089BE"));
+    }
+
+    public void onNotificationClick(View v){
+        //TODO ask lodu what this does
     }
 
     String readFile(){

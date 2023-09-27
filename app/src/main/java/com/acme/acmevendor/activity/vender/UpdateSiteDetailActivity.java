@@ -48,6 +48,12 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
         finish();
     }
 
+    public void btnUpdateClick(View view) {
+
+        //TODO add dialog to select photo and make api call and finish
+        finish();
+    }
+
     public void btnSaveClick(View view) {
 
         try {
@@ -101,6 +107,9 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
         } catch (Exception e) {
             Log.d("tag12", e.toString());
         }
+        //TODO make api call to send data to api
+        finish();
+
     }
     Executor cronetExecutor= Executors.newSingleThreadExecutor();
     @Override

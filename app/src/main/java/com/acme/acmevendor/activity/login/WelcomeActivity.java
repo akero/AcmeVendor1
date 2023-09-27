@@ -25,6 +25,8 @@ public class WelcomeActivity extends BaseActivity {
     private ActivityWelcomeBinding binding;
     private WelcomeActivityViewModel welcomeActivityViewModel;
 
+    //TODO add flow to enter otp etc and finish login after saving login token
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

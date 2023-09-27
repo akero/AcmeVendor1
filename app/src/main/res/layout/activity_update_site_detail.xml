@@ -100,7 +100,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/primarystroke"
                     android:fontFamily="@font/dmsansbold"
-                    android:onClick="btnNextClick"
+                    android:onClick="btnUpdateClick"
                     android:text="Update Site Photograph"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"

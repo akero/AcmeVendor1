@@ -47,7 +47,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.custom_emailsent, null);
         TextView tvResubmit = view.findViewById(R.id.tvResubmit);
-        String text = "<font color=#0089BE>Can't get email? </font> <font color=#DA2829>Resubmit</font>";
+        String text = "<font color=#0089BE>Didn't receive email? </font> <font color=#DA2829>Resubmit</font>";
         tvResubmit.setText(Html.fromHtml(text));
         Button btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);

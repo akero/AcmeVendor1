@@ -1,6 +1,7 @@
 package com.acme.acmevendor.activity.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -143,16 +144,159 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if (data[v].endsWith("}")){
                 data[v]= data[v].substring(0, data[v].length()-1);
             }
-            //"id":25,"image":"images\/qSFXR5qpbxW3lVEArBvczhyqg6OASG2J5OombCAS.png","vendor_id":"32","campaign_id":18,"start_date":"2023-05-03","end_date":"2023-05-05","location":"delhi","longitute":"34","latitude":"34","width":"23","height":"23","total_area":"32","media_type":"fssf","illumination":"fdf","created_at":"24\/07\/2023","updated_at":"24\/07\/2023"
 
-            //TODO sort this data and populate page. then implement for vendor and client
+            implementUi(data);
+
 
             Log.d("tag27", data[v]);
 
         }
     }
 
+    //TODO sort this data and populate page. then implement for vendor and client
 
+    private final Context ctxt= this;
+
+    //array for campaign id
+    String campaignidarray[][];
+
+    private void implementUi(String a[]){
+
+        //"id":25,"image":"images\/qSFXR5qpbxW3lVEArBvczhyqg6OASG2J5OombCAS.png","vendor_id":"32","campaign_id":18,"start_date":"2023-05-03","end_date":"2023-05-05","location":"delhi","longitute":"34","latitude":"34","width":"23","height":"23","total_area":"32","media_type":"fssf","illumination":"fdf","created_at":"24\/07\/2023","updated_at":"24\/07\/2023"
+
+        //TODO unit id is not clear yet
+        int unitid=1;
+
+        campaignidarray= new String[a.length][1];
+        String[][] extractedcampaignids= extractcampaignids(a);
+
+        //TODO here
+
+
+
+
+        // Print the populated array
+        for (int i = 0; i < extractedcampaignids.length; i++) {
+            for (int j = 0; j < extractedcampaignids[i].length; j++) {
+                Log.d("tag33",extractedcampaignids[i][j] + " ");
+            }
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Your UI update code goes here
+
+        GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+        binding.rvCampaignList.setLayoutManager(layoutManager);
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            JSONObject jsonObjectairbnb = new JSONObject();
+            jsonObjectairbnb.put("sitenumber", "009");
+            jsonObjectairbnb.put("unitnumber", "#887001");
+            jsonArray.put(jsonObjectairbnb);
+
+            JSONObject jsonObjecthyundai = new JSONObject();
+            jsonObjecthyundai.put("sitenumber", "002");
+            jsonObjecthyundai.put("unitnumber", "#878002");
+            jsonArray.put(jsonObjecthyundai);
+
+            JSONObject jsonObjectford = new JSONObject();
+            jsonObjectford.put("sitenumber", "003");
+            jsonObjectford.put("unitnumber", "#765003");
+            jsonArray.put(jsonObjectford);
+
+            JSONObject jsonObjectpatanjli = new JSONObject();
+            jsonObjectpatanjli.put("sitenumber", "004");
+            jsonObjectpatanjli.put("unitnumber", "#432004");
+            jsonArray.put(jsonObjectpatanjli);
+        } catch (Exception e) {
+            Log.d("tag21", e.toString());
+        }
+
+        CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
+        binding.rvCampaignList.setAdapter(adapter);
+            }
+        });
+    }
+
+    public String[][] extractcampaignids(String[] a){
+//extracting data
+        //TODO fix
+        String b="";
+        b=a[0]; //TODO change
+
+        String[][] extractedcampaignids= new String[a.length][1];
+
+        Log.d("tag32", "length of array"+a.length);
+
+        for(int c=0; c<a.length; c++) {
+            b= a[c];
+
+            for (int i = 0; i < a.length; i++) {
+
+
+                int j = 0;
+                String id = "";
+
+
+                //extracting from one
+
+                outerloop1:
+                for (int p = 0; p < a.length; p++) {
+                    j = b.lastIndexOf("\"id\":");
+                    char h = 'a';
+                    Log.d("tag32", Character.toString(b.charAt(j)));
+
+
+                    //getting id
+                    for (int k = j + 5; k < b.length(); k++) {
+
+                        if (b.charAt(k) != ',') {
+                            id = id + b.charAt(k);
+                            Log.d("tag32", Character.toString(b.charAt(k)));
+
+                        } else {
+                            break outerloop1;
+                        }
+                    }
+                }
+                Log.d("tag31", "id is" + id);
+
+                Log.d("tag30", "here");
+
+
+                //extracting data
+                String campaignid = "";
+
+                int k = 0;
+                outerloop:
+                for (int o = 0; o < a.length; o++) {
+                    //b=a[i];
+                    k = b.lastIndexOf("\"campaign_id\":");
+                    Log.d("tag30", Character.toString(b.charAt(k)));
+
+//TODO here
+                    //getting id
+                    for (int l = k + 13; l < b.length(); l++) {
+
+                        if (b.charAt(l) != ',') {
+                            campaignid = campaignid + b.charAt(l);
+
+                        } else {
+                            break outerloop;
+                        }
+                    }
+
+                    extractedcampaignids[c][0]= campaignid;
+
+                    //Site no.
+                    Log.d("tag31", campaignid);
+                }
+            }
+        }
+        return extractedcampaignids;
+    }
 
     private void campaignList() {
         vendorclientorcampaign=0;
@@ -187,7 +331,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     public void onPlusClick(View view) {
 
         Log.d("tag20", "onplusclick");
-        // ... your logic ...
+        //TODO ask lodu what this does
+    }
+
+    public void onNotificationClick(View view){
+        //TODO ask lodu what this does
     }
 
     public void onAddClientClick(View view) {
