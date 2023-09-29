@@ -22,6 +22,7 @@ import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.MainViewModel;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.StringTokenizer;
@@ -159,187 +160,105 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     //array for campaign id
     String campaignidarray[][];
 
-    private void implementUi(String a[]){
-
-        //"id":25,"image":"images\/qSFXR5qpbxW3lVEArBvczhyqg6OASG2J5OombCAS.png","vendor_id":"32","campaign_id":18,"start_date":"2023-05-03","end_date":"2023-05-05","location":"delhi","longitute":"34","latitude":"34","width":"23","height":"23","total_area":"32","media_type":"fssf","illumination":"fdf","created_at":"24\/07\/2023","updated_at":"24\/07\/2023"
+    private void implementUi(String a[]) {
 
         Log.d("tag40", "1");
 
         //TODO unit id is not clear yet
-        int unitid=1;
+        int unitid = 1;
 
-        campaignidarray= new String[a.length][1];
+        campaignidarray = new String[a.length][1];
         Log.d("tag40", "2");
 
-        String[][] extractedcampaignids= extractcampaignids(a);
+        // Extracting campaign ids
+        String[][] extractedcampaignids = extractCampaignIds(a);
         Log.d("tag40", "3");
 
         //TODO here
-
         Log.d("tag40", "4");
-
-
 
         // Print the populated array
         for (int i = 0; i < extractedcampaignids.length; i++) {
             for (int j = 0; j < extractedcampaignids[i].length; j++) {
-                Log.d("tag33",extractedcampaignids[i][j] + " ");
+                Log.d("tag33", extractedcampaignids[i][j] + " ");
             }
         }
         Log.d("tag40", "5");
-
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // Your UI update code goes here
 
-        GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
-        binding.rvCampaignList.setLayoutManager(layoutManager);
-        JSONArray jsonArray = new JSONArray();
+                GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                binding.rvCampaignList.setLayoutManager(layoutManager);
+                JSONArray jsonArray = new JSONArray();
 
-        Log.d("tag31","here");
+                Log.d("tag31", "here");
 
-        try {
-            JSONObject jsonObjectairbnb = new JSONObject();
-            jsonObjectairbnb.put("sitenumber", "009");
-            jsonObjectairbnb.put("unitnumber", "#887001");
-            jsonArray.put(jsonObjectairbnb);
+                // Loop through the extracted campaign ids and create JSONObjects for each id
+                for (int i = 0; i < extractedcampaignids.length; i++) {
+                    try {
+                        // Create a new JSONObject for each campaign id
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("sitenumber", "Site " + (i + 1));
+                        jsonObject.put("unitnumber", extractedcampaignids[i][0]);  // Assuming the campaign id is the unit number
+                        jsonArray.put(jsonObject);
+                    } catch (JSONException e) {
+                        Log.d("tag21", e.toString());
+                    }
+                }
+//TODO here. ui is updating. Implement properly for all values and for vendor and client
 
-            JSONObject jsonObjecthyundai = new JSONObject();
-            jsonObjecthyundai.put("sitenumber", "002");
-            jsonObjecthyundai.put("unitnumber", "#878002");
-            jsonArray.put(jsonObjecthyundai);
-
-            JSONObject jsonObjectford = new JSONObject();
-            jsonObjectford.put("sitenumber", "003");
-            jsonObjectford.put("unitnumber", "#765003");
-            jsonArray.put(jsonObjectford);
-
-            JSONObject jsonObjectpatanjli = new JSONObject();
-            jsonObjectpatanjli.put("sitenumber", "004");
-            jsonObjectpatanjli.put("unitnumber", "#432004");
-            jsonArray.put(jsonObjectpatanjli);
-        } catch (Exception e) {
-            Log.d("tag21", e.toString());
-        }
-
-        CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
-        binding.rvCampaignList.setAdapter(adapter);
+                CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
+                binding.rvCampaignList.setAdapter(adapter);
             }
         });
     }
 
-    public String[][] extractcampaignids(String[] a){
-//extracting data
-        //TODO fix
+    public String[][] extractCampaignIds(String[] a) {
+        // The result array will have a length of a.length, but only the first entry will be populated
+        String[][] extractedCampaignIds = new String[a.length][1];
 
-        Log.d("tag50", String.valueOf(a.length));
+        // Check if the first entry of the array is not null
+        if (a[0] != null) {
+            // Get the first entry of the array
+            String b = a[0];
 
-        Log.d("tag41", "1");
-
-        String b="";
-        b=a[0]; //TODO change
-        Log.d("tag41", "2");
-
-        String[][] extractedcampaignids= new String[a.length][1];
-        Log.d("tag41", "3");
-
-        Log.d("tag32", "length of array"+a.length);
-
-        for(int c=0; c<a.length; c++) {
-            b= a[c];
-            Log.d("tag41", "4");
-            for (int i = 0; i < a.length; i++) {
-
-                Log.d("tag41", "5");
-                int j = 0;
-                String id = "";
-
-
-                //extracting from one
-
-                outerloop1:
-                for (int p = 0; p < a.length; p++) {
-                    j = b.lastIndexOf("\"id\":");
-                    char h = 'a';
-                    Log.d("tag32", Character.toString(b.charAt(j)));
-
-                    Log.d("tag41", "6");
-                    //getting id
-                    for (int k = j + 5; k < b.length(); k++) {
-
-                        if (b.charAt(k) != ',') {
-                            id = id + b.charAt(k);
-                            Log.d("tag32", Character.toString(b.charAt(k)));
-
-                        } else {
-                            break outerloop1;
-                        }
-                    }
+            // Find the index of "campaign_id":
+            int campaignIdIndex = b.indexOf("\"campaign_id\":");
+            if (campaignIdIndex != -1) {  // Check if "campaign_id": was found
+                // Extract the campaign_id value
+                int startIndex = campaignIdIndex + 13;  // 13 is the length of "campaign_id": including the colon
+                int endIndex = b.indexOf(",", startIndex);  // Find the next comma after "campaign_id":
+                if (endIndex == -1) {  // If there's no comma, find the next closing curly brace
+                    endIndex = b.indexOf("}", startIndex);
                 }
-
-                Log.d("tag41", "7");
-
-                Log.d("tag31", "id is" + id);
-
-                Log.d("tag30", "here");
-
-
-                //extracting data
-                String campaignid = "";
-
-                Log.d("tag41", "8");
-
-
-                int k = 0;
-                outerloop:
-                for (int o = 0; o < a.length; o++) {
-                    //b=a[i];
-                    k = b.lastIndexOf("\"campaign_id\":");
-                    Log.d("tag30", Character.toString(b.charAt(k)));
-                    Log.d("tag41", "9");
-
-//TODO here
-                    //getting id
-                    for (int l = k + 13; l < b.length(); l++) {
-
-                        if (b.charAt(l) != ',') {
-                            Log.d("tag41", "10");
-
-                            campaignid = campaignid + b.charAt(l);
-
-                        } else {
-                            Log.d("tag41", "11");
-
-                            break outerloop;
-                        }
-                    }
-
-                    Log.d("tag41", "12");
-
-                    extractedcampaignids[c][0]= campaignid;
-
-                    Log.d("tag41", "13");
-
-
-                    //Site no.
-                    Log.d("tag31", campaignid);
+                if (endIndex != -1) {  // Check if endIndex was found
+                    // Extract the campaign_id substring
+                    String campaignId = b.substring(startIndex, endIndex);
+                    // Remove any unwanted characters (like quotes) from campaignId
+                    campaignId = campaignId.replace("\"", "").trim();
+                    // Store the campaign_id in the result array
+                    extractedCampaignIds[0][0] = campaignId;
+                } else {
+                    System.err.println("Failed to extract campaign_id: endIndex not found");
                 }
+            } else {
+                System.err.println("Failed to extract campaign_id: campaign_id index not found");
             }
+        } else {
+            System.err.println("The first entry of the array is null");
         }
 
-        Log.d("tag41", "end. extractedcampaignids");
-
-
-        return extractedcampaignids;
+        return extractedCampaignIds;
     }
+
 
     private void campaignList() {
         vendorclientorcampaign=0;
         logintoken="322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-
     }
 
     private void clientList() {
