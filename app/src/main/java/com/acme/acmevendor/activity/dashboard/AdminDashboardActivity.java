@@ -209,6 +209,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     }
                 }
 //TODO here. ui is updating. Implement properly for all values and for vendor and client
+                //TODO trace back the part where you are querying for api data and implement from there
 
                 CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
                 binding.rvCampaignList.setAdapter(adapter);
