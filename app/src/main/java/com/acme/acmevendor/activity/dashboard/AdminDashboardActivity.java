@@ -114,7 +114,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         Log.d("tag25", "response is "+ response);
         Log.d("tag21","5");
-//TODO: handle population
+        //TODO: handle population
 
 
         //removing stuff except data
@@ -144,11 +144,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if (data[v].endsWith("}")){
                 data[v]= data[v].substring(0, data[v].length()-1);
             }
-
             implementUi(data);
 
 
-            Log.d("tag27", data[v]);
+
 
         }
     }
@@ -164,14 +163,20 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         //"id":25,"image":"images\/qSFXR5qpbxW3lVEArBvczhyqg6OASG2J5OombCAS.png","vendor_id":"32","campaign_id":18,"start_date":"2023-05-03","end_date":"2023-05-05","location":"delhi","longitute":"34","latitude":"34","width":"23","height":"23","total_area":"32","media_type":"fssf","illumination":"fdf","created_at":"24\/07\/2023","updated_at":"24\/07\/2023"
 
+        Log.d("tag40", "1");
+
         //TODO unit id is not clear yet
         int unitid=1;
 
         campaignidarray= new String[a.length][1];
+        Log.d("tag40", "2");
+
         String[][] extractedcampaignids= extractcampaignids(a);
+        Log.d("tag40", "3");
 
         //TODO here
 
+        Log.d("tag40", "4");
 
 
 
@@ -181,6 +186,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 Log.d("tag33",extractedcampaignids[i][j] + " ");
             }
         }
+        Log.d("tag40", "5");
+
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -189,6 +197,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
         JSONArray jsonArray = new JSONArray();
+
+        Log.d("tag31","here");
 
         try {
             JSONObject jsonObjectairbnb = new JSONObject();
@@ -223,19 +233,24 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     public String[][] extractcampaignids(String[] a){
 //extracting data
         //TODO fix
+
+        Log.d("tag41", "1");
+
         String b="";
         b=a[0]; //TODO change
+        Log.d("tag41", "2");
 
         String[][] extractedcampaignids= new String[a.length][1];
+        Log.d("tag41", "3");
 
         Log.d("tag32", "length of array"+a.length);
 
         for(int c=0; c<a.length; c++) {
             b= a[c];
-
+            Log.d("tag41", "4");
             for (int i = 0; i < a.length; i++) {
 
-
+                Log.d("tag41", "5");
                 int j = 0;
                 String id = "";
 
@@ -248,7 +263,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     char h = 'a';
                     Log.d("tag32", Character.toString(b.charAt(j)));
 
-
+                    Log.d("tag41", "6");
                     //getting id
                     for (int k = j + 5; k < b.length(); k++) {
 
@@ -261,6 +276,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                         }
                     }
                 }
+
+                Log.d("tag41", "7");
+
                 Log.d("tag31", "id is" + id);
 
                 Log.d("tag30", "here");
@@ -269,32 +287,49 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 //extracting data
                 String campaignid = "";
 
+                Log.d("tag41", "8");
+
+
                 int k = 0;
                 outerloop:
                 for (int o = 0; o < a.length; o++) {
                     //b=a[i];
                     k = b.lastIndexOf("\"campaign_id\":");
                     Log.d("tag30", Character.toString(b.charAt(k)));
+                    Log.d("tag41", "9");
 
 //TODO here
                     //getting id
                     for (int l = k + 13; l < b.length(); l++) {
 
                         if (b.charAt(l) != ',') {
+                            Log.d("tag41", "10");
+
                             campaignid = campaignid + b.charAt(l);
 
                         } else {
+                            Log.d("tag41", "11");
+
                             break outerloop;
                         }
                     }
 
+                    Log.d("tag41", "12");
+
                     extractedcampaignids[c][0]= campaignid;
+
+                    Log.d("tag41", "13");
+
 
                     //Site no.
                     Log.d("tag31", campaignid);
                 }
             }
         }
+
+        Log.d("tag41", "end. extractedcampaignids");
+
+
         return extractedcampaignids;
     }
 
