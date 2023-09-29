@@ -234,6 +234,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 //extracting data
         //TODO fix
 
+        Log.d("tag50", String.valueOf(a.length));
+
         Log.d("tag41", "1");
 
         String b="";
