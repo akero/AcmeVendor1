@@ -25,7 +25,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executor;
@@ -39,10 +43,13 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     //TODO add api call and populate
     //>todo access token save to memory add to api call
 
+    String loginToken="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vender_dash_board);
+        loginToken= readFromFile(this);
         campaignList();
     }
 
@@ -85,6 +92,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         binding.rvCampaignList.setAdapter(adapter);
     }
 
+
+
     public void onItemClick(int position) {
         //adding api here
 
@@ -93,7 +102,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         CronetEngine cronetEngine = builder.build();
 
         //TODO
-        String token= "474|Z94CA7l1NBZS1deYcnEhp8ZRyxrlWwPA0pp7jZ04";
+        String token= loginToken;
         // Create a JSON payload with the email and password
 
         //TODO
@@ -149,10 +158,43 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
         intent.putExtra("campaigntype", campaignType);
         intent.putExtra("position", position);
+        intent.putExtra("logintoken", loginToken);
         startActivity( intent);
 
 
         //        Intent intent= new Intent(VenderDashBoardActivity.this, VenderDashBoardActivity.class);
   //      startActivity(intent);
     }
+
+    //read token
+    String readFromFile(Context context) {
+        String fileName = "logintoken";
+        StringBuilder content = new StringBuilder();
+
+        try (FileInputStream fis = context.openFileInput(fileName);
+             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+             BufferedReader br = new BufferedReader(isr)) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                content.append(line);
+            }
+        } catch (FileNotFoundException e) {
+            Log.d("tag26", "File not found: " + e.toString());
+            // Handle file not found, perhaps return a default value or notify the user
+        } catch (IOException e) {
+            Log.d("tag26", "Read file error: " + e.toString());
+            // Handle other I/O error
+        }
+
+        String fileContent = content.toString();
+        if (fileContent.isEmpty()) {
+            Log.d("tag26", "File is empty");
+            // Handle empty file, perhaps return a default value or notify the user
+        }
+
+        return fileContent;
+    }
+
+
 }

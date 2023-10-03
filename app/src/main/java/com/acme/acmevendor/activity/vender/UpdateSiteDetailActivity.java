@@ -40,7 +40,7 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
         binding = DataBindingUtil.setContentView(this, R.layout.activity_update_site_detail);
 
         //TODO add code for accepting input and pass to btn saveclick or global variable and add upload photo button code
-
+        
 
     }
 
