@@ -22,6 +22,7 @@ public class ClientDashBoardActivity extends AppCompatActivity {
     private boolean oldcampaign = true;
 
     //TODO handle clicks on old and live campaign, make api call, parse data, populate. pass site details api data to viewsitedetailactivity
+    //TODO access token save to memory add to api call
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

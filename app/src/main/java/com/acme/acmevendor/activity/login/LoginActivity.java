@@ -56,16 +56,20 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
 
             if (loginType == 0) {
 
+                //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tag23", "0");
                 startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
 
             } else if (loginType == 1) {
 
+
+                //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tag23", "1");
                 startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
 
             } else {
 
+                //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tag23", "2");
                 startActivity(new Intent(LoginActivity.this, VenderDashBoardActivity.class));
             }
@@ -83,6 +87,9 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
     public void btnloginClick(View view) {
         Context context= this;
 
+        //TODO check what type of login and pass to api. 1 is admin 2 is vendor. CLient is 0.
+        //TODO add api call, save login details, connect to relevant function and pass the details
+
         if (binding.etLoginid.getText().toString().isEmpty() || binding.etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
@@ -92,7 +99,7 @@ try {
     loginActivityViewModel.callLogin(
             binding.etLoginid.getText().toString(),
             binding.etPassword.getText().toString(),
-            context);
+            context, loginType);
     Log.d("tag4", "success");
 }catch(Exception e){
     Log.d("tag4", e.toString());
@@ -169,6 +176,8 @@ try {
     @Override
     public void onResponseReceived(String response){
 
+        //returning different login tokens for every query
+
         if (loginType == 0) {
 
             String res="";
@@ -178,6 +187,8 @@ try {
             writeToFile(res, this);
 
             Log.d("tag23", "0" +res);
+
+            //TODO in other class access the token first
             startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
 
         } else if (loginType == 1) {
@@ -188,7 +199,7 @@ try {
             res=res.substring(0,a-1);
             writeToFile(res, this);
 
-
+            //TODO in other class access the token first
             Log.d("tag23", "1"+ res);
 
             startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
@@ -200,7 +211,7 @@ try {
             int a= res.indexOf(",");
             res=res.substring(0,a-1);
             writeToFile(res, this);
-
+            //TODO in other class access the token first
             Log.d("tag23", "2"+res);
 
 
@@ -209,6 +220,8 @@ try {
 
     }
 
+
+    //saving login token to file
     void writeToFile(String response, Context context){
         String name="logintoken";
         String content= response;

@@ -37,6 +37,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     Executor cronetExecutor= Executors.newSingleThreadExecutor();
 
     //TODO add api call and populate
+    //>todo access token save to memory add to api call
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         request.start();
     }
 
+
+    //TODO add token to future activity
     @Override
     public void onResponseReceived(String response){
         Log.d("tag11", "response is "+ response);

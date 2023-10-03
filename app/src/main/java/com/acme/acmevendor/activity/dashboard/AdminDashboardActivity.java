@@ -33,6 +33,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     JSONArray jsonArray;
     boolean showMenus = false;
 
+    //todo access token save to memory add to api call
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

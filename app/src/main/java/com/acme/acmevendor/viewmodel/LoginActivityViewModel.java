@@ -45,7 +45,10 @@ public class LoginActivityViewModel extends ViewModel {
 
     Executor cronetExecutor= Executors.newSingleThreadExecutor();
 
-    public void callLogin(String email, String pass, Context context) {
+    public void callLogin(String email, String pass, Context context, int logintype) {
+
+        //default logintype is 1, admin, 2 is vendor, 0 is client
+
         //TODO REMOVE
         email= "ven@gmail.com";
         pass = "123456";
@@ -85,9 +88,28 @@ public class LoginActivityViewModel extends ViewModel {
                 // No-op
             }
         };
+        //TODO ask faggot to implement 3 different urls for different login types. boilerplate till then.
+
+        String apiURL="";
+
+        //client
+        if(logintype==0){
+            //TODO change url after faggot does his fucking job
+            apiURL="https://acme.warburttons.com/api/login";
+        }
+        //admin
+        else if(logintype==1) {
+            //TODO change url after faggot does his fucking job
+            apiURL="https://acme.warburttons.com/api/login";
+        }
+        //vendor
+        else{
+            //TODO change url after faggot does his fucking job
+            apiURL="https://acme.warburttons.com/api/login";
+        }
 
         UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                        "https://acme.warburttons.com/api/login", new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
+                        apiURL, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
                 .setHttpMethod("POST")  // Set the method to POST
                 .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
                 .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
