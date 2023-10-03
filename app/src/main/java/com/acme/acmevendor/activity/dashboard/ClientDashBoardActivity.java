@@ -1,5 +1,6 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,15 +12,26 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.databinding.ActivityClientDashBoardBinding;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
-public class ClientDashBoardActivity extends AppCompatActivity {
+public class ClientDashBoardActivity extends AppCompatActivity implements ApiInterface {
 
     private ActivityClientDashBoardBinding binding;
     private boolean oldcampaign = true;
+
+    String loginToken="";
 
     //TODO handle clicks on old and live campaign, make api call, parse data, populate. pass site details api data to viewsitedetailactivity
     //TODO access token save to memory add to api call
@@ -28,6 +40,8 @@ public class ClientDashBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_dash_board);
+
+        loginToken= readFromFile(this);
         campaignList();
     }
 
@@ -72,8 +86,21 @@ public class ClientDashBoardActivity extends AppCompatActivity {
     }
 
     private void campaignList() {
+
+        int vendorclientorcampaign= 1;
+        String logintoken= loginToken;
+
+        //TODO remove after hardcode is removed
+        logintoken= "534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
+
+        APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
+
+
+
+        //TODO remove
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+
 
         JSONArray jsonArray = new JSONArray();
         try {
@@ -108,5 +135,55 @@ public class ClientDashBoardActivity extends AppCompatActivity {
         startActivity(new Intent(this, ViewSiteDetailActivity.class)
                 .putExtra("position", position)
                 .putExtra("campaignType", "old"));
+    }
+
+    //read token
+    String readFromFile(Context context) {
+        String fileName = "logintoken";
+        StringBuilder content = new StringBuilder();
+
+        try (FileInputStream fis = context.openFileInput(fileName);
+             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+             BufferedReader br = new BufferedReader(isr)) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                content.append(line);
+            }
+        } catch (FileNotFoundException e) {
+            Log.d("tag26", "File not found: " + e.toString());
+            // Handle file not found, perhaps return a default value or notify the user
+        } catch (IOException e) {
+            Log.d("tag26", "Read file error: " + e.toString());
+            // Handle other I/O error
+        }
+
+        String fileContent = content.toString();
+        if (fileContent.isEmpty()) {
+            Log.d("tag26", "File is empty");
+            // Handle empty file, perhaps return a default value or notify the user
+        }
+
+        Log.d("cldbatest", "filecontent for logintoken "+fileContent);
+        return fileContent;
+    }
+
+    //TODO add token to future activity
+    @Override
+    public void onResponseReceived(String response){
+        Log.d("cldbatest","response is "+ response);
+
+
+        //TODO replace. this is for response for the current page's data.
+        //TODO implement response into UI
+        String campaignType="";
+        int position= 0;
+
+        /*Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
+        intent.putExtra("campaigntype", campaignType);
+        intent.putExtra("position", position);
+        intent.putExtra("logintoken", loginToken);
+        startActivity( intent);
+    */
     }
 }

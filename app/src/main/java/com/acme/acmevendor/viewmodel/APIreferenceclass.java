@@ -56,6 +56,9 @@ public class APIreferenceclass {
             headers.put("Authorization", "Bearer " + logintoken);
             headers.put("Content-Type", "application/json");
 
+            Log.d("addbatest","Inside admin api");
+
+
             callapi(headers, jsonPayload, context, querytype, url);
         }
 
@@ -64,11 +67,19 @@ public class APIreferenceclass {
 
             String url="https://acme.warburttons.com/api/get_client_campaigns";
             querytype= 0;
+
+
+
+
+
             String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
 
             Map<String, String> headers= new HashMap<>();
-            headers.put("Authorization", "bearer"+logintoken);
+            headers.put("Authorization", "Bearer "+logintoken);
             headers.put("Content-Type", "application/json");
+
+            Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+
 
             callapi(headers, jsonPayload, context, querytype, url);
         }
@@ -82,8 +93,11 @@ public class APIreferenceclass {
             String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";
 
             Map<String, String> headers= new HashMap<>();
-            headers.put("Authorization", "bearer"+logintoken);
+            headers.put("Authorization", "Bearer "+logintoken);
             headers.put("Content-Type", "application/json");
+
+            Log.d("vdbatest","Inside apirefapiclass");
+
 
             callapi(headers, jsonPayload, context, querytype, url);
 

@@ -115,7 +115,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 //onresponsereceived from api
     public void onResponseReceived(String response){
 
-        Log.d("tag25", "response is "+ response);
+        Log.d("addbatest", "response is "+ response);
         Log.d("tag21","5");
         //TODO: handle population
 
@@ -260,6 +260,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
     private void campaignList() {
         vendorclientorcampaign=0;
+        //TODO pass correct logintoken here
         logintoken="322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }

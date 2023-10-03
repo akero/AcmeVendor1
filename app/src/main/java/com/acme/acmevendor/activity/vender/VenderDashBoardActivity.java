@@ -15,6 +15,7 @@ import com.acme.acmevendor.activity.login.LoginActivity;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.api.MyUrlRequestCallback;
 import com.acme.acmevendor.databinding.ActivityVenderDashBoardBinding;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 
 import org.chromium.net.CronetEngine;
@@ -53,6 +54,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vender_dash_board);
         loginToken= readFromFile(this);
+        Log.d("vdbatest", "logintoken "+loginToken);
+
         campaignList();
     }
 
@@ -60,11 +63,13 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
+        int vendorclientorcampaign= 2;
+        String logintoken= loginToken;
+
+        APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
 
 
-
-
-//TODO parse api response and enter into recyclerview
+        //TODO parse api response and enter into recyclerview, remove this
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObjectairbnb = new JSONObject();
         JSONObject jsonObjecthyundai = new JSONObject();
@@ -99,9 +104,15 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
     public void onItemClick(int position) {
         //adding api here
+        //api response is wrong properly send login token
 
+        //TODO redo this its for moving to next page not to query vendor data. this code is to get current page data replace it
+        int vendorclientorcampaign= 2;
+        String logintoken= loginToken;
 
-        CronetEngine.Builder builder = new CronetEngine.Builder(this);
+        //APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
+
+        /*CronetEngine.Builder builder = new CronetEngine.Builder(this);
         CronetEngine cronetEngine = builder.build();
 
         //TODO
@@ -110,6 +121,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
         //TODO
         String jsonPayload = "{\"token\":\"" + token + "\"}";
+
+        Log.d("vdbatest", "jsonpayload  "+jsonPayload);
 
         // Convert the JSON payload to bytes for uploading
         final byte[] postData = jsonPayload.getBytes(StandardCharsets.UTF_8);
@@ -146,6 +159,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
         UrlRequest request = requestBuilder.build();
         request.start();
+
+         */
     }
 
 
@@ -154,21 +169,20 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     //TODO add token to future activity
     @Override
     public void onResponseReceived(String response){
-        Log.d("tag11", "response is "+ response);
+        Log.d("vdbatest","response is "+ response);
+        //TODO response is wrong from api end follow up with the faggot
 
-    //TODO
+        //TODO replace. this is for response for the current page's data.
+        //TODO implement response into UI
         String campaignType="";
         int position= 0;
 
-        Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
+        /*Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
         intent.putExtra("campaigntype", campaignType);
         intent.putExtra("position", position);
         intent.putExtra("logintoken", loginToken);
         startActivity( intent);
-
-
-        //        Intent intent= new Intent(VenderDashBoardActivity.this, VenderDashBoardActivity.class);
-  //      startActivity(intent);
+    */
     }
 
     //read token
@@ -198,6 +212,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
             // Handle empty file, perhaps return a default value or notify the user
         }
 
+        Log.d("vdbatest", "filecontent for logintoken "+fileContent);
         return fileContent;
     }
 
