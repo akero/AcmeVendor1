@@ -34,13 +34,26 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
 
     private ActivityUpdateSiteDetailBinding binding;
 
+    //intent contents
+    String campaignType="";
+    int position= 0;
+    String logintoken="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_update_site_detail);
 
         //TODO add code for accepting input and pass to btn saveclick or global variable and add upload photo button code
-        
+        Intent intent= getIntent();
+
+        if(intent!=null){
+            campaignType= intent.getStringExtra("campaigntype");
+            logintoken= intent.getStringExtra("logintoken");
+            position= intent.getIntExtra("position", 0);
+
+        }
+
 
     }
 

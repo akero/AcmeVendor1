@@ -45,6 +45,9 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
     String loginToken="";
 
+    //intent contents
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +147,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         UrlRequest request = requestBuilder.build();
         request.start();
     }
+
+
 
 
     //TODO add token to future activity
