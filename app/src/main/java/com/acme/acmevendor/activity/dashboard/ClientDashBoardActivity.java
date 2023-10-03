@@ -90,6 +90,8 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         int vendorclientorcampaign= 1;
         String logintoken= loginToken;
 
+        //TODO here
+
         //TODO remove after hardcode is removed
         logintoken= "534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
 
