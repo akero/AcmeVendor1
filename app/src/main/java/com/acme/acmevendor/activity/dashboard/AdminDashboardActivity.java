@@ -20,6 +20,9 @@ import com.acme.acmevendor.databinding.ActivityMainBinding;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.MainViewModel;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,7 +124,18 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         Log.d("tag21","5");
         //TODO: handle population
 
-//todo replace with gson
+        String[] dataStrings = extractDataStrings(response);
+
+        // Usage example
+        for(String dataStr : dataStrings) {
+            Log.d("tag2222",dataStr);
+        }
+
+        //todo fix implementui and uncomment below line
+        //implementUi(dataStrings);
+
+
+        /*
         //removing stuff except data
         String a= parseString(response);
 
@@ -153,14 +167,27 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //todo remove
             data(data);
 
-            
-
-            implementUi(data);
 
 
+
+*/
 
 
         }
+
+//extracting data into an array. the api response
+    public static String[] extractDataStrings(String apiResponse) {
+        Gson gson = new Gson();
+        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
+        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
+
+        String[] dataStrings = new String[dataArray.size()];
+        for (int i = 0; i < dataArray.size(); i++) {
+            String rawString = dataArray.get(i).toString();
+            dataStrings[i] = rawString.substring(1, rawString.length() - 1);  // Removing curly braces
+        }
+
+        return dataStrings;
     }
 
     void data(String[] data){
