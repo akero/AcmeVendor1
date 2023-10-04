@@ -43,6 +43,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         binding.rvCampaignList.setLayoutManager(layoutManager);
         JSONArray jsonArray = new JSONArray();
 
+        //TODO remove after adding to ui
+
         try {
             JSONObject jsonObjectairbnb = new JSONObject();
             jsonObjectairbnb.put("sitenumber", "001");
@@ -119,7 +121,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         Log.d("tag21","5");
         //TODO: handle population
 
-
+//todo replace with gson
         //removing stuff except data
         String a= parseString(response);
 
@@ -147,6 +149,12 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if (data[v].endsWith("}")){
                 data[v]= data[v].substring(0, data[v].length()-1);
             }
+
+        //todo remove
+            data(data);
+
+            
+
             implementUi(data);
 
 
@@ -154,6 +162,14 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         }
     }
+
+    void data(String[] data){
+
+            for (String element : data) {
+                Log.d("asdf", element);
+            }
+        }
+
 
     //TODO sort this data and populate page. then implement for vendor and client
 

@@ -97,7 +97,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
         APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
 
-
+//TODO now add response to ui
 
         //TODO remove
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
