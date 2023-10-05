@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class AdminDashboardActivity extends AppCompatActivity implements ApiInterface {
@@ -126,10 +127,19 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         String[] dataStrings = extractDataStrings(response);
 
+
+
         // Usage example
         for(String dataStr : dataStrings) {
             Log.d("tag2222",dataStr);
         }
+
+        //ids
+        String[] idArray= extractIds(dataStrings);
+
+        Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
+
+
 
         //todo fix implementui and uncomment below line
         //implementUi(dataStrings);
@@ -175,20 +185,43 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         }
 
-//extracting data into an array. the api response
-    public static String[] extractDataStrings(String apiResponse) {
-        Gson gson = new Gson();
-        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
-        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
+    private String[] extractIds(String[] dataStrings) {
+        // Create an array to store extracted ids.
+        String[] ids = new String[dataStrings.length];
 
-        String[] dataStrings = new String[dataArray.size()];
-        for (int i = 0; i < dataArray.size(); i++) {
-            String rawString = dataArray.get(i).toString();
-            dataStrings[i] = rawString.substring(1, rawString.length() - 1);  // Removing curly braces
+        // Loop through each string in the input array.
+        for (int i = 0; i < dataStrings.length; i++) {
+            try {
+                // Parse the string into a JSONObject.
+                JSONObject jsonObject = new JSONObject(dataStrings[i]);
+
+                // Extract the "id" field and store it in the ids array.
+                ids[i] = String.valueOf(jsonObject.getInt("id"));
+            } catch (JSONException e) {
+                // Handle JSON parsing error. Here setting the id to a default error value ("error").
+                ids[i] = "error";
+                e.printStackTrace();
+            }
         }
 
-        return dataStrings;
+        // Return the extracted ids.
+        return ids;
     }
+
+//extracting data into an array. the api response
+public static String[] extractDataStrings(String apiResponse) {
+    Gson gson = new Gson();
+    JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
+    JsonArray dataArray = jsonResponse.getAsJsonArray("data");
+
+    String[] dataStrings = new String[dataArray.size()];
+    for (int i = 0; i < dataArray.size(); i++) {
+        dataStrings[i] = dataArray.get(i).toString();
+    }
+
+    return dataStrings;
+}
+
 
     void data(String[] data){
 
@@ -229,7 +262,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             }
         }
         Log.d("tag40", "5");
-
+/*
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -259,7 +292,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
                 binding.rvCampaignList.setAdapter(adapter);
             }
-        });
+        }); */
     }
 
     public String[][] extractCampaignIds(String[] a) {
