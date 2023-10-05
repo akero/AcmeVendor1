@@ -45,37 +45,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
-        JSONArray jsonArray = new JSONArray();
 
         //TODO remove after adding to ui
-
-      /*  try {
-            JSONObject jsonObjectairbnb = new JSONObject();
-            jsonObjectairbnb.put("sitenumber", "001");
-            jsonObjectairbnb.put("unitnumber", "#887001");
-            jsonArray.put(jsonObjectairbnb);
-
-            JSONObject jsonObjecthyundai = new JSONObject();
-            jsonObjecthyundai.put("sitenumber", "002");
-            jsonObjecthyundai.put("unitnumber", "#878002");
-            jsonArray.put(jsonObjecthyundai);
-
-            JSONObject jsonObjectford = new JSONObject();
-            jsonObjectford.put("sitenumber", "003");
-            jsonObjectford.put("unitnumber", "#765003");
-            jsonArray.put(jsonObjectford);
-
-            JSONObject jsonObjectpatanjli = new JSONObject();
-            jsonObjectpatanjli.put("sitenumber", "004");
-            jsonObjectpatanjli.put("unitnumber", "#432004");
-            jsonArray.put(jsonObjectpatanjli);
-        } catch (Exception e) {
-            Log.d("tag21", e.toString());
-        }
-
+        jsonArray= new JSONArray();
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
         binding.rvCampaignList.setAdapter(adapter);
-*/
         campaignList();
     }
 
@@ -98,19 +72,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     String created_at="";
     String updated_at="";
 
-    public String parseString(String response){
-
-
-        String a=response;
-        int i= a.indexOf("[");
-        int j= a.lastIndexOf("]");
-
-        String b= a.substring(i+1,j);
-        Log.d("tag26", b);
-
-        return b;
-    }
-
 
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
 
@@ -128,7 +89,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         String[] dataStrings = extractDataStrings(response);
 
 
-
         // Usage example
         for(String dataStr : dataStrings) {
             Log.d("tag2222",dataStr);
@@ -144,39 +104,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
 
-
-
-
-
-        /*
-        //removing stuff except data
-        String a= parseString(response);
-
-        //put data for every item in a separate string
-        char d;
-        int numberofitems= 0;
-        for(int k=0; k< a.length(); k++){
-
-            d= a.charAt(k);
-            if (d =='{'){
-                numberofitems+=1;
-            }
-        }
-
-        String data[]= new String[numberofitems];
-        StringTokenizer str= new StringTokenizer(a, "{");
-
-        for(int v=0; v<numberofitems; v++){
-
-            data[v]= str.nextToken();
-            if (data[v].endsWith(",")){
-                data[v]= data[v].substring(0, data[v].length()-1);
-            }
-
-            if (data[v].endsWith("}")){
-                data[v]= data[v].substring(0, data[v].length()-1);
-            }
-*/
         }
 
     private String[] extractIds(String[] dataStrings) {
@@ -233,6 +160,7 @@ public static String[] extractDataStrings(String apiResponse) {
         //ids[] output is 22,23,24,25. In strings.
         //TODO implement ids and unit id to ui
 
+        jsonArray= new JSONArray();
 
         runOnUiThread(new Runnable() {
             @Override
@@ -241,7 +169,6 @@ public static String[] extractDataStrings(String apiResponse) {
 
                 GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                 binding.rvCampaignList.setLayoutManager(layoutManager);
-                JSONArray jsonArray = new JSONArray();
 
                 Log.d("tag31", "here");
 
@@ -266,43 +193,6 @@ public static String[] extractDataStrings(String apiResponse) {
         });
     }
 
-    public String[][] extractCampaignIds(String[] a) {
-        // The result array will have a length of a.length, but only the first entry will be populated
-        String[][] extractedCampaignIds = new String[a.length][1];
-
-        // Check if the first entry of the array is not null
-        if (a[0] != null) {
-            // Get the first entry of the array
-            String b = a[0];
-
-            // Find the index of "campaign_id":
-            int campaignIdIndex = b.indexOf("\"campaign_id\":");
-            if (campaignIdIndex != -1) {  // Check if "campaign_id": was found
-                // Extract the campaign_id value
-                int startIndex = campaignIdIndex + 13;  // 13 is the length of "campaign_id": including the colon
-                int endIndex = b.indexOf(",", startIndex);  // Find the next comma after "campaign_id":
-                if (endIndex == -1) {  // If there's no comma, find the next closing curly brace
-                    endIndex = b.indexOf("}", startIndex);
-                }
-                if (endIndex != -1) {  // Check if endIndex was found
-                    // Extract the campaign_id substring
-                    String campaignId = b.substring(startIndex, endIndex);
-                    // Remove any unwanted characters (like quotes) from campaignId
-                    campaignId = campaignId.replace("\"", "").trim();
-                    // Store the campaign_id in the result array
-                    extractedCampaignIds[0][0] = campaignId;
-                } else {
-                    System.err.println("Failed to extract campaign_id: endIndex not found");
-                }
-            } else {
-                System.err.println("Failed to extract campaign_id: campaign_id index not found");
-            }
-        } else {
-            System.err.println("The first entry of the array is null");
-        }
-
-        return extractedCampaignIds;
-    }
 
 
     private void campaignList() {
@@ -407,8 +297,26 @@ public static String[] extractDataStrings(String apiResponse) {
     }
 
     public void onItemClick(int position) {
-        startActivity(new Intent(this, ViewSiteDetailActivity.class)
-                .putExtra("position", position)
-                .putExtra("campaignType", "old"));
+        try {
+            // Retrieve JSONObject from your jsonArray at position
+            JSONObject jsonObject = jsonArray.getJSONObject(position);
+
+            // Get site id or site no from the JSONObject
+            String siteNumber = jsonObject.getString("unitnumber"); // Or get an id if you have that
+            // String siteId = jsonObject.getString("siteId"); // If you have a site id.
+
+            // Start new activity and pass the retrieved data
+            startActivity(new Intent(this, ViewSiteDetailActivity.class)
+                    .putExtra("position", position)
+                    .putExtra("campaignType", "old")
+                    .putExtra("siteNumber", siteNumber));
+
+            Log.d("jkl", siteNumber);
+            // .putExtra("siteId", siteId)); // If you are passing site id
+        } catch (JSONException e) {
+            Log.d("tag123", e.toString());
+            // Handle exception (e.g. show a Toast to the user indicating an error)
+        }
     }
+
 }

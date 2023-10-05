@@ -56,6 +56,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity {
         binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
     }
 
+
     public void liveCampaignClick(View view) {
         binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
         binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
