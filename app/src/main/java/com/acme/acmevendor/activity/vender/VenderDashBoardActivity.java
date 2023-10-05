@@ -17,6 +17,9 @@ import com.acme.acmevendor.api.MyUrlRequestCallback;
 import com.acme.acmevendor.databinding.ActivityVenderDashBoardBinding;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UploadDataProvider;
@@ -46,6 +49,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
     String loginToken="";
 
+    JSONArray jsonArray;
+
     //intent contents
 
 
@@ -54,6 +59,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vender_dash_board);
         loginToken= readFromFile(this);
+
+        jsonArray= new JSONArray();
         Log.d("vdbatest", "logintoken "+loginToken);
 
         campaignList();
@@ -69,7 +76,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
 
 
-        //TODO parse api response and enter into recyclerview, remove this
+      /*  //TODO parse api response and enter into recyclerview, remove this
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObjectairbnb = new JSONObject();
         JSONObject jsonObjecthyundai = new JSONObject();
@@ -98,69 +105,45 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
         binding.rvCampaignList.setAdapter(adapter);
+
+
+       */
     }
 
+    public static String[] extractDataStrings(String apiResponse) {
+        Gson gson = new Gson();
+        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
+        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
 
+        String[] dataStrings = new String[dataArray.size()];
+        for (int i = 0; i < dataArray.size(); i++) {
+            dataStrings[i] = dataArray.get(i).toString();
+        }
+
+        return dataStrings;
+    }
 
     public void onItemClick(int position) {
-        //adding api here
-        //api response is wrong properly send login token
+        try {
+            // Retrieve JSONObject from your jsonArray at position
+            JSONObject jsonObject = jsonArray.getJSONObject(position);
 
-        //TODO redo this its for moving to next page not to query vendor data. this code is to get current page data replace it
-        int vendorclientorcampaign= 2;
-        String logintoken= loginToken;
+            // Get site id or site no from the JSONObject
+            String siteNumber = jsonObject.getString("unitnumber"); // Or get an id if you have that
+            // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
-        //APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
+            // Start new activity and pass the retrieved data
+            startActivity(new Intent(this, ViewSiteDetailActivity.class)
+                    .putExtra("position", position)
+                    .putExtra("campaignType", "old")
+                    .putExtra("siteNumber", siteNumber));
 
-        /*CronetEngine.Builder builder = new CronetEngine.Builder(this);
-        CronetEngine cronetEngine = builder.build();
-
-        //TODO
-        String token= loginToken;
-        // Create a JSON payload with the email and password
-
-        //TODO
-        String jsonPayload = "{\"token\":\"" + token + "\"}";
-
-        Log.d("vdbatest", "jsonpayload  "+jsonPayload);
-
-        // Convert the JSON payload to bytes for uploading
-        final byte[] postData = jsonPayload.getBytes(StandardCharsets.UTF_8);
-
-        // Create an upload data provider to send the POST data
-        UploadDataProvider uploadDataProvider = new UploadDataProvider() {
-            @Override
-            public long getLength() throws IOException {
-                return postData.length;
-            }
-
-            @Override
-            public void read(UploadDataSink uploadDataSink, ByteBuffer byteBuffer) throws IOException {
-                byteBuffer.put(postData);
-                uploadDataSink.onReadSucceeded(false);
-            }
-
-            @Override
-            public void rewind(UploadDataSink uploadDataSink) throws IOException {
-                uploadDataSink.onRewindSucceeded();
-            }
-
-            @Override
-            public void close() throws IOException {
-                // No-op
-            }
-        };
-
-        UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                        "https://acme.warburttons.com/api/get_vendor_campaigns", new MyUrlRequestCallback( (ApiInterface) this), cronetExecutor)
-                .setHttpMethod("GET")  // Set the method to GET
-                .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
-                .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
-
-        UrlRequest request = requestBuilder.build();
-        request.start();
-
-         */
+            Log.d("jkl", siteNumber);
+            // .putExtra("siteId", siteId)); // If you are passing site id
+        } catch (JSONException e) {
+            Log.d("tag123", e.toString());
+            // Handle exception (e.g. show a Toast to the user indicating an error)
+        }
     }
 
 
@@ -170,12 +153,26 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     @Override
     public void onResponseReceived(String response){
         Log.d("vdbatest","response is "+ response);
-        //TODO response is wrong from api end follow up with the faggot
+        //TODO response is wrong from api end follow up with the dev
 
         //TODO replace. this is for response for the current page's data.
         //TODO implement response into UI
         String campaignType="";
         int position= 0;
+
+        String[] dataStrings = extractDataStrings(response);
+
+
+        // Usage example
+        for(String dataStr : dataStrings) {
+            Log.d("tag2222",dataStr);
+        }
+
+        //id array. send to ui
+        String[] idArray= extractIds(dataStrings);
+        //TODO extract the unit id and pass that too
+
+        implementUi(idArray);
 
         /*Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
         intent.putExtra("campaigntype", campaignType);
@@ -183,6 +180,75 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         intent.putExtra("logintoken", loginToken);
         startActivity( intent);
     */
+    }
+
+    Context ctxt= this;
+
+    private void implementUi(String ids[]) {
+
+        Log.d("tag40", "1");
+
+        //TODO unit id is not clear yet
+        int unitid = 1;
+        //ids[] output is 22,23,24,25. In strings.
+        //TODO implement ids and unit id to ui
+
+        jsonArray= new JSONArray();
+
+
+        //TODO add site number, change pics
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Your UI update code goes here
+
+                GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 1);
+                binding.rvCampaignList.setLayoutManager(layoutManager);
+
+                Log.d("tag31", "here");
+
+                // Loop through the extracted campaign ids and create JSONObjects for each id
+                for (int i = 0; i < ids.length; i++) {
+                    try {
+                        // Create a new JSONObject for each campaign id
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("sitenumber",  (i + 1));
+                        jsonObject.put("unitnumber", ids[i]);  // Assuming the campaign id is the unit number
+                        jsonArray.put(jsonObject);
+                    } catch (JSONException e) {
+                        Log.d("tag21", e.toString());
+                    }
+                }
+//TODO here. ui is updating. Implement properly for all values and for vendor and client
+                //TODO trace back the part where you are querying for api data and implement from there
+
+                CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
+                binding.rvCampaignList.setAdapter(adapter);
+            }
+        });
+    }
+
+    private String[] extractIds(String[] dataStrings) {
+        // Create an array to store extracted ids.
+        String[] ids = new String[dataStrings.length];
+
+        // Loop through each string in the input array.
+        for (int i = 0; i < dataStrings.length; i++) {
+            try {
+                // Parse the string into a JSONObject.
+                JSONObject jsonObject = new JSONObject(dataStrings[i]);
+
+                // Extract the "id" field and store it in the ids array.
+                ids[i] = String.valueOf(jsonObject.getInt("id"));
+            } catch (JSONException e) {
+                // Handle JSON parsing error. Here setting the id to a default error value ("error").
+                ids[i] = "error";
+                e.printStackTrace();
+            }
+        }
+
+        // Return the extracted ids.
+        return ids;
     }
 
     //read token
@@ -215,6 +281,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         Log.d("vdbatest", "filecontent for logintoken "+fileContent);
         return fileContent;
     }
+
 
 
 }
