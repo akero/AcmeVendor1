@@ -49,7 +49,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         //TODO remove after adding to ui
 
-        try {
+      /*  try {
             JSONObject jsonObjectairbnb = new JSONObject();
             jsonObjectairbnb.put("sitenumber", "001");
             jsonObjectairbnb.put("unitnumber", "#887001");
@@ -75,7 +75,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
         binding.rvCampaignList.setAdapter(adapter);
-
+*/
         campaignList();
     }
 
@@ -139,8 +139,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //TODO extract the unit id and pass that too
 
         implementUi(idArray);
-
-
 
 
 
@@ -235,10 +233,7 @@ public static String[] extractDataStrings(String apiResponse) {
         //ids[] output is 22,23,24,25. In strings.
         //TODO implement ids and unit id to ui
 
-        
 
-
-/*
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -251,12 +246,12 @@ public static String[] extractDataStrings(String apiResponse) {
                 Log.d("tag31", "here");
 
                 // Loop through the extracted campaign ids and create JSONObjects for each id
-                for (int i = 0; i < extractedcampaignids.length; i++) {
+                for (int i = 0; i < ids.length; i++) {
                     try {
                         // Create a new JSONObject for each campaign id
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("sitenumber", "Site " + (i + 1));
-                        jsonObject.put("unitnumber", extractedcampaignids[i][0]);  // Assuming the campaign id is the unit number
+                        jsonObject.put("sitenumber",  (i + 1));
+                        jsonObject.put("unitnumber", ids[i]);  // Assuming the campaign id is the unit number
                         jsonArray.put(jsonObject);
                     } catch (JSONException e) {
                         Log.d("tag21", e.toString());
@@ -268,7 +263,7 @@ public static String[] extractDataStrings(String apiResponse) {
                 CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
                 binding.rvCampaignList.setAdapter(adapter);
             }
-        }); */
+        });
     }
 
     public String[][] extractCampaignIds(String[] a) {
@@ -324,10 +319,6 @@ public static String[] extractDataStrings(String apiResponse) {
         //TODO- here
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-
-
-
-
 
     }
 
