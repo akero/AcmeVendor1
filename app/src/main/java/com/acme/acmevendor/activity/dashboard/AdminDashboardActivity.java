@@ -134,15 +134,20 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             Log.d("tag2222",dataStr);
         }
 
-        //ids
+        //id array. send to ui
         String[] idArray= extractIds(dataStrings);
+        //TODO extract the unit id and pass that too
+
+        implementUi(idArray);
+
+
+
+
 
         Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
 
 
 
-        //todo fix implementui and uncomment below line
-        //implementUi(dataStrings);
 
 
         /*
@@ -173,16 +178,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if (data[v].endsWith("}")){
                 data[v]= data[v].substring(0, data[v].length()-1);
             }
-
-        //todo remove
-            data(data);
-
-
-
-
 */
-
-
         }
 
     private String[] extractIds(String[] dataStrings) {
@@ -223,14 +219,6 @@ public static String[] extractDataStrings(String apiResponse) {
 }
 
 
-    void data(String[] data){
-
-            for (String element : data) {
-                Log.d("asdf", element);
-            }
-        }
-
-
     //TODO sort this data and populate page. then implement for vendor and client
 
     private final Context ctxt= this;
@@ -238,30 +226,18 @@ public static String[] extractDataStrings(String apiResponse) {
     //array for campaign id
     String campaignidarray[][];
 
-    private void implementUi(String a[]) {
+    private void implementUi(String ids[]) {
 
         Log.d("tag40", "1");
 
         //TODO unit id is not clear yet
         int unitid = 1;
+        //ids[] output is 22,23,24,25. In strings.
+        //TODO implement ids and unit id to ui
 
-        campaignidarray = new String[a.length][1];
-        Log.d("tag40", "2");
+        
 
-        // Extracting campaign ids
-        String[][] extractedcampaignids = extractCampaignIds(a);
-        Log.d("tag40", "3");
 
-        //TODO here
-        Log.d("tag40", "4");
-
-        // Print the populated array
-        for (int i = 0; i < extractedcampaignids.length; i++) {
-            for (int j = 0; j < extractedcampaignids[i].length; j++) {
-                Log.d("tag33", extractedcampaignids[i][j] + " ");
-            }
-        }
-        Log.d("tag40", "5");
 /*
         runOnUiThread(new Runnable() {
             @Override
