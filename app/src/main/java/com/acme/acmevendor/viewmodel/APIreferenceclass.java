@@ -111,7 +111,7 @@ public class APIreferenceclass {
     public APIreferenceclass(Context context) {
     }
 
-    public APIreferenceclass(String countrycode, String mobile, Context context){
+  /*  public APIreferenceclass(String countrycode, String mobile, Context context){
 
         //TODO- change
         String url="https://acme.warburttons.com/api/register";
@@ -122,7 +122,12 @@ public class APIreferenceclass {
 
 
 
+    } */
+
+    public APIreferenceclass(String loginToken, String siteNumber, Context context){
+
     }
+
 
     public APIreferenceclass(String logintoken, Context context) {
     }
@@ -210,4 +215,6 @@ public class APIreferenceclass {
             Log.d("tag21", e.toString());
         }
     }
+
+
 }

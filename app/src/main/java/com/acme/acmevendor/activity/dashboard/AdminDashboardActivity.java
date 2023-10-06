@@ -204,6 +204,7 @@ public static String[] extractDataStrings(String apiResponse) {
 
     private void clientList() {
         vendorclientorcampaign=1;
+        //TODO pass correct logintoken here
         logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
         //TODO- here
@@ -214,6 +215,7 @@ public static String[] extractDataStrings(String apiResponse) {
 
     private void venderList() {
         vendorclientorcampaign=2;
+        //TODO pass correct logintoken here
         logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
@@ -301,15 +303,18 @@ public static String[] extractDataStrings(String apiResponse) {
             // Retrieve JSONObject from your jsonArray at position
             JSONObject jsonObject = jsonArray.getJSONObject(position);
 
+            //TODO add correct login token here
+            logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+
             // Get site id or site no from the JSONObject
             String siteNumber = jsonObject.getString("unitnumber"); // Or get an id if you have that
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
             // Start new activity and pass the retrieved data
             startActivity(new Intent(this, ViewSiteDetailActivity.class)
-                    .putExtra("position", position)
                     .putExtra("campaignType", "old")
-                    .putExtra("siteNumber", siteNumber));
+                    .putExtra("siteNumber", siteNumber)
+                    .putExtra("logintoken", logintoken));
 
             Log.d("jkl", siteNumber);
             // .putExtra("siteId", siteId)); // If you are passing site id
@@ -318,5 +323,4 @@ public static String[] extractDataStrings(String apiResponse) {
             // Handle exception (e.g. show a Toast to the user indicating an error)
         }
     }
-
 }
