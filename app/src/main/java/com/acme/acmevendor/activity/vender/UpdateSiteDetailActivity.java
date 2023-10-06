@@ -26,11 +26,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 
-
 public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiInterface{
-
-
-
 
     private ActivityUpdateSiteDetailBinding binding;
 
@@ -53,8 +49,6 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
             position= intent.getIntExtra("position", 0);
 
         }
-
-
     }
 
     public void btnCloseClick(View view) {
