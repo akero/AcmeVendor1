@@ -6,15 +6,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.databinding.DataBindingUtil;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
+import com.acme.acmevendor.viewmodel.SiteDetail;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 
@@ -56,10 +64,87 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         Log.d("tag41", "5");
     }
 
-    void implementUI(String response) {
-        // Parsing JSON to Java objects
+    private void implementUI(String response) {
+        try {
+            JSONObject jsonResponse = new JSONObject(response);
+            if(jsonResponse.getBoolean("success")) {
+                JSONArray dataArray = jsonResponse.getJSONArray("data");
+                JSONObject dataObject = dataArray.getJSONObject(0);
 
-    }
+                SiteDetail siteDetail = new SiteDetail();
+                siteDetail.setSiteId(String.valueOf(dataObject.getInt("id")));
+                siteDetail.setSiteName(dataObject.optString("vendor_id"));
+                siteDetail.setLocation(dataObject.getString("location"));
+
+                // Assuming these properties are in SiteDetail
+                siteDetail.setLastInspection(dataObject.getString("created_at"));
+                siteDetail.setNextInspection(dataObject.getString("end_date"));
+                // ... add further properties as per your actual SiteDetail class ...
+                siteDetail.setInspectorName("N/A");
+
+//TODO here
+                // Update UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView tvSiteId = findViewById(R.id.tvSiteno);
+                        tvSiteId.setText(siteDetail.getSiteId());
+
+                        TextView tvLocation = findViewById(R.id.tvLocation);
+                        tvLocation.setText(siteDetail.getLocation());
+
+                        TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+                        tvSiteName.setText(siteDetail.getSiteName());
+
+
+
+                    }
+                });
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewSiteDetailActivity.this, "Data retrieval failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        } catch (Exception e) {
+            // Handle JSON parsing error
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ViewSiteDetailActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            // Assigning values and listeners to Buttons
+            Button btnNext = findViewById(R.id.btnNext);
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle next button click
+                }
+            });
+
+            Button btnDownload = findViewById(R.id.btnDownload);
+            btnDownload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle download button click
+                }
+            });
+
+            Button btnClose = findViewById(R.id.btnClose);
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle close button click
+                    finish();
+                }
+            });
+        }}
+
+
 
 
     void apicall(String logintoken, String siteNumber){
