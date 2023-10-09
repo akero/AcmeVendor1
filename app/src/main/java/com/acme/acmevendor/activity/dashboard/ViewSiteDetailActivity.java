@@ -14,6 +14,9 @@ import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface {
 
@@ -53,9 +56,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         Log.d("tag41", "5");
     }
 
-    void implementUI(String response){
-        //TODO here
+    void implementUI(String response) {
+        // Parsing JSON to Java objects
+
     }
+
 
     void apicall(String logintoken, String siteNumber){
 

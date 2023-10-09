@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,8 +30,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:src="@drawable/ic_notification" />
-
-
         </RelativeLayout>
 
         <ScrollView
@@ -46,15 +40,11 @@
             >
 
 
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_20sdp"
            >
-
 
             <LinearLayout
                 android:id="@+id/ll_compaign"
@@ -101,8 +91,6 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />
-
-
             </LinearLayout>
 
 
@@ -127,8 +115,6 @@
                 android:scaleType="fitXY"
                 android:layout_below="@id/tvAddSiteDetail"
                 android:src="@drawable/temp_campaign" />
-
-
 
 
             <LinearLayout
@@ -169,7 +155,6 @@
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/texthintcolor"
                             android:textSize="@dimen/_12ssp" />
-
                     </RelativeLayout>
 
 
@@ -178,10 +163,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-
 
                         <TextView
                             android:id="@+id/tvSiteno"
@@ -208,9 +189,6 @@
                             android:textSize="@dimen/_12ssp" />
 
                     </RelativeLayout>
-
-
-
                 </LinearLayout>
 
 
@@ -266,7 +244,6 @@
                     android:textSize="@dimen/_12ssp" />
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -315,10 +292,6 @@
                         android:layout_weight="1"
                         android:layout_marginLeft="@dimen/_2sdp">
 
-
-
-
-
                         <TextView
                             android:id="@+id/tvLongitudeText"
                             android:layout_width="match_parent"
@@ -344,9 +317,6 @@
                             android:textSize="@dimen/_12ssp" />
 
                     </RelativeLayout>
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -388,7 +358,6 @@
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/texthintcolor"
                             android:textSize="@dimen/_12ssp" />
-
                     </RelativeLayout>
 
 
@@ -397,10 +366,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-
 
                         <TextView
                             android:id="@+id/tvWidthText"
@@ -428,11 +393,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                     </RelativeLayout>
-
-
-
                 </LinearLayout>
-
 
 
                 <TextView
@@ -445,7 +406,6 @@
                     android:text="Total Area in sq. ft"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <TextView
                     android:id="@+id/tvTotalArea"
@@ -460,8 +420,6 @@
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
 
-
-
                 <TextView
                     android:id="@+id/tvMediaTypeText"
                     android:layout_width="match_parent"
@@ -472,7 +430,6 @@
                     android:text="Media Type"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
             <TextView
                 android:id="@+id/tvMediaType"
@@ -487,7 +444,6 @@
                 android:textColorHint="@color/texthintcolor"
                 android:textSize="@dimen/_12ssp" />
 
-
                 <TextView
                     android:id="@+id/tvIlluminationText"
                     android:layout_width="match_parent"
@@ -498,7 +454,6 @@
                     android:text="Illumination"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
             <TextView
                 android:id="@+id/tvIllumination"
@@ -512,7 +467,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/texthintcolor"
                 android:textSize="@dimen/_12ssp" />
-
 
             <Button
                 android:id="@+id/btnNext"
@@ -528,7 +482,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_14ssp" />
 
-
                 <Button
                     android:id="@+id/btnDownload"
                     android:layout_width="match_parent"
@@ -542,7 +495,6 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14ssp" />
-
 
             <Button
                 android:id="@+id/btnClose"
@@ -558,15 +510,6 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
-
-
-
-
-
-
-
-
-
         </RelativeLayout>
 
         </ScrollView>
@@ -575,8 +518,6 @@
             android:layout_height="@dimen/_10sdp"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimaryDark" />
-
-
 
     </RelativeLayout>
 </layout>
