@@ -3,6 +3,8 @@ package com.acme.acmevendor.activity.dashboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
+import com.acme.acmevendor.utility.RoundRectCornerImageView;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.SiteDetail;
@@ -24,7 +27,9 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URL;
 
 public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface {
 
@@ -69,55 +74,108 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getBoolean("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
-                JSONObject dataObject = dataArray.getJSONObject(0);
+                if(dataArray != null && dataArray.length() > 0) {
+                    JSONObject dataObject = dataArray.getJSONObject(0);
+                    if(dataObject != null) {
+                        SiteDetail siteDetail = new SiteDetail();
+                        siteDetail.setId(dataObject.optInt("id"));
+                        siteDetail.setVendorId(dataObject.optString("vendor_id"));
+                        siteDetail.setLocation(dataObject.optString("location"));
+                        siteDetail.setCreatedAt(dataObject.optString("created_at"));
+                        siteDetail.setEndDate(dataObject.optString("end_date"));
+                        siteDetail.setLatitude(dataObject.optString("latitude"));
+                        siteDetail.setLongitude(dataObject.optString("longitute"));
+                        siteDetail.setMediaType(dataObject.optString("media_type"));
+                        siteDetail.setIllumination(dataObject.optString("illumination"));
+                        siteDetail.setStartDate(dataObject.optString("start_date"));
+                        try {
+                            String imageUrl = dataObject.optString("image");
+                            if(imageUrl != null && !imageUrl.isEmpty()) {
+                                URL url = new URL(imageUrl);
+                                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                siteDetail.setImage(bitmap);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            // Handle error
+                        }
 
-                SiteDetail siteDetail = new SiteDetail();
-                siteDetail.setSiteId(String.valueOf(dataObject.getInt("id")));
-                siteDetail.setSiteName(dataObject.optString("vendor_id"));
-                siteDetail.setLocation(dataObject.getString("location"));
+                        // Update UI
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView tvSiteId = findViewById(R.id.etSiteNo);
+                                //TODO after person implements site name then change this
+                                tvSiteId.setText(String.valueOf(siteDetail.getId()));
 
-                // Assuming these properties are in SiteDetail
-                siteDetail.setLastInspection(dataObject.getString("created_at"));
-                siteDetail.setNextInspection(dataObject.getString("end_date"));
-                // ... add further properties as per your actual SiteDetail class ...
-                siteDetail.setInspectorName("N/A");
+                                TextView tvLocation = findViewById(R.id.tvLocation);
+                                tvLocation.setText(siteDetail.getLocation());
 
-//TODO here
-                // Update UI
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        TextView tvSiteId = findViewById(R.id.tvSiteno);
-                        tvSiteId.setText(siteDetail.getSiteId());
+                                TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+                                tvSiteName.setText(siteDetail.getVendorId());
 
-                        TextView tvLocation = findViewById(R.id.tvLocation);
-                        tvLocation.setText(siteDetail.getLocation());
+                                TextView tvLastInspection = findViewById(R.id.tvStartDate);
+                                tvLastInspection.setText(siteDetail.getCreatedAt());
 
-                        TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
-                        tvSiteName.setText(siteDetail.getSiteName());
+                                TextView tvLatitude = findViewById(R.id.tvLatitude);
+                                tvLatitude.setText(siteDetail.getLatitude());
 
+                                TextView tvLongitude = findViewById(R.id.tvLongitude);
+                                tvLongitude.setText(siteDetail.getLongitude());
 
+                                TextView tvMediaType = findViewById(R.id.tvMediaType);
+                                tvMediaType.setText(siteDetail.getMediaType());
 
+                                TextView tvIllumination = findViewById(R.id.tvIllumination);
+                                tvIllumination.setText(siteDetail.getIllumination());
+
+                                TextView tvStartDate = findViewById(R.id.tvStartDate);
+                                tvStartDate.setText(siteDetail.getStartDate());
+
+                                RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
+                                if(siteDetail.getImage()!=null) {
+                                    tvImage.setImageBitmap(siteDetail.getImage());
+                                }
+                                }
+                        });
                     }
-                });
+                } else {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                }
             } else {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(ViewSiteDetailActivity.this, "Data retrieval failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
             }
         } catch (Exception e) {
-            // Handle JSON parsing error
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(ViewSiteDetailActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
-                }
-            });
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        }
 
-            // Assigning values and listeners to Buttons
+
+
+
+
+
+
+
+        // Assigning values and listeners to Buttons
             Button btnNext = findViewById(R.id.btnNext);
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,7 +200,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                     finish();
                 }
             });
-        }}
+        }
 
 
 

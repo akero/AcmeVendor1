@@ -1,29 +1,92 @@
 package com.acme.acmevendor.viewmodel;
 
+import android.graphics.Bitmap;
+import android.media.Image;
+
 public class SiteDetail {
-    private String site_id;
-    private String site_name;
+    private boolean success;
+    private String message;
+    private int id;
+    private Bitmap image;
+    private String vendor_id;
+    private int campaign_id;
+    private String start_date;
+    private String end_date;
     private String location;
-    private String last_inspection;
-    private String next_inspection;
-    private String inspector_name;
+    private String longitute;
+    private String latitude;
+    private String width;
+    private String height;
+    private String total_area;
+    private String media_type;
+    private String illumination;
+    private String created_at;
+    private String updated_at;
 
     // Getters and Setters for each field
 
-    public String getSiteId() {
-        return site_id;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setSiteId(String site_id) {
-        this.site_id = site_id;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public String getSiteName() {
-        return site_name;
+    public String getMessage() {
+        return message;
     }
 
-    public void setSiteName(String site_name) {
-        this.site_name = site_name;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public String getVendorId() {
+        return vendor_id;
+    }
+
+    public void setVendorId(String vendor_id) {
+        this.vendor_id = vendor_id;
+    }
+
+    public int getCampaignId() {
+        return campaign_id;
+    }
+
+    public void setCampaignId(int campaign_id) {
+        this.campaign_id = campaign_id;
+    }
+
+    public String getStartDate() {
+        return start_date;
+    }
+
+    public void setStartDate(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEndDate() {
+        return end_date;
+    }
+
+    public void setEndDate(String end_date) {
+        this.end_date = end_date;
     }
 
     public String getLocation() {
@@ -34,27 +97,75 @@ public class SiteDetail {
         this.location = location;
     }
 
-    public String getLastInspection() {
-        return last_inspection;
+    public String getLongitude() {
+        return longitute;
     }
 
-    public void setLastInspection(String last_inspection) {
-        this.last_inspection = last_inspection;
+    public void setLongitude(String longitute) {
+        this.longitute = longitute;
     }
 
-    public String getNextInspection() {
-        return next_inspection;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setNextInspection(String next_inspection) {
-        this.next_inspection = next_inspection;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public String getInspectorName() {
-        return inspector_name;
+    public String getWidth() {
+        return width;
     }
 
-    public void setInspectorName(String inspector_name) {
-        this.inspector_name = inspector_name;
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getTotalArea() {
+        return total_area;
+    }
+
+    public void setTotalArea(String total_area) {
+        this.total_area = total_area;
+    }
+
+    public String getMediaType() {
+        return media_type;
+    }
+
+    public void setMediaType(String media_type) {
+        this.media_type = media_type;
+    }
+
+    public String getIllumination() {
+        return illumination;
+    }
+
+    public void setIllumination(String illumination) {
+        this.illumination = illumination;
+    }
+
+    public String getCreatedAt() {
+        return created_at;
+    }
+
+    public void setCreatedAt(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdatedAt() {
+        return updated_at;
+    }
+
+    public void setUpdatedAt(String updated_at) {
+        this.updated_at = updated_at;
     }
 }
