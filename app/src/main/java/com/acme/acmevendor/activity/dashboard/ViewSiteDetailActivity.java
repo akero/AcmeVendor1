@@ -112,7 +112,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                                 tvLocation.setText(siteDetail.getLocation());
 
                                 TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
-                                tvSiteName.setText(siteDetail.getVendorId());
+                                //tvSiteName.setText(siteDetail.getVendorId());
 
                                 TextView tvLastInspection = findViewById(R.id.tvStartDate);
                                 tvLastInspection.setText(siteDetail.getCreatedAt());
