@@ -1,22 +1,128 @@
 package com.acme.acmevendor.activity.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.login.LoginActivity;
+import com.acme.acmevendor.activity.login.OTP;
 import com.acme.acmevendor.activity.login.SplashActivity;
 import com.acme.acmevendor.activity.login.WelcomeActivity;
+import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
+import com.acme.acmevendor.utility.AppPreferences;
+import com.acme.acmevendor.utility.NetworkUtils;
+import com.acme.acmevendor.viewmodel.LoginActivityViewModel;
 
-public class SelectLoginType extends AppCompatActivity {
+public class SelectLoginType extends BaseActivity {
+
+    Button bt1,bt2,bt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_login_type);
 
-        Intent mainIntent = new Intent(SelectLoginType.this, WelcomeActivity.class);
-        startActivity(mainIntent);
+        bt1= findViewById(R.id.button1);
+        bt2= findViewById(R.id.button2);
+        bt3= findViewById(R.id.button3);
+
+        bt1.setOnClickListener(new View.OnClickListener() {//vendor
+            @Override
+            public void onClick(View v) {
+                // Handle the button click here
+                int loginType = 0;
+                Intent intent= new Intent(SelectLoginType.this, OTP.class);
+                intent.putExtra("loginType", loginType);
+                startActivity(intent);
+                }
+        });
+
+        bt2.setOnClickListener(new View.OnClickListener() {//acme
+            @Override
+            public void onClick(View v) {
+                // Handle the button click here
+                int loginType = 1;
+                Intent intent= new Intent(SelectLoginType.this, OTP.class);
+                intent.putExtra("loginType", loginType);
+                startActivity(intent);
+            }
+        });
+
+        bt3.setOnClickListener(new View.OnClickListener() {//client
+            @Override
+            public void onClick(View v) {
+                // Handle the button click here
+                int loginType = 2;
+                Intent intent= new Intent(SelectLoginType.this, OTP.class);
+                intent.putExtra("loginType", loginType);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
+
+  /*  @SuppressLint("ResourceAsColor")
+    public void btnAdminClick(View view) {
+
+        loginType = 1;
+
+        binding.tvAdminLogin.setTextColor(Color.WHITE);
+        binding.tvClientLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvVenderLogin.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvAdminLogin.setBackgroundResource(R.drawable.primaryround);
+        binding.tvClientLogin.setBackgroundResource(0);
+        binding.tvVenderLogin.setBackgroundResource(0);
+
+        // Set backgrounds and colors similarly for the views as mentioned in the Kotlin code
+        // Repeat this for other methods too
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void btnVenderClick(View view) {
+
+        loginType = 2;
+
+        binding.tvAdminLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvClientLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvVenderLogin.setTextColor(Color.WHITE);
+
+        binding.tvAdminLogin.setBackgroundResource(0);
+        binding.tvClientLogin.setBackgroundResource(0);
+        binding.tvVenderLogin.setBackgroundResource(R.drawable.primaryround);
+
+        // Set backgrounds and colors similarly for the views as mentioned in the Kotlin code
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void btnClientClick(View view) {
+
+        loginType = 0;
+
+        binding.tvAdminLogin.setTextColor(R.color.colorPrimaryDark);
+        binding.tvClientLogin.setTextColor(Color.WHITE);
+        binding.tvVenderLogin.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvAdminLogin.setBackgroundResource(0);
+        binding.tvClientLogin.setBackgroundResource(R.drawable.primaryround);
+        binding.tvVenderLogin.setBackgroundResource(0);
+
+        // Set backgrounds and colors similarly for the views as mentioned in the Kotlin code
+    }
+    */
+
 }
