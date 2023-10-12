@@ -19,6 +19,9 @@ public class SiteDetail {
     private String height;
     private String total_area;
     private String media_type;
+    private String name; // assuming it's a String, change the type if necessary
+    private String site_no; // assuming it's a String, change the type if necessary
+
     private String illumination;
     private String created_at;
     private String updated_at;
@@ -52,6 +55,23 @@ public class SiteDetail {
     public Bitmap getImage() {
         return image;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSiteNo() {
+        return site_no;
+    }
+
+    public void setSiteNo(String site_no) {
+        this.site_no = site_no;
+    }
+
 
     public void setImage(Bitmap image) {
         this.image = image;

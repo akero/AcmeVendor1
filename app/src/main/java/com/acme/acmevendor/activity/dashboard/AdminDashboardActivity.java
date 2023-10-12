@@ -100,8 +100,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         implementUi(idArray);
 
-
-
         Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
 
         }

@@ -104,15 +104,16 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 TextView tvSiteId = findViewById(R.id.etSiteNo);
                                 //TODO after person implements site name then change this
-                                tvSiteId.setText(String.valueOf(siteDetail.getId()));
+                                tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
 
                                 TextView tvLocation = findViewById(R.id.tvLocation);
                                 tvLocation.setText(siteDetail.getLocation());
 
                                 TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
-                                //tvSiteName.setText(siteDetail.getVendorId());
+                                tvSiteName.setText(siteDetail.getName());
 
                                 TextView tvLastInspection = findViewById(R.id.tvStartDate);
                                 tvLastInspection.setText(siteDetail.getCreatedAt());
