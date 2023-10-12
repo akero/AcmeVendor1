@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.login.WelcomeActivity">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_main_bg"
+        android:padding="@dimen/_20sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/etEmailId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/otp1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/otp2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:maxLength="1"
+                android:inputType="number"
+                android:background="@drawable/primarystroke"
+                android:padding="@dimen/_10sdp"
+                android:fontFamily="@font/dmsansregular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+
+            <EditText
+                android:id="@+id/otp2"
+                app:layout_constraintStart_toEndOf="@+id/otp1"
+                app:layout_constraintEnd_toStartOf="@+id/otp3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:maxLength="1"
+                android:inputType="number"
+                android:background="@drawable/primarystroke"
+                android:padding="@dimen/_10sdp"
+                android:fontFamily="@font/dmsansregular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+
+            <EditText
+                android:id="@+id/otp3"
+                app:layout_constraintStart_toEndOf="@+id/otp2"
+                app:layout_constraintEnd_toStartOf="@+id/otp4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:maxLength="1"
+                android:inputType="number"
+                android:background="@drawable/primarystroke"
+                android:padding="@dimen/_10sdp"
+                android:fontFamily="@font/dmsansregular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+
+            <EditText
+                android:id="@+id/otp4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintStart_toEndOf="@+id/otp3"
+                app:layout_constraintEnd_toStartOf="@+id/otp5"
+                app:layout_constraintTop_toTopOf="parent"
+                android:maxLength="1"
+                android:inputType="number"
+                android:background="@drawable/primarystroke"
+                android:padding="@dimen/_10sdp"
+                android:fontFamily="@font/dmsansregular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+
+            <EditText
+                android:id="@+id/otp5"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintStart_toEndOf="@+id/otp4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:maxLength="1"
+                android:inputType="number"
+                android:background="@drawable/primarystroke"
+                android:padding="@dimen/_10sdp"
+                android:fontFamily="@font/dmsansregular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tvRememberPassword"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/dmsansbold"
+
+            android:text="Welcome To\nAcme Media Group"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_20ssp" />
+
+
+
+
+        <TextView
+            android:id="@+id/tvRememberPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dmsansregular"
+            android:layout_above="@id/etEmailId"
+            android:layout_marginBottom="6dp"
+            android:text="Enter OTP"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_10ssp" />
+
+
+
+
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etEmailId"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/primaryround"
+            android:fontFamily="@font/dmsansbold"
+            android:onClick="btnSubmitClick"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+
+
+
+
+    </RelativeLayout>
+
+
+</layout>

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.SelectLoginType;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashActivity.this, WelcomeActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, SelectLoginType.class);
                 startActivity(mainIntent);
                 finish();
             }

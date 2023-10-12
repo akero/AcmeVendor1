@@ -44,6 +44,7 @@ public class WelcomeActivity extends BaseActivity {
             Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
             intent.putExtra("Email", binding.etEmailId.getText().toString());
             startActivity(intent);
+
         });
 
         welcomeActivityViewModel.errorMessage.observe(this, errorMessage -> {
@@ -87,8 +88,12 @@ public class WelcomeActivity extends BaseActivity {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
 
-            Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
+            //TODO change
+            Intent intent = new Intent(WelcomeActivity.this, OTP.class);
+            intent.putExtra("Email", binding.etEmailId.getText().toString());
             startActivity(intent);
+            //Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
+            //startActivity(intent);
 
             //TODO uncomment this
             //showProgressDialog();
