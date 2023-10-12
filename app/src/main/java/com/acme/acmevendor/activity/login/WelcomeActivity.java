@@ -26,13 +26,15 @@ public class WelcomeActivity extends BaseActivity {
     private WelcomeActivityViewModel welcomeActivityViewModel;
 
     //TODO add flow to enter otp etc and finish login after saving login token
-
+    int loginType=1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Log.d("tag2","start of welcomeactivity");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
+
+        loginType=getIntent().getIntExtra("loginType", 1);
 
         welcomeActivityViewModel = new ViewModelProvider(this).get(WelcomeActivityViewModel.class);
         welcomeActivityViewModel.successresponse.observe(this, response -> {
@@ -89,8 +91,10 @@ public class WelcomeActivity extends BaseActivity {
         } else {
 
             //TODO change
+
             Intent intent = new Intent(WelcomeActivity.this, OTP.class);
             intent.putExtra("Email", binding.etEmailId.getText().toString());
+            intent.putExtra("loginType", loginType);
             startActivity(intent);
             //Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
             //startActivity(intent);

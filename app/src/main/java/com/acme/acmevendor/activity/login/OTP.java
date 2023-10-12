@@ -39,6 +39,9 @@ public class OTP extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         int loginType= getIntent().getIntExtra("loginType", 1);
+        String email= getIntent().getStringExtra("Email");
+
+        //TODO call api with email and logintype then start the next class
 
         if (loginType == 0) {
 
