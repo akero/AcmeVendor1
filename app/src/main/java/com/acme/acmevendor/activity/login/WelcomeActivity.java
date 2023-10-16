@@ -45,7 +45,7 @@ public class WelcomeActivity extends BaseActivity {
 
             Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
             intent.putExtra("Email", binding.etEmailId.getText().toString());
-            startActivity(intent);
+            //startActivity(intent);
 
         });
 

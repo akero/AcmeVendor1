@@ -104,6 +104,73 @@ public class APIreferenceclass {
       }
     }
 
+    //login
+    public APIreferenceclass(int vendorclientorcampaign, Context context, String email) {
+
+        //TODO make api call now
+//campaign
+        if (vendorclientorcampaign == 0) {
+
+            Log.d("tag21","1");
+
+            String url="https://acme.warburttons.com/api/get_campaign_sites/18";
+            querytype=0;
+            String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            Log.d("addbatest","Inside admin api");
+
+
+            callapi(headers, jsonPayload, context, querytype, url);
+        }
+
+        //client
+        else if (vendorclientorcampaign == 1) {
+
+            String url="https://acme.warburttons.com/api/get_client_campaigns";
+            querytype= 0;
+
+
+
+
+
+            String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
+
+            Map<String, String> headers= new HashMap<>();
+            headers.put("Authorization", "Bearer "+logintoken);
+            headers.put("Content-Type", "application/json");
+
+            Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+
+
+            callapi(headers, jsonPayload, context, querytype, url);
+        }
+
+        //vendor
+        else if (vendorclientorcampaign == 2) {
+
+            String url="https://acme.warburttons.com/api/get_vendor_campaigns";
+
+            querytype=0; //GET
+            String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";
+
+            Map<String, String> headers= new HashMap<>();
+            headers.put("Authorization", "Bearer "+logintoken);
+            headers.put("Content-Type", "application/json");
+
+            Log.d("vdbatest","Inside apirefapiclass");
+
+
+            callapi(headers, jsonPayload, context, querytype, url);
+
+        }
+
+    }
+
+
 
     public APIreferenceclass(String email, String pass, String logintoken, Context context) {
     }

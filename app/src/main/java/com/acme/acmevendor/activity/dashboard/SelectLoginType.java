@@ -34,15 +34,15 @@ public class SelectLoginType extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_login_type);
 
-        bt1= findViewById(R.id.button1);
-        bt2= findViewById(R.id.button2);
-        bt3= findViewById(R.id.button3);
+        bt1= findViewById(R.id.button1); //client 1
+        bt2= findViewById(R.id.button2); //campaign 0
+        bt3= findViewById(R.id.button3); //vendor 2
 
         bt1.setOnClickListener(new View.OnClickListener() {//vendor
             @Override
             public void onClick(View v) {
                 // Handle the button click here
-                int loginType = 0;
+                int loginType = 1;
                 Intent intent= new Intent(SelectLoginType.this, OTP.class);
                 intent.putExtra("loginType", loginType);
                 startActivity(intent);
@@ -53,7 +53,7 @@ public class SelectLoginType extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // Handle the button click here
-                int loginType = 1;
+                int loginType = 0;
                 Intent intent= new Intent(SelectLoginType.this, OTP.class);
                 intent.putExtra("loginType", loginType);
                 startActivity(intent);
