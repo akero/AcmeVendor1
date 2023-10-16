@@ -1,17 +1,30 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
@@ -25,8 +38,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -47,6 +63,25 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
+
+        try {
+
+            // Initialize BroadcastReceiver
+            onDownloadComplete = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                    if (downloadReference == id) {
+                        Toast.makeText(ViewSiteDetailActivity.this, "Download Completed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            };
+
+            // Registering the receiver to listen for ACTION_DOWNLOAD_COMPLETE
+            registerReceiver(onDownloadComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        }catch(Exception e){
+            Log.d("tag41", e.toString());
+        }
 
         Log.d("tag41", "1");
 
@@ -84,19 +119,28 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         siteDetail.setCreatedAt(dataObject.optString("created_at"));
                         siteDetail.setEndDate(dataObject.optString("end_date"));
                         siteDetail.setLatitude(dataObject.optString("latitude"));
-                        siteDetail.setLongitude(dataObject.optString("longitute"));
+                        siteDetail.setLongitude(dataObject.optString("longitute")); // Consider renaming "longitute" to "longitude" in your JSON or code for consistency
                         siteDetail.setMediaType(dataObject.optString("media_type"));
                         siteDetail.setIllumination(dataObject.optString("illumination"));
                         siteDetail.setStartDate(dataObject.optString("start_date"));
+                        siteDetail.setName(dataObject.optString("name"));
+                        siteDetail.setSiteNo(dataObject.optString("site_no"));
+                        siteDetail.setWidth(dataObject.optString("width"));
+                        siteDetail.setHeight(dataObject.optString("height"));
+                        siteDetail.setTotalArea(dataObject.optString("total_area"));
+                        siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
                         try {
                             String imageUrl = dataObject.optString("image");
-                            if(imageUrl != null && !imageUrl.isEmpty()) {
+                            imageUrl= "https://acme.warburttons.com/"+ imageUrl;
+                            Log.d("tag41", "imageurl is "+ imageUrl);
+                            if(imageUrl != "null" && !imageUrl.isEmpty()) {
                                 URL url = new URL(imageUrl);
                                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                                 siteDetail.setImage(bitmap);
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            Log.d("tag41", "error in implementui" +e.toString());
+                            Log.e("tag41", "sdfdg", e);
                             // Handle error
                         }
 
@@ -132,6 +176,22 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
                                 TextView tvStartDate = findViewById(R.id.tvStartDate);
                                 tvStartDate.setText(siteDetail.getStartDate());
+
+                                // Set the site number
+                                TextView tvSiteNo = findViewById(R.id.etSiteNo);
+                                tvSiteNo.setText(String.valueOf(siteDetail.getSiteNo())); // assuming getter method exists
+
+                                // Set the width
+                                TextView tvWidth = findViewById(R.id.tvWidth);
+                                tvWidth.setText(siteDetail.getWidth()); // assuming getter method exists
+
+                                // Set the height
+                                TextView tvHeight = findViewById(R.id.tvHeight);
+                                tvHeight.setText(siteDetail.getHeight()); // assuming getter method exists
+
+                                // Set the total area
+                                TextView tvTotalArea = findViewById(R.id.tvTotalArea);
+                                tvTotalArea.setText(siteDetail.getTotalArea()); // assuming getter method exists
 
                                 RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
                                 if(siteDetail.getImage()!=null) {
@@ -189,6 +249,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             btnDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    onDownloadClick(v);
                     // Handle download button click
                 }
             });
@@ -227,9 +288,12 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         return dataStrings;
     }
 
+    String response1="";
+
     @Override
     public void onResponseReceived(String response){
 
+        response1= response;
         implementUI(response);
         Log.d("tag41", response);
     }
@@ -248,9 +312,47 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
 
     public void onDownloadClick(View view) {
+        // Check for write permissions
+        if (checkPermission()) {
+            // Permission already granted, perform your operation here
+            String formattedJson = formatJSONString(response1);
+            if (formattedJson != null) {
+                writeToFile(formattedJson, "ApiResponse.txt");
+            } else {
+                Toast.makeText(this, "Error formatting JSON", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // Permission not granted, request it
+            requestPermission();
+        }
+    }
 
-        //TODO put shit in a file and download and finish activity
-        finish();
+
+    public String formatJSONString(String unformattedJson) {
+        try {
+            JSONObject jsonObject = new JSONObject(unformattedJson);
+            return jsonObject.toString(4); // `4` is the number of spaces to use for indentation
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void writeToFile(String data, String fileName) {
+        File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "YourAppName");
+        // Create the folder if it doesn't exist
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        // Create the file
+        File file = new File(directory, fileName);
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(data);
+            Toast.makeText(this, "Data saved at " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error saving data to file", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void oldCampaignClick(View view) {
@@ -263,4 +365,81 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
         binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
     }
+
+    //download code
+
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+    }
+
+    private long downloadReference;
+    private BroadcastReceiver onDownloadComplete;
+
+    private void startDownload(String fileURL, String fileName) {
+        try {
+            if (checkPermission()) {
+                Uri downloadUri = Uri.parse(fileURL);
+                String destination = Environment.DIRECTORY_DOWNLOADS;
+
+                // Set up the request
+                DownloadManager.Request request = new DownloadManager.Request(downloadUri);
+                request.setTitle(fileName);
+                request.setDescription("Downloading...");
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.setDestinationInExternalPublicDir(destination, fileName);
+
+                // Enqueue the download
+                DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                downloadReference = downloadManager.enqueue(request);
+
+                Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
+            } else {
+                requestPermission();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Unregister the receiver to avoid memory leaks
+        unregisterReceiver(onDownloadComplete);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean writeExternalFileAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean readExternalFileAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                    if (writeExternalFileAccepted && readExternalFileAccepted) {
+                        // Permission has been granted, you can proceed with file operations
+                        Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+                        // You might want to perform the operation that required permission here
+                        // For example, if this was a download operation, initiate the download
+                    } else {
+                        Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                        // Permission was denied. You can notify the user and disable relevant features or close the app.
+                    }
+                }
+                break;
+        }
+    }
+
+
 }
