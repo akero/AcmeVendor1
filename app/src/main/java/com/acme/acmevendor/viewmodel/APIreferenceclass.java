@@ -104,6 +104,8 @@ public class APIreferenceclass {
       }
     }
 
+
+    //TODO endpoint for otp get when this person gets his email
     //login
     public APIreferenceclass(int vendorclientorcampaign, Context context, String email) {
 
@@ -113,15 +115,15 @@ public class APIreferenceclass {
 
             Log.d("tag21","1");
 
-            String url="https://acme.warburttons.com/api/get_campaign_sites/18";
+            String url="https://acme.warburttons.com/api/login";
             querytype=0;
-            String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+            String jsonPayload = "{\"Authorization\": \"";
 
             Map<String, String> headers = new HashMap<>();
-            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Authorization", "Bearer " );
             headers.put("Content-Type", "application/json");
 
-            Log.d("addbatest","Inside admin api");
+            Log.d("otptest","Inside otp api");
 
 
             callapi(headers, jsonPayload, context, querytype, url);
@@ -130,12 +132,12 @@ public class APIreferenceclass {
         //client
         else if (vendorclientorcampaign == 1) {
 
-            String url="https://acme.warburttons.com/api/get_client_campaigns";
+            String url="https://acme.warburttons.com/api/login";
             querytype= 0;
 
 
-
-
+//TODO remove comments
+/*
 
             String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
 
@@ -146,14 +148,15 @@ public class APIreferenceclass {
             Log.d("cldbatest","jsonpayload is "+ jsonPayload);
 
 
-            callapi(headers, jsonPayload, context, querytype, url);
+            callapi(headers, jsonPayload, context, querytype, url); */
         }
 
         //vendor
         else if (vendorclientorcampaign == 2) {
 
-            String url="https://acme.warburttons.com/api/get_vendor_campaigns";
+            String url="https://acme.warburttons.com/api/login";
 
+            /*
             querytype=0; //GET
             String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";
 
@@ -164,7 +167,7 @@ public class APIreferenceclass {
             Log.d("vdbatest","Inside apirefapiclass");
 
 
-            callapi(headers, jsonPayload, context, querytype, url);
+            callapi(headers, jsonPayload, context, querytype, url); */
 
         }
 

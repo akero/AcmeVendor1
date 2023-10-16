@@ -57,7 +57,30 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailInput = email.getText().toString().trim();
+
+                //TODO call api with email and logintype then start the next class. comment this once otp is implemented
+
+                if (loginType == 0) {
+
+                    //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
+                    Log.d("tag23", "0");
+                    startActivity(new Intent(OTP.this, ClientDashBoardActivity.class));
+
+                } else if (loginType == 1) {
+
+
+                    //todo implement fn to save/retreive login data and pass otp class. Then add receiver on other class.
+                    Log.d("tag23", "1");
+                    startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
+
+                } else {
+
+                    //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
+                    Log.d("tag23", "2");
+                    startActivity(new Intent(OTP.this, VenderDashBoardActivity.class));
+                }
+
+                /*String emailInput = email.getText().toString().trim();
 
                 // Check if the input is empty
                 if(emailInput.isEmpty()) {
@@ -69,38 +92,18 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                 }
                 // If the email input is valid, start the new activity.
                 else {
-                    //TODO: make api call here, put intent in onresponsereceived
+                    //TODO: make api call here, put intent in onresponsereceived. pending till they guy gets email.
 
-                    APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
+//                    APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
 
 
-                }
+                }*/
             }
 
         });
 
 
-        //TODO call api with email and logintype then start the next class
 
-      /*  if (loginType == 0) {
-
-            //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
-            Log.d("tag23", "0");
-            startActivity(new Intent(OTP.this, ClientDashBoardActivity.class));
-
-        } else if (loginType == 1) {
-
-
-            //todo implement fn to save/retreive login data and pass otp class. Then add receiver on other class.
-            Log.d("tag23", "1");
-            startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
-
-        } else {
-
-            //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
-            Log.d("tag23", "2");
-            startActivity(new Intent(OTP.this, VenderDashBoardActivity.class));
-        }*/
     }
 
     @Override

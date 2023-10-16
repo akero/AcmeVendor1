@@ -42,7 +42,7 @@ public class SelectLoginType extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // Handle the button click here
-                int loginType = 1;
+                int loginType = 0;
                 Intent intent= new Intent(SelectLoginType.this, OTP.class);
                 intent.putExtra("loginType", loginType);
                 startActivity(intent);
@@ -53,7 +53,7 @@ public class SelectLoginType extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // Handle the button click here
-                int loginType = 0;
+                int loginType = 1;
                 Intent intent= new Intent(SelectLoginType.this, OTP.class);
                 intent.putExtra("loginType", loginType);
                 startActivity(intent);
