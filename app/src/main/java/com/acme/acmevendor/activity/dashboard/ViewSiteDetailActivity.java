@@ -51,7 +51,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     private String campaignType = "";
     private int position = 0;
-
     String siteNumber= "";
     String logintoken="";
     private ActivityViewSiteDetailBinding binding;
@@ -65,7 +64,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
 
         try {
-
             // Initialize BroadcastReceiver
             onDownloadComplete = new BroadcastReceiver() {
                 @Override
@@ -84,7 +82,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         }
 
         Log.d("tag41", "1");
-
 
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
@@ -229,13 +226,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 });
         }
 
-
-
-
-
-
-
-
         // Assigning values and listeners to Buttons
             Button btnNext = findViewById(R.id.btnNext);
             btnNext.setOnClickListener(new View.OnClickListener() {
@@ -264,16 +254,12 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             });
         }
 
-
-
-
     void apicall(String logintoken, String siteNumber){
 
         Log.d("tag41", "6");
         Context context= this;
         APIreferenceclass api= new APIreferenceclass(logintoken, siteNumber, context);
         Log.d("tag41", "7");
-
     }
     public static String[] extractDataStrings(String apiResponse) {
         Gson gson = new Gson();
@@ -308,25 +294,31 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
 
     public void onNotificationClick(View view){
-        //TODO ask lodu what this does
+        //TODO ask dev what this does
     }
 
     public void onDownloadClick(View view) {
         // Check for write permissions
         if (checkPermission()) {
+            Log.d("tag45","1");
             // Permission already granted, perform your operation here
             String formattedJson = formatJSONString(response1);
             if (formattedJson != null) {
+
+                Log.d("tag45","2");
                 writeToFile(formattedJson, "ApiResponse.txt");
             } else {
+
+                Log.d("tag45","3");
                 Toast.makeText(this, "Error formatting JSON", Toast.LENGTH_SHORT).show();
             }
         } else {
+
+            Log.d("tag45","4");
             // Permission not granted, request it
             requestPermission();
         }
     }
-
 
     public String formatJSONString(String unformattedJson) {
         try {
@@ -360,7 +352,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
     }
 
-
     public void liveCampaignClick(View view) {
         binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
         binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
@@ -377,6 +368,9 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
 
     private void requestPermission() {
+
+        Log.d("tag45","5");
+        View v= null;
         ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
     }
 
@@ -419,27 +413,22 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-                    boolean writeExternalFileAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean readExternalFileAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-                    if (writeExternalFileAccepted && readExternalFileAccepted) {
-                        // Permission has been granted, you can proceed with file operations
-                        Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
-                        // You might want to perform the operation that required permission here
-                        // For example, if this was a download operation, initiate the download
-                    } else {
-                        Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
-                        // Permission was denied. You can notify the user and disable relevant features or close the app.
-                    }
-                }
-                break;
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permissions granted, continue with download
+                Log.d("tag45","7");
+                View v = null;
+                onDownloadClick(v);
+            } else {
+                Log.d("tag45","8");
+
+                // permissions denied, show a message to the user
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-
 
 }
