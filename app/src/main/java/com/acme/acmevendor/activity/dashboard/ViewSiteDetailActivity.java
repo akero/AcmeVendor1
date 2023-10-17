@@ -63,7 +63,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
 
-        try {
+       /* try {
             // Initialize BroadcastReceiver
             onDownloadComplete = new BroadcastReceiver() {
                 @Override
@@ -80,7 +80,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         }catch(Exception e){
             Log.d("tag41", e.toString());
         }
-
+*/
         Log.d("tag41", "1");
 
         if (getIntent().getExtras() != null) {
@@ -298,25 +298,17 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
 
     public void onDownloadClick(View view) {
-        // Check for write permissions
-        if (checkPermission()) {
-            Log.d("tag45","1");
-            // Permission already granted, perform your operation here
-            String formattedJson = formatJSONString(response1);
-            if (formattedJson != null) {
-
-                Log.d("tag45","2");
-                writeToFile(formattedJson, "ApiResponse.txt");
-            } else {
-
-                Log.d("tag45","3");
-                Toast.makeText(this, "Error formatting JSON", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-
-            Log.d("tag45","4");
-            // Permission not granted, request it
-            requestPermission();
+        //handle click
+        Log.d("tag46", response1);
+        File txtFile;
+        String a= response1;
+        try {
+             txtFile= new File(getExternalFilesDir(null), "Site Details.txt");
+            Log.d("tag46", "File path: " + txtFile.getAbsolutePath());
+            FileWriter writer = new FileWriter(txtFile);
+            writer.write(a); // 'a' is your JSON string
+        }catch(Exception e){
+            Log.d("tag46", e.toString());
         }
     }
 
@@ -357,11 +349,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
     }
 
-    //download code
+    //TODO delete. download code
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    private boolean checkPermission() {
+ /*   private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
         return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
@@ -373,8 +365,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         View v= null;
         ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
     }
-
-    private long downloadReference;
+*/
+   /* private long downloadReference;
     private BroadcastReceiver onDownloadComplete;
 
     private void startDownload(String fileURL, String fileName) {
@@ -403,16 +395,13 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             Toast.makeText(this, "Download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
+*/
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        // Unregister the receiver to avoid memory leaks
-        unregisterReceiver(onDownloadComplete);
     }
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -430,5 +419,5 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             }
         }
     }
-
+*/
 }
