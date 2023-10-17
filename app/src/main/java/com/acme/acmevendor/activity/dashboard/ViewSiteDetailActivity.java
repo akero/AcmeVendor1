@@ -42,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -300,15 +301,56 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     public void onDownloadClick(View view) {
         //handle click
         Log.d("tag46", response1);
+
         File txtFile;
-        String a= response1;
+        String a = response1;
+        FileWriter writer = null; // Initialize writer outside try-catch so it can be accessed in the finally block
         try {
-             txtFile= new File(getExternalFilesDir(null), "Site Details.txt");
+            txtFile = new File(getExternalFilesDir(null), "Site Details.txt");
             Log.d("tag46", "File path: " + txtFile.getAbsolutePath());
-            FileWriter writer = new FileWriter(txtFile);
+            writer = new FileWriter(txtFile);
             writer.write(a); // 'a' is your JSON string
-        }catch(Exception e){
+            String fullPath = txtFile.getAbsolutePath();
+            String shortenedPath = fullPath.replace("/storage/emulated/0/", "Internal Storage > ... > ");
+
+            Toast.makeText(this, "File downloaded to Internal Storage> Android> data> com.acme.acmevendor", Toast.LENGTH_LONG).show();
+            writer.flush(); // Good practice to flush before closing, though close() does this too
+        } catch (Exception e) {
             Log.d("tag46", e.toString());
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close(); // Ensure the writer is closed, this will also flush the buffer
+                }
+            } catch (IOException e) {
+                Toast.makeText(this, "Download failed check your internet", Toast.LENGTH_LONG).show();
+                Log.d("tag46", e.toString());
+            }
+        }
+    }
+
+    void writeToFile(String response, Context context){
+        String name="logintoken";
+        String content= response;
+        FileOutputStream fostream= null;
+
+        try{
+            fostream= context.openFileOutput(name,Context.MODE_PRIVATE);
+            fostream.write(response.getBytes());
+            fostream.close();
+
+        }catch(Exception e){
+            Log.d("tag24", "error-" +e.toString());
+        }
+        finally{
+            try{
+
+                if(fostream!=null){
+                    fostream.close();
+                }
+            }catch(Exception e){
+                Log.d("tag25","Closing outputstream failed");
+            }
         }
     }
 
