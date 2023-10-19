@@ -192,6 +192,15 @@ public static String[] extractDataStrings(String apiResponse) {
     }
 
 
+    private void clearUi() {
+        // Clear the RecyclerView
+        if (binding.rvCampaignList.getAdapter() != null) {
+            CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
+            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
+        }
+
+        // Reset any other UI elements here as needed
+    }
 
     private void campaignList() {
         vendorclientorcampaign=0;
@@ -245,6 +254,7 @@ public static String[] extractDataStrings(String apiResponse) {
 
     @SuppressLint("ResourceAsColor")
     public void btnCompaignClick(View view) {
+        clearUi();
 
         binding.tvVender.setBackgroundResource(0);
         binding.tvVender.setTextColor(R.color.colorPrimaryDark);
@@ -262,6 +272,7 @@ public static String[] extractDataStrings(String apiResponse) {
     @SuppressLint("ResourceAsColor")
     public void btnVenderClick(View view) {
         Log.d("tag20", "btnvenderclick");
+        clearUi();
 
         binding.tvVender.setBackgroundResource(R.drawable.primaryround);
         binding.tvVender.setTextColor(Color.WHITE);
@@ -280,6 +291,7 @@ public static String[] extractDataStrings(String apiResponse) {
     @SuppressLint("ResourceAsColor")
     public void btnClientClick(View view) {
         Log.d("tag20", "btnclientclick");
+        clearUi();
 
         binding.tvVender.setBackgroundResource(0);
         binding.tvVender.setTextColor(R.color.colorPrimaryDark);

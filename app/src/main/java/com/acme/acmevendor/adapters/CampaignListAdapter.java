@@ -19,6 +19,12 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
     private Context context;
     private JSONArray jsonArray;
 
+    public void clearData() {
+        // Clear the existing data
+        jsonArray = new JSONArray(); // Or clear the existing array in another appropriate way
+        notifyDataSetChanged();
+    }
+
     public CampaignListAdapter(Context context, JSONArray jsonArray) {
         this.context = context;
         this.jsonArray = jsonArray;
