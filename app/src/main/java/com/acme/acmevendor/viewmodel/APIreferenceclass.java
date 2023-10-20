@@ -198,7 +198,7 @@ public class APIreferenceclass {
     //for viewsitedetail
     public APIreferenceclass(String loginToken, String siteNumber, Context context){
 
-        //TODO add siteNumber to api call
+        //TODO add siteNumber to api callYou explained
 
         Log.d("tag41","8");
 
