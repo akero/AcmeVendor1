@@ -66,6 +66,7 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
             try {
                 String imageUrl = jsonObject.optString("image");
                 //TODO here get urls working then check is the recyclerview is populated with images
+                //TODO network on main thread exception
                 imageUrl= "https://acme.warburttons.com/"+ imageUrl;
                 Log.d("tag41", "imageurl is "+ imageUrl);
                 if(imageUrl != "null" && !imageUrl.isEmpty()) {
