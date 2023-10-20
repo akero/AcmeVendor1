@@ -1,10 +1,12 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import android.graphics.Bitmap;
+
 public class AdminCrudDataClass {
 
     int id =0;
     String name= "";
-    String image= "images/GghzUXeuU09hlQg1k7LxN4t5RDobBgcn8rzoUMJF.jpg";
+    Bitmap image;
     String uid= "";
 
     public void setId(int id)
@@ -25,12 +27,12 @@ public class AdminCrudDataClass {
         return name;
     }
 
-    public void setImage(String image)
+    public void setImage(Bitmap image)
     {
         this.image=image;
     }
 
-    public String getImage(){
+    public Bitmap getImage(){
         return image;
     }
 

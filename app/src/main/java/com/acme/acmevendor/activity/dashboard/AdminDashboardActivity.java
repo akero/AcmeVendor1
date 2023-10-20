@@ -3,6 +3,8 @@ package com.acme.acmevendor.activity.dashboard;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +12,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,9 +22,11 @@ import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.adapters.ClientListAdapter;
 import com.acme.acmevendor.databinding.ActivityMainBinding;
+import com.acme.acmevendor.utility.RoundRectCornerImageView;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.MainViewModel;
+import com.acme.acmevendor.viewmodel.SiteDetail;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -28,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -100,12 +108,85 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
  */
     }
-
     private void implementUi(String response){
 
-        
+
+        try {
+
+            JSONObject jsonObject = new JSONObject();
+            JSONArray jsonArray1= new JSONArray();
+
+
+            String ids[];
+            JSONObject jsonResponse = new JSONObject(response);
+            if(jsonResponse.getBoolean("success")) {
+                JSONArray dataArray = jsonResponse.getJSONArray("data");
+                if(dataArray != null && dataArray.length() > 0) {
+
+                    for(int i=0; i< dataArray.length();i++){
+
+
+                    JSONObject dataObject = dataArray.getJSONObject(i);
+                    if(dataObject != null) {
+                        jsonObject= new JSONObject();
+                        Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                        AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                        jsonObject.putOpt("id", dataObject.optInt("id"));
+                        jsonObject.putOpt("uid", dataObject.optString("uid"));
+                        jsonObject.putOpt("image", dataObject.optString("image"));
+                        jsonObject.putOpt("name", dataObject.optString("name"));
+
+                        siteDetail.setName(dataObject.optString("name"));
+
+                        try {
+                            String imageUrl = dataObject.optString("image");
+                            imageUrl= "https://acme.warburttons.com/"+ imageUrl;
+                            Log.d("tag41", "imageurl is "+ imageUrl);
+                            if(imageUrl != "null" && !imageUrl.isEmpty()) {
+                                URL url = new URL(imageUrl);
+                                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                siteDetail.setImage(bitmap);
+                            }
+                        } catch (Exception e) {
+                            Log.d("tag41", "error in implementui" +e.toString());
+                            Log.e("tag41", "sdfdg", e);
+                            // Handle error
+                        }
+
+                        jsonArray1.put(jsonObject);
+//TODO here
+
+
+            }
+
+                    }
+
+                    Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+
+                }
 
     }
+
+            runOnUiThread(new Runnable() {
+                              @Override
+                              public void run() {
+                                  // Your UI update code goes here
+
+                                  GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                                  binding.rvCampaignList.setLayoutManager(layoutManager);
+            CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+            binding.rvCampaignList.setAdapter(adapter);
+
+                              }});
+
+
+          //  jsonObject.put("sitenumber",  (i + 1));
+            //jsonObject.put("unitnumber", ids[i]);  // Assuming the campaign id is the unit number
+            //jsonArray.put(jsonObject);
+
+
+        }catch (Exception e){} }
+
 
  /*   //TODO sort this data and populate page. then implement for vendor and client
     private void implementUi(String ids[]) {
