@@ -130,13 +130,13 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     if(dataObject != null) {
                         jsonObject= new JSONObject();
                         Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
-                        AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                        //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                         jsonObject.putOpt("id", dataObject.optInt("id"));
                         jsonObject.putOpt("uid", dataObject.optString("uid"));
                         jsonObject.putOpt("image", dataObject.optString("image"));
                         jsonObject.putOpt("name", dataObject.optString("name"));
 
-                        siteDetail.setName(dataObject.optString("name"));
+                        //siteDetail.setName(dataObject.optString("name"));
 
                         try {
                             String imageUrl = dataObject.optString("image");
@@ -145,7 +145,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                             if(imageUrl != "null" && !imageUrl.isEmpty()) {
                                 URL url = new URL(imageUrl);
                                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                siteDetail.setImage(bitmap);
+                                //siteDetail.setImage(bitmap);
                             }
                         } catch (Exception e) {
                             Log.d("tag41", "error in implementui" +e.toString());
