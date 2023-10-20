@@ -31,11 +31,32 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+
 public class AdminDashboardActivity extends AppCompatActivity implements ApiInterface {
+    int id=0;
+    String image="";
+    String vendor_id="";
+    int campaign_id=0;
+    String start_date=null;
+    String end_date=null;
+    String location="";
+    String longitude="";
+    String latitude="";
+    String width="";
+    String height="";
+    String total_area="";
+    String media_type="";
+    String illumination="";
+    String created_at="";
+    String updated_at="";
     MainViewModel mainViewModel;
     ActivityMainBinding binding;
     JSONArray jsonArray;
     boolean showMenus = false;
+    private final Context ctxt= this;
+    int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
+    //TODO- populate this token
+    String logintoken="";
 
     //todo access token save to memory add to api call
 
@@ -54,101 +75,39 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     }
 
 
-
-    int id=0;
-    String image="";
-    String vendor_id="";
-    int campaign_id=0;
-    String start_date=null;
-    String end_date=null;
-    String location="";
-    String longitude="";
-    String latitude="";
-    String width="";
-    String height="";
-    String total_area="";
-    String media_type="";
-    String illumination="";
-    String created_at="";
-    String updated_at="";
-
-
-    int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
-
-    //TODO- populate this token
-    String logintoken="";
-
-
-//onresponsereceived from api
+    //onresponsereceived from api
     public void onResponseReceived(String response){
 
         Log.d("addbatest", "response is "+ response);
         Log.d("tag21","5");
+
+
+        implementUi(response);
+
+        /*
         //TODO: handle population
-
         String[] dataStrings = extractDataStrings(response);
-
-
         // Usage example
         for(String dataStr : dataStrings) {
             Log.d("tag2222",dataStr);
         }
-
         //id array. send to ui
         String[] idArray= extractIds(dataStrings);
+
         //TODO extract the unit id and pass that too
-
-        implementUi(idArray);
-
+        implementUi(response);
         Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
 
-        }
-
-    private String[] extractIds(String[] dataStrings) {
-        // Create an array to store extracted ids.
-        String[] ids = new String[dataStrings.length];
-
-        // Loop through each string in the input array.
-        for (int i = 0; i < dataStrings.length; i++) {
-            try {
-                // Parse the string into a JSONObject.
-                JSONObject jsonObject = new JSONObject(dataStrings[i]);
-
-                // Extract the "id" field and store it in the ids array.
-                ids[i] = String.valueOf(jsonObject.getInt("id"));
-            } catch (JSONException e) {
-                // Handle JSON parsing error. Here setting the id to a default error value ("error").
-                ids[i] = "error";
-                e.printStackTrace();
-            }
-        }
-
-        // Return the extracted ids.
-        return ids;
+ */
     }
 
-//extracting data into an array. the api response
-public static String[] extractDataStrings(String apiResponse) {
-    Gson gson = new Gson();
-    JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
-    JsonArray dataArray = jsonResponse.getAsJsonArray("data");
+    private void implementUi(String response){
 
-    String[] dataStrings = new String[dataArray.size()];
-    for (int i = 0; i < dataArray.size(); i++) {
-        dataStrings[i] = dataArray.get(i).toString();
+        
+
     }
 
-    return dataStrings;
-}
-
-
-    //TODO sort this data and populate page. then implement for vendor and client
-
-    private final Context ctxt= this;
-
-    //array for campaign id
-    String campaignidarray[][];
-
+ /*   //TODO sort this data and populate page. then implement for vendor and client
     private void implementUi(String ids[]) {
 
         Log.d("tag40", "1");
@@ -192,20 +151,12 @@ public static String[] extractDataStrings(String apiResponse) {
     }
 
 
-    private void clearUi() {
-        // Clear the RecyclerView
-        if (binding.rvCampaignList.getAdapter() != null) {
-            CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
-            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
-        }
-
-        // Reset any other UI elements here as needed
-    }
+  */
 
     private void campaignList() {
         vendorclientorcampaign=0;
         //TODO pass correct logintoken here
-        logintoken="322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+        logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
 
@@ -217,7 +168,6 @@ public static String[] extractDataStrings(String apiResponse) {
         //TODO- here
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-
     }
 
     private void venderList() {
@@ -226,30 +176,6 @@ public static String[] extractDataStrings(String apiResponse) {
         logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-
-
-    }
-
-    public void onPlusClick(View view) {
-
-        Log.d("tag20", "onplusclick");
-        //TODO ask lodu what this does
-    }
-
-    public void onNotificationClick(View view){
-        //TODO ask lodu what this does
-    }
-
-    public void onAddClientClick(View view) {
-        startActivity(new Intent(this, AddClientActivity.class));
-    }
-
-    public void onAddVenderClick(View view) {
-        startActivity(new Intent(this, AddVenderActivity.class));
-    }
-
-    public void onDeleteClientClick(View view) {
-        // ... your logic ...
     }
 
     @SuppressLint("ResourceAsColor")
@@ -332,5 +258,73 @@ public static String[] extractDataStrings(String apiResponse) {
             Log.d("tag123", e.toString());
             // Handle exception (e.g. show a Toast to the user indicating an error)
         }
+    }
+
+    private void clearUi() {
+        // Clear the RecyclerView
+        if (binding.rvCampaignList.getAdapter() != null) {
+            CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
+            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
+        }
+        // Reset any other UI elements here as needed
+    }
+
+    private String[] extractIds(String[] dataStrings) {
+        // Create an array to store extracted ids.
+        String[] ids = new String[dataStrings.length];
+
+        // Loop through each string in the input array.
+        for (int i = 0; i < dataStrings.length; i++) {
+            try {
+                // Parse the string into a JSONObject.
+                JSONObject jsonObject = new JSONObject(dataStrings[i]);
+
+                // Extract the "id" field and store it in the ids array.
+                ids[i] = String.valueOf(jsonObject.getInt("id"));
+            } catch (JSONException e) {
+                // Handle JSON parsing error. Here setting the id to a default error value ("error").
+                ids[i] = "error";
+                e.printStackTrace();
+            }
+        }
+
+        // Return the extracted ids.
+        return ids;
+    }
+
+    //extracting data into an array. the api response
+    public static String[] extractDataStrings(String apiResponse) {
+        Gson gson = new Gson();
+        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
+        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
+
+        String[] dataStrings = new String[dataArray.size()];
+        for (int i = 0; i < dataArray.size(); i++) {
+            dataStrings[i] = dataArray.get(i).toString();
+        }
+
+        return dataStrings;
+    }
+
+    public void onPlusClick(View view) {
+
+        Log.d("tag20", "onplusclick");
+        //TODO ask lodu what this does
+    }
+
+    public void onNotificationClick(View view){
+        //TODO ask lodu what this does
+    }
+
+    public void onAddClientClick(View view) {
+        startActivity(new Intent(this, AddClientActivity.class));
+    }
+
+    public void onAddVenderClick(View view) {
+        startActivity(new Intent(this, AddVenderActivity.class));
+    }
+
+    public void onDeleteClientClick(View view) {
+        // ... your logic ...
     }
 }

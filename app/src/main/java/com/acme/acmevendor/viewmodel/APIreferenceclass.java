@@ -40,6 +40,7 @@ public class APIreferenceclass {
     int querytype=0; //0 for get, 1 for post
 
     //constructors
+    //for admin dashboard
     //campaign is 0, client is 1, vendor is 2
     public APIreferenceclass(int vendorclientorcampaign, String logintoken, Context context) {
 
@@ -48,7 +49,7 @@ public class APIreferenceclass {
 
             Log.d("tag21","1");
 
-            String url="https://acme.warburttons.com/api/get_campaign_sites/18";
+            String url="https://acme.warburttons.com/api/campaigns";
             querytype=0;
             String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
 
@@ -188,10 +189,6 @@ public class APIreferenceclass {
         querytype=1; //POST
         Map<String, String> headers= new HashMap<>();
         headers.put("Content-Type", "application/json");
-
-
-
-
     } */
 
 
