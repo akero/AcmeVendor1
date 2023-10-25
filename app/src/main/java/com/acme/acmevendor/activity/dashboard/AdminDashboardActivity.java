@@ -59,7 +59,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     String updated_at="";
     MainViewModel mainViewModel;
     ActivityMainBinding binding;
-    JSONArray jsonArray;
+    //JSONArray jsonArray;
     boolean showMenus = false;
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
@@ -76,8 +76,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         //TODO remove after adding to ui
-        jsonArray= new JSONArray();
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
+        jsonArray1= new JSONArray();
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList();
     }
@@ -107,14 +107,16 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
 
  */
+
     }
+    JSONArray jsonArray1;
     private void implementUi(String response){
 
 
         try {
 
             JSONObject jsonObject = new JSONObject();
-            JSONArray jsonArray1= new JSONArray();
+            jsonArray1= new JSONArray();
 
 
             String ids[];
@@ -385,23 +387,27 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
     public void onItemClick(int position) {
         try {
+            Log.d("tag51", Integer.toString(position));
             // Retrieve JSONObject from your jsonArray at position
-            JSONObject jsonObject = jsonArray.getJSONObject(position);
+            JSONObject jsonObject = jsonArray1.getJSONObject(position);
+            Log.d("tag51", jsonArray1.getJSONObject(position).toString());
 
             //TODO add correct login token here
             logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
             // Get site id or site no from the JSONObject
-            String siteNumber = jsonObject.getString("unitnumber"); // Or get an id if you have that
+            String id = jsonObject.getString("id"); // Or get an id if you have that
+            Log.d("tag51", jsonObject.getString("id"));
+
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
             // Start new activity and pass the retrieved data
             startActivity(new Intent(this, ViewSiteDetailActivity.class)
                     .putExtra("campaignType", "old")
-                    .putExtra("siteNumber", siteNumber)
-                    .putExtra("logintoken", logintoken));
+                    .putExtra("id", id)
+                    .putExtra("logintoken", logintoken)
+                    .putExtra("vandorclientorcampaign", vendorclientorcampaign));
 
-            Log.d("jkl", siteNumber);
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {
             Log.d("tag123", e.toString());
