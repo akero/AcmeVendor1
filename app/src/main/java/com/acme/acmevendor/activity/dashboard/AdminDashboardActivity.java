@@ -169,7 +169,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
-                                jsonObject.putOpt("uid", dataObject.optString("company_name"));
+                                jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
@@ -206,7 +206,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
-                                jsonObject.putOpt("uid", dataObject.optString("company_name"));
+                                jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
