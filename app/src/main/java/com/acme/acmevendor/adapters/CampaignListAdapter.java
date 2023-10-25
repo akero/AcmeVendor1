@@ -65,15 +65,15 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
 
             try {
                 String imageUrl = jsonObject.optString("image");
-                //TODO here get urls working then check is the recyclerview is populated with images
-                //TODO network on main thread exception
-                imageUrl= "https://acme.warburttons.com/"+ imageUrl;
-                Log.d("tag41", "imageurl is "+ imageUrl);
-                if(imageUrl != "null" && !imageUrl.isEmpty()) {
-                    URL url = new URL(imageUrl);
-                    Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    holder.tvImage.setImageBitmap(bitmap);
-                }
+                //TODO here get urls working then check if the recyclerview is populated with images
+                //TODO network on main thread exception. can use glide
+//                imageUrl= "https://acme.warburttons.com/"+ imageUrl;
+  //              Log.d("tag41", "imageurl is "+ imageUrl);
+    //            if(imageUrl != "null" && !imageUrl.isEmpty()) {
+      //              URL url = new URL(imageUrl);
+        //            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+          //          holder.tvImage.setImageBitmap(bitmap);
+            //    }
             } catch (Exception e) {
                 Log.d("tag41", "error in implementui" +e.toString());
                 Log.e("tag41", "sdfdg", e);

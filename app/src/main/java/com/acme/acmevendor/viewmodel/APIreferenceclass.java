@@ -66,7 +66,7 @@ public class APIreferenceclass {
         //client
         else if (vendorclientorcampaign == 1) {
 
-            String url="https://acme.warburttons.com/api/get_client_campaigns";
+            String url="https://acme.warburttons.com/api/clients";
             querytype= 0;
 
 
@@ -88,7 +88,7 @@ public class APIreferenceclass {
         //vendor
         else if (vendorclientorcampaign == 2) {
 
-            String url="https://acme.warburttons.com/api/get_vendor_campaigns";
+            String url="https://acme.warburttons.com/api/vendors";
 
             querytype=0; //GET
             String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";
