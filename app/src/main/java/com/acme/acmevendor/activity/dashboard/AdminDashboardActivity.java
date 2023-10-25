@@ -122,13 +122,14 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if(jsonResponse.getBoolean("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
                 if(dataArray != null && dataArray.length() > 0) {
+                    if(vendorclientorcampaign==0){
 
                     for(int i=0; i< dataArray.length();i++){
 
 
                     JSONObject dataObject = dataArray.getJSONObject(i);
                     if(dataObject != null) {
-                        jsonObject= new JSONObject();
+                        jsonObject = new JSONObject();
                         Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                         //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                         jsonObject.putOpt("id", dataObject.optInt("id"));
@@ -140,33 +141,102 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                         try {
                             String imageUrl = dataObject.optString("image");
-                            imageUrl= "https://acme.warburttons.com/"+ imageUrl;
-                            Log.d("tag41", "imageurl is "+ imageUrl);
-                            if(imageUrl != "null" && !imageUrl.isEmpty()) {
+                            imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                            Log.d("tag41", "imageurl is " + imageUrl);
+                            if (imageUrl != "null" && !imageUrl.isEmpty()) {
                                 URL url = new URL(imageUrl);
                                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                                 //siteDetail.setImage(bitmap);
                             }
                         } catch (Exception e) {
-                            Log.d("tag41", "error in implementui" +e.toString());
+                            Log.d("tag41", "error in implementui" + e.toString());
                             Log.e("tag41", "sdfdg", e);
                             // Handle error
                         }
-
                         jsonArray1.put(jsonObject);
 //TODO here
+                    }
+            }
+                    }else if(vendorclientorcampaign==1){
+
+
+                        for(int i=0; i< dataArray.length();i++){
+
+
+                            JSONObject dataObject = dataArray.getJSONObject(i);
+                            if(dataObject != null) {
+                                jsonObject = new JSONObject();
+                                Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                                //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                jsonObject.putOpt("id", dataObject.optInt("id"));
+                                jsonObject.putOpt("uid", dataObject.optString("company_name"));
+                                jsonObject.putOpt("image", dataObject.optString("logo"));
+                                jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                //siteDetail.setName(dataObject.optString("name"));
+
+                                try {
+                                    String imageUrl = dataObject.optString("logo");
+                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                    Log.d("tag41", "imageurl is " + imageUrl);
+                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
+                                        URL url = new URL(imageUrl);
+                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                        //siteDetail.setImage(bitmap);
+                                    }
+                                } catch (Exception e) {
+                                    Log.d("tag41", "error in implementui" + e.toString());
+                                    Log.e("tag41", "sdfdg", e);
+                                    // Handle error
+                                }
+                                jsonArray1.put(jsonObject);
+//TODO here
+                            }
+                        }
+
+                    }else if(vendorclientorcampaign==2){
+
+
+                        for(int i=0; i< dataArray.length();i++){
+
+
+                            JSONObject dataObject = dataArray.getJSONObject(i);
+                            if(dataObject != null) {
+                                jsonObject = new JSONObject();
+                                Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                                //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                jsonObject.putOpt("id", dataObject.optInt("id"));
+                                jsonObject.putOpt("uid", dataObject.optString("company_name"));
+                                jsonObject.putOpt("image", dataObject.optString("logo"));
+                                jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                //siteDetail.setName(dataObject.optString("name"));
+
+                                try {
+                                    String imageUrl = dataObject.optString("logo");
+                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                    Log.d("tag41", "imageurl is " + imageUrl);
+                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
+                                        URL url = new URL(imageUrl);
+                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                        //siteDetail.setImage(bitmap);
+                                    }
+                                } catch (Exception e) {
+                                    Log.d("tag41", "error in implementui" + e.toString());
+                                    Log.e("tag41", "sdfdg", e);
+                                    // Handle error
+                                }
+                                jsonArray1.put(jsonObject);
+//TODO here
+                            }
+                        }
+
+                    }
+                    Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                }
 
 
             }
-
-                    }
-
-                    Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
-
-                }
-
-    }
-
             runOnUiThread(new Runnable() {
                               @Override
                               public void run() {
@@ -180,12 +250,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                               }});
 
 
-          //  jsonObject.put("sitenumber",  (i + 1));
-            //jsonObject.put("unitnumber", ids[i]);  // Assuming the campaign id is the unit number
-            //jsonArray.put(jsonObject);
+        }catch (Exception e){}
 
 
-        }catch (Exception e){} }
+    }
 
 
  /*   //TODO sort this data and populate page. then implement for vendor and client
@@ -244,7 +312,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     private void clientList() {
         vendorclientorcampaign=1;
         //TODO pass correct logintoken here
-        logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+        logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
 
         //TODO- here
 
@@ -254,7 +322,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     private void venderList() {
         vendorclientorcampaign=2;
         //TODO pass correct logintoken here
-        logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+        logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
