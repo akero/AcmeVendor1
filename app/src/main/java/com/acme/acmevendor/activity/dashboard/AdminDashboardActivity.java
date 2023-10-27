@@ -111,14 +111,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     }
     JSONArray jsonArray1;
     private void implementUi(String response){
-
-
         try {
-
             JSONObject jsonObject = new JSONObject();
             jsonArray1= new JSONArray();
-
-
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getBoolean("success")) {
@@ -398,15 +393,32 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             // Get site id or site no from the JSONObject
             String id = jsonObject.getString("id"); // Or get an id if you have that
             Log.d("tag51", jsonObject.getString("id"));
+            Log.d("tag60", jsonObject.toString());
 
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
-            // Start new activity and pass the retrieved data
-            startActivity(new Intent(this, ViewCampaignSites.class)
-                    .putExtra("campaignType", "old")
-                    .putExtra("id", id)
-                    .putExtra("logintoken", logintoken)
-                    .putExtra("vendorclientorcampaign", vendorclientorcampaign));
+            if(vendorclientorcampaign==0){//campaign
+
+                // Start new activity and pass the retrieved data
+                startActivity(new Intent(this, ViewCampaignSites.class)
+                        .putExtra("campaignType", "old")
+                        .putExtra("id", id)
+                        .putExtra("logintoken", logintoken)
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                        .putExtra("apiresponse", jsonObject.toString()));
+
+            }else if(vendorclientorcampaign==1){//client
+
+                startActivity(new Intent(this, AdminViewClientDetails.class)
+                        .putExtra("id", id)
+                        .putExtra("logintoken", logintoken)
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign));
+
+            }else if(vendorclientorcampaign==2){//vendor
+
+            }
+
+
 
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {
