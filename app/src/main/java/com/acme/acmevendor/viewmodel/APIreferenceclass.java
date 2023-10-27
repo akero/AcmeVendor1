@@ -214,6 +214,29 @@ public class APIreferenceclass {
 
     }
 
+    //for viewcampaignsites
+    public APIreferenceclass(String loginToken, Context context, String id){
+
+        //TODO add siteNumber to api callYou explained
+
+        Log.d("tag58",id);
+
+        String url="https://acme.warburttons.com/api/get_campaign_sites/"+id;
+        Log.d("tag58",url);
+
+
+        String jsonPayload = "{\"Authorization\": \"" + loginToken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + loginToken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+
+        callapi1(headers, jsonPayload, context, url);
+
+    }
 
     public APIreferenceclass(String logintoken, Context context) {
     }
@@ -308,9 +331,11 @@ public class APIreferenceclass {
         try {
             //adding api here
             Log.d("tag21","2");
+            Log.d("tag58","Inside callapi1 1");
 
             CronetEngine.Builder builder = new CronetEngine.Builder(context);
             CronetEngine cronetEngine = builder.build();
+            Log.d("tag58","Inside callapi1 2");
 
             // Create a JSON payload with the email and password
             //String jsonPayload = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\"}";
@@ -319,6 +344,7 @@ public class APIreferenceclass {
             Log.d("tag21",jsonPayload);
             final byte[] postData = jsonPayload.getBytes(StandardCharsets.UTF_8);
 
+            Log.d("tag58","Inside callapi1 3");
 
             // Create an upload data provider to send the POST data
             UploadDataProvider uploadDataProvider = new UploadDataProvider() {
@@ -343,9 +369,11 @@ public class APIreferenceclass {
                     // No-op
                 }
             };
+            Log.d("tag58","Inside callapi1 4");
 
             UrlRequest.Builder requestBuilder;
 
+            Log.d("tag58","Inside callapi1 5");
 
                 requestBuilder = cronetEngine.newUrlRequestBuilder(
                                 url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
@@ -356,9 +384,14 @@ public class APIreferenceclass {
                 for (Map.Entry<String, String> header : headers.entrySet()) {
                     requestBuilder.addHeader(header.getKey(), header.getValue());
                 }
+            Log.d("tag58","Inside callapi1 6");
 
             UrlRequest request = requestBuilder.build();
+            Log.d("tag58","Inside callapi1 7");
+
             request.start();Log.d("tag21","4");
+            Log.d("tag58","Inside callapi1 8");
+
         } catch (Exception e) {
             Log.d("tag21", e.toString());
         }

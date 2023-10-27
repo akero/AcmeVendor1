@@ -1,5 +1,9 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -7,26 +11,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
-import com.acme.acmevendor.adapters.ClientListAdapter;
 import com.acme.acmevendor.databinding.ActivityMainBinding;
-import com.acme.acmevendor.utility.RoundRectCornerImageView;
+import com.acme.acmevendor.databinding.ActivityViewCampaignSitesBinding;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.MainViewModel;
-import com.acme.acmevendor.viewmodel.SiteDetail;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -36,11 +30,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.StringTokenizer;
 
+public class ViewCampaignSites extends AppCompatActivity implements ApiInterface {
 
-public class AdminDashboardActivity extends AppCompatActivity implements ApiInterface {
     int id=0;
     String image="";
     String vendor_id="";
@@ -58,28 +50,32 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     String created_at="";
     String updated_at="";
     MainViewModel mainViewModel;
-    ActivityMainBinding binding;
+    ActivityViewCampaignSitesBinding binding;
     //JSONArray jsonArray;
     boolean showMenus = false;
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
     //TODO- populate this token
     String logintoken="";
+    String idofcampaign;
 
     //todo access token save to memory add to api call
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_view_campaign_sites);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+
+        idofcampaign=getIntent().getStringExtra("id");
+        Log.d("tag58", idofcampaign);
 
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
         binding.rvCampaignList.setAdapter(adapter);
-        campaignList();
+        campaignList(idofcampaign);
     }
 
 
@@ -87,7 +83,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     public void onResponseReceived(String response){
 
         Log.d("addbatest", "response is "+ response);
-        Log.d("tag21","5");
+        Log.d("tag58","got response");
 
 
         implementUi(response);
@@ -126,39 +122,39 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
 
-                    for(int i=0; i< dataArray.length();i++){
+                        for(int i=0; i< dataArray.length();i++){
 
 
-                    JSONObject dataObject = dataArray.getJSONObject(i);
-                    if(dataObject != null) {
-                        jsonObject = new JSONObject();
-                        Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
-                        //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
-                        jsonObject.putOpt("id", dataObject.optInt("id"));
-                        jsonObject.putOpt("uid", dataObject.optString("uid"));
-                        jsonObject.putOpt("image", dataObject.optString("image"));
-                        jsonObject.putOpt("name", dataObject.optString("name"));
+                            JSONObject dataObject = dataArray.getJSONObject(i);
+                            if(dataObject != null) {
+                                jsonObject = new JSONObject();
+                                Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                                //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                jsonObject.putOpt("id", dataObject.optInt("id"));
+                                jsonObject.putOpt("uid", dataObject.optString("uid"));
+                                jsonObject.putOpt("image", dataObject.optString("image"));
+                                jsonObject.putOpt("name", dataObject.optString("name"));
 
-                        //siteDetail.setName(dataObject.optString("name"));
+                                //siteDetail.setName(dataObject.optString("name"));
 
-                        try {
-                            String imageUrl = dataObject.optString("image");
-                            imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                            Log.d("tag41", "imageurl is " + imageUrl);
-                            if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                URL url = new URL(imageUrl);
-                                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                //siteDetail.setImage(bitmap);
-                            }
-                        } catch (Exception e) {
-                            Log.d("tag41", "error in implementui" + e.toString());
-                            Log.e("tag41", "sdfdg", e);
-                            // Handle error
-                        }
-                        jsonArray1.put(jsonObject);
+                                try {
+                                    String imageUrl = dataObject.optString("image");
+                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                    Log.d("tag41", "imageurl is " + imageUrl);
+                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
+                                        URL url = new URL(imageUrl);
+                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                        //siteDetail.setImage(bitmap);
+                                    }
+                                } catch (Exception e) {
+                                    Log.d("tag41", "error in implementui" + e.toString());
+                                    Log.e("tag41", "sdfdg", e);
+                                    // Handle error
+                                }
+                                jsonArray1.put(jsonObject);
 //TODO here
-                    }
-            }
+                            }
+                        }
                     }else if(vendorclientorcampaign==1){
 
 
@@ -240,16 +236,16 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
             }
             runOnUiThread(new Runnable() {
-                              @Override
-                              public void run() {
-                                  // Your UI update code goes here
+                @Override
+                public void run() {
+                    // Your UI update code goes here
 
-                                  GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
-                                  binding.rvCampaignList.setLayoutManager(layoutManager);
-            CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
-            binding.rvCampaignList.setAdapter(adapter);
+                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                    binding.rvCampaignList.setLayoutManager(layoutManager);
+                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                    binding.rvCampaignList.setAdapter(adapter);
 
-                              }});
+                }});
 
 
         }catch (Exception e){}
@@ -304,86 +300,15 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
   */
 
-    private void campaignList() {
+    private void campaignList(String id) {
         vendorclientorcampaign=0;
         //TODO pass correct logintoken here
         logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
-        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
+
+        APIreferenceclass api= new APIreferenceclass(logintoken, this, id);
     }
 
-    private void clientList() {
-        vendorclientorcampaign=1;
-        //TODO pass correct logintoken here
-        logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
 
-        //TODO- here
-
-        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-    }
-
-    private void venderList() {
-        vendorclientorcampaign=2;
-        //TODO pass correct logintoken here
-        logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
-
-        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-    }
-
-    @SuppressLint("ResourceAsColor")
-    public void btnCompaignClick(View view) {
-        clearUi();
-
-        binding.tvVender.setBackgroundResource(0);
-        binding.tvVender.setTextColor(R.color.colorPrimaryDark);
-
-        binding.tvClient.setBackgroundResource(0);
-        binding.tvClient.setTextColor(R.color.colorPrimaryDark);
-
-        binding.tvCompaign.setBackgroundResource(R.drawable.primaryround);
-        binding.tvCompaign.setTextColor(Color.WHITE);
-
-        campaignList();
-        // ... your logic ...
-    }
-
-    @SuppressLint("ResourceAsColor")
-    public void btnVenderClick(View view) {
-        Log.d("tag20", "btnvenderclick");
-        clearUi();
-
-        binding.tvVender.setBackgroundResource(R.drawable.primaryround);
-        binding.tvVender.setTextColor(Color.WHITE);
-
-        binding.tvClient.setBackgroundResource(0);
-        binding.tvClient.setTextColor(R.color.colorPrimaryDark);
-
-        binding.tvCompaign.setBackgroundResource(0);
-        binding.tvCompaign.setTextColor(R.color.colorPrimaryDark);
-
-
-        venderList();
-        // ... your logic ...
-    }
-
-    @SuppressLint("ResourceAsColor")
-    public void btnClientClick(View view) {
-        Log.d("tag20", "btnclientclick");
-        clearUi();
-
-        binding.tvVender.setBackgroundResource(0);
-        binding.tvVender.setTextColor(R.color.colorPrimaryDark);
-
-        binding.tvClient.setBackgroundResource(R.drawable.primaryround);
-        Log.d("tag20", "1");
-        binding.tvClient.setTextColor(Color.WHITE);
-        Log.d("tag20", "2");
-
-        binding.tvCompaign.setBackgroundResource(0);
-        binding.tvCompaign.setTextColor(R.color.colorPrimaryDark);
-
-        clientList();
-        // ... your logic ...
-    }
 
     public void onItemClick(int position) {
         try {
@@ -402,7 +327,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
             // Start new activity and pass the retrieved data
-            startActivity(new Intent(this, ViewCampaignSites.class)
+            startActivity(new Intent(this, ViewSiteDetailActivity.class)
                     .putExtra("campaignType", "old")
                     .putExtra("id", id)
                     .putExtra("logintoken", logintoken)
