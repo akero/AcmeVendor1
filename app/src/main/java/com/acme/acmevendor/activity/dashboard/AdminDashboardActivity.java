@@ -65,6 +65,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
     //TODO- populate this token
     String logintoken="";
+    JSONArray jsonArray1;
+
+    JSONArray jsonArray2;
 
     //todo access token save to memory add to api call
 
@@ -77,6 +80,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
+        jsonArray2=new JSONArray();
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList();
@@ -109,11 +113,12 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
  */
 
     }
-    JSONArray jsonArray1;
     private void implementUi(String response){
         try {
             JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject1= new JSONObject();
             jsonArray1= new JSONArray();
+            jsonArray2= new JSONArray();
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getBoolean("success")) {
@@ -122,7 +127,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     if(vendorclientorcampaign==0){
 
                     for(int i=0; i< dataArray.length();i++){
-
 
                     JSONObject dataObject = dataArray.getJSONObject(i);
                     if(dataObject != null) {
@@ -154,7 +158,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 //TODO here
                     }
             }
-                    }else if(vendorclientorcampaign==1){
+                    }else if(vendorclientorcampaign==1){//client
+
 
 
                         for(int i=0; i< dataArray.length();i++){
@@ -162,13 +167,27 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
-                                jsonObject = new JSONObject();
+                                jsonObject1 = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                //to pass to client class
+                                jsonObject1.putOpt("id", dataObject.optInt("id"));
+                                jsonObject1.putOpt("name", dataObject.optString("name"));
+                                jsonObject1.putOpt("email", dataObject.optString("email"));
+                                jsonObject1.putOpt("phone_number", dataObject.optString("phone_number"));
+                                jsonObject1.putOpt("company_name", dataObject.optString("company_name"));
+                                jsonObject1.putOpt("company_address", dataObject.optString("company_address"));
+                                jsonObject1.putOpt("gst_no", dataObject.optString("gst_no"));
+                                jsonObject1.putOpt("logo", dataObject.optString("logo"));
+                                jsonObject1.putOpt("created_at", dataObject.optString("created_at"));
+                                jsonObject1.putOpt("updated_at", dataObject.optString("updated_at"));
+
+
 
                                 //siteDetail.setName(dataObject.optString("name"));
 
@@ -187,6 +206,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                     // Handle error
                                 }
                                 jsonArray1.put(jsonObject);
+                                jsonArray2.put(jsonObject1);
 //TODO here
                             }
                         }
@@ -387,6 +407,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             JSONObject jsonObject = jsonArray1.getJSONObject(position);
             Log.d("tag51", jsonArray1.getJSONObject(position).toString());
 
+
             //TODO add correct login token here
             logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
@@ -409,10 +430,20 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
             }else if(vendorclientorcampaign==1){//client
 
+                JSONObject jsonObject1 = jsonArray2.getJSONObject(position);
+                Log.d("tag91", jsonArray2.getJSONObject(position).toString());
+                Log.d("tag91",jsonArray2.toString());
+                Log.d("tag91",jsonObject1.toString());
+                Log.d("tag91",Integer.toString(position));
+
                 startActivity(new Intent(this, AdminViewClientDetails.class)
                         .putExtra("id", id)
                         .putExtra("logintoken", logintoken)
-                        .putExtra("vendorclientorcampaign", vendorclientorcampaign));
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                        .putExtra("jsonArray", jsonObject1.toString()));
+                //jsonObject1= new JSONObject();
+                //jsonArray2= new JSONArray();
+
 
             }else if(vendorclientorcampaign==2){//vendor
 
@@ -432,6 +463,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         if (binding.rvCampaignList.getAdapter() != null) {
             CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
             adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
+            if (vendorclientorcampaign == 0) {
+                jsonArray1 = new JSONArray();
+            } else if (vendorclientorcampaign == 1) {
+                jsonArray2 = new JSONArray();
+            }
         }
         // Reset any other UI elements here as needed
     }

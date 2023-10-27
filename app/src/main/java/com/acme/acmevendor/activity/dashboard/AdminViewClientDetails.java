@@ -46,6 +46,7 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
 
     //TODO populate all fields. pass api call data from prev activity
     //have to pass logintoken and siteid
+    String jsonArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +78,23 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
             logintoken = getIntent().getExtras().getString("logintoken", "");
             id= getIntent().getExtras().getString("id", "");
             apiresponse= getIntent().getExtras().getString("apiresponse");
+            try {
+                jsonArray = getIntent().getExtras().getString("jsonArray");
+            }catch(Exception e){
+                Log.d("tag60", e.toString());
+            }
             Log.d("tag41", "3");
         }
 
 
         Log.d("tag41", "4");
-        implementUI(apiresponse);
+        implementUI(jsonArray);
         //apicall(logintoken, id);
         Log.d("tag41", "5");
     }
 
     private void implementUI(String response) {
+        Log.d("tag60", response);
         //here
         try {
             JSONObject jsonResponse = new JSONObject(response);
@@ -96,7 +103,7 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
                 if(dataArray != null && dataArray.length() > 0) {
                     JSONObject dataObject = dataArray.getJSONObject(0);
                     if(dataObject != null) {
-                        SiteDetail siteDetail = new SiteDetail();
+                        ClientDetail siteDetail = new ClientDetail();
                         siteDetail.setId(dataObject.optInt("id"));
                         siteDetail.setVendorId(dataObject.optString("vendor_id"));
                         siteDetail.setLocation(dataObject.optString("location"));
