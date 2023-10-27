@@ -107,13 +107,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
     }
     JSONArray jsonArray1;
     private void implementUi(String response){
-
-
         try {
-
             JSONObject jsonObject = new JSONObject();
             jsonArray1= new JSONArray();
-
 
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
@@ -123,7 +119,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                     if(vendorclientorcampaign==0){
 
                         for(int i=0; i< dataArray.length();i++){
-
 
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
@@ -156,11 +151,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                             }
                         }
                     }else if(vendorclientorcampaign==1){
-
-
                         for(int i=0; i< dataArray.length();i++){
-
-
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
                                 jsonObject = new JSONObject();
@@ -193,11 +184,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                         }
 
                     }else if(vendorclientorcampaign==2){
-
-
                         for(int i=0; i< dataArray.length();i++){
-
-
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
                                 jsonObject = new JSONObject();
@@ -228,12 +215,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 //TODO here
                             }
                         }
-
                     }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
-
-
             }
             runOnUiThread(new Runnable() {
                 @Override
@@ -244,15 +228,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
                     binding.rvCampaignList.setAdapter(adapter);
-
                 }});
-
-
         }catch (Exception e){}
-
-
     }
-
 
  /*   //TODO sort this data and populate page. then implement for vendor and client
     private void implementUi(String ids[]) {
@@ -296,8 +274,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
             }
         });
     }
-
-
   */
 
     private void campaignList(String id) {
