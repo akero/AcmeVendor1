@@ -67,7 +67,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     String logintoken="";
     JSONArray jsonArray1;
 
-    JSONArray jsonArray2;
+    JSONArray jsonArray2;//client array
+    JSONArray jsonArray3;//vendor array
 
     //todo access token save to memory add to api call
 
@@ -81,6 +82,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
         jsonArray2=new JSONArray();
+        jsonArray3= new JSONArray();
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList();
@@ -117,8 +119,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         try {
             JSONObject jsonObject = new JSONObject();
             JSONObject jsonObject1= new JSONObject();
+            JSONObject jsonObject2= new JSONObject();
             jsonArray1= new JSONArray();
             jsonArray2= new JSONArray();
+            jsonArray3= new JSONArray();
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getBoolean("success")) {
@@ -219,13 +223,27 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
-                                jsonObject = new JSONObject();
+                                jsonObject2 = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                //to pass to client class
+                                jsonObject2.putOpt("id", dataObject.optInt("id"));
+                                jsonObject2.putOpt("name", dataObject.optString("name"));
+                                jsonObject2.putOpt("email", dataObject.optString("email"));
+                                jsonObject2.putOpt("phone_number", dataObject.optString("phone_number"));
+                                jsonObject2.putOpt("company_name", dataObject.optString("company_name"));
+                                jsonObject2.putOpt("company_address", dataObject.optString("company_address"));
+                                jsonObject2.putOpt("gst_no", dataObject.optString("gst_no"));
+                                jsonObject2.putOpt("logo", dataObject.optString("logo"));
+                                jsonObject2.putOpt("created_at", dataObject.optString("created_at"));
+                                jsonObject2.putOpt("updated_at", dataObject.optString("updated_at"));
+
+
 
                                 //siteDetail.setName(dataObject.optString("name"));
 
@@ -244,6 +262,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                     // Handle error
                                 }
                                 jsonArray1.put(jsonObject);
+                                jsonArray3.put(jsonObject2);
 //TODO here
                             }
                         }
@@ -447,6 +466,19 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
             }else if(vendorclientorcampaign==2){//vendor
 
+                JSONObject jsonObject1 = jsonArray3.getJSONObject(position);
+                //Log.d("tag91", jsonArray2.getJSONObject(position).toString());
+                //Log.d("tag91",jsonArray2.toString());
+                //Log.d("tag91",jsonObject1.toString());
+                //Log.d("tag91",Integer.toString(position));
+
+                startActivity(new Intent(this, AdminViewVendorDetails.class)
+                        .putExtra("id", id)
+                        .putExtra("logintoken", logintoken)
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                        .putExtra("jsonArray", jsonObject1.toString()));
+                //jsonObject1= new JSONObject();
+                //jsonArray2= new JSONArray();
             }
 
 
@@ -467,6 +499,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 jsonArray1 = new JSONArray();
             } else if (vendorclientorcampaign == 1) {
                 jsonArray2 = new JSONArray();
+            } else if(vendorclientorcampaign == 2){
+                jsonArray3= new JSONArray();
             }
         }
         // Reset any other UI elements here as needed
