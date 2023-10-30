@@ -76,13 +76,22 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
             logintoken = getIntent().getExtras().getString("logintoken", "");
+            Log.d("tag41", "3");
+
             id= getIntent().getExtras().getString("id", "");
-            apiresponse= getIntent().getExtras().getString("apiresponse");
+            Log.d("tag41", "4");
+
+            apiresponse= getIntent().getExtras().getString("jsonArray");
+            Log.d("tag41", "5");
+
             try {
                 jsonArray = getIntent().getExtras().getString("jsonArray");
             }catch(Exception e){
                 Log.d("tag60", e.toString());
             }
+            Log.d("tag41", "3");
+
+            Log.d("tag90", apiresponse);
             Log.d("tag41", "3");
         }
 
