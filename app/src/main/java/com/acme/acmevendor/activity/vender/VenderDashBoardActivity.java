@@ -3,6 +3,8 @@ package com.acme.acmevendor.activity.vender;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -10,7 +12,11 @@ import android.util.Log;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AdminViewClientDetails;
+import com.acme.acmevendor.activity.dashboard.AdminViewVendorDetails;
+import com.acme.acmevendor.activity.dashboard.ViewCampaignSites;
 import com.acme.acmevendor.activity.dashboard.ViewSiteDetailActivity;
+import com.acme.acmevendor.activity.dashboard.ViewVendorSites;
 import com.acme.acmevendor.activity.login.LoginActivity;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.api.MyUrlRequestCallback;
@@ -34,6 +40,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executor;
@@ -49,21 +56,122 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
     String loginToken="";
 
-    JSONArray jsonArray;
+    JSONArray jsonArray1;
 
     //intent contents
-
-
+    JSONArray jsonArray2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vender_dash_board);
-        loginToken= readFromFile(this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        binding.rvCampaignList.setLayoutManager(layoutManager);
 
-        jsonArray= new JSONArray();
-        Log.d("vdbatest", "logintoken "+loginToken);
+        //TODO implement this
+        //loginToken= readFromFile(this);
 
+        jsonArray1= new JSONArray();
+        jsonArray2= new JSONArray();
+        //Log.d("vdbatest", "logintoken "+loginToken);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
+        binding.rvCampaignList.setAdapter(adapter);
         campaignList();
+    }
+
+    public void onResponseReceived(String response){
+
+        Log.d("addbatest", "response is "+ response);
+        Log.d("tag21","5");
+
+
+        implementUi(response);
+
+        /*
+        //TODO: handle population
+        String[] dataStrings = extractDataStrings(response);
+        // Usage example
+        for(String dataStr : dataStrings) {
+            Log.d("tag2222",dataStr);
+        }
+        //id array. send to ui
+        String[] idArray= extractIds(dataStrings);
+
+        //TODO extract the unit id and pass that too
+        implementUi(response);
+        Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
+
+ */
+
+    }
+
+    private void implementUi(String response){
+        try {
+            JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject1= new JSONObject();
+            JSONObject jsonObject2= new JSONObject();
+            jsonArray1= new JSONArray();
+            jsonArray2= new JSONArray();
+            //jsonArray3= new JSONArray();
+            String ids[];
+            JSONObject jsonResponse = new JSONObject(response);
+            if(jsonResponse.getBoolean("success")) {
+                JSONArray dataArray = jsonResponse.getJSONArray("data");
+                if(dataArray != null && dataArray.length() > 0) {
+
+                        for (int i = 0; i < dataArray.length(); i++) {
+
+                            JSONObject dataObject = dataArray.getJSONObject(i);
+                            if (dataObject != null) {
+                                jsonObject = new JSONObject();
+                                Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                                //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                jsonObject.putOpt("id", dataObject.optInt("id"));
+                                jsonObject.putOpt("uid", dataObject.optString("uid"));
+                                jsonObject.putOpt("image", dataObject.optString("image"));
+                                jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                //siteDetail.setName(dataObject.optString("name"));
+
+                                try {
+                                    String imageUrl = dataObject.optString("image");
+                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                    Log.d("tag41", "imageurl is " + imageUrl);
+                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
+                                        URL url = new URL(imageUrl);
+                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                        //siteDetail.setImage(bitmap);
+                                    }
+                                } catch (Exception e) {
+                                    Log.d("tag41", "error in implementui" + e.toString());
+                                    Log.e("tag41", "sdfdg", e);
+                                    // Handle error
+                                }
+                                jsonArray1.put(jsonObject);
+//TODO here
+                            }
+                        }
+
+                    Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                }
+
+
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // Your UI update code goes here
+
+                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                    binding.rvCampaignList.setLayoutManager(layoutManager);
+                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                    binding.rvCampaignList.setAdapter(adapter);
+
+                }});
+
+
+        }catch (Exception e){}
+
+
     }
 
     private void campaignList() {
@@ -71,43 +179,10 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         int vendorclientorcampaign= 2;
-        String logintoken= loginToken;
-
-        APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-
-
-      /*  //TODO parse api response and enter into recyclerview, remove this
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObjectairbnb = new JSONObject();
-        JSONObject jsonObjecthyundai = new JSONObject();
-        JSONObject jsonObjectford = new JSONObject();
-        JSONObject jsonObjectpatanjli = new JSONObject();
-
-        try {
-            jsonObjectairbnb.put("sitenumber", "001");
-            jsonObjecthyundai.put("sitenumber", "002");
-            jsonObjectford.put("sitenumber", "003");
-            jsonObjectpatanjli.put("sitenumber", "004");
-
-            jsonObjectairbnb.put("unitnumber", "#887001");
-            jsonObjecthyundai.put("unitnumber", "#878002");
-            jsonObjectford.put("unitnumber", "#765003");
-            jsonObjectpatanjli.put("unitnumber", "#432004");
-
-            jsonArray.put(jsonObjectairbnb);
-            jsonArray.put(jsonObjecthyundai);
-            jsonArray.put(jsonObjectford);
-            jsonArray.put(jsonObjectpatanjli);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
-        binding.rvCampaignList.setAdapter(adapter);
-
-
-       */
+        //TODO pass correct token
+        String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+int a=0;
+        APIreferenceclass apiref= new APIreferenceclass(logintoken, this, a);
     }
 
     public static String[] extractDataStrings(String apiResponse) {
@@ -125,20 +200,36 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
     public void onItemClick(int position) {
         try {
+            Log.d("tag51", Integer.toString(position));
             // Retrieve JSONObject from your jsonArray at position
-            JSONObject jsonObject = jsonArray.getJSONObject(position);
+            JSONObject jsonObject = jsonArray1.getJSONObject(position);
+            Log.d("tag51", jsonArray1.getJSONObject(position).toString());
+
+
+            //TODO add correct login token here
+            String logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
             // Get site id or site no from the JSONObject
-            String siteNumber = jsonObject.getString("unitnumber"); // Or get an id if you have that
+            String id = jsonObject.getString("id"); // Or get an id if you have that
+            Log.d("tag51", jsonObject.getString("id"));
+            Log.d("tag60", jsonObject.toString());
+
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
+            int vendorclientorcampaign= 2;
 
-            // Start new activity and pass the retrieved data
-            startActivity(new Intent(this, ViewSiteDetailActivity.class)
-                    .putExtra("position", position)
-                    .putExtra("campaignType", "old")
-                    .putExtra("siteNumber", siteNumber));
 
-            Log.d("jkl", siteNumber);
+
+                // Start new activity and pass the retrieved data
+                startActivity(new Intent(this, ViewVendorSites.class)
+                        .putExtra("campaignType", "old")
+                        .putExtra("id", id)
+                        .putExtra("logintoken", logintoken)
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                        .putExtra("apiresponse", jsonObject.toString()));
+
+
+
+
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {
             Log.d("tag123", e.toString());
@@ -149,41 +240,9 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
 
 
-    //TODO add token to future activity
-    @Override
-    public void onResponseReceived(String response){
-        Log.d("vdbatest","response is "+ response);
-        //TODO response is wrong from api end follow up with the dev
-
-        //TODO replace. this is for response for the current page's data.
-        //TODO implement response into UI
-        String campaignType="";
-        int position= 0;
-
-        String[] dataStrings = extractDataStrings(response);
-
-
-        // Usage example
-        for(String dataStr : dataStrings) {
-            Log.d("tag2222",dataStr);
-        }
-
-        //id array. send to ui
-        String[] idArray= extractIds(dataStrings);
-        //TODO extract the unit id and pass that too
-
-        implementUi(idArray);
-
-        /*Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
-        intent.putExtra("campaigntype", campaignType);
-        intent.putExtra("position", position);
-        intent.putExtra("logintoken", loginToken);
-        startActivity( intent);
-    */
-    }
 
     Context ctxt= this;
-
+/*
     private void implementUi(String ids[]) {
 
         Log.d("tag40", "1");
@@ -283,5 +342,5 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     }
 
 
-
+*/
 }

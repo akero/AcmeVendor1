@@ -105,6 +105,27 @@ public class APIreferenceclass {
       }
     }
 
+    //for vendor flow first page
+    public APIreferenceclass(String logintoken, Context context, int a) {
+
+
+
+            Log.d("tag21","1");
+
+            String url="https://acme.warburttons.com/api/get_vendor_campaigns";
+            querytype=0;
+            String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            Log.d("addbatest","Inside admin api");
+
+
+            callapi(headers, jsonPayload, context, querytype, url);
+        }
+
 
     //TODO endpoint for otp get when this person gets his email
     //login
