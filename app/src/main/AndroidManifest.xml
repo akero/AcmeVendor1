@@ -31,6 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.dashboard.AdminViewClientDetails"
+            android:theme="@style/NoActTheme"
             android:exported="false" />
         <activity
             android:name=".activity.dashboard.ViewCampaignSites"

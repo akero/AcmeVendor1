@@ -138,7 +138,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/dmsansregular"
-                            android:text="Total Sites"
+                            android:text="Client id"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
@@ -169,7 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/dmsansregular"
-                            android:text="Site No."
+                            android:text="Phone Number"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
@@ -197,7 +197,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dmsansregular"
-                    android:text="Start Date"
+                    android:text="Email"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_below="@id/llUnit"
                     android:textColor="@color/colorPrimary"
@@ -225,7 +225,7 @@
                     android:layout_below="@id/tvStartDate"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/dmsansregular"
-                    android:text="Location"
+                    android:text="Company Name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
 
@@ -265,7 +265,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/dmsansregular"
-                            android:text="Latitude"
+                            android:text="Created On"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
@@ -297,7 +297,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/dmsansregular"
-                            android:text="Longitude"
+                            android:text="Updated On"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
@@ -319,91 +319,17 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/llDimensions"
-                    android:layout_below="@id/llLocation"
-                    android:orientation="horizontal">
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/_2sdp">
-
-
-                        <TextView
-                            android:id="@+id/tvHeightText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Dimension / Size in sq. ft"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-
-                        <TextView
-                            android:id="@+id/tvHeight"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvHeightText"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:hint="Height"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="@dimen/_2sdp">
-
-                        <TextView
-                            android:id="@+id/tvWidthText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text=""
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-
-                        <TextView
-                            android:id="@+id/tvWidth"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvWidthText"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:textColorHint="@color/texthintcolor"
-                            android:padding="@dimen/_8sdp"
-                            android:hint="Width"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_12ssp" />
-
-                    </RelativeLayout>
-                </LinearLayout>
 
 
                 <TextView
                     android:id="@+id/tvTotalAreaText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/llDimensions"
+                    android:layout_below="@id/llLocation"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/dmsansregular"
-                    android:text="Total Area in sq. ft"
+                    android:text="Company Address"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
 
@@ -427,7 +353,7 @@
                     android:layout_below="@id/tvTotalArea"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/dmsansregular"
-                    android:text="Media Type"
+                    android:text="GST number"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
 
@@ -444,35 +370,12 @@
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
 
-                <TextView
-                    android:id="@+id/tvIlluminationText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvMediaType"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/dmsansregular"
-                    android:text="Illumination"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_10ssp" />
-
-                <TextView
-                    android:id="@+id/tvIllumination"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvIlluminationText"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@drawable/primarystroke"
-                    android:fontFamily="@font/dmsansregular"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/texthintcolor"
-                    android:textSize="@dimen/_12ssp" />
 
                 <Button
                     android:id="@+id/btnNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvIllumination"
+                    android:layout_below="@id/tvMediaType"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:background="@drawable/primarystroke"
                     android:fontFamily="@font/dmsansbold"

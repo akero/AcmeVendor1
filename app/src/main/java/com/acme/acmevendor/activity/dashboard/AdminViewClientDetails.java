@@ -97,7 +97,7 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
 
 
         Log.d("tag41", "4");
-        implementUI(jsonArray);
+        implementUI(apiresponse);
         //apicall(logintoken, id);
         Log.d("tag41", "5");
     }
@@ -107,24 +107,25 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
         //here
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
-                if(dataArray != null && dataArray.length() > 0) {
-                    JSONObject dataObject = dataArray.getJSONObject(0);
-                    if(dataObject != null) {
+            Log.d("tag95", "1");
+
+                    if(jsonResponse != null) {
+                        Log.d("tag95", "1");
+
                         ClientDetail siteDetail = new ClientDetail();
-                        siteDetail.setId(dataObject.optInt("id"));
-                        siteDetail.setName(dataObject.optString("name"));
-                        siteDetail.setEmail(dataObject.optString("email"));
-                        siteDetail.setPhoneNumber(dataObject.optString("phone_number"));
-                        siteDetail.setCompanyName(dataObject.optString("company_name"));
-                        siteDetail.setCompanyAddress(dataObject.optString("company_address"));
-                        siteDetail.setGstNo(dataObject.optString("gst_no"));
-                        siteDetail.setCreatedAt(dataObject.optString("created_at"));
-                        siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
+                        siteDetail.setId(jsonResponse.optInt("id"));
+                        siteDetail.setName(jsonResponse.optString("name"));
+                        siteDetail.setEmail(jsonResponse.optString("email"));
+                        siteDetail.setPhoneNumber(jsonResponse.optString("phone_number"));
+                        siteDetail.setCompanyName(jsonResponse.optString("company_name"));
+                        siteDetail.setCompanyAddress(jsonResponse.optString("company_address"));
+                        siteDetail.setGstNo(jsonResponse.optString("gst_no"));
+                        siteDetail.setCreatedAt(jsonResponse.optString("created_at"));
+                        siteDetail.setUpdatedAt(jsonResponse.optString("updated_at"));
+                        Log.d("tag95", "1");
 
                         try {
-                            String imageUrl = dataObject.optString("logo");
+                            String imageUrl = jsonResponse.optString("logo");
                             imageUrl= "https://acme.warburttons.com/"+ imageUrl;
                             Log.d("tag41", "imageurl is "+ imageUrl);
                             if(imageUrl != "null" && !imageUrl.isEmpty()) {
@@ -136,18 +137,23 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
                             Log.d("tag41", "error in implementui" +e.toString());
                             // Handle error
                         }
+                        Log.d("tag95", "1");
 
                         // Update UI
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
 
-                                TextView tvSiteId = findViewById(R.id.etSiteNo);
+                                TextView tvSiteId = findViewById(R.id.etTotalSites);
                                 //TODO after person implements site name then change this
-                                tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
+                                tvSiteId.setText(String.valueOf(siteDetail.getId()));
+
+                                TextView tvSiteId1 = findViewById(R.id.etSiteNo);
+                                //TODO after person implements site name then change this
+                                tvSiteId1.setText(String.valueOf(siteDetail.getPhoneNumber()));
 
                                 TextView tvLocation = findViewById(R.id.tvLocation);
-                                tvLocation.setText(siteDetail.getLocation());
+                                tvLocation.setText(siteDetail.getComapnyName());
 
                                 TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
                                 tvSiteName.setText(siteDetail.getName());
@@ -156,63 +162,47 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
                                 tvLastInspection.setText(siteDetail.getCreatedAt());
 
                                 TextView tvLatitude = findViewById(R.id.tvLatitude);
-                                tvLatitude.setText(siteDetail.getLatitude());
+                                tvLatitude.setText(siteDetail.getCreatedAt());
 
                                 TextView tvLongitude = findViewById(R.id.tvLongitude);
-                                tvLongitude.setText(siteDetail.getLongitude());
+                                tvLongitude.setText(siteDetail.getUpdatedAt());
 
                                 TextView tvMediaType = findViewById(R.id.tvMediaType);
-                                tvMediaType.setText(siteDetail.getMediaType());
+                                tvMediaType.setText(siteDetail.getGstNo());
 
                                 TextView tvIllumination = findViewById(R.id.tvIllumination);
-                                tvIllumination.setText(siteDetail.getIllumination());
+                               // tvIllumination.setText(siteDetail.getIllumination());
 
                                 TextView tvStartDate = findViewById(R.id.tvStartDate);
-                                tvStartDate.setText(siteDetail.getStartDate());
+                                tvStartDate.setText(siteDetail.getEmail());
 
                                 // Set the site number
                                 TextView tvSiteNo = findViewById(R.id.etSiteNo);
-                                tvSiteNo.setText(String.valueOf(siteDetail.getSiteNo())); // assuming getter method exists
+                                //tvSiteNo.setText(String.valueOf(siteDetail.getSiteNo())); // assuming getter method exists
 
                                 // Set the width
                                 TextView tvWidth = findViewById(R.id.tvWidth);
-                                tvWidth.setText(siteDetail.getWidth()); // assuming getter method exists
+                               // tvWidth.setText(siteDetail.getWidth()); // assuming getter method exists
 
                                 // Set the height
                                 TextView tvHeight = findViewById(R.id.tvHeight);
-                                tvHeight.setText(siteDetail.getHeight()); // assuming getter method exists
+                                //tvHeight.setText(siteDetail.getCompanyAddress()); // assuming getter method exists
 
                                 // Set the total area
                                 TextView tvTotalArea = findViewById(R.id.tvTotalArea);
-                                tvTotalArea.setText(siteDetail.getTotalArea()); // assuming getter method exists
+                                tvTotalArea.setText(siteDetail.getCompanyAddress()); // assuming getter method exists
 
                                 RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
-                                if(siteDetail.getImage()!=null) {
-                                    tvImage.setImageBitmap(siteDetail.getImage());
+                                if(siteDetail.getLogo()!=null) {
+                                    tvImage.setImageBitmap(siteDetail.getLogo());
                                 }
                             }
                         });
                     }
-                } else {
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
-                        }
-                    });
 
-                }
-            } else {
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
-            }
         } catch (Exception e) {
             runOnUiThread(new Runnable() {
                 @Override

@@ -1,96 +1,31 @@
 package com.acme.acmevendor.activity.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import com.acme.acmevendor.R;
 
 public class ClientDetail extends AppCompatActivity {
 
-    private boolean success;
-    private String message;
     private int id;
-    private Bitmap image;
-    private String vendor_id;
-    private int campaign_id;
-    private String start_date;
-    private String end_date;
-    private String location;
-    private String longitute;
-    private String latitude;
-    private String width;
-    private String height;
-    private String total_area;
-    private String media_type;
-    private String name; // assuming it's a String, change the type if necessary
-    private String site_no; // assuming it's a String, change the type if necessary
-
-    private String illumination;
+    private String name;
+    private String email;
+    private String phonenumber;
+    private String companyname;
+    private String companyaddress;
+    private String gstno;
+    private Bitmap logo;
     private String created_at;
     private String updated_at;
 
-    private String phonenumber, email, companyname, companyaddress, gstno;
-    private Bitmap logo;
-
     // Getters and Setters for each field
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public int getId() {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setEmail(String email){this.email= email;}
-
-    public String getEmail(){return email;}
-
-    public void setPhoneNumber(String phonenumber){this.phonenumber= phonenumber;}
-
-    public String getPhoneNumber(){return phonenumber;}
-
-    public void setCompanyName(String companyname){this.companyname= companyname;}
-
-    public String getComapnyName(){return companyname;}
-
-    public void setCompanyAddress(String companyaddress){this.companyaddress= companyaddress;}
-
-    public String getCompanyAddress(){return companyaddress;}
-
-    public void setGstNo(String gstno){this.gstno= gstno;}
-
-    public String getGstNo(){return gstno;}
-
-    public void setLogo(Bitmap logo){this.logo= logo;}
-
-    public Bitmap getLogo(){return logo;}
-
-
-
-
-
-    public Bitmap getImage() {
-        return image;
     }
 
     public String getName() {
@@ -101,113 +36,52 @@ public class ClientDetail extends AppCompatActivity {
         this.name = name;
     }
 
-    public String getSiteNo() {
-        return site_no;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSiteNo(String site_no) {
-        this.site_no = site_no;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-
-    public void setImage(Bitmap image) {
-        this.image = image;
+    public String getPhoneNumber() {
+        return phonenumber;
     }
 
-    public String getVendorId() {
-        return vendor_id;
+    public void setPhoneNumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public void setVendorId(String vendor_id) {
-        this.vendor_id = vendor_id;
+    public String getComapnyName() {
+        return companyname;
     }
 
-    public int getCampaignId() {
-        return campaign_id;
+    public void setCompanyName(String companyname) {
+        this.companyname = companyname;
     }
 
-    public void setCampaignId(int campaign_id) {
-        this.campaign_id = campaign_id;
+    public String getCompanyAddress() {
+        return companyaddress;
     }
 
-    public String getStartDate() {
-        return start_date;
+    public void setCompanyAddress(String companyaddress) {
+        this.companyaddress = companyaddress;
     }
 
-    public void setStartDate(String start_date) {
-        this.start_date = start_date;
+    public String getGstNo() {
+        return gstno;
     }
 
-    public String getEndDate() {
-        return end_date;
+    public void setGstNo(String gstno) {
+        this.gstno = gstno;
     }
 
-    public void setEndDate(String end_date) {
-        this.end_date = end_date;
+    public Bitmap getLogo() {
+        return logo;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getLongitude() {
-        return longitute;
-    }
-
-    public void setLongitude(String longitute) {
-        this.longitute = longitute;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public String getTotalArea() {
-        return total_area;
-    }
-
-    public void setTotalArea(String total_area) {
-        this.total_area = total_area;
-    }
-
-    public String getMediaType() {
-        return media_type;
-    }
-
-    public void setMediaType(String media_type) {
-        this.media_type = media_type;
-    }
-
-    public String getIllumination() {
-        return illumination;
-    }
-
-    public void setIllumination(String illumination) {
-        this.illumination = illumination;
+    public void setLogo(Bitmap logo) {
+        this.logo = logo;
     }
 
     public String getCreatedAt() {
