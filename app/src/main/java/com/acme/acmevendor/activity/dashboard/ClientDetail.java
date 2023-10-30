@@ -31,6 +31,9 @@ public class ClientDetail extends AppCompatActivity {
     private String created_at;
     private String updated_at;
 
+    private String phonenumber, email, companyname, companyaddress, gstno;
+    private Bitmap logo;
+
     // Getters and Setters for each field
 
     public boolean isSuccess() {
@@ -53,9 +56,38 @@ public class ClientDetail extends AppCompatActivity {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setEmail(String email){this.email= email;}
+
+    public String getEmail(){return email;}
+
+    public void setPhoneNumber(String phonenumber){this.phonenumber= phonenumber;}
+
+    public String getPhoneNumber(){return phonenumber;}
+
+    public void setCompanyName(String companyname){this.companyname= companyname;}
+
+    public String getComapnyName(){return companyname;}
+
+    public void setCompanyAddress(String companyaddress){this.companyaddress= companyaddress;}
+
+    public String getCompanyAddress(){return companyaddress;}
+
+    public void setGstNo(String gstno){this.gstno= gstno;}
+
+    public String getGstNo(){return gstno;}
+
+    public void setLogo(Bitmap logo){this.logo= logo;}
+
+    public Bitmap getLogo(){return logo;}
+
+
+
+
 
     public Bitmap getImage() {
         return image;

@@ -114,33 +114,26 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
                     if(dataObject != null) {
                         ClientDetail siteDetail = new ClientDetail();
                         siteDetail.setId(dataObject.optInt("id"));
-                        siteDetail.setVendorId(dataObject.optString("vendor_id"));
-                        siteDetail.setLocation(dataObject.optString("location"));
-                        siteDetail.setCreatedAt(dataObject.optString("created_at"));
-                        siteDetail.setEndDate(dataObject.optString("end_date"));
-                        siteDetail.setLatitude(dataObject.optString("latitude"));
-                        siteDetail.setLongitude(dataObject.optString("longitute")); // Consider renaming "longitute" to "longitude" in your JSON or code for consistency
-                        siteDetail.setMediaType(dataObject.optString("media_type"));
-                        siteDetail.setIllumination(dataObject.optString("illumination"));
-                        siteDetail.setStartDate(dataObject.optString("start_date"));
                         siteDetail.setName(dataObject.optString("name"));
-                        siteDetail.setSiteNo(dataObject.optString("site_no"));
-                        siteDetail.setWidth(dataObject.optString("width"));
-                        siteDetail.setHeight(dataObject.optString("height"));
-                        siteDetail.setTotalArea(dataObject.optString("total_area"));
+                        siteDetail.setEmail(dataObject.optString("email"));
+                        siteDetail.setPhoneNumber(dataObject.optString("phone_number"));
+                        siteDetail.setCompanyName(dataObject.optString("company_name"));
+                        siteDetail.setCompanyAddress(dataObject.optString("company_address"));
+                        siteDetail.setGstNo(dataObject.optString("gst_no"));
+                        siteDetail.setCreatedAt(dataObject.optString("created_at"));
                         siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
+
                         try {
-                            String imageUrl = dataObject.optString("image");
+                            String imageUrl = dataObject.optString("logo");
                             imageUrl= "https://acme.warburttons.com/"+ imageUrl;
                             Log.d("tag41", "imageurl is "+ imageUrl);
                             if(imageUrl != "null" && !imageUrl.isEmpty()) {
                                 URL url = new URL(imageUrl);
                                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                siteDetail.setImage(bitmap);
+                                siteDetail.setLogo(bitmap);
                             }
                         } catch (Exception e) {
                             Log.d("tag41", "error in implementui" +e.toString());
-                            Log.e("tag41", "sdfdg", e);
                             // Handle error
                         }
 
