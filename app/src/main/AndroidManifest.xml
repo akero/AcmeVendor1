@@ -36,7 +36,8 @@
             android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.ClientDetail"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/NoActTheme"/>
         <activity
             android:name=".activity.dashboard.AdminViewClientDetails"
             android:exported="false"
@@ -50,10 +51,10 @@
             android:name=".activity.login.OTP"
             android:exported="false"
             android:label="@string/title_activity_otp"
-            android:theme="@style/Theme.TestingProject" />
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.SelectLoginType"
-            android:theme="@style/Theme.TestingProject"
+            android:theme="@style/NoActTheme"
             android:exported="false" />
         <activity
             android:name=".activity.dashboard.AddVenderActivity"
@@ -97,7 +98,8 @@
             android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.BaseActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/NoActTheme"/>
         <activity
             android:name=".activity.login.ForgotPasswordActivity"
             android:exported="false"
