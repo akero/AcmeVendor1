@@ -45,29 +45,11 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         campaignList();
     }
 
-    public void oldCampaignClick(View view) {
-        oldcampaign = true;
-        binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
-        binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
-        binding.tvOldCampaign.setTextColor(Color.parseColor("#FFFFFF"));
-        binding.tvLiveCampaign.setTextColor(Color.parseColor("#0089BE"));
-    }
-
-    public void liveCampaignClick(View view) {
-        oldcampaign = false;
-        binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
-        binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
-        binding.tvLiveCampaign.setTextColor(Color.parseColor("#FFFFFF"));
-        binding.tvOldCampaign.setTextColor(Color.parseColor("#0089BE"));
-    }
-
     public void onNotificationClick(View v){
         //TODO ask lodu what this does
     }
 
     String readFile(){
-
-
         String token="";
         try {
             FileReader fr = new FileReader("logintoken");
@@ -76,9 +58,6 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
             while((i=fr.read())!=-1){
                 a=a+((char)i);
             }
-
-
-
         }catch(Exception e){
             Log.d("tag26", e.toString());
         }
@@ -86,23 +65,19 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     }
 
     private void campaignList() {
-
         int vendorclientorcampaign= 1;
         String logintoken= loginToken;
 
         //TODO here
-
         //TODO remove after hardcode is removed
         logintoken= "534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
-
         APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
 
-//TODO now add response to ui
+        //TODO now add response to ui
 
         //TODO remove
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
-
 
         JSONArray jsonArray = new JSONArray();
         try {
@@ -174,7 +149,6 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     @Override
     public void onResponseReceived(String response){
         Log.d("cldbatest","response is "+ response);
-
 
         //TODO replace. this is for response for the current page's data.
         //TODO implement response into UI
