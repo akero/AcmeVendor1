@@ -305,6 +305,8 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
 
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
+            //TODO change this
+
             // Start new activity and pass the retrieved data
             startActivity(new Intent(this, ViewSiteDetailActivity.class)
                     .putExtra("campaignType", "old")

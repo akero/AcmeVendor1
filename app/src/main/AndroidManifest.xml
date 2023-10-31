@@ -53,6 +53,7 @@
             android:theme="@style/Theme.TestingProject" />
         <activity
             android:name=".activity.dashboard.SelectLoginType"
+            android:theme="@style/Theme.TestingProject"
             android:exported="false" />
         <activity
             android:name=".activity.dashboard.AddVenderActivity"

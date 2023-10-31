@@ -280,8 +280,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                                   GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                                   binding.rvCampaignList.setLayoutManager(layoutManager);
-            CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
-            binding.rvCampaignList.setAdapter(adapter);
+                                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                                    binding.rvCampaignList.setAdapter(adapter);
 
                               }});
 
