@@ -9,7 +9,7 @@ import com.acme.acmevendor.R;
 public class AddCampaignDetails extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//test
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_campaign_details);
     }
