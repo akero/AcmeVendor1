@@ -14,6 +14,7 @@ import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.CampaignListActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.activity.dashboard.ViewCampaignSites;
 import com.acme.acmevendor.activity.dashboard.ViewVendorSites;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import org.json.JSONArray;
@@ -97,6 +98,8 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                     ((AdminDashboardActivity) context).onItemClick(position);
                 }else if (context instanceof ViewVendorSites) {
                     ((ViewVendorSites) context).onItemClick(position);
+                }else if(context instanceof ViewCampaignSites){
+                    ((ViewCampaignSites) context).onItemClick(position);
                 }
 
             });

@@ -216,11 +216,13 @@ public class APIreferenceclass {
     //for viewsitedetail
     public APIreferenceclass(String loginToken, String siteNumber, Context context){
 
-        //TODO add siteNumber to api callYou explained
+        //TODO add siteNumber to api call
 
         Log.d("tag41","8");
 
-        String url="https://acme.warburttons.com/api/get_site_by_id/39";
+        String url="https://acme.warburttons.com/api/get_site_by_id/"+ siteNumber;
+
+        //String url="https://acme.warburttons.com/api/get_site_by_id/39";
 
         String jsonPayload = "{\"Authorization\": \"" + loginToken +"\"}";
 

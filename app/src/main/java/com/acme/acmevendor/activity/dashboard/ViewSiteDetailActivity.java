@@ -71,7 +71,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             campaignType = getIntent().getExtras().getString("campaignType", "");
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
-            Log.d("tag41", "3");
+            Log.d("tg2", siteNumber);
         }
 
         if ("old".equalsIgnoreCase(campaignType)){
