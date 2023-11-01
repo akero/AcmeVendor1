@@ -71,6 +71,8 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
                     //todo implement fn to save/retreive login data and pass otp class. Then add receiver on other class.
                     Log.d("tag23", "1");
+
+
                     startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
 
                 } else {
@@ -80,7 +82,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                     startActivity(new Intent(OTP.this, VenderDashBoardActivity.class));
                 }
 
-                /*String emailInput = email.getText().toString().trim();
+                String emailInput = email.getText().toString().trim();
 
                 // Check if the input is empty
                 if(emailInput.isEmpty()) {
@@ -94,10 +96,10 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                 else {
                     //TODO: make api call here, put intent in onresponsereceived. pending till they guy gets email.
 
-//                    APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
+                    APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
 
 
-                }*/
+                }
             }
 
         });

@@ -41,6 +41,8 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("tg3", "0");
+
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.etLoginid.setText(getIntent().getStringExtra("Email"));
@@ -54,20 +56,25 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
 
             AppPreferences.getInstance(LoginActivity.this).saveUserData(response.toString());
 
-            if (loginType == 0) {
+            //TODO check if its an email
+
+            if (loginType == 0) {//client
 
                 //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
-                Log.d("tag23", "0");
+
+                //
+
+                Log.d("tg3", "0");
                 startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
 
-            } else if (loginType == 1) {
+            } else if (loginType == 1) {//admin
 
 
                 //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tag23", "1");
                 startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
 
-            } else {
+            } else {//vendor
 
                 //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tag23", "2");
