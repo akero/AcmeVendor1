@@ -27,6 +27,9 @@
         android:theme="@style/Theme.TestingProject"
         tools:targetApi="31">
         <activity
+            android:name=".activity.dashboard.AddCampaignDetails"
+            android:exported="false" />
+        <activity
             android:name=".activity.dashboard.ViewVendorSites"
             android:exported="false"
             android:theme="@style/NoActTheme" />
@@ -37,7 +40,7 @@
         <activity
             android:name=".activity.dashboard.ClientDetail"
             android:exported="false"
-            android:theme="@style/NoActTheme"/>
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.AdminViewClientDetails"
             android:exported="false"
@@ -54,8 +57,8 @@
             android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.SelectLoginType"
-            android:theme="@style/NoActTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.AddVenderActivity"
             android:exported="false"
@@ -99,7 +102,7 @@
         <activity
             android:name=".activity.BaseActivity"
             android:exported="false"
-            android:theme="@style/NoActTheme"/>
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.login.ForgotPasswordActivity"
             android:exported="false"

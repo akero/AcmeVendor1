@@ -71,6 +71,8 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
+        Log.d("tag97", "here");
+
         idofcampaign=getIntent().getStringExtra("id");
         Log.d("tag58", idofcampaign);
 

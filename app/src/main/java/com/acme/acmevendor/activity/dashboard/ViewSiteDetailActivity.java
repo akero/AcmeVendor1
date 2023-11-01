@@ -63,25 +63,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
-
-       /* try {
-            // Initialize BroadcastReceiver
-            onDownloadComplete = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                    if (downloadReference == id) {
-                        Toast.makeText(ViewSiteDetailActivity.this, "Download Completed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            };
-
-            // Registering the receiver to listen for ACTION_DOWNLOAD_COMPLETE
-            registerReceiver(onDownloadComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        }catch(Exception e){
-            Log.d("tag41", e.toString());
-        }
-*/
+        
         Log.d("tag41", "1");
 
         if (getIntent().getExtras() != null) {
