@@ -132,12 +132,12 @@ public class APIreferenceclass {
     public APIreferenceclass(int vendorclientorcampaign, Context context, String email) {
 
         //TODO make api call now
-//campaign
+//client
         if (vendorclientorcampaign == 0) {
 
             Log.d("tag21","1");
 
-            String url="https://acme.warburttons.com/api/login";
+        /*    String url="https://acme.warburttons.com/api/login";
             querytype=0;
             String jsonPayload = "{\"Authorization\": \"";
 
@@ -148,10 +148,10 @@ public class APIreferenceclass {
             Log.d("otptest","Inside otp api");
 
 
-            callapi(headers, jsonPayload, context, querytype, url);
+            callapi(headers, jsonPayload, context, querytype, url);*/
         }
 
-        //client
+        //admin
         else if (vendorclientorcampaign == 1) {
 
             String url="https://acme.warburttons.com/api/login";
@@ -288,6 +288,30 @@ public class APIreferenceclass {
     public APIreferenceclass(String logintoken, Context context) {
     }
 
+    //for otp
+    public APIreferenceclass(int loginType, Context context, String email, String a){
+
+        //TODO add siteNumber to api callYou explained
+
+
+        String url="https://acme.warburttons.com/api/login";
+        Log.d("tag23", "logintype "+ loginType + " email " + email);
+
+
+        String jsonPayload = "{\"email\": \"" + email +"\"}";
+
+
+        Map<String, String> headers = new HashMap<>();
+        //headers.put("Authorization", "Bearer " + loginToken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+        querytype=1;
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+
+    }
 
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
 

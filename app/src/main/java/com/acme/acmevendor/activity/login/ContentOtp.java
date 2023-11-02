@@ -23,7 +23,7 @@ public class ContentOtp extends AppCompatActivity {
         otp2 = findViewById(R.id.otp2);
         otp3 = findViewById(R.id.otp3);
         otp4 = findViewById(R.id.otp4);
-        otp5 = findViewById(R.id.otp5);
+        //otp5 = findViewById(R.id.otp5);
         Button btnNext = findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(new View.OnClickListener() {

@@ -78,23 +78,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
 
                 app:layout_constraintStart_toEndOf="@+id/otp3"
-                app:layout_constraintEnd_toStartOf="@+id/otp5"
-                app:layout_constraintTop_toTopOf="parent"
-                android:maxLength="1"
-                android:inputType="number"
-                android:background="@drawable/primarystroke"
-                android:padding="@dimen/_10sdp"
-                android:fontFamily="@font/dmsansregular"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12ssp" />
-
-            <EditText
-                android:id="@+id/otp5"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-                app:layout_constraintStart_toEndOf="@+id/otp4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:maxLength="1"
@@ -104,6 +87,7 @@
                 android:fontFamily="@font/dmsansregular"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
