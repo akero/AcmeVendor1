@@ -21,6 +21,9 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
     private EditText otp1, otp2, otp3, otp4;
@@ -88,20 +91,25 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             loginType= jsonObject1.getString("type");
             Log.d("tg4", name+ token+ loginType);
 
-            saveTokenToDisk(token);
+            writeLoginToken(this, token);
 
             if(loginType== "admin"){
 
                 Intent intent= new Intent(ContentOtp.this, AdminDashboardActivity.class);
+                intent.putExtra("logintoken", token);
                 startActivity(intent);
 
             }else if(loginType== "vendor"){
 
                 Intent intent= new Intent(ContentOtp.this, VenderDashBoardActivity.class);
+                intent.putExtra("logintoken", token);
+
                 startActivity(intent);
             }else if(loginType== "client"){
 
                 Intent intent= new Intent(ContentOtp.this, ClientDashBoardActivity.class);
+                intent.putExtra("logintoken", token);
+
                 startActivity(intent);
             }
         }
@@ -110,9 +118,23 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
     }
 }
 
-    void saveTokenToDisk(String token){
+    public static void writeLoginToken(Context context, String logintoken) {
+        FileOutputStream fos = null;
 
-
+        try {
+            fos = context.openFileOutput("logintoken", Context.MODE_PRIVATE);
+            fos.write(logintoken.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private boolean isValidOtp(String otp) {
