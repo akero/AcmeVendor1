@@ -79,6 +79,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
+        logintoken = FileHelper.readLoginToken(this);
+        Log.d("tg4", logintoken);
+
+
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
         jsonArray2=new JSONArray();

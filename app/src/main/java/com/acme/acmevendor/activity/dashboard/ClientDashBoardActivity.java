@@ -41,7 +41,9 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_dash_board);
 Log.d("sdaf","");
-        loginToken= readFromFile(this);
+        loginToken= FileHelper.readLoginToken(this);
+        Log.d("tg4", loginToken);
+
         campaignList();
     }
 

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.activity.dashboard.FileHelper;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
@@ -91,7 +92,8 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             loginType= jsonObject1.getString("type");
             Log.d("tg4", name+ token+ loginType);
 
-            writeLoginToken(this, token);
+            boolean success = FileHelper.writeLoginToken(this, token);
+
 
             if(loginType== "admin"){
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.AdminViewClientDetails;
 import com.acme.acmevendor.activity.dashboard.AdminViewVendorDetails;
+import com.acme.acmevendor.activity.dashboard.FileHelper;
 import com.acme.acmevendor.activity.dashboard.ViewCampaignSites;
 import com.acme.acmevendor.activity.dashboard.ViewSiteDetailActivity;
 import com.acme.acmevendor.activity.dashboard.ViewVendorSites;
@@ -68,7 +69,9 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         //TODO implement this
-        //loginToken= readFromFile(this);
+        loginToken= FileHelper.readLoginToken(this);
+        Log.d("tg4", loginToken);
+
 
         jsonArray1= new JSONArray();
         jsonArray2= new JSONArray();
