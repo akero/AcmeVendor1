@@ -12,8 +12,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
+import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
@@ -66,9 +72,45 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         }
     }
 
+    String name;
+    String token;
+    String loginType;
+
     @Override
     public void onResponseReceived(String response){
         Log.d("tg4",  response);
+    try {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
+        if(jsonObject.getBoolean("success")== true){
+            name= jsonObject1.getString("name");
+            token= jsonObject1.getString("token");
+            loginType= jsonObject1.getString("type");
+            Log.d("tg4", name+ token+ loginType);
+
+            saveTokenToDisk(token);
+
+            if(loginType== "admin"){
+
+                Intent intent= new Intent(ContentOtp.this, AdminDashboardActivity.class);
+                startActivity(intent);
+
+            }else if(loginType== "vendor"){
+
+                Intent intent= new Intent(ContentOtp.this, VenderDashBoardActivity.class);
+                startActivity(intent);
+            }else if(loginType== "client"){
+
+                Intent intent= new Intent(ContentOtp.this, ClientDashBoardActivity.class);
+                startActivity(intent);
+            }
+        }
+    }catch(Exception e){
+        Log.d("tg4", e.toString());
+    }
+}
+
+    void saveTokenToDisk(String token){
 
 
     }
