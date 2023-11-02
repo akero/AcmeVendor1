@@ -1,17 +1,24 @@
 package com.acme.acmevendor.activity.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
 
-public class ContentOtp extends AppCompatActivity {
+public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
-    private EditText otp1, otp2, otp3, otp4, otp5;
+    private EditText otp1, otp2, otp3, otp4;
+    String email="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +30,9 @@ public class ContentOtp extends AppCompatActivity {
         otp2 = findViewById(R.id.otp2);
         otp3 = findViewById(R.id.otp3);
         otp4 = findViewById(R.id.otp4);
-        //otp5 = findViewById(R.id.otp5);
         Button btnNext = findViewById(R.id.btnNext);
+
+        email= getIntent().getStringExtra("email");
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,25 +44,37 @@ public class ContentOtp extends AppCompatActivity {
 
     private void validateAndContinue() {
         String otp = otp1.getText().toString() + otp2.getText().toString() +
-                otp3.getText().toString() + otp4.getText().toString() +
-                otp5.getText().toString();
+                otp3.getText().toString() + otp4.getText().toString();
 
         // Add OTP validation logic as per your requirement.
         // If OTP is valid, proceed to the next Activity
         if (isValidOtp(otp)) {
-            Intent intent = new Intent(ContentOtp.this, ContentOtp.class);
+
+            Context context= this;
+            APIreferenceclass api= new APIreferenceclass(otp, context, email, 1);
+
+            //Intent intent = new Intent(ContentOtp.this, ContentOtp.class);
             // Add any other data to send to the next activity
             // intent.putExtra("email", emailInput);
             // intent.putExtra("loginType", loginType);
-            startActivity(intent);
+            //startActivity(intent);
         } else {
+            Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+            //TODO
             // Handle invalid OTP entry
             // This could be showing an error message, shaking animation, etc.
         }
     }
 
+    @Override
+    public void onResponseReceived(String response){
+        Log.d("tg4",  response);
+
+
+    }
+
     private boolean isValidOtp(String otp) {
-        // Replace with your OTP validation logic
-        return otp.length() == 5;
+        //TODO Replace with your OTP validation logic
+        return otp.length() == 4;
     }
 }

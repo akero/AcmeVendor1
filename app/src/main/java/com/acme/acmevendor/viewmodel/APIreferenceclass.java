@@ -288,6 +288,8 @@ public class APIreferenceclass {
     public APIreferenceclass(String logintoken, Context context) {
     }
 
+
+
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 
@@ -299,6 +301,29 @@ public class APIreferenceclass {
 
 
         String jsonPayload = "{\"email\": \"" + email +"\"}";
+
+
+        Map<String, String> headers = new HashMap<>();
+        //headers.put("Authorization", "Bearer " + loginToken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+        querytype=1;
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+
+    }//for otp enter
+    public APIreferenceclass(String otp, Context context, String email, int a){
+
+        //TODO add siteNumber to api callYou explained
+
+
+        String url="https://acme.warburttons.com/api/verifyLogin";
+        //Log.d("tag23", "logintype "+ loginType + " email " + email);
+
+
+        String jsonPayload = "{\"email\": \"" + email +"\", \"password\": \"" + otp + "\"}";
 
 
         Map<String, String> headers = new HashMap<>();
