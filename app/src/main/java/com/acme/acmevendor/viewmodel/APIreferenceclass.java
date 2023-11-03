@@ -279,29 +279,20 @@ public class APIreferenceclass {
         headers.put("Content-Type", "application/json");
 
         Log.d("tag58","Inside viewsitedetail api");
-
-
         callapi1(headers, jsonPayload, context, url);
 
     }
 
-    public APIreferenceclass(String logintoken, Context context) {
-    }
-
-
-
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 
-        //TODO add siteNumber to api callYou explained
+        //TODO add siteNumber to api call
 
 
         String url="https://acme.warburttons.com/api/login";
         Log.d("tag23", "logintype "+ loginType + " email " + email);
 
-
         String jsonPayload = "{\"email\": \"" + email +"\"}";
-
 
         Map<String, String> headers = new HashMap<>();
         //headers.put("Authorization", "Bearer " + loginToken);
@@ -309,14 +300,14 @@ public class APIreferenceclass {
 
         Log.d("tag58","Inside viewsitedetail api");
 
-        querytype=1;
+        querytype= 1; ////post
 
         callapi(headers, jsonPayload, context, querytype ,url);
 
     }//for otp enter
     public APIreferenceclass(String otp, Context context, String email, int a){
 
-        //TODO add siteNumber to api callYou explained
+        //TODO add siteNumber to api call
 
 
         String url="https://acme.warburttons.com/api/verifyLogin";
@@ -324,7 +315,7 @@ public class APIreferenceclass {
 
 
         String jsonPayload = "{\"email\": \"" + email +"\", \"password\": \"" + otp + "\"}";
-
+        Log.d("tg4", jsonPayload);
 
         Map<String, String> headers = new HashMap<>();
         //headers.put("Authorization", "Bearer " + loginToken);
@@ -332,7 +323,7 @@ public class APIreferenceclass {
 
         Log.d("tag58","Inside viewsitedetail api");
 
-        querytype=1;
+        querytype=1; //post
 
         callapi(headers, jsonPayload, context, querytype ,url);
 

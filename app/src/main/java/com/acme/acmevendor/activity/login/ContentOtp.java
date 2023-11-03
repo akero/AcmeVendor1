@@ -83,7 +83,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
     @Override
     public void onResponseReceived(String response){
-        Log.d("tg4","otp response works");
+        Log.d("tg4","otp response works" +response);
 
         try {
         JSONObject jsonObject = new JSONObject(response);

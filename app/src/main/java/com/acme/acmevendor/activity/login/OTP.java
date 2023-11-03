@@ -35,8 +35,9 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityOtpBinding binding;
-
+    String emailInput;
     //TODO accept otp, make api call
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                 //TODO remove this hardcode
                 String email1= "rishabh@acmemedia.in";
 
-                String emailInput = email.getText().toString().trim();
+                emailInput = email.getText().toString().trim();
 
                 // Check if the input is empty
                 if(emailInput.isEmpty()) {
@@ -77,34 +78,26 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
                     //TODO call api with email and logintype then start the next class. comment this once otp is implemented
 
-                    if (loginType == 0) {
+                    if (loginType == 0) {//client
 
                         //TODO replace email1 with emailinput
                         Log.d("tag23", "0");
-                        APIreferenceclass api= new APIreferenceclass(loginType, context, email1, "");
+                        APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
 
-                    } else if (loginType == 1) {
+                    } else if (loginType == 1) {//admin
 
                         //TODO replace email1 with emailinput
                         Log.d("tag23", "1");
-
-                        APIreferenceclass api= new APIreferenceclass(loginType, context, email1, "");
-
-
-
+                        APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
                         //startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
-
-                    } else {
-
+                    } else {//vendor
                         //TODO replace email1 with emailinput
                         Log.d("tag23", "2");
-                        APIreferenceclass api= new APIreferenceclass(loginType, context, email1, "");
+                        APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
 
                         //APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
                         //startActivity(new Intent(OTP.this, VenderDashBoardActivity.class));
                     }
-
-
 
                 }
             }
@@ -123,7 +116,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         Intent intent = new Intent(OTP.this, ContentOtp.class);
 
         //TODO change 2nd param with emailInput
-        intent.putExtra("email", "rishabh@acmemedia.in");
+        intent.putExtra("email", emailInput);
         //intent.putExtra("loginType", loginType);
         startActivity(intent);
     }
