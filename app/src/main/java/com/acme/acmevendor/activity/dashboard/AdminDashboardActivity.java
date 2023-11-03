@@ -299,7 +299,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     private void campaignList() {
         vendorclientorcampaign=0;
         //TODO pass correct logintoken here
-        logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+        //logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
         Log.d("tg5","fin");
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
@@ -307,7 +307,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     private void clientList() {
         vendorclientorcampaign=1;
         //TODO pass correct logintoken here
-        logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+        //logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
 
         //TODO- here
 
@@ -317,7 +317,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     private void venderList() {
         vendorclientorcampaign=2;
         //TODO pass correct logintoken here
-        logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+        //logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
@@ -387,7 +387,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
 
             //TODO add correct login token here
-            logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+            //logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
             // Get site id or site no from the JSONObject
             String id = jsonObject.getString("id"); // Or get an id if you have that
