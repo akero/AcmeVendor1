@@ -1,6 +1,7 @@
 package com.acme.acmevendor.activity.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +15,14 @@ import androidx.databinding.DataBindingUtil;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityAddClientBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
 
-public class AddClientActivity extends AppCompatActivity {
+import org.json.JSONObject;
+
+import java.io.File;
+
+public class AddClientActivity extends AppCompatActivity implements ApiInterface{
 
     private ActivityAddClientBinding binding;
 
@@ -23,11 +30,22 @@ public class AddClientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_client);
+        logintoken= FileHelper.readLoginToken(this);
     }
 
     public void btnCloseClick(View view) {
         finish();
     }
+
+    String name="";
+    String email="";
+    String phone_number="";
+    String company_name="";
+    String company_address="";
+    String gst_no="";
+    //TODO add image type post
+    //Byte[] logo;
+    String logintoken;
 
     public void btnSaveClick(View view) {
         if (binding.etFullName.getText().toString().isEmpty() ||
@@ -41,14 +59,47 @@ public class AddClientActivity extends AppCompatActivity {
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
-            binding.etFullName.setText("");
+
+            JSONObject jsonPayload= new JSONObject();
+            try{
+                jsonPayload.put("name", name);
+                jsonPayload.put("email", email);
+                jsonPayload.put("phone_number", phone_number);
+                jsonPayload.put("company_name", company_name);
+                jsonPayload.put("company_address", company_address);
+                jsonPayload.put("gst_no", gst_no);
+
+            }catch(Exception e){
+                Log.d("tg6", e.toString());
+            }
+
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken);
+
+
+           /* binding.etFullName.setText("");
             binding.etEmail.setText("");
             binding.etCompanyName.setText("");
             binding.etCompanyAddress.setText("");
             binding.etGst.setText("");
             binding.etPhone.setText("");
             showSuccessMessage();
+        */
         }
+
+    }
+
+    @Override
+    public void onResponseReceived(String response){
+
+        Log.d("tg6", response);
+
+        binding.etFullName.setText("");
+        binding.etEmail.setText("");
+        binding.etCompanyName.setText("");
+        binding.etCompanyAddress.setText("");
+        binding.etGst.setText("");
+        binding.etPhone.setText("");
+        showSuccessMessage();
     }
 
     public void showSuccessMessage() {

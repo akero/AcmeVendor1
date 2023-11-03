@@ -13,6 +13,7 @@ import org.chromium.net.CronetEngine;
 import org.chromium.net.UploadDataProvider;
 import org.chromium.net.UploadDataSink;
 import org.chromium.net.UrlRequest;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -283,6 +284,29 @@ public class APIreferenceclass {
 
     }
 
+    //addclientactivity
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken){
+
+        //TODO add siteNumber to api call
+
+
+        String url="https://acme.warburttons.com/api/login";
+        //Log.d("tag23", "logintype "+ loginType + " email " + email);
+
+        String jsonPayload = jsonPayload1.toString();
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+        querytype= 1; ////post
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+
+    }
+
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 
@@ -309,10 +333,8 @@ public class APIreferenceclass {
 
         //TODO add siteNumber to api call
 
-
         String url="https://acme.warburttons.com/api/verifyLogin";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
-
 
         String jsonPayload = "{\"email\": \"" + email +"\", \"password\": \"" + otp + "\"}";
         Log.d("tg4", jsonPayload);
@@ -326,8 +348,10 @@ public class APIreferenceclass {
         querytype=1; //post
 
         callapi(headers, jsonPayload, context, querytype ,url);
-
     }
+
+
+
 
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
 
