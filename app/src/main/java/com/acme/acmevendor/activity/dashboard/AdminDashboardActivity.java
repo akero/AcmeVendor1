@@ -1,5 +1,4 @@
 package com.acme.acmevendor.activity.dashboard;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +38,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
 public class AdminDashboardActivity extends AppCompatActivity implements ApiInterface {
     int id=0;
     String image="";
@@ -66,12 +64,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     //TODO- populate this token
     String logintoken="";
     JSONArray jsonArray1;
-
     JSONArray jsonArray2;//client array
     JSONArray jsonArray3;//vendor array
 
     //todo access token save to memory add to api call
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,14 +89,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         campaignList();
     }
 
-
     //onresponsereceived from api
     public void onResponseReceived(String response){
-
         Log.d("addbatest", "response is "+ response);
         Log.d("tag21","5");
-
-
         implementUi(response);
 
         /*
@@ -116,10 +108,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //TODO extract the unit id and pass that too
         implementUi(response);
         Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
-
  */
-
     }
+
     private void implementUi(String response){
         try {
             JSONObject jsonObject = new JSONObject();
@@ -165,15 +156,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                         }
                         jsonArray1.put(jsonObject);
 //TODO here
+                        }
                     }
-            }
                     }else if(vendorclientorcampaign==1){//client
-
-
-
                         for(int i=0; i< dataArray.length();i++){
-
-
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
                                 jsonObject1 = new JSONObject();
@@ -196,8 +182,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject1.putOpt("created_at", dataObject.optString("created_at"));
                                 jsonObject1.putOpt("updated_at", dataObject.optString("updated_at"));
 
-
-
                                 //siteDetail.setName(dataObject.optString("name"));
 
                                 try {
@@ -216,16 +200,13 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 }
                                 jsonArray1.put(jsonObject);
                                 jsonArray2.put(jsonObject1);
-//TODO here
+                            //TODO here
                             }
                         }
 
                     }else if(vendorclientorcampaign==2){
 
-
                         for(int i=0; i< dataArray.length();i++){
-
-
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
                                 jsonObject2 = new JSONObject();
@@ -247,9 +228,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject2.putOpt("logo", dataObject.optString("logo"));
                                 jsonObject2.putOpt("created_at", dataObject.optString("created_at"));
                                 jsonObject2.putOpt("updated_at", dataObject.optString("updated_at"));
-
-
-
                                 //siteDetail.setName(dataObject.optString("name"));
 
                                 try {
@@ -275,8 +253,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
-
-
             }
             runOnUiThread(new Runnable() {
                               @Override
@@ -287,13 +263,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                   binding.rvCampaignList.setLayoutManager(layoutManager);
                                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
                                     binding.rvCampaignList.setAdapter(adapter);
-
                               }});
-
-
-        }catch (Exception e){}
-
-
+        }catch (Exception e){
+            Log.d("tag40",e.toString());
+        }
     }
 
     private void campaignList() {
@@ -308,9 +281,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         vendorclientorcampaign=1;
         //TODO pass correct logintoken here
         //logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
-
         //TODO- here
-
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
 
@@ -318,7 +289,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         vendorclientorcampaign=2;
         //TODO pass correct logintoken here
         //logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
-
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
 
@@ -385,7 +355,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             JSONObject jsonObject = jsonArray1.getJSONObject(position);
             Log.d("tag51", jsonArray1.getJSONObject(position).toString());
 
-
             //TODO add correct login token here
             //logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
@@ -421,7 +390,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                         .putExtra("jsonArray", jsonObject1.toString()));
                 //jsonObject1= new JSONObject();
                 //jsonArray2= new JSONArray();
-
 
             }else if(vendorclientorcampaign==2){//vendor
 
@@ -483,7 +451,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 e.printStackTrace();
             }
         }
-
         // Return the extracted ids.
         return ids;
     }
@@ -498,7 +465,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         for (int i = 0; i < dataArray.size(); i++) {
             dataStrings[i] = dataArray.get(i).toString();
         }
-
         return dataStrings;
     }
 
