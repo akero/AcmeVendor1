@@ -62,6 +62,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
             Context context= this;
             APIreferenceclass api= new APIreferenceclass(otp, context, email, 1);
+            Log.d("tg4","otp works");
 
             //Intent intent = new Intent(ContentOtp.this, ContentOtp.class);
             // Add any other data to send to the next activity
@@ -82,32 +83,35 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
     @Override
     public void onResponseReceived(String response){
-        Log.d("tg4",  response);
-    try {
+        Log.d("tg4","otp response works");
+
+        try {
         JSONObject jsonObject = new JSONObject(response);
         JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
         if(jsonObject.getBoolean("success")== true){
             name= jsonObject1.getString("name");
             token= jsonObject1.getString("token");
             loginType= jsonObject1.getString("type");
-            Log.d("tg4", name+ token+ loginType);
+            Log.d("tg4", loginType);
 
             boolean success = FileHelper.writeLoginToken(this, token);
 
 
-            if(loginType== "admin"){
+            if(loginType.equals("admin")){
+
+                Log.d("tg5","1");
 
                 Intent intent= new Intent(ContentOtp.this, AdminDashboardActivity.class);
                 intent.putExtra("logintoken", token);
                 startActivity(intent);
 
-            }else if(loginType== "vendor"){
+            }else if(loginType.equals("vendor")){
 
                 Intent intent= new Intent(ContentOtp.this, VenderDashBoardActivity.class);
                 intent.putExtra("logintoken", token);
 
                 startActivity(intent);
-            }else if(loginType== "client"){
+            }else if(loginType.equals("client")){
 
                 Intent intent= new Intent(ContentOtp.this, ClientDashBoardActivity.class);
                 intent.putExtra("logintoken", token);
