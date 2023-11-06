@@ -476,8 +476,8 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/primarystroke"
                 android:fontFamily="@font/dmsansbold"
-                android:onClick="btnNextClick"
-                android:text="Next"
+                android:onClick="btnEditClick"
+                android:text="Edit"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_14ssp" />

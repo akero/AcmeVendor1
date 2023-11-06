@@ -433,41 +433,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         // Reset any other UI elements here as needed
     }
 
-    private String[] extractIds(String[] dataStrings) {
-        // Create an array to store extracted ids.
-        String[] ids = new String[dataStrings.length];
-
-        // Loop through each string in the input array.
-        for (int i = 0; i < dataStrings.length; i++) {
-            try {
-                // Parse the string into a JSONObject.
-                JSONObject jsonObject = new JSONObject(dataStrings[i]);
-
-                // Extract the "id" field and store it in the ids array.
-                ids[i] = String.valueOf(jsonObject.getInt("id"));
-            } catch (JSONException e) {
-                // Handle JSON parsing error. Here setting the id to a default error value ("error").
-                ids[i] = "error";
-                e.printStackTrace();
-            }
-        }
-        // Return the extracted ids.
-        return ids;
-    }
-
-    //extracting data into an array. the api response
-    public static String[] extractDataStrings(String apiResponse) {
-        Gson gson = new Gson();
-        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
-        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
-
-        String[] dataStrings = new String[dataArray.size()];
-        for (int i = 0; i < dataArray.size(); i++) {
-            dataStrings[i] = dataArray.get(i).toString();
-        }
-        return dataStrings;
-    }
-
     public void onPlusClick(View view) {
 
         Log.d("tag20", "onplusclick");

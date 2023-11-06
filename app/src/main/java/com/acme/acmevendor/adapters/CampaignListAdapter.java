@@ -100,6 +100,8 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                     ((ViewVendorSites) context).onItemClick(position);
                 }else if(context instanceof ViewCampaignSites){
                     ((ViewCampaignSites) context).onItemClick(position);
+                }else if(context instanceof ClientDashBoardActivity){
+                    ((ClientDashBoardActivity) context).onItemClick(position);
                 }
 
             });

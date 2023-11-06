@@ -62,22 +62,17 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
 
                 //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
 
-                //
-
-                Log.d("tg3", "0");
+                Log.d("tg7", "client");
                 startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
 
             } else if (loginType == 1) {//admin
-
-
                 //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
-                Log.d("tag23", "1");
+                Log.d("tg7", "admin");
                 startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
 
             } else {//vendor
-
                 //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
-                Log.d("tag23", "2");
+                Log.d("tg7", "vendor");
                 startActivity(new Intent(LoginActivity.this, VenderDashBoardActivity.class));
             }
         });

@@ -214,7 +214,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Handle next button click
+
+                    Intent intent= new Intent(ViewSiteDetailActivity.this, AddClientActivity.class);
+                    intent.putExtra("loginToken", logintoken);
+                    intent.putExtra("siteNumber", siteNumber);
+                    startActivity(intent);
                 }
             });
 

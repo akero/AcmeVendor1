@@ -67,7 +67,7 @@ public class APIreferenceclass {
         //client
         else if (vendorclientorcampaign == 1) {
 
-            String url="https://acme.warburttons.com/api/clients";
+            String url="https://acme.warburttons.com/api/get_client_campaigns";
             querytype= 0;
 
 

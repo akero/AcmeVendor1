@@ -25,16 +25,14 @@ import java.io.File;
 public class AddClientActivity extends AppCompatActivity implements ApiInterface{
 
     private ActivityAddClientBinding binding;
+    String siteNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_client);
-        logintoken= FileHelper.readLoginToken(this);
-    }
-
-    public void btnCloseClick(View view) {
-        finish();
+        logintoken= getIntent().getStringExtra("loginToken");
+        siteNumber= getIntent().getStringExtra("siteNumber");
     }
 
     String name="";
@@ -48,7 +46,7 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
     String logintoken;
 
     public void btnSaveClick(View view) {
-        if (binding.etFullName.getText().toString().isEmpty() ||
+        if (    binding.etFullName.getText().toString().isEmpty() ||
                 binding.etEmail.getText().toString().isEmpty() ||
                 binding.etCompanyName.getText().toString().isEmpty() ||
                 binding.etCompanyAddress.getText().toString().isEmpty() ||
@@ -134,4 +132,9 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
             dialog.show();
         }
     }
+
+    public void btnCloseClick(View view) {
+        finish();
+    }
+
 }
