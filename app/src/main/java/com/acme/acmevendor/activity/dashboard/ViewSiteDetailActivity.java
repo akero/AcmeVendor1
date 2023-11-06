@@ -83,6 +83,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
     }
+    SiteDetail siteDetail;
+    JSONObject jsonobj;
 
     private void implementUI(String response) {
         try {
@@ -91,8 +93,9 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
                 if(dataArray != null && dataArray.length() > 0) {
                     JSONObject dataObject = dataArray.getJSONObject(0);
+                    jsonobj= dataObject;
                     if(dataObject != null) {
-                        SiteDetail siteDetail = new SiteDetail();
+                        siteDetail = new SiteDetail();
                         siteDetail.setId(dataObject.optInt("id"));
                         siteDetail.setVendorId(dataObject.optString("vendor_id"));
                         siteDetail.setLocation(dataObject.optString("location"));
@@ -215,9 +218,10 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent= new Intent(ViewSiteDetailActivity.this, AddClientActivity.class);
+                    Intent intent= new Intent(ViewSiteDetailActivity.this, AddSiteDetailActivity.class);
                     intent.putExtra("loginToken", logintoken);
                     intent.putExtra("siteNumber", siteNumber);
+                    intent.putExtra("siteDetail", jsonobj.toString());
                     startActivity(intent);
                 }
             });

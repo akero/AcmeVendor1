@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -30,6 +31,12 @@ import android.widget.Toast;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityAddSiteDetailBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
+import com.acme.acmevendor.utility.RoundRectCornerImageView;
+import com.acme.acmevendor.viewmodel.SiteDetail;
+
+import org.json.JSONObject;
+
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -43,11 +50,116 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     private LocationManager locationManager;
 
+    JSONObject jsonobj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
+        try {
+            jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
+        }catch(Exception e){
+            Log.d("tg90", e.toString());}
+
+        //populating fields
+        populateFields(jsonobj);
+
     }
+
+    void populateFields(JSONObject dataObject){
+        if(dataObject != null) {
+            SiteDetail siteDetail = new SiteDetail();
+            siteDetail.setId(dataObject.optInt("id"));
+            siteDetail.setVendorId(dataObject.optString("vendor_id"));
+            siteDetail.setLocation(dataObject.optString("location"));
+            siteDetail.setCreatedAt(dataObject.optString("created_at"));
+            siteDetail.setEndDate(dataObject.optString("end_date"));
+            siteDetail.setLatitude(dataObject.optString("latitude"));
+            siteDetail.setLongitude(dataObject.optString("longitute")); // Consider renaming "longitute" to "longitude" in your JSON or code for consistency
+            siteDetail.setMediaType(dataObject.optString("media_type"));
+            siteDetail.setIllumination(dataObject.optString("illumination"));
+            siteDetail.setStartDate(dataObject.optString("start_date"));
+            siteDetail.setName(dataObject.optString("name"));
+            siteDetail.setSiteNo(dataObject.optString("site_no"));
+            siteDetail.setWidth(dataObject.optString("width"));
+            siteDetail.setHeight(dataObject.optString("height"));
+            siteDetail.setTotalArea(dataObject.optString("total_area"));
+            siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
+            try {
+                String imageUrl = dataObject.optString("image");
+                imageUrl= "https://acme.warburttons.com/"+ imageUrl;
+                Log.d("tag41", "imageurl is "+ imageUrl);
+                if(imageUrl != "null" && !imageUrl.isEmpty()) {
+                    URL url = new URL(imageUrl);
+                    Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    siteDetail.setImage(bitmap);
+                }
+            } catch (Exception e) {
+                Log.d("tag41", "error in implementui" +e.toString());
+                Log.e("tag41", "sdfdg", e);
+                // Handle error
+            }
+
+            // Update UI
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    TextView tvSiteId = findViewById(R.id.etSiteNo);
+                    //TODO after person implements site name then change this
+                    tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
+
+                    TextView tvLocation = findViewById(R.id.etLocation);
+                    tvLocation.setText(siteDetail.getLocation());
+
+                    TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+                    tvSiteName.setText(siteDetail.getName());
+
+                    TextView tvLastInspection = findViewById(R.id.etStartDate);
+                    tvLastInspection.setText(siteDetail.getCreatedAt());
+
+                    TextView tvLatitude = findViewById(R.id.etLatitude);
+                    tvLatitude.setText(siteDetail.getLatitude());
+
+                    TextView tvLongitude = findViewById(R.id.etLongitude);
+                    tvLongitude.setText(siteDetail.getLongitude());
+
+                    //TODO
+
+                    //TextView tvMediaType = findViewById(R.id.tvMediaType);
+                    //tvMediaType.setText(siteDetail.getMediaType());
+
+                   // TextView tvIllumination = findViewById(R.id.tvIllumination);
+                   // tvIllumination.setText(siteDetail.getIllumination());
+
+                    TextView tvStartDate = findViewById(R.id.etStartDate);
+                    tvStartDate.setText(siteDetail.getStartDate());
+
+                    // Set the site number
+                    TextView tvSiteNo = findViewById(R.id.etSiteNo);
+                    tvSiteNo.setText(String.valueOf(siteDetail.getSiteNo())); // assuming getter method exists
+
+                    // Set the width
+                    TextView tvWidth = findViewById(R.id.etWidth);
+                    tvWidth.setText(siteDetail.getWidth()); // assuming getter method exists
+
+                    // Set the height
+                    TextView tvHeight = findViewById(R.id.etHeight);
+                    tvHeight.setText(siteDetail.getHeight()); // assuming getter method exists
+
+                    // Set the total area
+                    TextView tvTotalArea = findViewById(R.id.etTotalArea);
+                    tvTotalArea.setText(siteDetail.getTotalArea()); // assuming getter method exists
+
+                    //RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
+                   // if(siteDetail.getImage()!=null) {
+                    //    tvImage.setImageBitmap(siteDetail.getImage());
+                   // }
+                }
+            });
+        }
+    }
+
 
     public void btnCloseClick(View view) {
         finish();
