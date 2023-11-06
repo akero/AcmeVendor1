@@ -54,6 +54,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     private int position = 0;
     String siteNumber= "";
     String logintoken="";
+    String campaignId="";
     private ActivityViewSiteDetailBinding binding;
 
     //TODO populate all fields. pass api call data from prev activity
@@ -68,6 +69,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
+            campaignId = getIntent().getExtras().getString("campaignId", "");
+
             campaignType = getIntent().getExtras().getString("campaignType", "");
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
@@ -220,6 +223,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
                     Intent intent= new Intent(ViewSiteDetailActivity.this, AddSiteDetailActivity.class);
                     intent.putExtra("loginToken", logintoken);
+                    intent.putExtra("campaignId", campaignId);
                     intent.putExtra("siteNumber", siteNumber);
                     intent.putExtra("siteDetail", jsonobj.toString());
                     startActivity(intent);

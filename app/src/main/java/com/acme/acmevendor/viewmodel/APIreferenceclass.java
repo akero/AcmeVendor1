@@ -8,14 +8,19 @@ import androidx.lifecycle.MutableLiveData;
 import com.acme.acmevendor.api.MyUrlRequestCallback;
 import com.acme.acmevendor.models.SendOtpResponseModel;
 import com.google.android.gms.common.api.Api;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UploadDataProvider;
 import org.chromium.net.UploadDataSink;
 import org.chromium.net.UrlRequest;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -38,7 +43,7 @@ public class APIreferenceclass {
 
     Executor cronetExecutor = Executors.newSingleThreadExecutor();
 
-    int querytype=0; //0 for get, 1 for post
+    int querytype=0; //0 for get, 1 for post, 2 for put
 
     //constructors
     //for admin dashboard
@@ -126,6 +131,9 @@ public class APIreferenceclass {
 
             callapi(headers, jsonPayload, context, querytype, url);
         }
+
+
+
 
 
     //TODO endpoint for otp get when this person gets his email
@@ -351,6 +359,120 @@ public class APIreferenceclass {
     }
 
 
+    //addsitedetailactivity
+    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
+
+
+
+        Log.d("tag21","1");
+
+        String url="https://acme.warburttons.com/api/sites/";
+        jsonString= fixjsonstring(jsonString);
+
+        String urlEncodedParams = encodeJsonToUrl(jsonString);
+
+
+
+        url= url+siteno+"?"+urlEncodedParams;
+
+        querytype= queryType;
+
+        Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
+
+
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+
+        callapi(headers, jsonPayload, context, querytype, url);
+    }
+
+    String fixjsonstring(String originalJsonString) {
+        try {
+            // Create a JSON object from the original JSON string
+            JSONObject jsonObject = new JSONObject(originalJsonString);
+
+            // Check if a field is missing or has a null value, and if so, add a placeholder
+            if (!jsonObject.has("campaign_id") || jsonObject.isNull("campaign_id")) {
+                jsonObject.put("campaign_id", "placeholder_campaign_id");
+            }
+
+            if (!jsonObject.has("vendor_id") || jsonObject.isNull("vendor_id")||jsonObject.get("vendor_id")== "") {
+                jsonObject.put("vendor_id", "placeholder_vendor_id");
+            }
+
+            if (!jsonObject.has("end_date") || jsonObject.isNull("end_date")) {
+                jsonObject.put("end_date", "placeholder_end_date");
+            }
+
+            if (!jsonObject.has("longitude") || jsonObject.isNull("longitude")|| jsonObject.get("longitude")== "") {
+                jsonObject.put("longitude", "placeholder_longitude");
+            }
+
+            if (!jsonObject.has("media_type") || jsonObject.isNull("media_type")) {
+                jsonObject.put("media_type", "placeholder_media_type");
+            }
+
+            if (!jsonObject.has("illumination") || jsonObject.isNull("illumination")) {
+                jsonObject.put("illumination", "placeholder_illumination");
+            }
+
+            if (!jsonObject.has("updated_at") || jsonObject.isNull("updated_at")) {
+                jsonObject.put("updated_at", "placeholder_updated_at");
+            }
+
+            // Convert the modified JSON object back to a JSON string
+            String jsonStringWithPlaceholders = jsonObject.toString();
+            return jsonStringWithPlaceholders;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null; // Handle the exception as needed
+        }
+    }
+
+
+
+    public String encodeJsonToUrl(String jsonstring) {
+        try {
+            // Parse the JSON string into a map
+            Map<String, String> jsonMap = new HashMap<>();
+
+            // Parse the provided JSON string into a map using a JSON library.
+            // Assuming jsonstring is a valid JSON object, you can parse it into a map.
+
+            // Example of parsing JSON using the Gson library:
+            Gson gson = new Gson();
+            jsonMap = gson.fromJson(jsonstring, new TypeToken<Map<String, String>>() {}.getType());
+
+            // Create a StringBuilder to build the URL-encoded string
+            StringBuilder encodedParams = new StringBuilder();
+
+            for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+                // Encode each key and value and append to the URL-encoded string
+                encodedParams.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                encodedParams.append("=");
+                encodedParams.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+                encodedParams.append("&");
+            }
+
+            // Remove the trailing '&' character
+            if (encodedParams.length() > 0) {
+                encodedParams.setLength(encodedParams.length() - 1);
+            }
+
+            // Return the URL-encoded string
+            return encodedParams.toString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null; // Handle the exception as needed
+        }
+    }
+
 
 
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
@@ -418,7 +540,19 @@ public class APIreferenceclass {
                     requestBuilder.addHeader(header.getKey(), header.getValue());
                 }
 
-            }else {
+            }else if(querytype== 2) {
+                requestBuilder = cronetEngine.newUrlRequestBuilder(
+                                url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
+                        .setHttpMethod("PUT")  // Set the method to PUT
+                        .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
+                        .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
+
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    requestBuilder.addHeader(header.getKey(), header.getValue());
+                }
+            }
+
+            else {
                     requestBuilder = cronetEngine.newUrlRequestBuilder(
                                     url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
                             .setHttpMethod("POST")  // Set the method to POST

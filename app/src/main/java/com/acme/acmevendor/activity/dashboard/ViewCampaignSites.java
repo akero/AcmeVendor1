@@ -305,6 +305,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
             // Start new activity and pass the retrieved data
             startActivity(new Intent(this, ViewSiteDetailActivity.class)
                     .putExtra("campaignType", "old")
+                    .putExtra("campaignId", idofcampaign)
                     .putExtra("siteNumber", id)
                     .putExtra("logintoken", logintoken)
                     .putExtra("vendorclientorcampaign", vendorclientorcampaign));

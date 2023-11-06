@@ -73,7 +73,7 @@ public class MyUrlRequestCallback extends UrlRequest.Callback {
     public void onSucceeded(UrlRequest request, UrlResponseInfo info) {
 
         String responseBody = new String(outputByte.toByteArray(), StandardCharsets.UTF_8);
-        Log.d("ResponseBody", responseBody);
+        //Log.d("ResponseBody", responseBody);
 
         // If you also want the UrlResponseInfo as a string:
         String responseInfoString = urlresponseinfotostring(info);
@@ -82,7 +82,7 @@ public class MyUrlRequestCallback extends UrlRequest.Callback {
         ai.onResponseReceived(responseBody);
 
 
-        Log.d("tag4", responseBody+"------INFO______"+responseInfoString);
+        //Log.d("tag4", responseBody+"------INFO______"+responseInfoString);
 
     }
 

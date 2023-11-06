@@ -32,17 +32,22 @@ import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityAddSiteDetailBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.utility.RoundRectCornerImageView;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.SiteDetail;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AddSiteDetailActivity extends AppCompatActivity implements LocationListener {
+public class AddSiteDetailActivity extends AppCompatActivity implements LocationListener, ApiInterface {
 
     private ActivityAddSiteDetailBinding binding;
+    private final Context ctxt= this;
+
     private Calendar cal = Calendar.getInstance();
     private int yy, mm, dd;
     private String imageUrl = "";
@@ -51,6 +56,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     private LocationManager locationManager;
 
     JSONObject jsonobj;
+    String loginToken;
+    String campaignId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +65,25 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
+            campaignId= getIntent().getStringExtra("campaignId");
         }catch(Exception e){
             Log.d("tg90", e.toString());}
+
+        FileHelper fh= new FileHelper();
+        loginToken= fh.readLoginToken(this);
 
         //populating fields
         populateFields(jsonobj);
 
     }
 
+    String siteno;
+    SiteDetail siteDetail;
+
+
     void populateFields(JSONObject dataObject){
         if(dataObject != null) {
-            SiteDetail siteDetail = new SiteDetail();
+            siteDetail = new SiteDetail();
             siteDetail.setId(dataObject.optInt("id"));
             siteDetail.setVendorId(dataObject.optString("vendor_id"));
             siteDetail.setLocation(dataObject.optString("location"));
@@ -99,6 +114,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
                 Log.e("tag41", "sdfdg", e);
                 // Handle error
             }
+
+            siteno= siteDetail.getSiteNo();
 
             // Update UI
             runOnUiThread(new Runnable() {
@@ -165,20 +182,87 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         finish();
     }
 
+    int queryType;
     public void btnSaveClick(View view) {
-        if (binding.etUnitId.getText().toString().isEmpty()
-                || binding.etSiteNo.getText().toString().isEmpty()
-                || binding.etStartDate.getText().toString().isEmpty()
-                || binding.etLocation.getText().toString().isEmpty()
-                || binding.etLatitude.getText().toString().isEmpty()
-                || binding.etLongitude.getText().toString().isEmpty()
-                || binding.etHeight.getText().toString().isEmpty()
-                || binding.etWidth.getText().toString().isEmpty()
-                || binding.etTotalArea.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
-        } else {
-            showSuccessMessage();
+
+// Create a SiteDetail object
+        SiteDetail siteDetail = new SiteDetail();
+
+// Set the site number
+        TextView tvSiteId = findViewById(R.id.etSiteNo);
+        siteDetail.setSiteNo(tvSiteId.getText().toString());
+
+// Set the location
+        TextView tvLocation = findViewById(R.id.etLocation);
+        siteDetail.setLocation(tvLocation.getText().toString());
+
+// Set the site name
+        TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+        siteDetail.setName(tvSiteName.getText().toString());
+
+// Set the last inspection date
+        TextView tvLastInspection = findViewById(R.id.etStartDate);
+        siteDetail.setCreatedAt(tvLastInspection.getText().toString());
+
+// Set the latitude
+        TextView tvLatitude = findViewById(R.id.etLatitude);
+        siteDetail.setLatitude(tvLatitude.getText().toString());
+
+// Set the longitude (correct the typo from "longitute" to "longitude" in your JSON or code)
+        TextView tvLongitude = findViewById(R.id.etLongitude);
+        siteDetail.setLongitude(tvLongitude.getText().toString());
+
+// Set the start date
+        TextView tvStartDate = findViewById(R.id.etStartDate);
+        siteDetail.setStartDate(tvStartDate.getText().toString());
+
+// Set the width
+        TextView tvWidth = findViewById(R.id.etWidth);
+        siteDetail.setWidth(tvWidth.getText().toString());
+
+// Set the height
+        TextView tvHeight = findViewById(R.id.etHeight);
+        siteDetail.setHeight(tvHeight.getText().toString());
+
+// Set the total area
+        TextView tvTotalArea = findViewById(R.id.etTotalArea);
+        siteDetail.setTotalArea(tvTotalArea.getText().toString());
+
+// Now you have populated the SiteDetail object with data from the EditText views
+
+// Create a JSON object from the SiteDetail object
+        JSONObject siteDetailJson = new JSONObject();
+        try {
+            Integer id = siteDetail.getId(); // Assuming getId() returns an Integer
+            int idValue = id != null ? id : 0; // Replace 0 with your default value
+            siteDetailJson.put("id", idValue);
+            siteDetailJson.put("campaign_id", campaignId);
+            siteDetailJson.put("id", id);siteDetailJson.put("vendor_id", siteDetail.getVendorId() != null ? siteDetail.getVendorId() : "");
+            siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
+            siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
+            siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
+            siteDetailJson.put("latitude", siteDetail.getLatitude() != null ? siteDetail.getLatitude() : "");
+            siteDetailJson.put("longitude", siteDetail.getLongitude() != null ? siteDetail.getLongitude() : "");
+            siteDetailJson.put("media_type", siteDetail.getMediaType() != null ? siteDetail.getMediaType() : "");
+            siteDetailJson.put("illumination", siteDetail.getIllumination() != null ? siteDetail.getIllumination() : "");
+            siteDetailJson.put("start_date", siteDetail.getStartDate() != null ? siteDetail.getStartDate() : "");
+            siteDetailJson.put("name", siteDetail.getName() != null ? siteDetail.getName() : "");
+            siteDetailJson.put("site_no", siteDetail.getSiteNo() != null ? siteDetail.getSiteNo() : "");
+            siteDetailJson.put("width", siteDetail.getWidth() != null ? siteDetail.getWidth() : "");
+            siteDetailJson.put("height", siteDetail.getHeight() != null ? siteDetail.getHeight() : "");
+            siteDetailJson.put("total_area", siteDetail.getTotalArea() != null ? siteDetail.getTotalArea() : "");
+            siteDetailJson.put("updated_at", siteDetail.getUpdatedAt() != null ? siteDetail.getUpdatedAt() : "");
+
+            // Add more properties as needed
+        } catch (JSONException e) {
+            Log.d("tg9", e.toString());
+            e.printStackTrace();
         }
+
+        queryType= 2; //PUT
+        APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
+
+
     }
 
     public void addImage(View view) {
@@ -320,4 +404,10 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     private static final String TAG = "LocationProvider";
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+
+    @Override
+    public void onResponseReceived(String response) {
+        Log.d("tg9", response);
+        //showSuccessMessage();
+    }
 }
