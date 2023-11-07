@@ -436,11 +436,19 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     public void onPlusClick(View view) {
 
         Log.d("tag20", "onplusclick");
-
-        Intent intent= new Intent(AdminDashboardActivity.this, AddClientActivity.class);
+    if(vendorclientorcampaign==1) {
+        Intent intent = new Intent(AdminDashboardActivity.this, AddClientActivity.class);
         intent.putExtra("logintoken", logintoken);
         startActivity(intent);
-
+    }else if(vendorclientorcampaign==2){//vendor
+        Intent intent = new Intent(AdminDashboardActivity.this, AddVenderActivity.class);
+        intent.putExtra("logintoken", logintoken);
+        startActivity(intent);
+    }else{
+        Intent intent = new Intent(AdminDashboardActivity.this, AddCampaignDetails.class);
+        intent.putExtra("logintoken", logintoken);
+        startActivity(intent);
+    }
 
     }
 
