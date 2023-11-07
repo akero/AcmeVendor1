@@ -177,7 +177,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }
     }
 
-
     public void btnCloseClick(View view) {
         finish();
     }
@@ -261,8 +260,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
         queryType= 2; //PUT
         APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
-
-
     }
 
     public void addImage(View view) {
