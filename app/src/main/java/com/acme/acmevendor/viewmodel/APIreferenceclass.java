@@ -75,10 +75,6 @@ public class APIreferenceclass {
             String url="https://acme.warburttons.com/api/get_client_campaigns";
             querytype= 0;
 
-
-
-
-
             String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
 
             Map<String, String> headers= new HashMap<>();
@@ -86,7 +82,6 @@ public class APIreferenceclass {
             headers.put("Content-Type", "application/json");
 
             Log.d("cldbatest","jsonpayload is "+ jsonPayload);
-
 
             callapi(headers, jsonPayload, context, querytype, url);
         }
@@ -105,17 +100,12 @@ public class APIreferenceclass {
 
             Log.d("vdbatest","Inside apirefapiclass");
 
-
             callapi(headers, jsonPayload, context, querytype, url);
-
       }
     }
 
     //for vendor flow first page
     public APIreferenceclass(String logintoken, Context context, int a) {
-
-
-
             Log.d("tag21","1");
 
             String url="https://acme.warburttons.com/api/get_vendor_campaigns";
@@ -127,7 +117,6 @@ public class APIreferenceclass {
             headers.put("Content-Type", "application/json");
 
             Log.d("addbatest","Inside admin api");
-
 
             callapi(headers, jsonPayload, context, querytype, url);
         }
@@ -397,34 +386,45 @@ public class APIreferenceclass {
             // Create a JSON object from the original JSON string
             JSONObject jsonObject = new JSONObject(originalJsonString);
 
-            // Check if a field is missing or has a null value, and if so, add a placeholder
+            Log.d("tg09", originalJsonString);
+
+            // Assuming you are using org.json.JSONObject;
+
+// Check for "campaign_id"
             if (!jsonObject.has("campaign_id") || jsonObject.isNull("campaign_id")) {
                 jsonObject.put("campaign_id", "placeholder_campaign_id");
             }
 
-            if (!jsonObject.has("vendor_id") || jsonObject.isNull("vendor_id")||jsonObject.get("vendor_id")== "") {
+// Check for "vendor_id"
+            if (!jsonObject.has("vendor_id") || jsonObject.isNull("vendor_id") || "".equals(jsonObject.optString("vendor_id"))) {
                 jsonObject.put("vendor_id", "placeholder_vendor_id");
             }
 
+// Check for "end_date"
             if (!jsonObject.has("end_date") || jsonObject.isNull("end_date")) {
                 jsonObject.put("end_date", "placeholder_end_date");
             }
 
-            if (!jsonObject.has("longitude") || jsonObject.isNull("longitude")|| jsonObject.get("longitude")== "") {
-                jsonObject.put("longitude", "placeholder_longitude");
+// Check for "longitude"
+            if (!jsonObject.has("longitute") || jsonObject.isNull("longitute") || "".equals(jsonObject.optString("longitute"))) {
+                jsonObject.put("longitute", "placeholder_longitute");
             }
 
-            if (!jsonObject.has("media_type") || jsonObject.isNull("media_type")) {
+// Check for "media_type"
+            if (!jsonObject.has("media_type") || jsonObject.isNull("media_type") || jsonObject.get("media_type").equals("")) {
                 jsonObject.put("media_type", "placeholder_media_type");
             }
 
-            if (!jsonObject.has("illumination") || jsonObject.isNull("illumination")) {
+// Check for "illumination"
+            if (!jsonObject.has("illumination") || jsonObject.isNull("illumination") || jsonObject.get("illumination").equals("")) {
                 jsonObject.put("illumination", "placeholder_illumination");
             }
 
+// Check for "updated_at"
             if (!jsonObject.has("updated_at") || jsonObject.isNull("updated_at")) {
                 jsonObject.put("updated_at", "placeholder_updated_at");
             }
+
 
             // Convert the modified JSON object back to a JSON string
             String jsonStringWithPlaceholders = jsonObject.toString();

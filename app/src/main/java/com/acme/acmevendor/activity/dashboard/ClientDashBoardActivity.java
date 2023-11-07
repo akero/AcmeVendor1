@@ -275,10 +275,6 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                             .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                             .putExtra("logintoken", logintoken)//TODO
                             .putExtra("apiresponse", jsonObject.toString()));
-
-
-
-
                 // .putExtra("siteId", siteId)); // If you are passing site id
             } catch (JSONException e) {
                 Log.d("tag123", e.toString());
