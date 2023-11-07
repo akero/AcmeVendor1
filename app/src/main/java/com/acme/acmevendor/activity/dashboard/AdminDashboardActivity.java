@@ -436,7 +436,12 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     public void onPlusClick(View view) {
 
         Log.d("tag20", "onplusclick");
-        //TODO ask lodu what this does
+
+        Intent intent= new Intent(AdminDashboardActivity.this, AddClientActivity.class);
+        intent.putExtra("logintoken", logintoken);
+        startActivity(intent);
+
+
     }
 
     public void onNotificationClick(View view){

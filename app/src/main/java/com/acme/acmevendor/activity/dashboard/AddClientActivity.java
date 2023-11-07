@@ -31,7 +31,7 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_client);
-        logintoken= getIntent().getStringExtra("loginToken");
+        logintoken= getIntent().getStringExtra("logintoken");
         siteNumber= getIntent().getStringExtra("siteNumber");
     }
 
@@ -57,6 +57,13 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
+
+            String name=binding.etFullName.getText().toString();
+            String email=binding.etEmail.getText().toString();
+            String phone_number=binding.etPhone.getText().toString();
+            String company_name=binding.etCompanyName.getText().toString();
+            String company_address=binding.etCompanyAddress.getText().toString();
+            String gst_no= binding.etGst.getText().toString();
 
             JSONObject jsonPayload= new JSONObject();
             try{
@@ -90,14 +97,31 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
     public void onResponseReceived(String response){
 
         Log.d("tg6", response);
+        try{
+            JSONObject jsonobj= new JSONObject(response);
+            if(jsonobj.get("success").equals("false")) {
+                Toast.makeText(this, "Please check the fields", Toast.LENGTH_SHORT);
 
-        binding.etFullName.setText("");
-        binding.etEmail.setText("");
-        binding.etCompanyName.setText("");
-        binding.etCompanyAddress.setText("");
-        binding.etGst.setText("");
-        binding.etPhone.setText("");
-        showSuccessMessage();
+            }else{
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.etFullName.setText("");
+                        binding.etEmail.setText("");
+                        binding.etCompanyName.setText("");
+                        binding.etCompanyAddress.setText("");
+                        binding.etGst.setText("");
+                        binding.etPhone.setText("");
+                        showSuccessMessage();
+                        //Toast.makeText(AddClientActivity.this, "Client successfully created" , Toast.LENGTH_SHORT).show();
+                    }
+                    });
+            }
+        }catch (Exception e){
+            Log.d("tg9", e.toString());
+        }
     }
 
     public void showSuccessMessage() {

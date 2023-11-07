@@ -65,14 +65,13 @@ public class APIreferenceclass {
 
             Log.d("addbatest","Inside admin api");
 
-
             callapi(headers, jsonPayload, context, querytype, url);
         }
 
         //client
         else if (vendorclientorcampaign == 1) {
 
-            String url="https://acme.warburttons.com/api/get_client_campaigns";
+            String url="https://acme.warburttons.com/api/clients";
             querytype= 0;
 
             String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
@@ -120,10 +119,6 @@ public class APIreferenceclass {
 
             callapi(headers, jsonPayload, context, querytype, url);
         }
-
-
-
-
 
     //TODO endpoint for otp get when this person gets his email
     //login
@@ -287,7 +282,7 @@ public class APIreferenceclass {
         //TODO add siteNumber to api call
 
 
-        String url="https://acme.warburttons.com/api/login";
+        String url="https://acme.warburttons.com/api/clients";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
 
         String jsonPayload = jsonPayload1.toString();
