@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.databinding.ActivityAddCampaignDetailsBinding;
 import com.acme.acmevendor.databinding.ActivityAddClientBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
 
 public class AddCampaignDetails extends AppCompatActivity implements ApiInterface {
 
-    private ActivityAddClientBinding binding;
+    private ActivityAddCampaignDetailsBinding binding;
     String siteNumber;
 
     @Override
@@ -50,33 +51,51 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     String logintoken;
 
     public void btnSaveClick(View view) {
-        if (    binding.etFullName.getText().toString().isEmpty() ||
-                binding.etEmail.getText().toString().isEmpty() ||
-                binding.etCompanyName.getText().toString().isEmpty() ||
-                binding.etCompanyAddress.getText().toString().isEmpty() ||
-                binding.etGst.getText().toString().isEmpty() ||
-                binding.etPhone.getText().toString().isEmpty()) {
+        if (    binding.etUnitId.getText().toString().isEmpty() ||
+                binding.etSiteNo.getText().toString().isEmpty() ||
+                binding.etStartDate.getText().toString().isEmpty() ||
+                binding.etEndDate.getText().toString().isEmpty() ||
+                binding.etLocation.getText().toString().isEmpty() ||
+                binding.etLatitude.getText().toString().isEmpty() ||
+                binding.etLongitude.getText().toString().isEmpty() ||
+                binding.etHeight.getText().toString().isEmpty() ||
+                binding.etTotalArea.getText().toString().isEmpty() ||
+                binding.etWidth.getText().toString().isEmpty()) {
 
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
 
-            String name=binding.etFullName.getText().toString();
-            String email=binding.etEmail.getText().toString();
-            String phone_number=binding.etPhone.getText().toString();
-            String company_name=binding.etCompanyName.getText().toString();
-            String company_address=binding.etCompanyAddress.getText().toString();
-            String gst_no= binding.etGst.getText().toString();
+            String unitid=binding.etUnitId.getText().toString();
+            String siteno=binding.etSiteNo.getText().toString();
+            String startdate=binding.etStartDate.getText().toString();
+            String enddate=binding.etEndDate.getText().toString();
+            String location=binding.etLocation.getText().toString();
+            String latitude=binding.etLatitude.getText().toString();
+            String longitude=binding.etLongitude.getText().toString();
+            String dimensionheight=binding.etHeight.getText().toString();
+            String dimensionwidth=binding.etWidth.getText().toString();
+            String totalarea=binding.etTotalArea.getText().toString();
+            String mediatype=binding.etUnitId.getText().toString();
+            String illumination=binding.etUnitId.getText().toString();
+
+
 
             JSONObject jsonPayload= new JSONObject();
             try{
-                jsonPayload.put("name", name);
-                jsonPayload.put("email", email);
-                jsonPayload.put("phone_number", phone_number);
-                jsonPayload.put("company_name", company_name);
-                jsonPayload.put("company_address", company_address);
-                jsonPayload.put("gst_no", gst_no);
+                jsonPayload.put("unitid", unitid);
+                jsonPayload.put("siteno", siteno);
+                jsonPayload.put("startdate", startdate);
+                jsonPayload.put("enddate", enddate);
+                jsonPayload.put("location", location);
+                jsonPayload.put("latitude", latitude);
+                jsonPayload.put("longitude", longitude);
+                jsonPayload.put("dimensionheight", dimensionheight);
+                jsonPayload.put("dimensionwidth", dimensionwidth);
+                jsonPayload.put("totalarea", totalarea);
+                jsonPayload.put("mediatype", mediatype);
+                jsonPayload.put("illumination", illumination);
 
             }catch(Exception e){
                 Log.d("tg6", e.toString());
@@ -112,12 +131,16 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        binding.etFullName.setText("");
-                        binding.etEmail.setText("");
-                        binding.etCompanyName.setText("");
-                        binding.etCompanyAddress.setText("");
-                        binding.etGst.setText("");
-                        binding.etPhone.setText("");
+                        binding.etUnitId.setText("");
+                        binding.etSiteNo.setText("");
+                        binding.etStartDate.setText("");
+                        binding.etEndDate.setText("");
+                        binding.etLocation.setText("");
+                        binding.etLatitude.setText("");
+                        binding.etLongitude.setText("");
+                        binding.etHeight.setText("");
+                        binding.etWidth.setText("");
+                        binding.etTotalArea.setText("");
                         showSuccessMessage();
                         //Toast.makeText(AddClientActivity.this, "Client successfully created" , Toast.LENGTH_SHORT).show();
                     }
