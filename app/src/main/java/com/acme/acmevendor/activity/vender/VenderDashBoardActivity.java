@@ -8,12 +8,18 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AddCampaignDetails;
+import com.acme.acmevendor.activity.dashboard.AddClientActivity;
+import com.acme.acmevendor.activity.dashboard.AddVenderActivity;
+import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.AdminViewClientDetails;
 import com.acme.acmevendor.activity.dashboard.AdminViewVendorDetails;
+import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.FileHelper;
 import com.acme.acmevendor.activity.dashboard.ViewCampaignSites;
 import com.acme.acmevendor.activity.dashboard.ViewSiteDetailActivity;
@@ -346,4 +352,13 @@ int a=0;
 
 
 */
+
+    public void onPlusClick(View view) {
+
+        Log.d("tag20", "onplusclick");
+
+        Intent intent = new Intent(VenderDashBoardActivity.this, AddCampaignDetails.class);
+        intent.putExtra("logintoken", loginToken);
+        startActivity(intent);
+    }
 }
