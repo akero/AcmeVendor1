@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -201,6 +202,9 @@ import java.net.URL;
                 @Override
                 public void onClick(View v) {
                     // Handle next button click
+                    Intent intent= new Intent(AdminViewVendorDetails.this, AddVenderActivity.class);
+                    intent.putExtra("logintoken", logintoken);
+                    startActivity(intent);
                 }
             });
 
@@ -259,7 +263,9 @@ import java.net.URL;
         }
 
         public void btnNextClick(View view) {
-            //TODO ask what this does
+            //edit
+
+
             // finish();
         }
 
