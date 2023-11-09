@@ -46,53 +46,19 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_20ssp" />
 
-
-
-
-        <TextView
-            android:id="@+id/tvRememberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/etEmailId"
-            android:fontFamily="@font/dmsansregular"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:text="Already have an account?"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_10ssp" />
-
-        <TextView
-            android:id="@+id/tvSignin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/etEmailId"
-            android:layout_toEndOf="@id/tvRememberPassword"
-            android:fontFamily="@font/dmsansregular"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginStart="@dimen/_2sdp"
-
-            android:text="Sign in"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_10ssp" />
-
-
-
         <Button
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvRememberPassword"
+            android:layout_below="@id/etEmailId"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/primaryround"
+            android:background="@drawable/button_selector_2"
             android:fontFamily="@font/dmsansbold"
             android:onClick="btnSubmitClick"
             android:text="Next"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@drawable/textcolor_selector_2"
             android:textSize="@dimen/_14ssp" />
-
-
-
-
 
     </RelativeLayout>
 
