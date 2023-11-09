@@ -256,18 +256,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         APIreferenceclass api= new APIreferenceclass(logintoken, siteNumber, context);
         Log.d("tag41", "7");
     }
-    public static String[] extractDataStrings(String apiResponse) {
-        Gson gson = new Gson();
-        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
-        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
-
-        String[] dataStrings = new String[dataArray.size()];
-        for (int i = 0; i < dataArray.size(); i++) {
-            dataStrings[i] = dataArray.get(i).toString();
-        }
-
-        return dataStrings;
-    }
 
     String response1="";
 

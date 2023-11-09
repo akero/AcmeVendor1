@@ -124,7 +124,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if(jsonResponse.getBoolean("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
                 if(dataArray != null && dataArray.length() > 0) {
-                    if(vendorclientorcampaign==0){
+                    if(vendorclientorcampaign==0){//cam
 
                     for(int i=0; i< dataArray.length();i++){
 
@@ -160,15 +160,21 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     }
                     }else if(vendorclientorcampaign==1){//client
                         for(int i=0; i< dataArray.length();i++){
+                            Log.d("tg12", Integer.toString(i));
                             JSONObject dataObject = dataArray.getJSONObject(i);
+                            Log.d("tg12", dataArray.getJSONObject(i).toString());
+
                             if(dataObject != null) {
                                 jsonObject1 = new JSONObject();
+                                jsonObject= new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
+                                Log.d("tg12", dataArray.getJSONObject(i).toString());
+
 
                                 //to pass to client class
                                 jsonObject1.putOpt("id", dataObject.optInt("id"));
@@ -204,12 +210,14 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                             }
                         }
 
-                    }else if(vendorclientorcampaign==2){
+                    }else if(vendorclientorcampaign==2){//ven
 
                         for(int i=0; i< dataArray.length();i++){
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
                                 jsonObject2 = new JSONObject();
+                                jsonObject= new JSONObject();
+
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
@@ -381,7 +389,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 Log.d("tag91", jsonArray2.getJSONObject(position).toString());
                 Log.d("tag91",jsonArray2.toString());
                 Log.d("tag91",jsonObject1.toString());
+
                 Log.d("tag91",Integer.toString(position));
+
+                Log.d("tg11", id);
 
                 startActivity(new Intent(this, AdminViewClientDetails.class)
                         .putExtra("id", id)

@@ -368,7 +368,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         TextView tvMsg = view.findViewById(R.id.tvMsg);
         TextView tvResubmit = view.findViewById(R.id.tvResubmit);
         tvResubmit.setVisibility(View.INVISIBLE);
-        tvMsg.setText("Campaign Added Successfully");
+        tvMsg.setText("Site Added Successfully");
         Button btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);
         final AlertDialog dialog = builder.create();

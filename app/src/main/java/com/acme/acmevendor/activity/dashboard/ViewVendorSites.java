@@ -76,6 +76,10 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
         idofcampaign=getIntent().getStringExtra("id");
         Log.d("tag58", idofcampaign);
 
+
+        FileHelper fh= new FileHelper();
+        logintoken= fh.readLoginToken(this);
+
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
@@ -240,7 +244,7 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
     private void campaignList(String id) {
         vendorclientorcampaign=0;
         //TODO pass correct logintoken here
-        logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+        //logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
 
         APIreferenceclass api= new APIreferenceclass(logintoken, this, id);
     }
@@ -254,8 +258,7 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
             JSONObject jsonObject = jsonArray1.getJSONObject(position);
             Log.d("tag51", jsonArray1.getJSONObject(position).toString());
 
-            //TODO add correct login token here
-            logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+            //logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
             // Get site id or site no from the JSONObject
             String id = jsonObject.getString("id"); // Or get an id if you have that
