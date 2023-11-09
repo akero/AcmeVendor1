@@ -88,7 +88,6 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
             showSuccessMessage();
         */
         }
-
     }
 
     @Override
@@ -101,8 +100,6 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
                 Toast.makeText(this, "Please check the fields", Toast.LENGTH_SHORT);
 
             }else{
-
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

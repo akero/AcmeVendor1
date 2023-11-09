@@ -93,7 +93,7 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
 
         Log.d("addbatest", "response is "+ response);
         Log.d("tag58","got response");
-
+        Log.d("tag111", "viewvendorsites");
 
         implementUi(response);
 

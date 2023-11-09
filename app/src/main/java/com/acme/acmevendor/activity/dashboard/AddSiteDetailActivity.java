@@ -71,6 +71,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
         FileHelper fh= new FileHelper();
         loginToken= fh.readLoginToken(this);
+        Log.d("tag111", "addsitedetailactivity");
 
         //populating fields
         populateFields(jsonobj);
