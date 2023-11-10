@@ -365,8 +365,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
     public void onPlusClick(View view) {
 
-        Log.d("tag20", "onplusclick");
-        //TODO ask lodu what this does
+        Log.d("tag20", "onplugtreehththtsclick");
+        Intent intent= new Intent(ViewCampaignSites.this, AddSiteDetailActivity.class);
+        startActivity(intent);
     }
 
     public void onNotificationClick(View view){

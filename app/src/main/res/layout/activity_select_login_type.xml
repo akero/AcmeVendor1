@@ -9,7 +9,6 @@
         android:background="@drawable/ic_main_bg"
         android:padding="@dimen/_20sdp">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -19,8 +18,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 >
 
-
-
                 <Button
                     android:id="@+id/button1"
                     android:layout_width="match_parent"
@@ -29,8 +26,8 @@
                     android:textSize="16sp"
                     android:elevation="2dp"
                     android:fontFamily="@font/dmsansbold"
-                    android:textColor="@drawable/textcolor_selector"
-                    android:background="@drawable/button_selector"
+                    android:background="@drawable/button_selector_3"
+                    android:textColor="@drawable/textcolor_selector_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -42,10 +39,10 @@
                     android:layout_height="50dp"
                     android:text="Acme Login"
                     android:fontFamily="@font/dmsansbold"
-                    android:textColor="@drawable/textcolor_selector"
                     android:elevation="2dp"
                     android:textSize="16sp"
-                    android:background="@drawable/button_selector"
+                    android:background="@drawable/button_selector_3"
+                    android:textColor="@drawable/textcolor_selector_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button1"
@@ -56,10 +53,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Vendor Login"
-                    android:background="@drawable/button_selector"
+                    android:background="@drawable/button_selector_3"
+                    android:textColor="@drawable/textcolor_selector_2"
                     android:elevation="2dp"
                     android:textSize="16sp"
-                    android:textColor="@drawable/textcolor_selector"
                     android:fontFamily="@font/dmsansbold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +64,5 @@
                     android:layout_marginTop="10dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -78,7 +78,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         loginToken= FileHelper.readLoginToken(this);
         Log.d("tg4", loginToken);
 
-
         jsonArray1= new JSONArray();
         jsonArray2= new JSONArray();
         //Log.d("vdbatest", "logintoken "+loginToken);
@@ -92,25 +91,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         Log.d("addbatest", "response is "+ response);
         Log.d("tag21","5");
 
-
         implementUi(response);
-
-        /*
-        //TODO: handle population
-        String[] dataStrings = extractDataStrings(response);
-        // Usage example
-        for(String dataStr : dataStrings) {
-            Log.d("tag2222",dataStr);
-        }
-        //id array. send to ui
-        String[] idArray= extractIds(dataStrings);
-
-        //TODO extract the unit id and pass that too
-        implementUi(response);
-        Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
-
- */
-
     }
 
     private void implementUi(String response){
@@ -162,8 +143,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
-
-
             }
             runOnUiThread(new Runnable() {
                 @Override
@@ -176,11 +155,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                     binding.rvCampaignList.setAdapter(adapter);
 
                 }});
-
-
         }catch (Exception e){}
-
-
     }
 
     private void campaignList() {
@@ -190,7 +165,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         int vendorclientorcampaign= 2;
         //TODO pass correct token
         String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
-int a=0;
+        int a=0;
         APIreferenceclass apiref= new APIreferenceclass(logintoken, this, a);
     }
 
@@ -236,9 +211,6 @@ int a=0;
                         .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                         .putExtra("apiresponse", jsonObject.toString()));
 
-
-
-
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {
             Log.d("tag123", e.toString());
@@ -246,112 +218,7 @@ int a=0;
         }
     }
 
-
-
-
-
     Context ctxt= this;
-/*
-    private void implementUi(String ids[]) {
-
-        Log.d("tag40", "1");
-
-        //TODO unit id is not clear yet
-        int unitid = 1;
-        //ids[] output is 22,23,24,25. In strings.
-        //TODO implement ids and unit id to ui
-
-        jsonArray= new JSONArray();
-
-
-        //TODO add site number, change pics
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // Your UI update code goes here
-
-                GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 1);
-                binding.rvCampaignList.setLayoutManager(layoutManager);
-
-                Log.d("tag31", "here");
-
-                // Loop through the extracted campaign ids and create JSONObjects for each id
-                for (int i = 0; i < ids.length; i++) {
-                    try {
-                        // Create a new JSONObject for each campaign id
-                        JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("sitenumber",  (i + 1));
-                        jsonObject.put("unitnumber", ids[i]);  // Assuming the campaign id is the unit number
-                        jsonArray.put(jsonObject);
-                    } catch (JSONException e) {
-                        Log.d("tag21", e.toString());
-                    }
-                }
-//TODO here. ui is updating. Implement properly for all values and for vendor and client
-                //TODO trace back the part where you are querying for api data and implement from there
-
-                CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray);
-                binding.rvCampaignList.setAdapter(adapter);
-            }
-        });
-    }
-
-    private String[] extractIds(String[] dataStrings) {
-        // Create an array to store extracted ids.
-        String[] ids = new String[dataStrings.length];
-
-        // Loop through each string in the input array.
-        for (int i = 0; i < dataStrings.length; i++) {
-            try {
-                // Parse the string into a JSONObject.
-                JSONObject jsonObject = new JSONObject(dataStrings[i]);
-
-                // Extract the "id" field and store it in the ids array.
-                ids[i] = String.valueOf(jsonObject.getInt("id"));
-            } catch (JSONException e) {
-                // Handle JSON parsing error. Here setting the id to a default error value ("error").
-                ids[i] = "error";
-                e.printStackTrace();
-            }
-        }
-
-        // Return the extracted ids.
-        return ids;
-    }
-
-    //read token
-    String readFromFile(Context context) {
-        String fileName = "logintoken";
-        StringBuilder content = new StringBuilder();
-
-        try (FileInputStream fis = context.openFileInput(fileName);
-             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
-             BufferedReader br = new BufferedReader(isr)) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                content.append(line);
-            }
-        } catch (FileNotFoundException e) {
-            Log.d("tag26", "File not found: " + e.toString());
-            // Handle file not found, perhaps return a default value or notify the user
-        } catch (IOException e) {
-            Log.d("tag26", "Read file error: " + e.toString());
-            // Handle other I/O error
-        }
-
-        String fileContent = content.toString();
-        if (fileContent.isEmpty()) {
-            Log.d("tag26", "File is empty");
-            // Handle empty file, perhaps return a default value or notify the user
-        }
-
-        Log.d("vdbatest", "filecontent for logintoken "+fileContent);
-        return fileContent;
-    }
-
-
-*/
 
     public void onPlusClick(View view) {
 

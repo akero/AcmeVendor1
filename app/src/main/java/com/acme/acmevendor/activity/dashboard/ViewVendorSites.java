@@ -329,8 +329,9 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
     }
 
     public void onPlusClick(View view) {
+        //TODO here
 
-        Log.d("tag20", "onplusclick");
+        Log.d("tag20", "onplusclick1");
         //TODO ask lodu what this does
     }
 

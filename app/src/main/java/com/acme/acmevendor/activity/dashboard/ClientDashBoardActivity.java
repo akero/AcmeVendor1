@@ -158,7 +158,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
     public void onPlusClick(View view) {
 
-        Log.d("tag20", "onplusclick");
+        Log.d("tag20", "here");
 
             Intent intent = new Intent(ClientDashBoardActivity.this, AddCampaignDetails.class);
             intent.putExtra("logintoken", logintoken);
