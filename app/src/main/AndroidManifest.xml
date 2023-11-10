@@ -27,9 +27,12 @@
         android:theme="@style/Theme.TestingProject"
         tools:targetApi="31">
         <activity
+            android:name=".activity.dashboard.AddSiteDetailsActivityVendor"
+            android:exported="false" />
+        <activity
             android:name=".activity.dashboard.AddCampaignDetails"
             android:exported="false"
-            android:theme="@style/NoActTheme"/>
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.ViewVendorSites"
             android:exported="false"
