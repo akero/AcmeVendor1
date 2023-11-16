@@ -1,4 +1,4 @@
-package com.acme.acmevendor.activity.dashboard;
+/*package com.acme.acmevendor.activity.dashboard;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -419,4 +419,4 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
         });
 
     }
-}
+}*/
