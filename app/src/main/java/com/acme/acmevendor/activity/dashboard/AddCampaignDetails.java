@@ -4,11 +4,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,17 +26,132 @@ import com.acme.acmevendor.viewmodel.ApiInterface;
 
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 public class AddCampaignDetails extends AppCompatActivity implements ApiInterface {
 
     private ActivityAddCampaignDetailsBinding binding;
     String siteNumber;
+    String selectedItem;
+    String selectedItem1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_campaign_details);
         logintoken= getIntent().getStringExtra("logintoken");
-        //siteNumber= getIntent().getStringExtra("siteNumber");
+        selectedItem="";
+        selectedItem1="";
+
+        binding.etStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on below line we are getting
+                // the instance of our calendar.
+                final Calendar c = Calendar.getInstance();
+
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                // on below line we are creating a variable for date picker dialog.
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        // on below line we are passing context.
+                        AddCampaignDetails.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // on below line we are setting date to our text view.
+                                binding.etStartDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        },
+                        // on below line we are passing year,
+                        // month and day for selected date in our date picker.
+                        year, month, day);
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+            }
+        });
+
+        binding.etEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on below line we are getting
+                // the instance of our calendar.
+                final Calendar c = Calendar.getInstance();
+
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                // on below line we are creating a variable for date picker dialog.
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        // on below line we are passing context.
+                        AddCampaignDetails.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // on below line we are setting date to our text view.
+                                binding.etEndDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        },
+                        // on below line we are passing year,
+                        // month and day for selected date in our date picker.
+                        year, month, day);
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+            }
+        });
+
+
+        String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        binding.spinnermediatype.setAdapter(adapter);
+
+        // Inside your onCreate method
+        binding.spinnermediatype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
+        String[] items1 = new String[]{"Item 1", "Item 2", "Item 3"};
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
+        binding.spinnerillumination.setAdapter(adapter1);
+
+        // Inside your onCreate method
+        binding.spinnerillumination.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem1 = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
     }
 
     String unitid="";
@@ -46,6 +166,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     String totalarea="";
     String mediatype="";
     String illumination="";
+    //TODO ask content for spinner
     //TODO add image type post
     //Byte[] logo;
     String logintoken;
@@ -60,7 +181,11 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 binding.etLongitude.getText().toString().isEmpty() ||
                 binding.etHeight.getText().toString().isEmpty() ||
                 binding.etTotalArea.getText().toString().isEmpty() ||
-                binding.etWidth.getText().toString().isEmpty()) {
+                binding.etWidth.getText().toString().isEmpty() ||
+                binding.etStartDate.getText().toString().isEmpty()||
+                binding.etEndDate.getText().toString().isEmpty()||
+                selectedItem.equals("")||
+                selectedItem1.equals("")){
 
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
@@ -77,8 +202,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             String dimensionheight=binding.etHeight.getText().toString();
             String dimensionwidth=binding.etWidth.getText().toString();
             String totalarea=binding.etTotalArea.getText().toString();
-            String mediatype=binding.etUnitId.getText().toString();
-            String illumination=binding.etUnitId.getText().toString();
+            String mediatype=selectedItem;
+            String illumination=selectedItem1;
 
 
 

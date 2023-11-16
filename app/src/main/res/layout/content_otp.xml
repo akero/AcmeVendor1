@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.login.WelcomeActivity">
 
-    <data>
-
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,13 +29,10 @@
                 android:padding="@dimen/_10sdp"
                 android:textColor="@color/colorPrimary"
                 android:elevation="2dp"
-
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
 
             <EditText
                 android:id="@+id/otp2"
@@ -53,7 +46,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 android:elevation="2dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/otp3"
                 app:layout_constraintStart_toEndOf="@+id/otp1"
@@ -69,7 +61,6 @@
                 android:maxLength="1"
                 android:padding="@dimen/_10sdp"
                 android:elevation="2dp"
-
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -92,9 +83,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--                 app:layout_constraintStart_toEndOf="@+id/otp4"app:layout_constraintEnd_toStartOf="@+id/otp2"

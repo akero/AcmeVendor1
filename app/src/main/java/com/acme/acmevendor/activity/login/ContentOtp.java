@@ -89,7 +89,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
     private void validateAndContinue() {
         String otp = otp1.getText().toString() + otp2.getText().toString() +
-                otp3.getText().toString() + otp4.getText().toString() + otp5.getText().toString();
+                otp3.getText().toString() + otp4.getText().toString();
 
         // Add OTP validation logic as per your requirement.
         // If OTP is valid, proceed to the next Activity
