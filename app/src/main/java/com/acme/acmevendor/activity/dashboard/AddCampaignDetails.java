@@ -313,4 +313,10 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         finish();
     }
 
+    public void addImage(){
+
+
+
+    }
+
 }
