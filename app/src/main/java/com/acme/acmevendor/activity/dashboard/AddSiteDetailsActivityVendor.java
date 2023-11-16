@@ -1,10 +1,12 @@
-package com.acme.acmevendor.activity.dashboard;
+/*package com.acme.acmevendor.activity.dashboard;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
@@ -46,7 +48,7 @@ import java.util.Locale;
 
 public class AddSiteDetailsActivityVendor extends AppCompatActivity implements LocationListener, ApiInterface {
 
-    private ActivityAddSiteDetailsVendorBinding binding;
+    private ViewDataBinding binding;
     private final Context ctxt= this;
 
     private Calendar cal = Calendar.getInstance();
@@ -418,3 +420,4 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
 
     }
 }
+*/

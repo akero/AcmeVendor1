@@ -3,6 +3,8 @@ package com.acme.acmevendor.activity.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +29,7 @@ import java.io.IOException;
 
 public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
-    private EditText otp1, otp2, otp3, otp4;
+    private EditText otp1, otp2, otp3, otp4, otp5;
     String email="";
 
     @Override
@@ -40,21 +42,54 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         otp2 = findViewById(R.id.otp2);
         otp3 = findViewById(R.id.otp3);
         otp4 = findViewById(R.id.otp4);
-        Button btnNext = findViewById(R.id.btnNext);
+        //otp5 = findViewById(R.id.otp5);
+        //Button btnNext = findViewById(R.id.btnNext);
+
+        // Setup auto-advance
+        setupAutoAdvance(otp1, otp2);
+        setupAutoAdvance(otp2, otp3);
+        setupAutoAdvance(otp3, otp4);
+        //setupAutoAdvance(otp4, otp5);
+        setupAutoAdvance(otp4, null);
 
         email= getIntent().getStringExtra("email");
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+       // btnNext.setOnClickListener(new View.OnClickListener() {
+           // @Override
+         //   public void onClick(View v) {
+              //  validateAndContinue();
+          //  }
+       // });
+    }
+
+    private void setupAutoAdvance(final EditText currentEditText, final EditText nextEditText) {
+        currentEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                validateAndContinue();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed for this functionality
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Check if a single digit is entered
+                if (s.length() == 1 && nextEditText != null) {
+                    nextEditText.requestFocus();
+                }else if (s.length() == 1 && nextEditText == null) {
+                    // When the last EditText is filled, validate and continue
+                    validateAndContinue();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not needed for this functionality
             }
         });
     }
 
     private void validateAndContinue() {
         String otp = otp1.getText().toString() + otp2.getText().toString() +
-                otp3.getText().toString() + otp4.getText().toString();
+                otp3.getText().toString() + otp4.getText().toString() + otp5.getText().toString();
 
         // Add OTP validation logic as per your requirement.
         // If OTP is valid, proceed to the next Activity

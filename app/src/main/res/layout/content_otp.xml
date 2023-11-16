@@ -19,78 +19,86 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/otp1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/otp2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="48dp"
+                android:layout_width="71dp"
                 android:layout_height="48dp"
-                android:maxLength="1"
-                android:inputType="number"
                 android:background="@drawable/primarystroke"
-                android:padding="@dimen/_10sdp"
                 android:fontFamily="@font/dmsansregular"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="@dimen/_10sdp"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12ssp" />
+                android:elevation="2dp"
+
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <EditText
                 android:id="@+id/otp2"
-                app:layout_constraintStart_toEndOf="@+id/otp1"
-                app:layout_constraintEnd_toStartOf="@+id/otp3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="48dp"
+                android:layout_width="71dp"
                 android:layout_height="48dp"
-                android:maxLength="1"
-                android:inputType="number"
                 android:background="@drawable/primarystroke"
-                android:padding="@dimen/_10sdp"
                 android:fontFamily="@font/dmsansregular"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="@dimen/_10sdp"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_12ssp"
+                android:elevation="2dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/otp3"
+                app:layout_constraintStart_toEndOf="@+id/otp1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/otp3"
-                app:layout_constraintStart_toEndOf="@+id/otp2"
-                app:layout_constraintEnd_toStartOf="@+id/otp4"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-                android:layout_width="48dp"
+                android:layout_width="71dp"
                 android:layout_height="48dp"
-                android:maxLength="1"
-                android:inputType="number"
                 android:background="@drawable/primarystroke"
-                android:padding="@dimen/_10sdp"
                 android:fontFamily="@font/dmsansregular"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="@dimen/_10sdp"
+                android:elevation="2dp"
+
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/otp4"
+                app:layout_constraintStart_toEndOf="@+id/otp2"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/otp4"
-                android:layout_width="48dp"
+                android:layout_width="71dp"
                 android:layout_height="48dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-                app:layout_constraintStart_toEndOf="@+id/otp3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:maxLength="1"
-                android:inputType="number"
                 android:background="@drawable/primarystroke"
-                android:padding="@dimen/_10sdp"
                 android:fontFamily="@font/dmsansregular"
+                android:inputType="number"
+                android:maxLength="1"
+                android:elevation="4dp"
+                android:padding="@dimen/_10sdp"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+<!--                 app:layout_constraintStart_toEndOf="@+id/otp4"app:layout_constraintEnd_toStartOf="@+id/otp2"
+-->
 
         <TextView
             android:id="@+id/tvForgotPassword"
@@ -99,7 +107,6 @@
             android:layout_above="@id/tvRememberPassword"
             android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/dmsansbold"
-
             android:text="Welcome To\nAcme Media Group"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_20ssp" />
@@ -120,7 +127,7 @@
 
 
 
-
+<!--
 
         <Button
             android:id="@+id/btnNext"
@@ -137,7 +144,7 @@
             android:textSize="@dimen/_14ssp" />
 
 
-
+-->
 
 
     </RelativeLayout>
