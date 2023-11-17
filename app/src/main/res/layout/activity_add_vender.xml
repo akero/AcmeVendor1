@@ -179,6 +179,30 @@
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
 
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/etLocation"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Email"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvEmail"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/texthintcolor"
+                    android:textSize="@dimen/_12ssp" />
 
 
 
@@ -189,7 +213,7 @@
                     android:fontFamily="@font/dmsansregular"
                     android:text="Phone Number"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_below="@id/etLocation"
+                    android:layout_below="@id/etEmail"
                     android:onClick="liveCampaignClick"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
@@ -238,7 +262,30 @@
 
 
 
+                <TextView
+                    android:id="@+id/tvCompanyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/etCompanyName"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Company Address"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_10ssp" />
 
+
+                <EditText
+                    android:id="@+id/etCompanyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvCompanyAddress"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/texthintcolor"
+                    android:textSize="@dimen/_12ssp" />
 
 
 
@@ -251,7 +298,7 @@
                     android:fontFamily="@font/dmsansregular"
                     android:text="GST NO."
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_below="@id/etCompanyName"
+                    android:layout_below="@id/etCompanyAddress"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
 

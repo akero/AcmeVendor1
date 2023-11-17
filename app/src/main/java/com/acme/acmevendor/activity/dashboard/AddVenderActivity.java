@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityAddClientBinding;
+import com.acme.acmevendor.databinding.ActivityAddVenderBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
 
 public class AddVenderActivity extends AppCompatActivity implements ApiInterface {
 
-    private ActivityAddClientBinding binding;
+    private ActivityAddVenderBinding binding;
     String siteNumber;
 
     @Override
