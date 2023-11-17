@@ -47,6 +47,8 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_dash_board);
 
+        Log.d("tag999", "1");
+
         ctxt= this;
 
         loginToken= FileHelper.readLoginToken(this);
@@ -99,15 +101,14 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     public void onNotificationClick(View v){
         //TODO ask lodu what this does
     }
-    //TODO pass correct logintoken here
-    String logintoken="534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
+    //String logintoken="534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
     private void campaignList() {
         int vendorclientorcampaign= 1;
 
 
 
         Log.d("tg5","fin");
-        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
+        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, loginToken, this);
     }
 
 /*

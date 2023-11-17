@@ -31,6 +31,8 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_client);
+        Log.d("tag999", "2");
+
         logintoken= getIntent().getStringExtra("logintoken");
         siteNumber= getIntent().getStringExtra("siteNumber");
     }

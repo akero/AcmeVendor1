@@ -52,6 +52,7 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_view_client_details);
+        Log.d("tag999", "3");
 
        /* try {
             // Initialize BroadcastReceiver

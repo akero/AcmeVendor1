@@ -122,6 +122,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
 
+                        //TODO here. have to filter based on whether this class is called from admin dash or client dash or vendor dash. Right now only 0 being called
+
+                        Log.d("tag998", "1");
                         for(int i=0; i< dataArray.length();i++){
 
                             JSONObject dataObject = dataArray.getJSONObject(i);
@@ -155,6 +158,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                             }
                         }
                     }else if(vendorclientorcampaign==1){
+
+                        Log.d("tag998", "2");
                         for(int i=0; i< dataArray.length();i++){
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
@@ -188,6 +193,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                         }
 
                     }else if(vendorclientorcampaign==2){
+
+                        Log.d("tag998", "3");
                         for(int i=0; i< dataArray.length();i++){
                             JSONObject dataObject = dataArray.getJSONObject(i);
                             if(dataObject != null) {
@@ -215,9 +222,10 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                     Log.e("tag41", "sdfdg", e);
                                     // Handle error
                                 }
-                                jsonArray1.put(jsonObject);
+
 //TODO here
-                            }
+                            jsonArray1.put(jsonObject);
+                        }
                         }
                     }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
