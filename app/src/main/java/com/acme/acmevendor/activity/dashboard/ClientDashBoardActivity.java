@@ -161,7 +161,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         Log.d("tag20", "here");
 
             Intent intent = new Intent(ClientDashBoardActivity.this, AddCampaignDetails.class);
-            intent.putExtra("logintoken", logintoken);
+            intent.putExtra("logintoken", loginToken);
             startActivity(intent);
        }
 
@@ -263,7 +263,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                 JSONObject jsonObject = jsonArray1.getJSONObject(position);
                 Log.d("tag51", jsonArray1.getJSONObject(position).toString());
 
-                //TODO add correct login token here
+
                 //logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
                 // Get site id or site no from the JSONObject
@@ -280,7 +280,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                             .putExtra("campaignType", "old")
                             .putExtra("id", id)
                             .putExtra("vendorclientorcampaign", vendorclientorcampaign)
-                            .putExtra("logintoken", logintoken)//TODO
+                            .putExtra("logintoken", loginToken)
                             .putExtra("apiresponse", jsonObject.toString()));
                 // .putExtra("siteId", siteId)); // If you are passing site id
             } catch (JSONException e) {
