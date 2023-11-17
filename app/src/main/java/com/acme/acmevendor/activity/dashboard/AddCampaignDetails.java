@@ -113,7 +113,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             }
         });
 
-
+//spinner code
         String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -152,6 +152,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 // Another interface callback
             }
         });
+
+        //end of spinner code
     }
 
     String unitid="";

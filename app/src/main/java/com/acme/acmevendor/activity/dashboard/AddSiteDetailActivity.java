@@ -24,6 +24,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -58,7 +60,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     JSONObject jsonobj;
     String loginToken;
     String campaignId;
-
+    String selectedItem, selectedItem1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +71,54 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }catch(Exception e){
             Log.d("tg90", e.toString());}
 
+        selectedItem="";
+        selectedItem1="";
+
         FileHelper fh= new FileHelper();
         loginToken= fh.readLoginToken(this);
         Log.d("tag111", "addsitedetailactivity");
+
+        //spinner code
+        String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        binding.spinnermediatype.setAdapter(adapter);
+
+        // Inside your onCreate method
+        binding.spinnermediatype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
+        String[] items1 = new String[]{"Item 1", "Item 2", "Item 3"};
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
+        binding.spinnerillumination.setAdapter(adapter1);
+
+        // Inside your onCreate method
+        binding.spinnerillumination.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem1 = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+        //end of spinner code
 
         //populating fields
         populateFields(jsonobj);

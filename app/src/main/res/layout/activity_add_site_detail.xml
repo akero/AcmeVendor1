@@ -487,10 +487,12 @@
             android:background="@drawable/primarystroke">
 
             <Spinner
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:id="@+id/spinMediaType"/>
+                android:id="@+id/spinnermediatype"
+                />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
@@ -525,7 +527,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:id="@+id/spinIllumination"/>
+                android:id="@+id/spinnerillumination"
+                />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
