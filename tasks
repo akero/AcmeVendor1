@@ -1,0 +1,178 @@
+addcampaigndetails, use addsitesdetail class
+
+>viewsitedetail line 56
+
+
+email about https://acme.warburttons.com/api/get_campaign_sites/18
+
+//vendor admin
+//In adminviewclientdetails. whole thing
+
+pass client details to new class
+make ui for client properties
+insert data
+line 91android:textColor="@color/black"
+
+line 308 todo in viewvendorsites
+
+>make viewcampaignsites
+>line 86
+//call api with id
+//populate ui
+add vendor client viewsites
+
+connect to view site details
+
+
+
+add api call for 3 different types in viewsitedetail
+>retreive data from json array for admin
+figure out what to do for vendor client
+
+
+
+
+
+//putting all data in jsonarray1
+//admin
+
+loading images is slow implement glide
+
+
+line 69 campaignlistadapter
+fix images app wide
+network on main thread exception
+
+Start with non dash
+
+
+implement crud get campaign in admin dash
+in new implementui
+put jsonobject, add setters >make viewcampaignsites
+call api with id
+then implement into the xml
+
+vendor
+client
+
+add loading screen in loading and vendor and client
+
+
+
+
+
+pass to sitedetails and implement correct site data
+line 204 api class
+
+put image into dash
+
+/TODO- >implement otp- line 44 in otp class have to call api now
+/TODO- >line 110 api class
+/TODOsort data - pending from backend
+ask what unit id is
+populate total sites in sitedetails
+
+
+
+//fix click in admindash
+//fix api calls in admin dash
+//unit id not showing in client
+//vendor
+//Change unit id to company name
+
+//add null checks to sitedetails
+//line 93, viewsitedetailactivity. complete the url ask dev
+//then fix inserting in ui
+//fix download button
+//fix inserting data
+//sitedetails
+//test below for vendor- Stuck from faggot's end. cant do his job properly. wrong response from api do client for now).
+//api response is wrong properly send login token
+//access token save to memory for client
+//put data in ui in admin, line 134
+//implement ids into the ui
+
+
+//insert data in sitedetails
+//add getters setters for new data points
+//check for what the side or unit id is
+
+
+//add api call
+//get response
+//parse
+//insert into ui
+//width is inserting, debug implementui
+
+in signup page fix colors
+fix blinking in data sitedetails
+
+implement sitedetail clicks for vendor and client
+remove unneeded buttons from sitedetails
+
+remove unnecessary stuff from sitedetails
+
+implement api into ui for all 3 and then insert all data
+done for admin, implement client and vendor
+client
+use guidelines to fix otp boxes
+fix color of button in otp
+fix color login buttons 
+
+in viewsitedetails line 301 fix the data layout
+change file name according to site number
+
+//vendor
+
+send api and put data in site details
+
+receiving res from all 3 now add to ui
+
+on line 93 ClientDashboardactivity
+
+>add to ui in admin dash
+
+add spinning circle when loading ui
+
+add to api call
+then pass further updatasitedetailactivity line 43
+implement itemclick in vendoractivity
+
+in all 3
+
+parse api response in all 3
+populate ui
+
+
+in admindashactivity
+line 211
+ui is updating. 
+Implement properly for all values and for vendor and client
+implement for client and vendor
+dont show login, check if file exists and auto login and skip.
+
+implement signup flow
+
+/in login screen add tokens etc, save and retrieve (pending)
+
+
+implement forgot pass
+implement client and vendor parts from login
+
+
+implement proper logintoken and checks for it
+
+implement otp
+
+implement proper sign in
+implement saving and retrieving logintoken
+
+
+
+add the other two flows. added vendor
+acme flow
+//fix api response- the login page is being returned.
+/add further to add vendor and client code
+implement login flow
+apireference continue in otp once backend is done
+store token on login in loginactivity
