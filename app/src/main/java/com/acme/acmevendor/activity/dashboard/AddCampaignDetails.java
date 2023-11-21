@@ -12,6 +12,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,11 +189,13 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
 
             JSONObject jsonPayload= new JSONObject();
             try{
+                //String base64Image = Base64.encodeToString(imageStream.toByteArray(), Base64.DEFAULT);
+                //jsonPayload.put("image", base64Image);
                 jsonPayload.put("name", name);
                 jsonPayload.put("vendor", vendor);
                 jsonPayload.put("startdate", startdate);
                 jsonPayload.put("enddate", enddate);
-                jsonPayload.put("image", imageStream);
+                //jsonPayload.put("image", imageStream);
 
                 //TODO fix both
                 jsonPayload.put("uid", 1);

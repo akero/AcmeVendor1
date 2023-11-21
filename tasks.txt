@@ -1,4 +1,4 @@
-implement add image
+>implement add image- on line 192 appcampdet
 check permission in phone
 remove null from all image uploads
 
