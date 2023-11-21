@@ -303,8 +303,6 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }
     }
 
-
-
     public void btnCloseClick(View view) {
         finish();
     }
