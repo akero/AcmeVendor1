@@ -66,20 +66,20 @@
                         android:layout_marginRight="@dimen/_2sdp">
 
                         <TextView
-                            android:id="@+id/tvUnitId"
+                            android:id="@+id/tvName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/dmsansregular"
-                            android:text="Unit Id"
+                            android:text="Name"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
                         <EditText
-                            android:id="@+id/etUnitId"
+                            android:id="@+id/etName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tvUnitId"
+                            android:layout_below="@id/tvName"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/primarystroke"
                             android:fontFamily="@font/dmsansregular"
@@ -96,20 +96,20 @@
                         android:layout_marginLeft="@dimen/_2sdp">
 
                         <TextView
-                            android:id="@+id/tvSiteno"
+                            android:id="@+id/tvVendor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/dmsansregular"
-                            android:text="Site No."
+                            android:text="Vendor"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
                         <EditText
-                            android:id="@+id/etSiteNo"
+                            android:id="@+id/etVendor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tvSiteno"
+                            android:layout_below="@id/tvVendor"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/primarystroke"
                             android:fontFamily="@font/dmsansregular"
@@ -197,197 +197,14 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/llDates"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/dmsansregular"
-                    android:text="Location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_10ssp" />
 
-                <EditText
-                    android:id="@+id/etLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvLocation"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@drawable/primarystroke"
-                    android:fontFamily="@font/dmsansregular"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/texthintcolor"
-                    android:textSize="@dimen/_12ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/llLocation"
-                    android:layout_below="@id/etLocation"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/_2sdp">
-
-                        <TextView
-                            android:id="@+id/tvLatitude"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Latitude"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <EditText
-                            android:id="@+id/etLatitude"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvLatitude"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="@dimen/_2sdp">
-
-                        <TextView
-                            android:id="@+id/tvLongitude"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Longitude"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <EditText
-                            android:id="@+id/etLongitude"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvLongitude"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/llDimensions"
-                    android:layout_below="@id/llLocation"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/_2sdp">
-
-                        <TextView
-                            android:id="@+id/tvHeight"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Dimension / Size in sq. ft"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <EditText
-                            android:id="@+id/etHeight"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvHeight"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:hint="Height"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="@dimen/_2sdp">
-
-                        <TextView
-                            android:id="@+id/tvwidth"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text=""
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <EditText
-                            android:id="@+id/etWidth"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvwidth"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:textColorHint="@color/texthintcolor"
-                            android:padding="@dimen/_8sdp"
-                            android:hint="Width"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvTotalArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/llDimensions"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/dmsansregular"
-                    android:text="Total Area in sq. ft"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_10ssp" />
-
-                <EditText
-                    android:id="@+id/etTotalArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvTotalArea"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@drawable/primarystroke"
-                    android:fontFamily="@font/dmsansregular"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/texthintcolor"
-                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
                     android:id="@+id/tvMediaType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/etTotalArea"
+                    android:layout_below="@id/llDates"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/dmsansregular"
                     android:text="Media Type"

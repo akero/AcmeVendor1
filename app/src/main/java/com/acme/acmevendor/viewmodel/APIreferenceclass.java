@@ -299,6 +299,29 @@ public class APIreferenceclass {
 
     }
 
+    //addcampaignactivity
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a){
+
+        //TODO add siteNumber to api call
+
+
+        String url="https://acme.warburttons.com/api/campaigns";
+        //Log.d("tag23", "logintype "+ loginType + " email " + email);
+
+        String jsonPayload = jsonPayload1.toString();
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside ad campaign api");
+
+        querytype= 1; ////post
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+
+    }
+
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 

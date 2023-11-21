@@ -1,12 +1,13 @@
-addcampaigndetails, use addsitesdetail class
+implement add image
+check permission in phone
+remove null from all image uploads
 
->viewsitedetail line 56
-
+for add campaign-
+uid  is unique id for each campaign
+user_id , id of user who is creating the campaign
+client_id means this campaign belongs to which client, there should be dropdown of clients and need to send id of selected client
 
 email about https://acme.warburttons.com/api/get_campaign_sites/18
-
-//vendor admin
-//In adminviewclientdetails. whole thing
 
 pass client details to new class
 make ui for client properties
@@ -154,7 +155,10 @@ dont show login, check if file exists and auto login and skip.
 implement signup flow
 
 /in login screen add tokens etc, save and retrieve (pending)
-
+//addcampaigndetails, use addsitesdetail class
+//viewsitedetail line 56
+//vendor admin
+//In adminviewclientdetails. whole thing
 
 implement forgot pass
 implement client and vendor parts from login

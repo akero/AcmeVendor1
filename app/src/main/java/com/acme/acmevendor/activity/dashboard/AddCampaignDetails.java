@@ -1,10 +1,16 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,19 +19,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityAddCampaignDetailsBinding;
-import com.acme.acmevendor.databinding.ActivityAddClientBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
-
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 
 public class AddCampaignDetails extends AppCompatActivity implements ApiInterface {
@@ -34,6 +37,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     String siteNumber;
     String selectedItem;
     String selectedItem1;
+    private UploadHelper uploadHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         logintoken= getIntent().getStringExtra("logintoken");
         selectedItem="";
         selectedItem1="";
+        imageStream= null;
 
         binding.etStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +139,6 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             }
         });
 
-
         String[] items1 = new String[]{"Item 1", "Item 2", "Item 3"};
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
@@ -156,36 +161,16 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         //end of spinner code
     }
 
-    String unitid="";
-    String siteno="";
-    String startdate="";
-    String enddate="";
-    String location="";
-    String latitude="";
-    String longitude="";
-    String dimensionheight="";
-    String dimensionwidth="";
-    String totalarea="";
-    String mediatype="";
-    String illumination="";
     //TODO ask content for spinner
     //TODO add image type post
     //Byte[] logo;
     String logintoken;
 
     public void btnSaveClick(View view) {
-        if (    binding.etUnitId.getText().toString().isEmpty() ||
-                binding.etSiteNo.getText().toString().isEmpty() ||
+        if (    binding.etName.getText().toString().isEmpty() ||
+                binding.etVendor.getText().toString().isEmpty() ||
                 binding.etStartDate.getText().toString().isEmpty() ||
                 binding.etEndDate.getText().toString().isEmpty() ||
-                binding.etLocation.getText().toString().isEmpty() ||
-                binding.etLatitude.getText().toString().isEmpty() ||
-                binding.etLongitude.getText().toString().isEmpty() ||
-                binding.etHeight.getText().toString().isEmpty() ||
-                binding.etTotalArea.getText().toString().isEmpty() ||
-                binding.etWidth.getText().toString().isEmpty() ||
-                binding.etStartDate.getText().toString().isEmpty()||
-                binding.etEndDate.getText().toString().isEmpty()||
                 selectedItem.equals("")||
                 selectedItem1.equals("")){
 
@@ -194,82 +179,50 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
 
-            String unitid=binding.etUnitId.getText().toString();
-            String siteno=binding.etSiteNo.getText().toString();
+            String name=binding.etName.getText().toString();
+            String vendor=binding.etVendor.getText().toString();
             String startdate=binding.etStartDate.getText().toString();
             String enddate=binding.etEndDate.getText().toString();
-            String location=binding.etLocation.getText().toString();
-            String latitude=binding.etLatitude.getText().toString();
-            String longitude=binding.etLongitude.getText().toString();
-            String dimensionheight=binding.etHeight.getText().toString();
-            String dimensionwidth=binding.etWidth.getText().toString();
-            String totalarea=binding.etTotalArea.getText().toString();
             String mediatype=selectedItem;
             String illumination=selectedItem1;
 
-
-
             JSONObject jsonPayload= new JSONObject();
             try{
-                jsonPayload.put("unitid", unitid);
-                jsonPayload.put("siteno", siteno);
+                jsonPayload.put("name", name);
+                jsonPayload.put("vendor", vendor);
                 jsonPayload.put("startdate", startdate);
                 jsonPayload.put("enddate", enddate);
-                jsonPayload.put("location", location);
-                jsonPayload.put("latitude", latitude);
-                jsonPayload.put("longitude", longitude);
-                jsonPayload.put("dimensionheight", dimensionheight);
-                jsonPayload.put("dimensionwidth", dimensionwidth);
-                jsonPayload.put("totalarea", totalarea);
+                jsonPayload.put("image", imageStream);
+
+                //TODO fix both
+                jsonPayload.put("uid", 1);
+                jsonPayload.put("user_id", 1);
                 jsonPayload.put("mediatype", mediatype);
                 jsonPayload.put("illumination", illumination);
 
             }catch(Exception e){
                 Log.d("tg6", e.toString());
             }
-
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken);
-
-
-           /* binding.etFullName.setText("");
-            binding.etEmail.setText("");
-            binding.etCompanyName.setText("");
-            binding.etCompanyAddress.setText("");
-            binding.etGst.setText("");
-            binding.etPhone.setText("");
-            showSuccessMessage();
-        */
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 1);
         }
-
     }
 
     @Override
     public void onResponseReceived(String response){
-
         Log.d("tg6", response);
         try{
             JSONObject jsonobj= new JSONObject(response);
             if(jsonobj.get("success").equals("false")) {
                 Toast.makeText(this, "Please check the fields", Toast.LENGTH_SHORT);
-
             }else{
-
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        binding.etUnitId.setText("");
-                        binding.etSiteNo.setText("");
+                        binding.etName.setText("");
+                        binding.etVendor.setText("");
                         binding.etStartDate.setText("");
                         binding.etEndDate.setText("");
-                        binding.etLocation.setText("");
-                        binding.etLatitude.setText("");
-                        binding.etLongitude.setText("");
-                        binding.etHeight.setText("");
-                        binding.etWidth.setText("");
-                        binding.etTotalArea.setText("");
                         showSuccessMessage();
-                        //Toast.makeText(AddClientActivity.this, "Client successfully created" , Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -311,14 +264,53 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }
     }
 
+    ByteArrayOutputStream imageStream;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try{
+        uploadHelper.handleActivityResult(requestCode, resultCode, data);
+        imageStream= null;
+        imageStream= uploadHelper.getImageStream();}
+        catch(Exception e){
+            Log.d("tag998", e.toString());
+        }
+        // Use the image stream as needed
+    }
+
+    private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 101;
+
+    private void requestReadStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_STORAGE_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == READ_STORAGE_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, open gallery
+                if (uploadHelper == null) {
+                    uploadHelper = new UploadHelper(this);
+                }
+                uploadHelper.openGallery();
+            } else {
+                // Permission denied
+                Toast.makeText(this, "Permission to access storage is required to select an image", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+
     public void btnCloseClick(View view) {
         finish();
     }
 
-    public void addImage(){
-
-
-
-    }
-
+    public void addImage(View view){
+       //TODO remove
+        //requestReadStoragePermission();
+       }
 }
