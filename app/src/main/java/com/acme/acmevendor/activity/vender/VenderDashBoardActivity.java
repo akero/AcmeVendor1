@@ -182,6 +182,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         return dataStrings;
     }
 
+    //String logintoken;
+
     public void onItemClick(int position) {
         try {
             Log.d("tag51", Integer.toString(position));
@@ -191,7 +193,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
 
             //TODO add correct login token here
-            String logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+            //String logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
             // Get site id or site no from the JSONObject
             String id = jsonObject.getString("id"); // Or get an id if you have that
@@ -207,7 +209,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                 startActivity(new Intent(this, ViewVendorSites.class)
                         .putExtra("campaignType", "old")
                         .putExtra("id", id)
-                        .putExtra("logintoken", logintoken)
+                        .putExtra("logintoken", loginToken)
                         .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                         .putExtra("apiresponse", jsonObject.toString()));
 

@@ -1,92 +1,96 @@
-rish1994a for client
-
->the campaign field is required- edit site for vendor dash
-
+image upload
+TODO pass correct token in campaignlist in vendor dash 
 TODO ask backend dev why adding site says site not found
-
 implement add image- on line 192 appcampdet
 check permission in phone
 remove null from all image uploads
-
-for add campaign-
-uid  is unique id for each campaign
-user_id , id of user who is creating the campaign
-client_id means this campaign belongs to which client, there should be dropdown of clients and need to send id of selected client
-
+add delete and update data for all
 email about https://acme.warburttons.com/api/get_campaign_sites/18
+loading images is slow implement glide
+fix images app wide
+add loading screen in loading and vendor and client
+put image into dash
+fix blinking in data sitedetails
+remove unnecessary stuff from sitedetails
+use guidelines to fix otp boxes
+add spinning circle when loading ui
+performance optimizations
+add campaign admin file upload pending from backend
+images read pending all
 
-pass client details to new class
-make ui for client properties
-insert data
-line 91android:textColor="@color/black"
 
-line 308 todo in viewvendorsites
 
->make viewcampaignsites
->line 86
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//edit site vendor-    D  {"success":false,"message":"Validation Error.","data":{"campaign_id":["The campaign id field is required."]}}
+//2023-11-21 15:18:10.120  4259-4290  OpenGLRenderer          com.acme.acmevendor                 
+//client - edit or add site- site not found
+//vendor- add site button not functional
+//the campaign field is required- edit site for vendor dash
+//for add campaign-
+//uid  is unique id for each campaign
+//user_id , id of user who is creating the campaign
+//client_id means this campaign belongs to which client, there should be dropdown of clients and need to send id of selected client
+//pass client details to new class
+//make ui for client properties
+//insert data
+//line 91android:textColor="@color/black"
+//line 308 todo in viewvendorsites
+//make viewcampaignsites
+//line 86
 //call api with id
 //populate ui
-add vendor client viewsites
-
-connect to view site details
-
-
-
-add api call for 3 different types in viewsitedetail
->retreive data from json array for admin
-figure out what to do for vendor client
-
-
-
-
-
+//add vendor client viewsites
+//connect to view site details
+//add api call for 3 different types in viewsitedetail
+//retreive data from json array for admin
+//figure out what to do for vendor client
 //putting all data in jsonarray1
 //admin
-
-loading images is slow implement glide
-
-
-line 69 campaignlistadapter
-fix images app wide
-network on main thread exception
-
-Start with non dash
-
-
-implement crud get campaign in admin dash
-in new implementui
-put jsonobject, add setters >make viewcampaignsites
-call api with id
-then implement into the xml
-
-vendor
-client
-
-add loading screen in loading and vendor and client
-
-
-
-
-
-pass to sitedetails and implement correct site data
-line 204 api class
-
-put image into dash
-
-/TODO- >implement otp- line 44 in otp class have to call api now
-/TODO- >line 110 api class
-/TODOsort data - pending from backend
-ask what unit id is
-populate total sites in sitedetails
-
-
-
+//line 69 campaignlistadapter
+//network on main thread exception
+//Start with non dash
+//implement crud get campaign in admin dash
+//in new implementui
+//put jsonobject, add setters >make viewcampaignsites
+//call api with id
+//then implement into the xml
+//vendor
+//client
+//pass to sitedetails and implement correct site data
+//line 204 api class
+//TODO- >implement otp- line 44 in otp class have to call api now
+//TODO- >line 110 api class
+//TODOsort data - pending from backend
+//ask what unit id is
+//populate total sites in sitedetails
 //fix click in admindash
 //fix api calls in admin dash
 //unit id not showing in client
 //vendor
 //Change unit id to company name
-
 //add null checks to sitedetails
 //line 93, viewsitedetailactivity. complete the url ask dev
 //then fix inserting in ui
@@ -98,91 +102,57 @@ populate total sites in sitedetails
 //access token save to memory for client
 //put data in ui in admin, line 134
 //implement ids into the ui
-
-
 //insert data in sitedetails
 //add getters setters for new data points
 //check for what the side or unit id is
-
-
 //add api call
 //get response
 //parse
 //insert into ui
 //width is inserting, debug implementui
-
-in signup page fix colors
-fix blinking in data sitedetails
-
-implement sitedetail clicks for vendor and client
-remove unneeded buttons from sitedetails
-
-remove unnecessary stuff from sitedetails
-
-implement api into ui for all 3 and then insert all data
-done for admin, implement client and vendor
-client
-use guidelines to fix otp boxes
-fix color of button in otp
-fix color login buttons 
-
-in viewsitedetails line 301 fix the data layout
-change file name according to site number
-
+//in signup page fix colors
+//implement sitedetail clicks for vendor and client
+//remove unneeded buttons from sitedetails
+//implement api into ui for all 3 and then insert all data
+//done for admin, implement client and vendor
+//client
+//fix color of button in otp
+//fix color login buttons 
+//in viewsitedetails line 301 fix the data layout
+//change file name according to site number
 //vendor
-
-send api and put data in site details
-
-receiving res from all 3 now add to ui
-
-on line 93 ClientDashboardactivity
-
->add to ui in admin dash
-
-add spinning circle when loading ui
-
-add to api call
-then pass further updatasitedetailactivity line 43
-implement itemclick in vendoractivity
-
-in all 3
-
-parse api response in all 3
-populate ui
-
-
-in admindashactivity
-line 211
-ui is updating. 
-Implement properly for all values and for vendor and client
-implement for client and vendor
-dont show login, check if file exists and auto login and skip.
-
-implement signup flow
-
-/in login screen add tokens etc, save and retrieve (pending)
+//send api and put data in site details
+//receiving res from all 3 now add to ui
+//on line 93 ClientDashboardactivity
+//add to ui in admin dash
+//add to api call
+//then pass further updatasitedetailactivity line 43
+//implement itemclick in vendoractivity
+//in all 3
+//parse api response in all 3
+//populate ui
+//in admindashactivity
+//line 211
+//ui is updating. 
+//Implement properly for all values and for vendor and client
+//implement for client and vendor
+//dont show login, check if file exists and auto login and skip.
+//implement signup flow
+//in login screen add tokens etc, save and retrieve (pending)
 //addcampaigndetails, use addsitesdetail class
 //viewsitedetail line 56
 //vendor admin
 //In adminviewclientdetails. whole thing
-
-implement forgot pass
-implement client and vendor parts from login
-
-
-implement proper logintoken and checks for it
-
-implement otp
-
-implement proper sign in
-implement saving and retrieving logintoken
-
-
-
-add the other two flows. added vendor
-acme flow
+//implement forgot pass
+//implement client and vendor parts from login
+//implement proper logintoken and checks for it
+//implement otp
+//implement proper sign in
+//implement saving and retrieving logintoken
+//add the other two flows. added vendor
+//acme flow
 //fix api response- the login page is being returned.
-/add further to add vendor and client code
-implement login flow
-apireference continue in otp once backend is done
-store token on login in loginactivity
+//add further to add vendor and client code
+//implement login flow
+//apireference continue in otp once backend is done
+//store token on login in loginactivity

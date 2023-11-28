@@ -1,5 +1,0 @@
->apppreferences fix
-login fix layout
-
-
-in admin vendor get vendor crud then when one is clicked then show details of particular vendor
