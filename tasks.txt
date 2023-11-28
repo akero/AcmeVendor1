@@ -16,6 +16,8 @@ fix blinking in data sitedetails
 add spinning circle when loading ui
 performance optimizations
 
+autocapture otp
+remove login picker
 add more site in edit site
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
