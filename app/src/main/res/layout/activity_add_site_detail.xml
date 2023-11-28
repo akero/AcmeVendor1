@@ -582,7 +582,7 @@
             android:background="@drawable/primarystroke"
             android:fontFamily="@font/dmsansbold"
             android:onClick="addMoreSiteClick"
-            android:text="Add More Site"
+            android:text="Add More Sites"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_14ssp" />

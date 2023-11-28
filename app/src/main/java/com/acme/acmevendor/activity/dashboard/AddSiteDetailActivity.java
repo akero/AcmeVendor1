@@ -406,6 +406,17 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     }
 
     public void addMoreSiteClick(View view) {
+
+        //TODO here
+        Intent intent= new Intent(AddSiteDetailActivity.this, AddSiteDetailActivity.class);
+        intent.putExtra("loginToken", loginToken);
+        intent.putExtra("campaignId", campaignId);
+        //Log.d("tag000", logintoken+ "| "+ campaignId+"| "+  siteNumber+ "| "+ jsonobj.toString());
+        //Log.d("tag000", siteNumber);
+        //intent.putExtra("siteNumber", siteno);
+        intent.putExtra("siteDetail", jsonobj.toString());
+        startActivity(intent);
+
     }
 
     public void showSuccessMessage() {
