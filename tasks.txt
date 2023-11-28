@@ -1,4 +1,10 @@
->implement add image- on line 192 appcampdet
+rish1994a for client
+
+>the campaign field is required- edit site for vendor dash
+
+TODO ask backend dev why adding site says site not found
+
+implement add image- on line 192 appcampdet
 check permission in phone
 remove null from all image uploads
 

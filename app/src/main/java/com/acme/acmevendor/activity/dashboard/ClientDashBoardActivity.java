@@ -47,7 +47,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_dash_board);
 
-        Log.d("tag999", "1");
+        Log.d("tag199", "1");
 
         ctxt= this;
 
@@ -209,7 +209,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                                     try {
                                         String imageUrl = dataObject.optString("image");
                                         imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                        Log.d("tag41", "imageurl is " + imageUrl);
+                                        Log.d("tag411", "imageurl is " + imageUrl);
                                         if (imageUrl != "null" && !imageUrl.isEmpty()) {
                                             URL url = new URL(imageUrl);
                                             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -275,14 +275,17 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                 // String siteId = jsonObject.getString("siteId"); // If you have a site id.
                 int vendorclientorcampaign= 1;
 
+                Log.d("tag122", id);
 
                     // Start new activity and pass the retrieved data
                     startActivity(new Intent(this, ViewCampaignSites.class)
                             .putExtra("campaignType", "old")
+
                             .putExtra("id", id)
                             .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                             .putExtra("logintoken", loginToken)
                             .putExtra("apiresponse", jsonObject.toString()));
+
                 // .putExtra("siteId", siteId)); // If you are passing site id
             } catch (JSONException e) {
                 Log.d("tag123", e.toString());

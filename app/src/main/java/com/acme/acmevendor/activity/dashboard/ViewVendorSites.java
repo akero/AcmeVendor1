@@ -330,9 +330,10 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
 
     public void onPlusClick(View view) {
         //TODO here
-
         Log.d("tag20", "onplusclick1");
-        //TODO ask lodu what this does
+
+        Intent intent= new Intent(ViewVendorSites.this, AddSiteDetailActivity.class);
+        startActivity(intent);
     }
 
     public void onNotificationClick(View view){
