@@ -1,6 +1,7 @@
-line 410 addmoresite
+>line 410 addmoresite. add more site in edit site
 
->use guidelines to fix otp boxes
+
+//use guidelines to fix otp boxes
 add delete and update data for all
 
 loading images is slow implement glide
@@ -12,13 +13,13 @@ image upload
 implement add image- on line 192 appcampdet
 
 add loading screen in loading and vendor and client
-fix blinking in data sitedetails
+fix blinking in data sitedetails add loading screen
 add spinning circle when loading ui
+
 performance optimizations
 
 autocapture otp
-remove login picker
-add more site in edit site
+//remove login picker
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
 TODO pass correct token in campaignlist in vendor dash 
