@@ -1,22 +1,25 @@
-image upload
-TODO pass correct token in campaignlist in vendor dash 
-TODO ask backend dev why adding site says site not found
-implement add image- on line 192 appcampdet
-check permission in phone
-remove null from all image uploads
+>use guidelines to fix otp boxes
 add delete and update data for all
-email about https://acme.warburttons.com/api/get_campaign_sites/18
+
 loading images is slow implement glide
 fix images app wide
-add loading screen in loading and vendor and client
+remove null from all image uploads
 put image into dash
+images read pending all
+image upload
+implement add image- on line 192 appcampdet
+
+add loading screen in loading and vendor and client
 fix blinking in data sitedetails
-remove unnecessary stuff from sitedetails
-use guidelines to fix otp boxes
 add spinning circle when loading ui
 performance optimizations
+
+add more site in edit site
 add campaign admin file upload pending from backend
-images read pending all
+email about https://acme.warburttons.com/api/get_campaign_sites/18
+TODO pass correct token in campaignlist in vendor dash 
+TODO ask backend dev why adding site says site not found
+check permission in phone
 
 
 
@@ -43,7 +46,7 @@ images read pending all
 
 
 
-
+//remove unnecessary stuff from sitedetails
 //edit site vendor-    D  {"success":false,"message":"Validation Error.","data":{"campaign_id":["The campaign id field is required."]}}
 //2023-11-21 15:18:10.120  4259-4290  OpenGLRenderer          com.acme.acmevendor                 
 //client - edit or add site- site not found

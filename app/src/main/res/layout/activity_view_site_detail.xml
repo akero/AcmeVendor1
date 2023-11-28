@@ -46,60 +46,13 @@
             android:padding="@dimen/_20sdp"
            >
 
-            <LinearLayout
-                android:id="@+id/ll_compaign"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/yellowround"
-                android:elevation="5dp"
-                android:visibility="gone"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/_3sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingRight="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_8sdp">
 
-
-                <TextView
-                    android:id="@+id/tvOldCampaign"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/primaryround"
-                    android:fontFamily="@font/dmsansregular"
-                    android:onClick="oldCampaignClick"
-                    android:padding="@dimen/_2sdp"
-                    android:text="Old Campaign"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
-
-
-                <TextView
-                    android:id="@+id/tvLiveCampaign"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/dmsansregular"
-                    android:onClick="liveCampaignClick"
-                    android:padding="@dimen/_2sdp"
-                    android:text="Live Campaign"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
-            </LinearLayout>
 
 
             <TextView
                 android:id="@+id/tvAddSiteDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_compaign"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/dmsansregular"
                 android:text="Site Name"
                 android:textAlignment="center"
@@ -123,39 +76,6 @@
                     android:id="@+id/llUnit"
                     android:layout_below="@id/ivCampaignImage"
                     android:orientation="horizontal">
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/_2sdp">
-
-
-                        <TextView
-                            android:id="@+id/tvTotalSites"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Total Sites"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-
-                        <TextView
-                            android:id="@+id/etTotalSites"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvTotalSites"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" />
-                    </RelativeLayout>
 
 
                     <RelativeLayout

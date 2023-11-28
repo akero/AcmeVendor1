@@ -77,11 +77,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             Log.d("tg2", siteNumber);
         }
 
-        if ("old".equalsIgnoreCase(campaignType)){
-            binding.tvOldCampaign.performClick();
-        } else {
-            binding.tvLiveCampaign.performClick();
-        }
+        //if ("old".equalsIgnoreCase(campaignType)){
+          //  binding.tvOldCampaign.performClick();
+        //} else {
+         //   binding.tvLiveCampaign.performClick();
+        //}
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
@@ -367,13 +367,13 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
 
     public void oldCampaignClick(View view) {
-        binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
-        binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
+        //binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
+        //binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
     }
 
     public void liveCampaignClick(View view) {
-        binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
-        binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
+        //binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
+        //binding.tvOldCampaign.setBackgroundResource(R.color.coloryellow);
     }
 
     //TODO delete. download code

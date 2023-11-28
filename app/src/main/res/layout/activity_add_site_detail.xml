@@ -73,38 +73,7 @@
             android:orientation="horizontal">
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="@dimen/_2sdp">
 
-
-                <TextView
-                    android:id="@+id/tvUnitId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/dmsansregular"
-                    android:text="Unit Id"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_10ssp" />
-
-
-                <EditText
-                    android:id="@+id/etUnitId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvUnitId"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@drawable/primarystroke"
-                    android:fontFamily="@font/dmsansregular"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/texthintcolor"
-                    android:textSize="@dimen/_12ssp" />
-
-            </RelativeLayout>
 
 
                <RelativeLayout
@@ -112,10 +81,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-
 
         <TextView
             android:id="@+id/tvSiteno"
