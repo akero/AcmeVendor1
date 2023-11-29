@@ -3,10 +3,8 @@ add the round picker
 
 add delete and update data for all
 
-
-image read working view site details
->
-loading images is slow implement glide
+>Have to implement glide for everything except sitedetails
+loading images is slow implement glide. 
 fix images app wide
 remove null from all image uploads
 put image into dash
