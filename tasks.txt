@@ -8,13 +8,14 @@ loading images is slow implement glide.
 fix images app wide
 remove null from all image uploads
 put image into dash
->images read pending all
+images read pending all
 image upload
 implement add image- on line 192 appcampdet
 
 add loading screen in loading and vendor and client
 fix blinking in data sitedetails add loading screen
 add spinning circle when loading ui
+use customprogressxml
 
 check permission in phone
 

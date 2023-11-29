@@ -45,6 +45,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
     ProgressBar progressBar;
     Animation rotateAnimation;
+    //View view;
     //View overlay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //view= findViewById(R.id.view_dim_overlay);
         //animation code
 
         Log.d("tag51", Integer.toString(loginType));
@@ -95,6 +97,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                         //animation code
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.startAnimation(rotateAnimation);
+                        //view.setVisibility(View.VISIBLE);
                         //animation code
 
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
@@ -107,6 +110,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                         //animation code
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.startAnimation(rotateAnimation);
+                        //view.setVisibility(View.VISIBLE);
                         //animation code
 
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
@@ -118,6 +122,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                         //animation code
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.startAnimation(rotateAnimation);
+                        //view.setVisibility(View.VISIBLE);
                         //animation code
 
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
@@ -152,6 +157,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
             public void run() {
                 progressBar.clearAnimation();
                 progressBar.setVisibility(View.GONE);
+                //view.setVisibility(View.GONE);
             }
         });
         //animation code
