@@ -41,12 +41,10 @@ public class OTP extends AppCompatActivity implements ApiInterface {
     private AppBarConfiguration appBarConfiguration;
     private ActivityOtpBinding binding;
     String emailInput;
-    //TODO accept otp, make api call
 
     ProgressBar progressBar;
     Animation rotateAnimation;
-    //View view;
-    //View overlay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +53,10 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         setContentView(binding.getRoot());
 
         int loginType= 1;
-        //getIntent().getIntExtra("loginType", 1);
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
-        //view= findViewById(R.id.view_dim_overlay);
-        //animation code
 
         Log.d("tag51", Integer.toString(loginType));
 
@@ -126,9 +121,6 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                         //animation code
 
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
-
-                        //APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
-                        //startActivity(new Intent(OTP.this, VenderDashBoardActivity.class));
                     }
 
                 }
