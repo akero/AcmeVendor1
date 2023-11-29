@@ -1,5 +1,7 @@
 package com.acme.acmevendor.activity.login;
 
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.core.view.WindowCompat;
@@ -38,7 +43,9 @@ public class OTP extends AppCompatActivity implements ApiInterface {
     String emailInput;
     //TODO accept otp, make api call
 
-
+    ProgressBar progressBar;
+    Animation rotateAnimation;
+    //View overlay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,10 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         int loginType= 1;
         //getIntent().getIntExtra("loginType", 1);
 
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         Log.d("tag51", Integer.toString(loginType));
 
@@ -59,9 +70,6 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //TODO remove this hardcode
-                String email1= "rishabh@acmemedia.in";
 
                 emailInput = email.getText().toString().trim();
 
@@ -83,17 +91,35 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
                         //TODO replace email1 with emailinput
                         Log.d("tag23", "0");
+
+                        //animation code
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.startAnimation(rotateAnimation);
+                        //animation code
+
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
 
                     } else if (loginType == 1) {//admin
 
                         //TODO replace email1 with emailinput
                         Log.d("tag23", "1");
+
+                        //animation code
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.startAnimation(rotateAnimation);
+                        //animation code
+
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
                         //startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
                     } else {//vendor
                         //TODO replace email1 with emailinput
                         Log.d("tag23", "2");
+
+                        //animation code
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.startAnimation(rotateAnimation);
+                        //animation code
+
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
 
                         //APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput);
@@ -119,6 +145,17 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         //TODO change 2nd param with emailInput
         intent.putExtra("email", emailInput);
         //intent.putExtra("loginType", loginType);
+
+        //animation code
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.clearAnimation();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+        //animation code
+
         startActivity(intent);
     }
 }
