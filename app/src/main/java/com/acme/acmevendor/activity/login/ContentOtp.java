@@ -7,8 +7,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +34,9 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
     private EditText otp1, otp2, otp3, otp4, otp5;
     String email="";
+    ProgressBar progressBar;
+    Animation rotateAnimation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,11 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         otp4 = findViewById(R.id.otp4);
         //otp5 = findViewById(R.id.otp5);
         //Button btnNext = findViewById(R.id.btnNext);
+
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         // Setup auto-advance
         setupAutoAdvance(otp1, otp2);
@@ -95,6 +106,12 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         // If OTP is valid, proceed to the next Activity
         if (isValidOtp(otp)) {
 
+            //animation code
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.startAnimation(rotateAnimation);
+            //view.setVisibility(View.VISIBLE);
+            //animation code
+
             Context context= this;
             APIreferenceclass api= new APIreferenceclass(otp, context, email, 1);
             Log.d("tg4","otp works");
@@ -136,20 +153,27 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
                 Log.d("tg5","1");
 
+                loadingSpinner();
+
                 Intent intent= new Intent(ContentOtp.this, AdminDashboardActivity.class);
                 intent.putExtra("logintoken", token);
+
+
+
                 startActivity(intent);
 
             }else if(loginType.equals("vendor")){
 
                 Intent intent= new Intent(ContentOtp.this, VenderDashBoardActivity.class);
                 intent.putExtra("logintoken", token);
+                loadingSpinner();
 
                 startActivity(intent);
             }else if(loginType.equals("client")){
 
                 Intent intent= new Intent(ContentOtp.this, ClientDashBoardActivity.class);
                 intent.putExtra("logintoken", token);
+                loadingSpinner();
 
                 startActivity(intent);
             }
@@ -159,23 +183,17 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
     }
 }
 
-    public static void writeLoginToken(Context context, String logintoken) {
-        FileOutputStream fos = null;
-
-        try {
-            fos = context.openFileOutput("logintoken", Context.MODE_PRIVATE);
-            fos.write(logintoken.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    void loadingSpinner(){
+        //animation code
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.clearAnimation();
+                progressBar.setVisibility(View.GONE);
+                //view.setVisibility(View.GONE);
             }
-        }
+        });
+        //animation code
     }
 
     private boolean isValidOtp(String otp) {

@@ -10,7 +10,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,25 +42,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class AdminDashboardActivity extends AppCompatActivity implements ApiInterface {
-    int id=0;
-    String image="";
-    String vendor_id="";
-    int campaign_id=0;
-    String start_date=null;
-    String end_date=null;
-    String location="";
-    String longitude="";
-    String latitude="";
-    String width="";
-    String height="";
-    String total_area="";
-    String media_type="";
-    String illumination="";
-    String created_at="";
-    String updated_at="";
-    MainViewModel mainViewModel;
     ActivityMainBinding binding;
-    //JSONArray jsonArray;
     boolean showMenus = false;
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
@@ -66,6 +51,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     JSONArray jsonArray1;
     JSONArray jsonArray2;//client array
     JSONArray jsonArray3;//vendor array
+
+    ProgressBar progressBar;
+    Animation rotateAnimation;
+
 
     //todo access token save to memory add to api call
     @Override
@@ -78,6 +67,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         logintoken = FileHelper.readLoginToken(this);
         Log.d("tg4", logintoken);
 
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
+
         Log.d("tg5","3");
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
@@ -86,6 +80,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
         binding.rvCampaignList.setAdapter(adapter);
         Log.d("tg5","4");
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+
         campaignList();
     }
 
@@ -267,6 +265,12 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                               public void run() {
                                   // Your UI update code goes here
 
+
+                                              progressBar.clearAnimation();
+                                              progressBar.setVisibility(View.GONE);
+                                              //view.setVisibility(View.GONE);
+
+
                                   GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                                   binding.rvCampaignList.setLayoutManager(layoutManager);
                                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
@@ -282,6 +286,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //TODO pass correct logintoken here
         //logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
         Log.d("tg5","fin");
+
+
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
 
@@ -290,6 +296,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //TODO pass correct logintoken here
         //logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
         //TODO- here
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
 
@@ -297,6 +306,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         vendorclientorcampaign=2;
         //TODO pass correct logintoken here
         //logintoken="Bearer 211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
 
@@ -312,6 +324,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
         binding.tvCompaign.setBackgroundResource(R.drawable.primaryround);
         binding.tvCompaign.setTextColor(Color.WHITE);
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
 
         campaignList();
         // ... your logic ...
@@ -376,6 +391,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             if(vendorclientorcampaign==0){//campaign
 
                 // Start new activity and pass the retrieved data
+
+
                 startActivity(new Intent(this, ViewCampaignSites.class)
                         .putExtra("campaignType", "old")
                         .putExtra("id", id)
@@ -418,8 +435,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 //jsonObject1= new JSONObject();
                 //jsonArray2= new JSONArray();
             }
-
-
 
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {

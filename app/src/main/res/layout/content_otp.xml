@@ -10,6 +10,16 @@
         android:background="@drawable/ic_main_bg"
         android:padding="@dimen/_20sdp">
 
+        <!-- Loading code -->
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+        <!-- Loading code end -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/etEmailId"
             android:layout_width="match_parent"

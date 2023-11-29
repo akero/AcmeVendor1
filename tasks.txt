@@ -12,6 +12,7 @@ images read pending all
 image upload
 implement add image- on line 192 appcampdet
 
+close keyboard otp
 add loading screen in loading and vendor and client
 fix blinking in data sitedetails add loading screen
 add spinning circle when loading ui
