@@ -119,12 +119,16 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                             String imageUrl = dataObject.optString("image");
                             imageUrl= "https://acme.warburttons.com/"+ imageUrl;
                             Log.d("tag41", "imageurl is "+ imageUrl);
+                            Log.d("tg2", "image code not executing 1");
+
                             if(imageUrl != "null" && !imageUrl.isEmpty()) {
                                 URL url = new URL(imageUrl);
                                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                Log.d("tg2", "image code executing");
                                 siteDetail.setImage(bitmap);
                             }
                         } catch (Exception e) {
+                            Log.d("tg2", "image code not executing 2");
                             Log.d("tag41", "error in implementui" +e.toString());
                             Log.e("tag41", "sdfdg", e);
                             // Handle error
@@ -178,9 +182,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                                 // Set the total area
                                 TextView tvTotalArea = findViewById(R.id.tvTotalArea);
                                 tvTotalArea.setText(siteDetail.getTotalArea()); // assuming getter method exists
+                                Log.d("tg2", "image code not executing");
 
                                 RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
                                 if(siteDetail.getImage()!=null) {
+                                    Log.d("tg2", "image code executing");
                                     tvImage.setImageBitmap(siteDetail.getImage());
                                 }
                                 }

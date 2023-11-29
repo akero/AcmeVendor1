@@ -1,14 +1,16 @@
->line 410 addmoresite. add more site in edit site
+line 410 addmoresite. add more site in edit site
+add the round picker
 
-
-//use guidelines to fix otp boxes
 add delete and update data for all
 
+
+image read working view site details
+>
 loading images is slow implement glide
 fix images app wide
 remove null from all image uploads
 put image into dash
-images read pending all
+>images read pending all
 image upload
 implement add image- on line 192 appcampdet
 
@@ -16,15 +18,14 @@ add loading screen in loading and vendor and client
 fix blinking in data sitedetails add loading screen
 add spinning circle when loading ui
 
+check permission in phone
+
 performance optimizations
 
-autocapture otp
-//remove login picker
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
 TODO pass correct token in campaignlist in vendor dash 
 TODO ask backend dev why adding site says site not found
-check permission in phone
 
 
 
@@ -49,8 +50,9 @@ check permission in phone
 
 
 
-
-
+//autocapture otp
+//remove login picker
+//use guidelines to fix otp boxes
 //remove unnecessary stuff from sitedetails
 //edit site vendor-    D  {"success":false,"message":"Validation Error.","data":{"campaign_id":["The campaign id field is required."]}}
 //2023-11-21 15:18:10.120  4259-4290  OpenGLRenderer          com.acme.acmevendor                 
