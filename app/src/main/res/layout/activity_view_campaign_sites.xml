@@ -9,12 +9,24 @@
         android:layout_height="match_parent"
         tools:context=".activity.dashboard.AdminDashboardActivity">
 
+        <!-- Loading code -->
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+        <!-- Loading code end -->
+
         <RelativeLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:background="@color/colorPrimary"
             android:padding="@dimen/_5sdp">
+
+
 
             <ImageView
                 android:layout_width="@dimen/_80sdp"

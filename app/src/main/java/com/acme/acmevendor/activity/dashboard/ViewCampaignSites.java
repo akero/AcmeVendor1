@@ -13,6 +13,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
@@ -68,6 +71,11 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_campaign_sites);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         FileHelper fh= new FileHelper();
         logintoken= fh.readLoginToken(this);
@@ -239,14 +247,29 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+
+                    //animation code
+                            progressBar.clearAnimation();
+                            progressBar.setVisibility(View.GONE);
+                    //animation code
+
                     binding.rvCampaignList.setAdapter(adapter);
                 }});
         }catch (Exception e){}
     }
 
+    ProgressBar progressBar;
+    Animation rotateAnimation;
+
     private void campaignList(String id) {
         vendorclientorcampaign=0;
         //TODO pass correct logintoken here
+
+        //animation code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //view.setVisibility(View.VISIBLE);
+        //animation code
         APIreferenceclass api= new APIreferenceclass(logintoken, this, id);
     }
 

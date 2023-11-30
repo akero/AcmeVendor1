@@ -17,6 +17,7 @@ check permission in phone
 performance optimizations
 add failure checks to everything
 fix otp box shake
+admin client view next click doesnt work
 
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
