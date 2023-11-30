@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -36,12 +37,15 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
     String email="";
     ProgressBar progressBar;
     Animation rotateAnimation;
+    Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_otp); // make sure to use your actual layout name
+
+        context= this;
 
         // Initialize UI Elements
         otp1 = findViewById(R.id.otp1);
@@ -177,6 +181,34 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
                 startActivity(intent);
             }
+        }else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    //stop loading spinner
+                    loadingSpinner();
+
+                    otp1.setText("");
+                    otp2.setText("");
+                    otp3.setText("");
+                    otp4.setText("");
+                    otp1.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(otp1, InputMethodManager.SHOW_IMPLICIT);
+
+
+                    Animation anim= AnimationUtils.loadAnimation(context, R.anim.shake);
+                    otp1.startAnimation(anim);
+                    otp2.startAnimation(anim);
+                    otp3.startAnimation(anim);
+                    otp4.startAnimation(anim);
+
+
+
+                }
+            });
+
         }
     }catch(Exception e){
         Log.d("tg4", e.toString());

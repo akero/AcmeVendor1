@@ -520,6 +520,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     @Override
     public void onResponseReceived(String response) {
         Log.d("tg9", response);
+
         runOnUiThread(new Runnable(){
             @Override
             public void run() {

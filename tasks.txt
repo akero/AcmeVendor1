@@ -1,6 +1,6 @@
-screenshake if otp wrong
-
-add delete and update data for all
+>add loading screen in loading and vendor and client
+fix blinking in data sitedetails add loading screen
+add spinning circle when loading ui
 
 Have to implement glide for everything except sitedetails
 loading images is slow implement glide. 
@@ -11,16 +11,12 @@ images read pending all
 image upload
 implement add image- on line 192 appcampdet
 
-close keyboard otp
-add loading screen in loading and vendor and client
-fix blinking in data sitedetails add loading screen
-add spinning circle when loading ui
-use customprogressxml
+add delete and update data for all
 
 check permission in phone
-
 performance optimizations
 add failure checks to everything
+fix otp box shake
 
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
@@ -44,8 +40,8 @@ TODO addsitedetailactivity line 311 pendng from backend. After this accept site 
 
 
 
-
-
+//use customprogressxml
+//screenshake if otp wrong
 //line 410 addmoresite. add more site in edit site
 //new method
 //clear data in ui

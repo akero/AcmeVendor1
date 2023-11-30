@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_main_bg"
+        android:clipChildren="false"
         android:padding="@dimen/_20sdp">
 
         <!-- Loading code -->
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:clipChildren="false"
             android:orientation="horizontal">
 
             <EditText
@@ -86,7 +88,7 @@
                 android:fontFamily="@font/dmsansregular"
                 android:inputType="number"
                 android:maxLength="1"
-                android:elevation="4dp"
+                android:elevation="2dp"
                 android:padding="@dimen/_10sdp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
@@ -95,8 +97,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--                 app:layout_constraintStart_toEndOf="@+id/otp4"app:layout_constraintEnd_toStartOf="@+id/otp2"
--->
 
         <TextView
             android:id="@+id/tvForgotPassword"
