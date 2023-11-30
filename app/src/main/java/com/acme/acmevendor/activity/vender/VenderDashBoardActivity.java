@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -67,12 +70,19 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
     //intent contents
     JSONArray jsonArray2;
+    ProgressBar progressBar;
+    Animation rotateAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vender_dash_board);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         //TODO implement this
         loginToken= FileHelper.readLoginToken(this);
@@ -152,6 +162,14 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+
+                    //animation code
+
+                            progressBar.clearAnimation();
+                            progressBar.setVisibility(View.GONE);
+
+                            //animation code
+
                     binding.rvCampaignList.setAdapter(adapter);
 
                 }});
@@ -166,6 +184,14 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         //TODO pass correct token
         String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
         int a=0;
+
+        //animation code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //view.setVisibility(View.VISIBLE);
+        //animation code
+
+
         APIreferenceclass apiref= new APIreferenceclass(logintoken, this, a);
     }
 

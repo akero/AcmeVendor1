@@ -58,6 +58,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
         //animation code
+
         Log.d("tag51", Integer.toString(loginType));
 
         EditText email= findViewById(R.id.etEmailId);

@@ -15,6 +15,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
@@ -62,6 +65,9 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
     String logintoken="";
     String idofcampaign;
 
+    ProgressBar progressBar;
+    Animation rotateAnimation;
+
     //todo access token save to memory add to api call
 
     @Override
@@ -70,6 +76,11 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_vendor_sites);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         Log.d("tag97", "here");
 
@@ -236,6 +247,11 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.GONE);
+                    //view.setVisibility(View.GONE);
+
                     binding.rvCampaignList.setAdapter(adapter);
                 }});
         }catch (Exception e){}
@@ -245,6 +261,13 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
         vendorclientorcampaign=0;
         //TODO pass correct logintoken here
         //logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+
+        //animation code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //view.setVisibility(View.VISIBLE);
+        //animation code
+
 
         APIreferenceclass api= new APIreferenceclass(logintoken, this, id);
     }

@@ -8,6 +8,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,12 +46,21 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
     Context ctxt;
 
+    ProgressBar progressBar;
+    Animation rotateAnimation;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_dash_board);
 
         Log.d("tag199", "1");
+
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         ctxt= this;
 
@@ -105,57 +118,16 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     private void campaignList() {
         int vendorclientorcampaign= 1;
 
-
-
         Log.d("tg5","fin");
+
+        //animation code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //view.setVisibility(View.VISIBLE);
+        //animation code
+
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, loginToken, this);
     }
-
-/*
-    private void campaignList() {
-        int vendorclientorcampaign= 1;
-        String logintoken= loginToken;
-
-        //TODO here
-        //TODO remove after hardcode is removed
-        //logintoken= "534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
-        APIreferenceclass apiref= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
-
-        //TODO now add response to ui
-
-        //TODO remove
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        binding.rvCampaignList.setLayoutManager(layoutManager);
-
-        JSONArray jsonArray = new JSONArray();
-        try {
-            JSONObject jsonObjectairbnb = new JSONObject();
-            jsonObjectairbnb.put("sitenumber", "001");
-            jsonObjectairbnb.put("unitnumber", "#887001");
-            jsonArray.put(jsonObjectairbnb);
-
-            JSONObject jsonObjecthyundai = new JSONObject();
-            jsonObjecthyundai.put("sitenumber", "002");
-            jsonObjecthyundai.put("unitnumber", "#878002");
-            jsonArray.put(jsonObjecthyundai);
-
-            JSONObject jsonObjectford = new JSONObject();
-            jsonObjectford.put("sitenumber", "003");
-            jsonObjectford.put("unitnumber", "#765003");
-            jsonArray.put(jsonObjectford);
-
-            JSONObject jsonObjectpatanjli = new JSONObject();
-            jsonObjectpatanjli.put("sitenumber", "004");
-            jsonObjectpatanjli.put("unitnumber", "#432004");
-            jsonArray.put(jsonObjectpatanjli);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
-        binding.rvCampaignList.setAdapter(adapter);
-    }
-*/
 
     public void onPlusClick(View view) {
 
@@ -170,6 +142,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     @Override
     public void onResponseReceived(String response){
         Log.d("cldbatest","response is "+ response);
+
         implementUi(response);
     }
 
@@ -238,6 +211,12 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                         GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                         binding.rvCampaignList.setLayoutManager(layoutManager);
                         CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+
+                        //animation code
+                        progressBar.clearAnimation();
+                        progressBar.setVisibility(View.GONE);
+                        //animation code
+
                         binding.rvCampaignList.setAdapter(adapter);
                     }});
             }catch (Exception e){
