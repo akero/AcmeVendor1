@@ -1,9 +1,8 @@
-line 410 addmoresite. add more site in edit site
-add the round picker
+screenshake if otp wrong
 
 add delete and update data for all
 
->Have to implement glide for everything except sitedetails
+Have to implement glide for everything except sitedetails
 loading images is slow implement glide. 
 fix images app wide
 remove null from all image uploads
@@ -21,11 +20,13 @@ use customprogressxml
 check permission in phone
 
 performance optimizations
+add failure checks to everything
 
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
 TODO pass correct token in campaignlist in vendor dash 
 TODO ask backend dev why adding site says site not found
+TODO addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further. 
 
 
 
@@ -45,11 +46,10 @@ TODO ask backend dev why adding site says site not found
 
 
 
-
-
-
-
-
+//line 410 addmoresite. add more site in edit site
+//new method
+//clear data in ui
+//new api call specifically for this method
 //autocapture otp
 //remove login picker
 //use guidelines to fix otp boxes

@@ -24,10 +24,12 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.acme.acmevendor.R;
@@ -307,6 +309,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }
 
         queryType= 2; //PUT
+
+        //TODO pending from backend. Ask him if siteno is "" then make new site.
         APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
     }
 
@@ -332,7 +336,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
             binding.ivCampaignImage.setImageBitmap(imageBitmap);
@@ -407,16 +411,68 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     public void addMoreSiteClick(View view) {
 
+        siteno= "";
         //TODO here
-        Intent intent= new Intent(AddSiteDetailActivity.this, AddSiteDetailActivity.class);
-        intent.putExtra("loginToken", loginToken);
-        intent.putExtra("campaignId", campaignId);
-        //Log.d("tag000", logintoken+ "| "+ campaignId+"| "+  siteNumber+ "| "+ jsonobj.toString());
-        //Log.d("tag000", siteNumber);
-        //intent.putExtra("siteNumber", siteno);
-        intent.putExtra("siteDetail", jsonobj.toString());
-        startActivity(intent);
+        TextView tvSiteId = findViewById(R.id.etSiteNo);
+        //TODO after person implements site name then change this
+        tvSiteId.requestFocus();
 
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(tvSiteId, InputMethodManager.SHOW_IMPLICIT);
+
+
+        ScrollView scrollView= findViewById(R.id.scrollview);
+        scrollView.smoothScrollTo(0, 0);
+
+        tvSiteId.setText("");
+
+
+        TextView tvLocation = findViewById(R.id.etLocation);
+        tvLocation.setText("");
+
+        TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+        tvSiteName.setText("Add Site");
+
+        TextView tvLastInspection = findViewById(R.id.etStartDate);
+        tvLastInspection.setText("");
+
+        TextView tvLatitude = findViewById(R.id.etLatitude);
+        tvLatitude.setText("");
+
+        TextView tvLongitude = findViewById(R.id.etLongitude);
+        tvLongitude.setText("");
+
+        //TODO
+
+        //TextView tvMediaType = findViewById(R.id.tvMediaType);
+        //tvMediaType.setText(siteDetail.getMediaType());
+
+        // TextView tvIllumination = findViewById(R.id.tvIllumination);
+        // tvIllumination.setText(siteDetail.getIllumination());
+
+        TextView tvStartDate = findViewById(R.id.etStartDate);
+        tvStartDate.setText("");
+
+        // Set the site number
+        TextView tvSiteNo = findViewById(R.id.etSiteNo);
+        tvSiteNo.setText(""); // assuming getter method exists
+
+        // Set the width
+        TextView tvWidth = findViewById(R.id.etWidth);
+        tvWidth.setText(""); // assuming getter method exists
+
+        // Set the height
+        TextView tvHeight = findViewById(R.id.etHeight);
+        tvHeight.setText(""); // assuming getter method exists
+
+        // Set the total area
+        TextView tvTotalArea = findViewById(R.id.etTotalArea);
+        tvTotalArea.setText(""); // assuming getter method exists
+
+        //RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
+        // if(siteDetail.getImage()!=null) {
+        //    tvImage.setImageBitmap(siteDetail.getImage());
+        // }
     }
 
     public void showSuccessMessage() {
