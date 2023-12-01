@@ -1,0 +1,35 @@
+dash
+
+add site details-
+calender end date not showing
+TODO add site details media type and illumination name of items- folow up with anish
+site not found for new sites
+success message showing for failed calls
+site not found for old sites
+download not saving file
+
+add new site-
+api call returns method not called exception
+on failed api call returns success message
+calendar end date not showing
+download not saving file
+
+edit client-
+shows add client
+api call return seems to ask for logintoken- add login token to call
+download not saving file
+success message says vendor added successfully
+
+edit vendor-
+title says add vendor
+success message says vendor added successfully
+
+client login-
+add campaign-
+api returns image required
+on failure it says added successfully
+
+vendor login-
+gray screen on login
+add- image field required
+on fail says success
