@@ -77,11 +77,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             Log.d("tg2", siteNumber);
         }
 
-        //if ("old".equalsIgnoreCase(campaignType)){
-          //  binding.tvOldCampaign.performClick();
-        //} else {
-         //   binding.tvLiveCampaign.performClick();
-        //}
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");

@@ -45,5 +45,6 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_view_campaign_sites">ViewCampaignSites</string>
+    <string name="title_activity_add_client_detail">AddClientDetailActivity</string>
 
 </resources>

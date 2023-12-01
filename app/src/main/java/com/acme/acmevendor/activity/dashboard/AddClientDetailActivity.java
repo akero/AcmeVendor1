@@ -1,6 +1,15 @@
 package com.acme.acmevendor.activity.dashboard;
 
 import android.os.Bundle;
+
+import com.acme.acmevendor.utility.NetworkUtils;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,36 +17,32 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import androidx.core.view.WindowCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.acme.acmevendor.databinding.ActivityAddClientDetailBinding;
 
 import com.acme.acmevendor.R;
-import com.acme.acmevendor.databinding.ActivityAddClientBinding;
-import com.acme.acmevendor.utility.NetworkUtils;
-import com.acme.acmevendor.viewmodel.APIreferenceclass;
-import com.acme.acmevendor.viewmodel.ApiInterface;
 
 import org.json.JSONObject;
 
-import java.io.File;
-
-public class AddClientActivity extends AppCompatActivity implements ApiInterface{
-
-    private ActivityAddClientBinding binding;
+public class AddClientDetailActivity extends AppCompatActivity implements ApiInterface {
+    private ActivityAddClientDetailBinding binding;
     String siteNumber;
+    String logintoken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_client);
-        Log.d("tag999", "2");
 
+        binding = ActivityAddClientDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         logintoken= getIntent().getStringExtra("logintoken");
-        siteNumber= getIntent().getStringExtra("siteNumber");
+        //siteNumber= getIntent().getStringExtra("siteNumber");
     }
-
-    String logintoken;
 
     public void btnSaveClick(View view) {
         if (    binding.etFullName.getText().toString().isEmpty() ||
@@ -73,16 +78,6 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
             }
 
             APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken);
-
-
-           /* binding.etFullName.setText("");
-            binding.etEmail.setText("");
-            binding.etCompanyName.setText("");
-            binding.etCompanyAddress.setText("");
-            binding.etGst.setText("");
-            binding.etPhone.setText("");
-            showSuccessMessage();
-        */
         }
 
     }
@@ -111,7 +106,7 @@ public class AddClientActivity extends AppCompatActivity implements ApiInterface
                         showSuccessMessage();
                         //Toast.makeText(AddClientActivity.this, "Client successfully created" , Toast.LENGTH_SHORT).show();
                     }
-                    });
+                });
             }
         }catch (Exception e){
             Log.d("tg9", e.toString());

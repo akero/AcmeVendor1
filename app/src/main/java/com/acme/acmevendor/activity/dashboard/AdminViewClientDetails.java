@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -219,6 +220,15 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View v) {
                 // Handle next button click
+                Intent intent= new Intent(AdminViewClientDetails.this, AddClientDetailActivity.class);
+                intent.putExtra("loginToken", logintoken);
+                //intent.putExtra("campaignId", campaignId);
+                //Log.d("tag000", logintoken+ "| "+ campaignId+"| "+  siteNumber+ "| "+ jsonobj.toString());
+                //Log.d("tag000", siteNumber);
+
+                //intent.putExtra("siteNumber", siteNumber);
+               // intent.putExtra("siteDetail", jsonobj.toString());
+                startActivity(intent);
             }
         });
 

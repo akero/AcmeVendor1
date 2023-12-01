@@ -380,7 +380,7 @@
                     android:background="@drawable/primarystroke"
                     android:fontFamily="@font/dmsansbold"
                     android:onClick="btnNextClick"
-                    android:text="Next"
+                    android:text="Edit"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14ssp" />

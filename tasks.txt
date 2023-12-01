@@ -1,3 +1,9 @@
+admin client view next click doesnt work make it edit
+fill data into the etexts
+>pass json data from adminviewclientdetails
+store in addclientdetailactivity
+show in ui
+
 Have to implement glide for everything except sitedetails
 loading images is slow implement glide. 
 fix images app wide
@@ -13,7 +19,6 @@ check permission in phone
 performance optimizations
 add failure checks to everything
 fix otp box shake
-admin client view next click doesnt work
 
 test
 
@@ -35,7 +40,7 @@ TODO addsitedetailactivity line 311 pendng from backend. After this accept site 
 
 
 
-
+//migrate view site to the main one
 //add spinning circle when loading ui
 //fix blinking in data sitedetails add loading screen
 //add loading screen in loading and vendor and client
