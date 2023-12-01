@@ -30,7 +30,7 @@
             android:name=".activity.dashboard.AddClientDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_add_client_detail"
-            android:theme="@style/Theme.TestingProject" />
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.AddSiteDetailsActivityVendor"
             android:exported="false" />

@@ -1,8 +1,4 @@
-admin client view next click doesnt work make it edit
-fill data into the etexts
->pass json data from adminviewclientdetails
-store in addclientdetailactivity
-show in ui
+>line 123 addclentdetailactivity
 
 Have to implement glide for everything except sitedetails
 loading images is slow implement glide. 
@@ -38,8 +34,11 @@ TODO addsitedetailactivity line 311 pendng from backend. After this accept site 
 
 
 
-
-
+//show in ui- line 72 addclientdetailactivity
+//admin client view next click doesnt work make it edit
+//fill data into the etexts
+//pass json data from adminviewclientdetails
+//store in addclientdetailactivity
 //migrate view site to the main one
 //add spinning circle when loading ui
 //fix blinking in data sitedetails add loading screen

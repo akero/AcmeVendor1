@@ -72,9 +72,19 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             //TODO here
             Log.d("tg23", "sadasgdsgds"+apiresponse);
 
+            try {
+
+                //inserting data into UI
+                binding.etFullName.setText(jsonobj.getString("name"));
+                binding.etEmail.setText(jsonobj.getString("email"));
+                binding.etCompanyName.setText(jsonobj.getString("company_name"));
+                binding.etCompanyAddress.setText(jsonobj.getString("company_address"));
+                binding.etGst.setText(jsonobj.getString("gst_no"));
+                binding.etPhone.setText(jsonobj.getString("phone_number"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
-
-
     }
 
     public void btnSaveClick(View view) {
@@ -110,9 +120,9 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
                 Log.d("tg6", e.toString());
             }
 
+            //TODO here
             APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken);
         }
-
     }
 
     @Override
@@ -130,14 +140,15 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        binding.etFullName.setText("");
+            /*            binding.etFullName.setText("");
                         binding.etEmail.setText("");
                         binding.etCompanyName.setText("");
                         binding.etCompanyAddress.setText("");
                         binding.etGst.setText("");
                         binding.etPhone.setText("");
+
+             */
                         showSuccessMessage();
-                        //Toast.makeText(AddClientActivity.this, "Client successfully created" , Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -155,7 +166,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
         TextView tvMsg = view.findViewById(R.id.tvMsg);
         TextView tvResubmit = view.findViewById(R.id.tvResubmit);
         tvResubmit.setVisibility(View.GONE);
-        tvMsg.setText("Client Added Successfully");
+        tvMsg.setText("Client Edited Successfully");
 
         Button btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);
