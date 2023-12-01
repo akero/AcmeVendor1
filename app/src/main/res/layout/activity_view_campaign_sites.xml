@@ -10,7 +10,6 @@
         tools:context=".activity.dashboard.AdminDashboardActivity">
 
         <!-- Loading code -->
-
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -25,8 +24,6 @@
             android:layout_height="@dimen/_40sdp"
             android:background="@color/colorPrimary"
             android:padding="@dimen/_5sdp">
-
-
 
             <ImageView
                 android:layout_width="@dimen/_80sdp"
