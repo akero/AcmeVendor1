@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 public class AddClientDetailActivity extends AppCompatActivity implements ApiInterface {
     private ActivityAddClientDetailBinding binding;
-    String siteNumber;
+    String response1;
     String logintoken;
 
     @Override
@@ -40,8 +40,41 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
         binding = ActivityAddClientDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        logintoken= getIntent().getStringExtra("logintoken");
-        //siteNumber= getIntent().getStringExtra("siteNumber");
+
+        try {
+            logintoken = getIntent().getStringExtra("logintoken");
+
+            //api response from last thread
+            response1 = getIntent().getStringExtra("response");
+            //siteNumber= getIntent().getStringExtra("siteNumber");
+
+
+
+            //Log.d("tg23", response1);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        implementUI(response1);
+    }
+
+    void implementUI(String apiresponse){
+        JSONObject jsonobj= null;
+
+        try {
+        jsonobj= new JSONObject(apiresponse);
+        }catch(Exception e){
+            Log.d("tg23", e.toString());
+        }
+
+        if(jsonobj!=null){
+
+            //TODO here
+            Log.d("tg23", "sadasgdsgds"+apiresponse);
+
+        }
+
+
     }
 
     public void btnSaveClick(View view) {

@@ -38,22 +38,6 @@ import java.net.URL;
 public class ViewCampaignSites extends AppCompatActivity implements ApiInterface {
 
     int id=0;
-    String image="";
-    String vendor_id="";
-    int campaign_id=0;
-    String start_date=null;
-    String end_date=null;
-    String location="";
-    String longitude="";
-    String latitude="";
-    String width="";
-    String height="";
-    String total_area="";
-    String media_type="";
-    String illumination="";
-    String created_at="";
-    String updated_at="";
-    MainViewModel mainViewModel;
     ActivityViewCampaignSitesBinding binding;
     //JSONArray jsonArray;
     boolean showMenus = false;
@@ -89,7 +73,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         binding.rvCampaignList.setAdapter(adapter);
         campaignList(idofcampaign);
     }
-
 
     //onresponsereceived from api
     public void onResponseReceived(String response){

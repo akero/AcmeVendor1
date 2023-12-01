@@ -54,25 +54,6 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_view_client_details);
         Log.d("tag999", "3");
-
-       /* try {
-            // Initialize BroadcastReceiver
-            onDownloadComplete = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                    if (downloadReference == id) {
-                        Toast.makeText(ViewSiteDetailActivity.this, "Download Completed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            };
-
-            // Registering the receiver to listen for ACTION_DOWNLOAD_COMPLETE
-            registerReceiver(onDownloadComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        }catch(Exception e){
-            Log.d("tag41", e.toString());
-        }
-*/
         Log.d("tag41", "1");
 
         if (getIntent().getExtras() != null) {
@@ -97,8 +78,59 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
             Log.d("tag41", "3");
         }
 
+        // Assigning values and listeners to Buttons
+        Button btnNext = findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle next button click
+                //try {
+                    Log.d("tag90", response1);
+
+                    Intent intent = new Intent(AdminViewClientDetails.this, AddClientDetailActivity.class);
+                    intent.putExtra("loginToken", logintoken);
+                    intent.putExtra("response", response1);
+                    //intent.putExtra("campaignId", campaignId);
+                    //Log.d("tag000", logintoken+ "| "+ campaignId+"| "+  siteNumber+ "| "+ jsonobj.toString());
+                    //Log.d("tag000", siteNumber);
+
+                    //intent.putExtra("siteNumber", siteNumber);
+                    // intent.putExtra("siteDetail", jsonobj.toString());
+                    startActivity(intent);
+
+               // }catch(Exception e){
+                 //   Log.d("tag222", e.toString());
+                   // e.printStackTrace();
+
+            //    }
+            }
+        });
+
+        Button btnDownload = findViewById(R.id.btnDownload);
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDownloadClick(v);
+                // Handle download button click
+            }
+        });
+
+        Button btnClose = findViewById(R.id.btnClose);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle close button click
+                finish();
+            }
+        });
+
 
         Log.d("tag41", "4");
+        response1= apiresponse;
+
+        Log.d("tag90", response1);
+
+
         implementUI(apiresponse);
         //apicall(logintoken, id);
         Log.d("tag41", "5");
@@ -201,10 +233,6 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
                             }
                         });
                     }
-
-
-
-
         } catch (Exception e) {
             runOnUiThread(new Runnable() {
                 @Override
@@ -213,63 +241,6 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
                 }
             });
         }
-
-        // Assigning values and listeners to Buttons
-        Button btnNext = findViewById(R.id.btnNext);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle next button click
-                Intent intent= new Intent(AdminViewClientDetails.this, AddClientDetailActivity.class);
-                intent.putExtra("loginToken", logintoken);
-                //intent.putExtra("campaignId", campaignId);
-                //Log.d("tag000", logintoken+ "| "+ campaignId+"| "+  siteNumber+ "| "+ jsonobj.toString());
-                //Log.d("tag000", siteNumber);
-
-                //intent.putExtra("siteNumber", siteNumber);
-               // intent.putExtra("siteDetail", jsonobj.toString());
-                startActivity(intent);
-            }
-        });
-
-        Button btnDownload = findViewById(R.id.btnDownload);
-        btnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDownloadClick(v);
-                // Handle download button click
-            }
-        });
-
-        Button btnClose = findViewById(R.id.btnClose);
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle close button click
-                finish();
-            }
-        });
-    }
-
-    void apicall(String logintoken, String id){
-
-        Log.d("tag41", "6");
-        Context context= this;
-        String padding="";
-        APIreferenceclass api= new APIreferenceclass(logintoken, context, id, padding);
-        Log.d("tag41", "7");
-    }
-    public static String[] extractDataStrings(String apiResponse) {
-        Gson gson = new Gson();
-        JsonObject jsonResponse = gson.fromJson(apiResponse, JsonObject.class);
-        JsonArray dataArray = jsonResponse.getAsJsonArray("data");
-
-        String[] dataStrings = new String[dataArray.size()];
-        for (int i = 0; i < dataArray.size(); i++) {
-            dataStrings[i] = dataArray.get(i).toString();
-        }
-
-        return dataStrings;
     }
 
     String response1="";
@@ -278,8 +249,10 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
     public void onResponseReceived(String response){
 
         response1= response;
+        Log.d("tag90", response1);
+
+
         implementUI(response);
-        Log.d("tag41", response);
     }
 
     public void btnCloseClick(View view) {
@@ -326,58 +299,6 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
         }
     }
 
-    void writeToFile(String response, Context context){
-        String name="logintoken";
-        String content= response;
-        FileOutputStream fostream= null;
-
-        try{
-            fostream= context.openFileOutput(name,Context.MODE_PRIVATE);
-            fostream.write(response.getBytes());
-            fostream.close();
-
-        }catch(Exception e){
-            Log.d("tag24", "error-" +e.toString());
-        }
-        finally{
-            try{
-
-                if(fostream!=null){
-                    fostream.close();
-                }
-            }catch(Exception e){
-                Log.d("tag25","Closing outputstream failed");
-            }
-        }
-    }
-
-    public String formatJSONString(String unformattedJson) {
-        try {
-            JSONObject jsonObject = new JSONObject(unformattedJson);
-            return jsonObject.toString(4); // `4` is the number of spaces to use for indentation
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void writeToFile(String data, String fileName) {
-        File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "YourAppName");
-        // Create the folder if it doesn't exist
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-        // Create the file
-        File file = new File(directory, fileName);
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write(data);
-            Toast.makeText(this, "Data saved at " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error saving data to file", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     public void oldCampaignClick(View view) {
         binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
         binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
@@ -392,71 +313,9 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    /*   private boolean checkPermission() {
-           int result = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
-           int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
-           return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
-       }
-
-       private void requestPermission() {
-
-           Log.d("tag45","5");
-           View v= null;
-           ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-       }
-   */
-   /* private long downloadReference;
-    private BroadcastReceiver onDownloadComplete;
-
-    private void startDownload(String fileURL, String fileName) {
-        try {
-            if (checkPermission()) {
-                Uri downloadUri = Uri.parse(fileURL);
-                String destination = Environment.DIRECTORY_DOWNLOADS;
-
-                // Set up the request
-                DownloadManager.Request request = new DownloadManager.Request(downloadUri);
-                request.setTitle(fileName);
-                request.setDescription("Downloading...");
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(destination, fileName);
-
-                // Enqueue the download
-                DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                downloadReference = downloadManager.enqueue(request);
-
-                Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
-            } else {
-                requestPermission();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-*/
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-   /* @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // permissions granted, continue with download
-                Log.d("tag45","7");
-                View v = null;
-                onDownloadClick(v);
-            } else {
-                Log.d("tag45","8");
-
-                // permissions denied, show a message to the user
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-*/
 }
