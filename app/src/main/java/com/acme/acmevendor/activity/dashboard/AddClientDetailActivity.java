@@ -120,8 +120,8 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
                 Log.d("tg6", e.toString());
             }
 
-            //TODO here
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken);
+            //TODO here- PENDING FROM BACKEND. PUT not working
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 0, 0);
         }
     }
 

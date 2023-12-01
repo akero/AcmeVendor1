@@ -299,6 +299,29 @@ public class APIreferenceclass {
 
     }
 
+    //addclientdetailactivity
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a, int b){
+
+        //TODO add siteNumber to api call
+
+
+        String url="https://acme.warburttons.com/api/clients";
+        //Log.d("tag23", "logintype "+ loginType + " email " + email);
+
+        String jsonPayload = jsonPayload1.toString();
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+        querytype= 1; ////post //TODO change to put (2)
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+
+    }
+
     //addcampaignactivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a){
 

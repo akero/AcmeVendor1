@@ -1,5 +1,3 @@
->line 123 addclentdetailactivity
-
 Have to implement glide for everything except sitedetails
 loading images is slow implement glide. 
 fix images app wide
@@ -16,13 +14,15 @@ performance optimizations
 add failure checks to everything
 fix otp box shake
 
-test
+>test
 
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
 TODO pass correct token in campaignlist in vendor dash 
 TODO ask backend dev why adding site says site not found
-TODO addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further. 
+TODO line 123 addclentdetailactivity- pending from backend. follow up.
+TODO addsitedetailactivity line 311 pendng from backend. After this accept 
+site id from backend in case user wants to edit further. 
 
 
 
