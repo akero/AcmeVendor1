@@ -407,6 +407,26 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
         dialog.show();
     }
 
+    public void showCalendarEnd(View view) {
+        yy = cal.get(Calendar.YEAR);
+        mm = cal.get(Calendar.MONTH);
+        dd = cal.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                yy = year;
+                mm = month;
+                dd = dayOfMonth;
+                String dateStr = String.format(Locale.getDefault(), "%02d-%02d-%02d", dd, mm + 1, yy);
+                binding.etEndDate.setText(dateStr);
+            }
+        }, yy, mm, dd);
+        dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        dialog.show();
+    }
+
+
+
     private static final String TAG = "LocationProvider";
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 

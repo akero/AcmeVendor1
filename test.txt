@@ -1,7 +1,7 @@
 dash
 
 add site details-
->calendar end date not showing
+//calendar end date not showing
 TODO add site details media type and illumination name of items- folow up with anish
 site not found for new sites
 success message showing for failed calls
