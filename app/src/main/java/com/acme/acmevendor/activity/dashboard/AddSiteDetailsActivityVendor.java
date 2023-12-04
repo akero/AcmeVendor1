@@ -425,20 +425,48 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
         dialog.show();
     }
 
-
-
     private static final String TAG = "LocationProvider";
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
     @Override
     public void onResponseReceived(String response) {
         Log.d("tg9", response);
+        try {
+            JSONObject jsonobj = new JSONObject(response);
+
+        if(jsonobj.getBoolean("success")== true){
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
                 showSuccessMessage();
             }
-        });
+        });}else{
+            showFailureMessage();
+        }
 
+        }catch(Exception e){
+            Log.d("tag123", e.toString());
+        }
+    }
+
+    public void showFailureMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.custom_emailsent, null);
+        TextView tvMsg = view.findViewById(R.id.tvMsg);
+        TextView tvResubmit = view.findViewById(R.id.tvResubmit);
+        tvResubmit.setVisibility(View.INVISIBLE);
+        tvMsg.setText("Site add failed please recheck all the fields");
+        Button btnClose = view.findViewById(R.id.btnClose);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

@@ -547,13 +547,56 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     @Override
     public void onResponseReceived(String response) {
         Log.d("tg9", response);
+        try {
+            JSONObject jsonobj = new JSONObject(response);
 
-        runOnUiThread(new Runnable(){
+                runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+try{
+                        if(jsonobj.getBoolean("success")== true){
+                            showSuccessMessage();}
+                        else{
+                            showFailureMessage();
+                        }
+                    }catch (Exception e){
+    runOnUiThread(new Runnable(){
+        @Override
+        public void run() {
+            showFailureMessage();
+        }});
+    Log.d("tagerw1", e.toString());
+                    }
+                }
+
+                });}catch(Exception e){
+
+
+            Log.d("tag123", e.toString());
+        }
+    }
+
+    public void showFailureMessage() {
+
+        Log.d("tagerw", "in onfailure");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.custom_emailsent, null);
+        TextView tvMsg = view.findViewById(R.id.tvMsg);
+        TextView tvResubmit = view.findViewById(R.id.tvResubmit);
+        tvResubmit.setVisibility(View.INVISIBLE);
+        tvMsg.setText("Site Add Failed Please Check All The Fields");
+        Button btnClose = view.findViewById(R.id.btnClose);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                showSuccessMessage();
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
-
-}
+        dialog.show();
+    }
 }

@@ -2,10 +2,11 @@ dash
 
 add site details-
 //calendar end date not showing
+>success message showing for failed calls 1
 TODO add site details media type and illumination name of items- folow up with anish
+sites all showing null check with dev
 site not found for new sites
-success message showing for failed calls
-site not found for old sites
+site not found for old sites	
 download not saving file
 
 add new site-
