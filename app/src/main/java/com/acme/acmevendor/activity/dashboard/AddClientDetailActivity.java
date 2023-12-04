@@ -40,7 +40,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
         binding = ActivityAddClientDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        Log.d("whichclass", "AddClientDetailActivity");
         try {
             logintoken = getIntent().getStringExtra("logintoken");
 

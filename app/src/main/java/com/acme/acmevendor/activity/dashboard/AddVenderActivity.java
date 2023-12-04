@@ -31,6 +31,7 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_vender);
         logintoken= getIntent().getStringExtra("logintoken");
+        Log.d("whichclass", "AddVendorActivity");
         //siteNumber= getIntent().getStringExtra("siteNumber");
     }
 

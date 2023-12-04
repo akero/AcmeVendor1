@@ -33,7 +33,7 @@ public class WelcomeActivity extends BaseActivity {
 
         Log.d("tag2","start of welcomeactivity");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
-
+        Log.d("whichclass", "WelcomeActivity");
         loginType=getIntent().getIntExtra("loginType", 1);
 
         welcomeActivityViewModel = new ViewModelProvider(this).get(WelcomeActivityViewModel.class);

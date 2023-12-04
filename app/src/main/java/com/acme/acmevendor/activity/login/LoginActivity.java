@@ -43,6 +43,8 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
         super.onCreate(savedInstanceState);
         Log.d("tg3", "0");
 
+        Log.d("whichclass", "LoginActivity");
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.etLoginid.setText(getIntent().getStringExtra("Email"));
 

@@ -2,6 +2,7 @@ package com.acme.acmevendor.activity.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change_password);
+        Log.d("whichclass", "ChangePasswordActivity");
     }
 
     public void btnResetClick(View view) {

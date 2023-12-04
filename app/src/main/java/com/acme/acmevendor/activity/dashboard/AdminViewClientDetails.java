@@ -55,7 +55,7 @@ public class AdminViewClientDetails extends AppCompatActivity implements ApiInte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_view_client_details);
         Log.d("tag999", "3");
         Log.d("tag41", "1");
-
+        Log.d("whichclass", "AdminViewClientDetails");
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
             logintoken = getIntent().getExtras().getString("logintoken", "");

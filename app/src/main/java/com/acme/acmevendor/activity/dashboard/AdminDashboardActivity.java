@@ -63,6 +63,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+        Log.d("whichclass", "AdminDashboardActivity");
         Log.d("tg5","2");
         logintoken = FileHelper.readLoginToken(this);
         Log.d("tg4", logintoken);

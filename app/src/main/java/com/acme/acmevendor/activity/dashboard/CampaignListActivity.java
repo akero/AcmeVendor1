@@ -3,6 +3,7 @@ package com.acme.acmevendor.activity.dashboard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class CampaignListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_campaign_list);
+        Log.d("whichclass", "CampaignListActivity");
         campaignList();
     }
 

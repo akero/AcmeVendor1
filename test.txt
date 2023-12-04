@@ -1,7 +1,7 @@
 dash
 
 add site details-
-calender end date not showing
+>calendar end date not showing
 TODO add site details media type and illumination name of items- folow up with anish
 site not found for new sites
 success message showing for failed calls
@@ -33,3 +33,12 @@ vendor login-
 gray screen on login
 add- image field required
 on fail says success
+
+
+edit site vendor-    D  {"success":false,"message":"Validation Error.","data":{"campaign_id":["The campaign id field is required."]}}
+client - edit or add site- site not found
+>vendor- add site button not functional
+add campaign admin file upload pending from backend
+images read pending all
+
+

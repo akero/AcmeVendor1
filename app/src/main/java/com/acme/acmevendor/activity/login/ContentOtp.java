@@ -45,6 +45,8 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_otp); // make sure to use your actual layout name
 
+        Log.d("whichclass", "ContentOtp");
+
         context= this;
 
         // Initialize UI Elements

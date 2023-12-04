@@ -77,6 +77,8 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
+        Log.d("whichclass", "ViewVendorSites");
+
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);

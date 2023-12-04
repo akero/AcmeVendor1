@@ -50,6 +50,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         selectedItem1="";
         imageStream= null;
 
+        Log.d("whichclass", "AddCampaignDetails");
+
         binding.etStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

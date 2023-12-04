@@ -56,6 +56,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_dash_board);
 
         Log.d("tag199", "1");
+        Log.d("whichclass", "ClientDashBoardActivity");
 
         //animation code
         progressBar= findViewById(R.id.progressBar);

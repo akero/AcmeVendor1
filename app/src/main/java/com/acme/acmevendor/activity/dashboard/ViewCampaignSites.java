@@ -55,6 +55,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_campaign_sites);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
+        Log.d("whichclass", "ViewCampaignSites");
 
         //animation code
         progressBar= findViewById(R.id.progressBar);

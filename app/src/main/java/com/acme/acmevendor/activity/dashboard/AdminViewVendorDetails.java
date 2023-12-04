@@ -56,7 +56,7 @@ import java.net.URL;
             super.onCreate(savedInstanceState);
             binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_view_vendor_details);
             Log.d("tag41", "1");
-
+            Log.d("whichclass", "AdminViewVendorDetails");
             if (getIntent().getExtras() != null) {
                 Log.d("tag41", "2");
                 logintoken = getIntent().getExtras().getString("logintoken", "");

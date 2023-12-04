@@ -74,6 +74,8 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
         }catch(Exception e){
             Log.d("tg90", e.toString());}
 
+        Log.d("whichclass", "AddCSiteDetailsActivityVendor");
+
         FileHelper fh= new FileHelper();
         loginToken= fh.readLoginToken(this);
         Log.d("tag111", "addsitedetailactivity");

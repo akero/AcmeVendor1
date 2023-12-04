@@ -66,6 +66,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
         
         Log.d("tag41", "1");
+        Log.d("whichclass", "ViewSiteDetailActivity");
 
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");

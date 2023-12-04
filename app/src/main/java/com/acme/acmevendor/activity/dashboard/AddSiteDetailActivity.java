@@ -67,6 +67,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
+        Log.d("whichclass", "AddSiteDetailActivity");
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
             campaignId= getIntent().getStringExtra("campaignId");

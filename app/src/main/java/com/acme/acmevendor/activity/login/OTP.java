@@ -52,6 +52,8 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         binding = ActivityOtpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Log.d("whichclass", "OTP");
+
         int loginType= 1;
 
         //animation code

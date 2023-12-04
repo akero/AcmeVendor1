@@ -33,7 +33,7 @@ public class SelectLoginType extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_login_type);
-
+        Log.d("whichclass", "SelectLoginType");
         bt1= findViewById(R.id.button1); //client 1
         bt2= findViewById(R.id.button2); //campaign 0
         bt3= findViewById(R.id.button3); //vendor 2

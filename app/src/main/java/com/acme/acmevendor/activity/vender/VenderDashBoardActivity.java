@@ -79,6 +79,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
+        Log.d("whichclass", "VendorDashBoardActivity");
+
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);

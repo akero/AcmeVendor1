@@ -40,6 +40,8 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_update_site_detail);
 
+        Log.d("whichclass", "UpdateSiteDetailActivity");
+
         //TODO add code for accepting input and pass to btn saveclick or global variable and add upload photo button code
         Intent intent= getIntent();
 
