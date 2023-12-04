@@ -211,8 +211,67 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 1);
         }
     }
-
     @Override
+    public void onResponseReceived(String response) {
+        Log.d("tg9", response);
+        try {
+            JSONObject jsonobj = new JSONObject(response);
+
+            runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    try{
+                        if(jsonobj.getBoolean("success")== true){
+                            binding.etName.setText("");
+                            binding.etVendor.setText("");
+                            binding.etStartDate.setText("");
+                            binding.etEndDate.setText("");
+                            showSuccessMessage();
+                        }
+                        else{
+                            showFailureMessage();
+                        }
+                    }catch (Exception e){
+                        runOnUiThread(new Runnable(){
+                            @Override
+                            public void run() {
+                                showFailureMessage();
+                            }});
+                        Log.d("tagerw1", e.toString());
+                    }
+                }
+
+            });}catch(Exception e){
+
+
+            Log.d("tag123", e.toString());
+        }
+    }
+
+    public void showFailureMessage() {
+
+        Log.d("tagerw", "in onfailure");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.custom_emailsent, null);
+        TextView tvMsg = view.findViewById(R.id.tvMsg);
+        TextView tvResubmit = view.findViewById(R.id.tvResubmit);
+        tvResubmit.setVisibility(View.INVISIBLE);
+        tvMsg.setText("Campaign Add Failed Please Check All The Fields");
+        Button btnClose = view.findViewById(R.id.btnClose);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    /*@Override
     public void onResponseReceived(String response){
         Log.d("tg6", response);
         try{
@@ -234,9 +293,9 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }catch (Exception e){
             Log.d("tg9", e.toString());
         }
-        
-    }
 
+    }
+*/
     public void showSuccessMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
