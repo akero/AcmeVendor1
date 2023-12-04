@@ -7,14 +7,14 @@ images read pending all
 image upload
 implement add image- on line 192 appcampdet
 
-add delete and update data for all
+>add delete and update data for all
 
 check permission in phone
 performance optimizations
 add failure checks to everything
 fix otp box shake
 
->test
+test
 
 notification icon
 add campaign admin file upload pending from backend

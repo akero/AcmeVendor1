@@ -15,10 +15,7 @@ add campaign-
 api returns image required
 //on failure it says added successfully
 
-vendor login-
->gray screen on login
-//add- image field required
-//on fail says success
+
 
 Backend-
 edit site vendor-    D  {"success":false,"message":"Validation Error.","data":{"campaign_id":["The campaign id field is required."]}}
@@ -51,5 +48,8 @@ api call return seems to ask for logintoken- add login token to call
 //success message says vendor added successfully
 //addclientdetailactivity- add failure msg
 //success message says vendor added successfully
-
+vendor login-
+//gray screen on login
+//add- image field required
+//on fail says success
 
