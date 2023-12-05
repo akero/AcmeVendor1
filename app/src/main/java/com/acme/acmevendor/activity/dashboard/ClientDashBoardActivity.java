@@ -175,27 +175,15 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                                     //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                     jsonObject.putOpt("id", dataObject.optInt("id"));
                                     jsonObject.putOpt("uid", dataObject.optString("uid"));
-                                    jsonObject.putOpt("image", dataObject.optString("image"));
+                                    jsonObject.putOpt("image", dataObject.optString("logo"));
                                     jsonObject.putOpt("name", dataObject.optString("name"));
 
                                     //siteDetail.setName(dataObject.optString("name"));
 
-                                    try {
-                                        String imageUrl = dataObject.optString("image");
-                                        imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                        Log.d("tag411", "imageurl is " + imageUrl);
-                                        if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                            URL url = new URL(imageUrl);
-                                            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                    // Inside the for-loop where you process each `dataObject`
+                                    //String imageUrl = dataObject.optString("image");
+                                    //jsonObject.putOpt("image", imageUrl);
 
-                                            //TODO
-                                            //siteDetail.setImage(bitmap);
-                                        }
-                                    } catch (Exception e) {
-                                        Log.d("tag41", "error in implementui" + e.toString());
-                                        Log.e("tag41", "sdfdg", e);
-                                        // Handle error
-                                    }
                                     jsonArray1.put(jsonObject);
 //TODO here
                                 }

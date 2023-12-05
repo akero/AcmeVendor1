@@ -1,12 +1,8 @@
->Have to implement glide for everything except sitedetails
-loading images is slow implement glide. 
-fix images app wide
+>image upload
 remove null from all image uploads
-put image into dash
-images read pending all
-image upload
 implement add image- on line 192 appcampdet
 
+add delete function
 check permission in phone
 performance optimizations
 add failure checks to everything
@@ -31,7 +27,11 @@ site id from backend in case user wants to edit further.
 
 
 
-
+//put image into dash
+//images read pending all
+//Have to implement glide for everything except sitedetails
+//loading images is slow implement glide. 
+//fix images app wide
 /add delete and update data for all
 //show in ui- line 72 addclientdetailactivity
 //admin client view next click doesnt work make it edit

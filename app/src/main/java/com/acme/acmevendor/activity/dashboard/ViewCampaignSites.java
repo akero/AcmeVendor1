@@ -128,8 +128,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject.putOpt("uid", dataObject.optString("uid"));
                                 jsonObject.putOpt("image", dataObject.optString("image"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
-                                String imageUrl = dataObject.optString("image");
-                                jsonObject.putOpt("image", imageUrl);
                                 //siteDetail.setName(dataObject.optString("name"));
 
 
@@ -151,9 +149,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
-                                //siteDetail.setName(dataObject.optString("name"));
-                                String imageUrl = dataObject.optString("image");
-                                jsonObject.putOpt("image", imageUrl);
 
 
                                 jsonArray1.put(jsonObject);
@@ -175,9 +170,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
-                                String imageUrl = dataObject.optString("image");
-                                jsonObject.putOpt("image", imageUrl);
-                                //siteDetail.setName(dataObject.optString("name"));
 
 
 

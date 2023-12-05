@@ -76,10 +76,13 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                 imageUrl = "https://acme.warburttons.com/" + imageUrl;
                 Glide.with(context)
                         .load(imageUrl)
-                        .placeholder(R.drawable.temp_campaign)
+                        .placeholder(R.drawable.temp_campaign) // Placeholder image while loading
                         .into(holder.ivCampaign);
             } else {
-                holder.ivCampaign.setImageDrawable(null); // Clear the ImageView if no valid URL
+                // Load placeholder image if there's no valid image URL
+                Glide.with(context)
+                        .load(R.drawable.temp_campaign) // Placeholder image when there's no image URL
+                        .into(holder.ivCampaign);
             }
 
             // Click listener for each item
@@ -100,11 +103,11 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                     ((ClientDashBoardActivity) context).onItemClick(position);
                 }
             });
-
         } catch (Exception e) {
             Log.e("tag41", "Error in onBindViewHolder: " + e.getMessage());
         }
     }
+
 
     @Override
     public int getItemCount() {
