@@ -1,8 +1,8 @@
->image upload
+image upload
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
-add delete function
+>add delete function
 check permission in phone
 performance optimizations
 add failure checks to everything
@@ -17,10 +17,7 @@ TODO pass correct token in campaignlist in vendor dash
 TODO ask backend dev why adding site says site not found
 TODO line 123 addclentdetailactivity- pending from backend. follow up.
 TODO addsitedetailactivity line 311 pendng from backend. After this accept 
-site id from backend in case user wants to edit further. 
-
-
-
+site id from backend in case user wants to edit further.
 
 
 
