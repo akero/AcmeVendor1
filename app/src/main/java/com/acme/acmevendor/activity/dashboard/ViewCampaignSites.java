@@ -128,23 +128,11 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject.putOpt("uid", dataObject.optString("uid"));
                                 jsonObject.putOpt("image", dataObject.optString("image"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
-
+                                String imageUrl = dataObject.optString("image");
+                                jsonObject.putOpt("image", imageUrl);
                                 //siteDetail.setName(dataObject.optString("name"));
 
-                                try {
-                                    String imageUrl = dataObject.optString("image");
-                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                    Log.d("tag41", "imageurl is " + imageUrl);
-                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                        URL url = new URL(imageUrl);
-                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                        //siteDetail.setImage(bitmap);
-                                    }
-                                } catch (Exception e) {
-                                    Log.d("tag41", "error in implementui" + e.toString());
-                                    Log.e("tag41", "sdfdg", e);
-                                    // Handle error
-                                }
+
                                 jsonArray1.put(jsonObject);
 //TODO here
                             }
@@ -164,21 +152,10 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
                                 //siteDetail.setName(dataObject.optString("name"));
+                                String imageUrl = dataObject.optString("image");
+                                jsonObject.putOpt("image", imageUrl);
 
-                                try {
-                                    String imageUrl = dataObject.optString("logo");
-                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                    Log.d("tag41", "imageurl is " + imageUrl);
-                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                        URL url = new URL(imageUrl);
-                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                        //siteDetail.setImage(bitmap);
-                                    }
-                                } catch (Exception e) {
-                                    Log.d("tag41", "error in implementui" + e.toString());
-                                    Log.e("tag41", "sdfdg", e);
-                                    // Handle error
-                                }
+
                                 jsonArray1.put(jsonObject);
 //TODO here
                             }
@@ -198,22 +175,11 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
+                                String imageUrl = dataObject.optString("image");
+                                jsonObject.putOpt("image", imageUrl);
                                 //siteDetail.setName(dataObject.optString("name"));
 
-                                try {
-                                    String imageUrl = dataObject.optString("logo");
-                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                    Log.d("tag41", "imageurl is " + imageUrl);
-                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                        URL url = new URL(imageUrl);
-                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                        //siteDetail.setImage(bitmap);
-                                    }
-                                } catch (Exception e) {
-                                    Log.d("tag41", "error in implementui" + e.toString());
-                                    Log.e("tag41", "sdfdg", e);
-                                    // Handle error
-                                }
+
 
 //TODO here
                             jsonArray1.put(jsonObject);
