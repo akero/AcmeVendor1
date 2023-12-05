@@ -17,6 +17,8 @@ import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.ViewCampaignSites;
 import com.acme.acmevendor.activity.dashboard.ViewVendorSites;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
+import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -65,28 +67,22 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
             holder.tvSiteNo.setText(jsonObject.getString("name"));
             if(jsonObject.has("uid")) {
                 holder.tvUnitNo.setText("Unit Id:- " + jsonObject.getString("uid"));
-            }else{
-                holder.tvUnitNo.setText("Company:- "+jsonObject.getString("company_name"));
-
+            } else {
+                holder.tvUnitNo.setText("Company:- " + jsonObject.getString("company_name"));
             }
 
-            try {
-                String imageUrl = jsonObject.optString("image");
-                //TODO here get urls working then check if the recyclerview is populated with images
-                //TODO network on main thread exception. can use glide
-//                imageUrl= "https://acme.warburttons.com/"+ imageUrl;
-  //              Log.d("tag41", "imageurl is "+ imageUrl);
-    //            if(imageUrl != "null" && !imageUrl.isEmpty()) {
-      //              URL url = new URL(imageUrl);
-        //            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-          //          holder.tvImage.setImageBitmap(bitmap);
-            //    }
-            } catch (Exception e) {
-                Log.d("tag41", "error in implementui" +e.toString());
-                Log.e("tag41", "sdfdg", e);
-                // Handle error
+            String imageUrl = jsonObject.optString("image");
+            if(imageUrl != null && !imageUrl.isEmpty() && !imageUrl.equals("null")) {
+                imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                Glide.with(context)
+                        .load(imageUrl)
+                        .placeholder(R.drawable.temp_campaign)
+                        .into(holder.ivCampaign);
+            } else {
+                holder.ivCampaign.setImageDrawable(null); // Clear the ImageView if no valid URL
             }
 
+            // Click listener for each item
             holder.itemView.setOnClickListener(v -> {
                 if (context instanceof CampaignListActivity) {
                     ((CampaignListActivity) context).onItemClick(position);
@@ -96,17 +92,17 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                     ((VenderDashBoardActivity) context).onItemClick(position);
                 } else if (context instanceof AdminDashboardActivity) {
                     ((AdminDashboardActivity) context).onItemClick(position);
-                }else if (context instanceof ViewVendorSites) {
+                } else if (context instanceof ViewVendorSites) {
                     ((ViewVendorSites) context).onItemClick(position);
-                }else if(context instanceof ViewCampaignSites){
+                } else if (context instanceof ViewCampaignSites) {
                     ((ViewCampaignSites) context).onItemClick(position);
-                }else if(context instanceof ClientDashBoardActivity){
+                } else if (context instanceof ClientDashBoardActivity) {
                     ((ClientDashBoardActivity) context).onItemClick(position);
                 }
-
             });
+
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("tag41", "Error in onBindViewHolder: " + e.getMessage());
         }
     }
 

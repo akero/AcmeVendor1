@@ -136,23 +136,13 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                         jsonObject.putOpt("uid", dataObject.optString("uid"));
                         jsonObject.putOpt("image", dataObject.optString("image"));
                         jsonObject.putOpt("name", dataObject.optString("name"));
+                        String imageUrl = dataObject.optString("image"); // or "logo"
+                        //imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                        jsonObject.putOpt("image", imageUrl); // Store the full image URL
+                        Log.d("tag1234", imageUrl);
 
                         //siteDetail.setName(dataObject.optString("name"));
 
-                        try {
-                            String imageUrl = dataObject.optString("image");
-                            imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                            Log.d("tag41", "imageurl is " + imageUrl);
-                            if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                URL url = new URL(imageUrl);
-                                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                //siteDetail.setImage(bitmap);
-                            }
-                        } catch (Exception e) {
-                            Log.d("tag41", "error in implementui" + e.toString());
-                            Log.e("tag41", "sdfdg", e);
-                            // Handle error
-                        }
                         jsonArray1.put(jsonObject);
 //TODO here
                         }
@@ -173,6 +163,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
                                 Log.d("tg12", dataArray.getJSONObject(i).toString());
+                                String imageUrl = dataObject.optString("image"); // or "logo"
+                                //imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                //jsonObject.putOpt("image", imageUrl); // Store the full image URL
+
 
 
                                 //to pass to client class
@@ -189,20 +183,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                                 //siteDetail.setName(dataObject.optString("name"));
 
-                                try {
-                                    String imageUrl = dataObject.optString("logo");
-                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                    Log.d("tag41", "imageurl is " + imageUrl);
-                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                        URL url = new URL(imageUrl);
-                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                        //siteDetail.setImage(bitmap);
-                                    }
-                                } catch (Exception e) {
-                                    Log.d("tag41", "error in implementui" + e.toString());
-                                    Log.e("tag41", "sdfdg", e);
-                                    // Handle error
-                                }
+
                                 jsonArray1.put(jsonObject);
                                 jsonArray2.put(jsonObject1);
                             //TODO here
@@ -223,6 +204,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
+                                String imageUrl = dataObject.optString("image"); // or "logo"
+                                //imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                //jsonObject.putOpt("image", imageUrl); // Store the full image URL
+
 
                                 //to pass to client class
                                 jsonObject2.putOpt("id", dataObject.optInt("id"));
@@ -237,20 +222,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject2.putOpt("updated_at", dataObject.optString("updated_at"));
                                 //siteDetail.setName(dataObject.optString("name"));
 
-                                try {
-                                    String imageUrl = dataObject.optString("logo");
-                                    imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                                    Log.d("tag41", "imageurl is " + imageUrl);
-                                    if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                        URL url = new URL(imageUrl);
-                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                        //siteDetail.setImage(bitmap);
-                                    }
-                                } catch (Exception e) {
-                                    Log.d("tag41", "error in implementui" + e.toString());
-                                    Log.e("tag41", "sdfdg", e);
-                                    // Handle error
-                                }
+
                                 jsonArray1.put(jsonObject);
                                 jsonArray3.put(jsonObject2);
 //TODO here
