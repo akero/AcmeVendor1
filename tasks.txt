@@ -1,19 +1,19 @@
-image upload
+>image upload
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
->add delete function line 348 admindash
->add code to dropdown a list which says delete
+add delete function line 348 admindash
+add code to dropdown a list which says delete
 delete code
 
-check permission in phone
-performance optimizations
-add failure checks to everything
 fix otp box shake
 
-test
 
-notification icon
+
+test
+test on phone ask the monkes
+
+notification icon- ask what it does
 add campaign admin file upload pending from backend
 email about https://acme.warburttons.com/api/get_campaign_sites/18
 TODO pass correct token in campaignlist in vendor dash 
@@ -21,12 +21,12 @@ TODO ask backend dev why adding site says site not found
 TODO line 123 addclentdetailactivity- pending from backend. follow up.
 TODO addsitedetailactivity line 311 pendng from backend. After this accept 
 site id from backend in case user wants to edit further.
+api call return seems to ask for logintoken- add login token to call. line 319 apireference
 
 
 
 
-
-
+//add failure checks to everything
 //put image into dash
 //images read pending all
 //Have to implement glide for everything except sitedetails
@@ -164,3 +164,4 @@ site id from backend in case user wants to edit further.
 //implement login flow
 //apireference continue in otp once backend is done
 //store token on login in loginactivity
+//performance optimizations

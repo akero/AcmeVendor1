@@ -40,9 +40,15 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
         binding = ActivityAddClientDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        logintoken= "";
+
         Log.d("whichclass", "AddClientDetailActivity");
         try {
-            logintoken = getIntent().getStringExtra("logintoken");
+            //logintoken = getIntent().getStringExtra("logintoken");
+            //if(logintoken.equals("")||logintoken.equals(null)){
+                FileHelper fh= new FileHelper();
+                logintoken= fh.readLoginToken(this);
+            //}
 
             //api response from last thread
             response1 = getIntent().getStringExtra("response");
@@ -151,7 +157,11 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
                 }
 
             });}catch(Exception e){
-
+            runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    showFailureMessage();
+                }});
 
             Log.d("tag123", e.toString());
         }

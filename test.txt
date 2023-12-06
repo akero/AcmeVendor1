@@ -1,20 +1,11 @@
 dash
 
-edit client-
-shows add client
-api call return seems to ask for logintoken- add login token to call
-
 edit vendor-
 title says add vendor
-
-
-
 
 client login-
 add campaign-
 api returns image required
-//on failure it says added successfully
-
 
 
 Backend-
@@ -33,6 +24,9 @@ site not found for old sites
 ----------------------------------
 add new site-
 api call returns method not called exception
+----------------------------------
+edit client- 
+api call return seems to ask for logintoken- add login token to call. line 319 apireference
 
 
 
@@ -52,4 +46,7 @@ vendor login-
 //gray screen on login
 //add- image field required
 //on fail says success
+//on failure it says added successfully
 
+edit client-
+//shows add client
