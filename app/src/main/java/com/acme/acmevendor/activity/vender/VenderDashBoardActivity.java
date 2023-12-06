@@ -93,7 +93,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         jsonArray1= new JSONArray();
         jsonArray2= new JSONArray();
         //Log.d("vdbatest", "logintoken "+loginToken);
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList();
     }
@@ -163,7 +163,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
-                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, false);
 
                     //animation code
 

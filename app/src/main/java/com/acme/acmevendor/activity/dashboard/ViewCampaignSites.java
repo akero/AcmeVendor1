@@ -70,7 +70,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, true);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList(idofcampaign);
     }
@@ -188,7 +188,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
-                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, true);
 
                     //animation code
                             progressBar.clearAnimation();

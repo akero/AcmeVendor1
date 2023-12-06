@@ -27,6 +27,8 @@ import java.net.URL;
 public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapter.ViewHolder> {
     private Context context;
     private JSONArray jsonArray;
+    private boolean showEdit;
+
 
     public void clearData() {
         // Clear the existing data
@@ -34,9 +36,10 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
         notifyDataSetChanged();
     }
 
-    public CampaignListAdapter(Context context, JSONArray jsonArray) {
+    public CampaignListAdapter(Context context, JSONArray jsonArray, boolean showEdit) {
         this.context = context;
         this.jsonArray = jsonArray;
+        this.showEdit = showEdit;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -44,6 +47,7 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
         TextView tvSiteNo;
         TextView tvUnitNo;
         ImageView tvImage;
+        ImageView edit;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -51,6 +55,7 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
             tvSiteNo = itemView.findViewById(R.id.tvSiteNo);
             tvUnitNo = itemView.findViewById(R.id.tvUnitNo);
             tvImage= itemView.findViewById(R.id.ivText);
+            edit= itemView.findViewById(R.id.edit);
         }
     }
 
@@ -63,6 +68,8 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         try {
+            holder.edit.setVisibility(showEdit ? View.VISIBLE : View.GONE);
+
             JSONObject jsonObject = jsonArray.getJSONObject(position);
             holder.tvSiteNo.setText(jsonObject.getString("name"));
             if(jsonObject.has("uid")) {

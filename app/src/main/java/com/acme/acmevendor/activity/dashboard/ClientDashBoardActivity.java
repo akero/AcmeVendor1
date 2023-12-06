@@ -69,7 +69,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         Log.d("tg4", loginToken);
 
 
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
         //TODO remove after adding to ui
        // jsonArray1= new JSONArray();
@@ -199,7 +199,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
                         GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                         binding.rvCampaignList.setLayoutManager(layoutManager);
-                        CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                        CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, false);
 
                         //animation code
                         progressBar.clearAnimation();

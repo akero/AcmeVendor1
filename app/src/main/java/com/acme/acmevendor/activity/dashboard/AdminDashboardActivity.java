@@ -78,7 +78,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         jsonArray1= new JSONArray();
         jsonArray2=new JSONArray();
         jsonArray3= new JSONArray();
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
         Log.d("tg5","4");
 
@@ -246,7 +246,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                                   GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                                   binding.rvCampaignList.setLayoutManager(layoutManager);
-                                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1);
+                                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, true);
                                     binding.rvCampaignList.setAdapter(adapter);
                               }});
         }catch (Exception e){

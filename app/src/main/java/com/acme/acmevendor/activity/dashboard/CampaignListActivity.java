@@ -60,7 +60,7 @@ public class CampaignListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray, false);
         binding.rvCampaignList.setAdapter(adapter);
     }
 
