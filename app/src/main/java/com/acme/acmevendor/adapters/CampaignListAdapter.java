@@ -28,8 +28,6 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
     private Context context;
     private JSONArray jsonArray;
     private boolean showEdit;
-
-
     public void clearData() {
         // Clear the existing data
         jsonArray = new JSONArray(); // Or clear the existing array in another appropriate way
@@ -69,6 +67,10 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         try {
             holder.edit.setVisibility(showEdit ? View.VISIBLE : View.GONE);
+            holder.edit.setOnClickListener(v -> {
+                ((AdminDashboardActivity) context).onEditClick(position);
+            });
+
 
             JSONObject jsonObject = jsonArray.getJSONObject(position);
             holder.tvSiteNo.setText(jsonObject.getString("name"));
@@ -114,7 +116,6 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
             Log.e("tag41", "Error in onBindViewHolder: " + e.getMessage());
         }
     }
-
 
     @Override
     public int getItemCount() {

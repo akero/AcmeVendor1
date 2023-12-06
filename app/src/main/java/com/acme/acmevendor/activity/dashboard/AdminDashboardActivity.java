@@ -344,6 +344,13 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         // ... your logic ...
     }
 
+    public void onEditClick(int position){
+        //add code to dropdown a list which says delete
+        //delete code
+        
+
+    }
+
     public void onItemClick(int position) {
         try {
             Log.d("tag51", Integer.toString(position));
