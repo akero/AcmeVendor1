@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -344,10 +346,25 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         // ... your logic ...
     }
 
-    public void onEditClick(int position){
+    public void onEditClick(int position, View view){
         //add code to dropdown a list which says delete
         //delete code
+        // Context should be your activity or fragment context
+        PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
+        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.delete) {
+                    // Handle delete action
 
+                    
+
+                    return true;
+                }
+                return false;
+            }
+        });
+        popup.show(); // Show the popup menu
 
     }
 

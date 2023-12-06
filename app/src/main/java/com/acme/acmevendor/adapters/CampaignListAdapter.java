@@ -68,7 +68,7 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
         try {
             holder.edit.setVisibility(showEdit ? View.VISIBLE : View.GONE);
             holder.edit.setOnClickListener(v -> {
-                ((AdminDashboardActivity) context).onEditClick(position);
+                ((AdminDashboardActivity) context).onEditClick(position, v);
             });
 
 
