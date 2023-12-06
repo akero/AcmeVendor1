@@ -2,7 +2,10 @@ image upload
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
->add delete function
+>add delete function line 348 admindash
+>add code to dropdown a list which says delete
+delete code
+
 check permission in phone
 performance optimizations
 add failure checks to everything
