@@ -1,5 +1,6 @@
->image upload
-test- line 359 addsitedetails
+>backend tasks
+Where do I send call to delete campaign, site, client, vendor?
+
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
@@ -25,6 +26,11 @@ TODO ask backend dev why adding site says site not found
 site id from backend in case user wants to edit further.
 >api call return seems to ask for logintoken- add login token to call. line 319 apireference
 
+image upload
+//test- line 359 addsitedetails
+convert to byte or file ask gpt- pending backend
+plan making api call
+make api call
 
 
 
