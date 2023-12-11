@@ -1,4 +1,6 @@
-image upload
+>image upload
+test- line 359 addsitedetails
+
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 

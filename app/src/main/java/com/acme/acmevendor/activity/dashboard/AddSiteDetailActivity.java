@@ -1,5 +1,8 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import androidx.activity.result.ActivityResultLauncher;
+//import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -327,13 +330,18 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        } catch (ActivityNotFoundException e) {
-        }
-    }
+    private static final int PICK_IMAGE = 1;
+
+    public void dispatchTakePictureIntent() {
+
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            String[] mimeTypes = {"image/jpeg", "image/png"};
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            startActivityForResult(intent, PICK_IMAGE);
+  }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -343,6 +351,17 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             binding.ivCampaignImage.setImageBitmap(imageBitmap);
             getlatlong();
         }
+
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri selectedImage = data.getData();
+                Log.d("tag2321", "image picked");
+                // Use the Uri to load the image
+                // You might need to use ContentResolver to get the actual image path or perform other operations depending on your use case
+            }
+        }
+
     }
 
     private void getlatlong() {
