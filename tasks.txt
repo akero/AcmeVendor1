@@ -15,13 +15,13 @@ test on phone ask the monkes
 
 notification icon- ask what it does
 add campaign admin file upload pending from backend
-email about https://acme.warburttons.com/api/get_campaign_sites/18
-TODO pass correct token in campaignlist in vendor dash 
+>check email about https://acme.warburttons.com/api/get_campaign_sites/18
+>TODO pass correct token in campaignlist in vendor dash 
 TODO ask backend dev why adding site says site not found
-TODO line 123 addclentdetailactivity- pending from backend. follow up.
-TODO addsitedetailactivity line 311 pendng from backend. After this accept 
+>TODO line 123 addclentdetailactivity- pending from backend. follow up.
+>TODO addsitedetailactivity line 311 pendng from backend. After this accept 
 site id from backend in case user wants to edit further.
-api call return seems to ask for logintoken- add login token to call. line 319 apireference
+>api call return seems to ask for logintoken- add login token to call. line 319 apireference
 
 
 

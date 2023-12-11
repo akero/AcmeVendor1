@@ -53,10 +53,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     JSONArray jsonArray1;
     JSONArray jsonArray2;//client array
     JSONArray jsonArray3;//vendor array
-
     ProgressBar progressBar;
     Animation rotateAnimation;
-
 
     //todo access token save to memory add to api call
     @Override
@@ -95,21 +93,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         Log.d("addbatest", "response is "+ response);
         Log.d("tag21","5");
         implementUi(response);
-
-        /*
-        //TODO: handle population
-        String[] dataStrings = extractDataStrings(response);
-        // Usage example
-        for(String dataStr : dataStrings) {
-            Log.d("tag2222",dataStr);
-        }
-        //id array. send to ui
-        String[] idArray= extractIds(dataStrings);
-
-        //TODO extract the unit id and pass that too
-        implementUi(response);
-        Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
- */
     }
 
     private void implementUi(String response){
@@ -169,8 +152,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 //imageUrl = "https://acme.warburttons.com/" + imageUrl;
                                 //jsonObject.putOpt("image", imageUrl); // Store the full image URL
 
-
-
                                 //to pass to client class
                                 jsonObject1.putOpt("id", dataObject.optInt("id"));
                                 jsonObject1.putOpt("name", dataObject.optString("name"));
@@ -184,7 +165,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject1.putOpt("updated_at", dataObject.optString("updated_at"));
 
                                 //siteDetail.setName(dataObject.optString("name"));
-
 
                                 jsonArray1.put(jsonObject);
                                 jsonArray2.put(jsonObject1);
@@ -224,7 +204,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                                 jsonObject2.putOpt("updated_at", dataObject.optString("updated_at"));
                                 //siteDetail.setName(dataObject.optString("name"));
 
-
                                 jsonArray1.put(jsonObject);
                                 jsonArray3.put(jsonObject2);
 //TODO here
@@ -239,12 +218,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                               @Override
                               public void run() {
                                   // Your UI update code goes here
-
-
                                               progressBar.clearAnimation();
                                               progressBar.setVisibility(View.GONE);
                                               //view.setVisibility(View.GONE);
-
 
                                   GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                                   binding.rvCampaignList.setLayoutManager(layoutManager);
@@ -261,7 +237,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //TODO pass correct logintoken here
         //logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
         Log.d("tg5","fin");
-
 
         APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, logintoken, this);
     }
@@ -321,7 +296,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         binding.tvCompaign.setBackgroundResource(0);
         binding.tvCompaign.setTextColor(R.color.colorPrimaryDark);
 
-
         venderList();
         // ... your logic ...
     }
@@ -357,7 +331,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 if (item.getItemId() == R.id.delete) {
                     // Handle delete action
 
-                    
 
                     return true;
                 }
@@ -389,7 +362,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                 // Start new activity and pass the retrieved data
 
-
                 startActivity(new Intent(this, ViewCampaignSites.class)
                         .putExtra("campaignType", "old")
                         .putExtra("id", id)
@@ -403,9 +375,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 Log.d("tag91", jsonArray2.getJSONObject(position).toString());
                 Log.d("tag91",jsonArray2.toString());
                 Log.d("tag91",jsonObject1.toString());
-
                 Log.d("tag91",Integer.toString(position));
-
                 Log.d("tg11", id);
 
                 startActivity(new Intent(this, AdminViewClientDetails.class)
@@ -472,11 +442,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         intent.putExtra("logintoken", logintoken);
         startActivity(intent);
     }
-
     }
 
     public void onNotificationClick(View view){
-        //TODO ask lodu what this does
+        //TODO ask dev what this does
     }
 
     public void onAddClientClick(View view) {
@@ -485,9 +454,5 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
     public void onAddVenderClick(View view) {
         startActivity(new Intent(this, AddVenderActivity.class));
-    }
-
-    public void onDeleteClientClick(View view) {
-        // ... your logic ...
     }
 }

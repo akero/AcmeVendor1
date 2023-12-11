@@ -271,31 +271,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         });
         dialog.show();
     }
-    /*@Override
-    public void onResponseReceived(String response){
-        Log.d("tg6", response);
-        try{
-            JSONObject jsonobj= new JSONObject(response);
-            if(jsonobj.get("success").equals("false")) {
-                Toast.makeText(this, "Please check the fields", Toast.LENGTH_SHORT);
-            }else{
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.etName.setText("");
-                        binding.etVendor.setText("");
-                        binding.etStartDate.setText("");
-                        binding.etEndDate.setText("");
-                        showSuccessMessage();
-                    }
-                });
-            }
-        }catch (Exception e){
-            Log.d("tg9", e.toString());
-        }
 
-    }
-*/
     public void showSuccessMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);

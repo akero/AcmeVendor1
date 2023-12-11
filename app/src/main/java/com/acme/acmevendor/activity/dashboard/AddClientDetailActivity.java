@@ -44,20 +44,12 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
         Log.d("whichclass", "AddClientDetailActivity");
         try {
-            //logintoken = getIntent().getStringExtra("logintoken");
-            //if(logintoken.equals("")||logintoken.equals(null)){
                 FileHelper fh= new FileHelper();
                 logintoken= fh.readLoginToken(this);
-            //}
 
             //api response from last thread
             response1 = getIntent().getStringExtra("response");
             //siteNumber= getIntent().getStringExtra("siteNumber");
-
-
-
-            //Log.d("tg23", response1);
-
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -77,9 +69,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
             //TODO here
             Log.d("tg23", "sadasgdsgds"+apiresponse);
-
             try {
-
                 //inserting data into UI
                 binding.etFullName.setText(jsonobj.getString("name"));
                 binding.etEmail.setText(jsonobj.getString("email"));
@@ -190,38 +180,6 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
         });
         dialog.show();
     }
-
-    /*@Override
-    public void onResponseReceived(String response){
-
-        Log.d("tg6", response);
-        try{
-            JSONObject jsonobj= new JSONObject(response);
-            if(jsonobj.get("success").equals("false")) {
-                Toast.makeText(this, "Please check the fields", Toast.LENGTH_SHORT);
-
-            }else{
-
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-            /*            binding.etFullName.setText("");
-                        binding.etEmail.setText("");
-                        binding.etCompanyName.setText("");
-                        binding.etCompanyAddress.setText("");
-                        binding.etGst.setText("");
-                        binding.etPhone.setText("");
-
-
-                        showSuccessMessage();
-                    }
-                });
-            }
-        }catch (Exception e){
-            Log.d("tg9", e.toString());
-        }
-    }*/
 
     public void showSuccessMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
