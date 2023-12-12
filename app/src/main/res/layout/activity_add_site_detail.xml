@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,11 +29,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:src="@drawable/ic_notification" />
-
-
         </RelativeLayout>
-
-
 
     <ScrollView
         android:id="@+id/scrollview"
@@ -51,10 +43,6 @@
         android:padding="@dimen/_20sdp"
         android:layout_height="match_parent">
 
-
-
-
-
         <TextView
             android:id="@+id/tvAddSiteDetail"
             android:layout_width="match_parent"
@@ -65,17 +53,12 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/llUnit"
             android:layout_below="@id/tvAddSiteDetail"
             android:orientation="horizontal">
-
-
-
-
 
                <RelativeLayout
                 android:layout_width="match_parent"
@@ -93,7 +76,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
 
-
                    <EditText
                        android:id="@+id/etSiteNo"
                        android:layout_width="match_parent"
@@ -106,13 +88,8 @@
                        android:textColor="@color/colorPrimary"
                        android:textColorHint="@color/texthintcolor"
                        android:textSize="@dimen/_12ssp" />
-
             </RelativeLayout>
-
-
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,13 +98,11 @@
             android:layout_below="@id/llUnit"
             android:orientation="horizontal">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/_2sdp">
-
 
                 <TextView
                     android:id="@+id/tvStartDate"
@@ -138,7 +113,6 @@
                     android:text="Start Date"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <EditText
                     android:id="@+id/etStartDate"
@@ -157,20 +131,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
-
-
             </RelativeLayout>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-
 
                 <TextView
                     android:id="@+id/tvEndDate"
@@ -181,7 +148,6 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <EditText
                     android:id="@+id/etEndDate"
@@ -200,16 +166,8 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
-
-
             </RelativeLayout>
-
-
-
         </LinearLayout>
-
-
-
 
         <TextView
             android:id="@+id/tvLocation"
@@ -221,7 +179,6 @@
             android:text="Location"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
-
 
         <EditText
             android:id="@+id/etLocation"
@@ -236,8 +193,6 @@
             android:textColorHint="@color/texthintcolor"
             android:textSize="@dimen/_12ssp" />
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -245,13 +200,11 @@
             android:layout_below="@id/etLocation"
             android:orientation="horizontal">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/_2sdp">
-
 
                 <TextView
                     android:id="@+id/tvLatitude"
@@ -262,7 +215,6 @@
                     android:text="Latitude"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <EditText
                     android:id="@+id/etLatitude"
@@ -276,19 +228,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
-
             </RelativeLayout>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-
 
                 <TextView
                     android:id="@+id/tvLongitude"
@@ -299,7 +245,6 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <EditText
                     android:id="@+id/etLongitude"
@@ -313,27 +258,21 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
-
             </RelativeLayout>
-
-
-
         </LinearLayout>
 
-  <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/llDimensions"
             android:layout_below="@id/llLocation"
             android:orientation="horizontal">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/_2sdp">
-
 
                 <TextView
                     android:id="@+id/tvHeight"
@@ -344,7 +283,6 @@
                     android:text="Dimension / Size in sq. ft"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <EditText
                     android:id="@+id/etHeight"
@@ -359,19 +297,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
-
             </RelativeLayout>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-
 
                 <TextView
                     android:id="@+id/tvwidth"
@@ -382,7 +314,6 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <EditText
                     android:id="@+id/etWidth"
@@ -397,14 +328,8 @@
                     android:hint="Width"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_12ssp" />
-
             </RelativeLayout>
-
-
-
         </LinearLayout>
-
-
 
         <TextView
             android:id="@+id/tvTotalArea"
@@ -416,7 +341,6 @@
             android:text="Total Area in sq. ft"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
-
 
         <EditText
             android:id="@+id/etTotalArea"
@@ -431,8 +355,6 @@
             android:textColorHint="@color/texthintcolor"
             android:textSize="@dimen/_12ssp" />
 
-
-
         <TextView
             android:id="@+id/tvMediaType"
             android:layout_width="match_parent"
@@ -444,7 +366,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
 
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -455,7 +376,6 @@
             android:background="@drawable/primarystroke">
 
             <Spinner
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -469,7 +389,6 @@
                 android:src="@drawable/ic_arrow"/>
         </FrameLayout>
 
-
     <TextView
             android:id="@+id/tvIllumination"
             android:layout_width="match_parent"
@@ -480,7 +399,6 @@
             android:text="Illumination"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
-
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -505,7 +423,6 @@
                 android:src="@drawable/ic_arrow"/>
         </FrameLayout>
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
@@ -514,13 +431,11 @@
             android:background="@drawable/primarystroke"
             android:layout_below="@id/flIllumination">
 
-
             <View
                 android:id="@+id/view"
                 android:layout_width="1dp"
                 android:layout_height="1dp"
                 android:layout_centerInParent="true" />
-
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -544,7 +459,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
-
             <com.acme.acmevendor.utility.RoundRectCornerImageView
                 android:id="@+id/ivCampaignImage"
                 android:layout_width="match_parent"
@@ -556,10 +470,7 @@
                 android:background="@color/colorPrimarylight"
                 android:onClick="addImage"
                 android:scaleType="fitXY" />
-
-
         </RelativeLayout>
-
 
         <Button
             android:id="@+id/btnSave"
@@ -575,7 +486,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_14ssp" />
 
-
         <Button
             android:id="@+id/btnAddMoreSite"
             android:layout_width="match_parent"
@@ -590,8 +500,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_14ssp" />
 
-
-
         <Button
             android:id="@+id/btnClose"
             android:layout_width="match_parent"
@@ -605,22 +513,13 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
-
-
-
-
-
-
-
     </RelativeLayout>
 
     </ScrollView>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimaryDark" />
-
     </RelativeLayout>
 </layout>

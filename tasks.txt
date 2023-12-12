@@ -1,12 +1,23 @@
->backend tasks
-Where do I send call to delete campaign, site, client, vendor?
+>notification icon- ask what it does
+>TODO pass correct token in campaignlist in vendor dash 
+/check email about https://acme.warburttons.com/api/get_campaign_sites/18- no such email
+/TODO line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
+/add campaign admin file upload pending from backend
+/TODO ask backend dev why adding site says site not found
+/TODO addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
+
+image upload
+//test- line 359 addsitedetails
+convert to byte or file ask gpt- /pending backend
+plan making api call
+make api call
 
 
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
-add delete function line 348 admindash
+add delete function line 348 admindash- send delete api call
 add code to dropdown a list which says delete
 delete code
 
@@ -17,24 +28,9 @@ fix otp box shake
 test
 test on phone ask the monkes
 
-notification icon- ask what it does
-add campaign admin file upload pending from backend
->check email about https://acme.warburttons.com/api/get_campaign_sites/18
->TODO pass correct token in campaignlist in vendor dash 
-TODO ask backend dev why adding site says site not found
->TODO line 123 addclentdetailactivity- pending from backend. follow up.
->TODO addsitedetailactivity line 311 pendng from backend. After this accept 
-site id from backend in case user wants to edit further.
->api call return seems to ask for logintoken- add login token to call. line 319 apireference
 
-image upload
-//test- line 359 addsitedetails
-convert to byte or file ask gpt- pending backend
-plan making api call
-make api call
-
-
-
+//backend tasks
+//Where do I send call to delete campaign, site, client, vendor?
 //add failure checks to everything
 //put image into dash
 //images read pending all
