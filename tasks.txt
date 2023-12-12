@@ -2,6 +2,7 @@
 Where do I send call to delete campaign, site, client, vendor?
 
 
+
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 

@@ -209,7 +209,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 //TODO here
                             }
                         }
-
                     }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
@@ -441,7 +440,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         Intent intent = new Intent(AdminDashboardActivity.this, AddCampaignDetails.class);
         intent.putExtra("logintoken", logintoken);
         startActivity(intent);
-    }
+        }
     }
 
     public void onNotificationClick(View view){
