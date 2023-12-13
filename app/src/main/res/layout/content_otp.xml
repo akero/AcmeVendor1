@@ -9,7 +9,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/ic_main_bg"
         android:clipChildren="false"
-        android:padding="@dimen/_20sdp">
+        android:paddingTop= "26dp"
+        android:paddingBottom= "26dp">
 
         <!-- Loading code -->
 
@@ -27,6 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:layout_marginEnd="26dp"
+            android:layout_marginStart="26dp"
+
             android:clipChildren="false"
             android:orientation="horizontal">
 
@@ -90,6 +94,7 @@
                 android:maxLength="1"
                 android:elevation="2dp"
                 android:padding="@dimen/_10sdp"
+
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +108,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/tvRememberPassword"
+            android:paddingLeft= "26dp"
+            android:paddingRight="26dp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/dmsansbold"
             android:text="Welcome To\nAcme Media Group"
@@ -119,6 +126,8 @@
             android:fontFamily="@font/dmsansregular"
             android:layout_above="@id/etEmailId"
             android:layout_marginBottom="6dp"
+            android:paddingLeft= "26dp"
+            android:paddingRight="26dp"
             android:text="Enter OTP"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
