@@ -1,11 +1,12 @@
+>line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
+-you need to use put method to edit client, when you are using PUT method each data should send by using query params
+>implement clentdetail in addclientdetailactivity line 99
+
 pass correct token in campaignlist in vendor dash 
 
 check email about https://acme.warburttons.com/api/get_campaign_sites/18
 -you need to select a image in postman while creating a campaign, after doing this you will not get this error
 https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
-
->line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
--you need to use put method to edit client, when you are using PUT method each data should send by using query params
 
 add campaign admin file upload pending from backend
 -you need to select a image in postman while creating a campaign, after doing this you will not get this error

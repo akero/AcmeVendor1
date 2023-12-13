@@ -96,6 +96,8 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
 
+            //here 
+
             String name=binding.etFullName.getText().toString();
             String email=binding.etEmail.getText().toString();
             String phone_number=binding.etPhone.getText().toString();

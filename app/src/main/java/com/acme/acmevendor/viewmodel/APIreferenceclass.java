@@ -316,7 +316,7 @@ public class APIreferenceclass {
 
         Log.d("tag58","Inside viewsitedetail api");
 
-        querytype= 1; ////post //TODO change to put (2)
+        querytype= 2; //TODO change to put (2)
 
         callapi(headers, jsonPayload, context, querytype ,url);
 
