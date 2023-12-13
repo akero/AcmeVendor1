@@ -66,6 +66,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     String loginToken;
     String campaignId;
     String selectedItem, selectedItem1;
+    String editingsite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
             campaignId= getIntent().getStringExtra("campaignId");
+            editingsite= "";
+            editingsite= getIntent().getStringExtra("editingsite");
         }catch(Exception e){
             Log.d("tg90", e.toString());}
 
@@ -312,10 +315,14 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             e.printStackTrace();
         }
 
-        queryType= 2; //PUT
-        siteno= siteDetail.getSiteNo();
-        //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
-        APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
+        if(editingsite.equals("yes")){
+            queryType= 2; //PUT
+            siteno= siteDetail.getSiteNo();
+            //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
+            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
+        }else{
+            //here make new call to add site
+        }
     }
 
     public void addImage(View view) {

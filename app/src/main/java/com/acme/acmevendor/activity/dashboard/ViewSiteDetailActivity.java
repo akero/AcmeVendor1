@@ -226,6 +226,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                     Intent intent= new Intent(ViewSiteDetailActivity.this, AddSiteDetailActivity.class);
                     intent.putExtra("loginToken", logintoken);
                     intent.putExtra("campaignId", campaignId);
+                    intent.putExtra("editingsite", "yes");
                     Log.d("tag000", logintoken+ "| "+ campaignId+"| "+  siteNumber+ "| "+ jsonobj.toString());
                     Log.d("tag000", siteNumber);
 

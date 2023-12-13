@@ -14,7 +14,7 @@ add campaign admin file upload pending from backend
 ask backend dev why adding site says site not found
 addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
 >You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
->Site edit working check site add
+>Site edit working check site add- line 324
 
 image upload
 convert to byte or file ask gpt
