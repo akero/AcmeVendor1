@@ -305,7 +305,33 @@ public class APIreferenceclass {
         //TODO add siteNumber to api call
 //here
 
-        String url="https://acme.warburttons.com/api/clients";
+        Log.d("tag21","1");
+
+        String url="https://acme.warburttons.com/api/clients/";
+        jsonString= fixjsonstring(jsonString);
+
+        String urlEncodedParams = encodeJsonToUrl(jsonString);
+
+
+
+        url= url+"?"+urlEncodedParams;
+
+        querytype= 2; //PUT
+
+        Log.d("tg99", "url "+ url +  "jsonstring"+ jsonString );
+
+
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+
+        callapi(headers, jsonPayload, context, querytype, url);
+      /*  String url="https://acme.warburttons.com/api/clients";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
 
         String jsonPayload = jsonPayload1.toString();
@@ -319,7 +345,7 @@ public class APIreferenceclass {
         querytype= 2; //TODO change to put (2)
 
         callapi(headers, jsonPayload, context, querytype ,url);
-
+*/
     }
 
     //addcampaignactivity

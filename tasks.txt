@@ -1,6 +1,6 @@
 line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
 -you need to use put method to edit client, when you are using PUT method each data should send by using query params
->make api call line 306 apireferenceclass
+make api call line 306 apireferenceclass- pending email
 
 pass correct token in campaignlist in vendor dash 
 
@@ -13,7 +13,7 @@ add campaign admin file upload pending from backend
 
 ask backend dev why adding site says site not found
 addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
--You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
+>You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
 
 image upload
 convert to byte or file ask gpt
