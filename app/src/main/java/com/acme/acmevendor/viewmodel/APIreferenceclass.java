@@ -300,10 +300,10 @@ public class APIreferenceclass {
     }
 
     //addclientdetailactivity
-    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a, int b){
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a, int b, String jsonString){
 
         //TODO add siteNumber to api call
-
+//here
 
         String url="https://acme.warburttons.com/api/clients";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);

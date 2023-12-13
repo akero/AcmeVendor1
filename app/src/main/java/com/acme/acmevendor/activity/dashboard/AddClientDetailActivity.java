@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
+import com.acme.acmevendor.viewmodel.SiteDetail;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,6 +28,7 @@ import com.acme.acmevendor.databinding.ActivityAddClientDetailBinding;
 
 import com.acme.acmevendor.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AddClientDetailActivity extends AppCompatActivity implements ApiInterface {
@@ -96,7 +98,9 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
 
-            //here 
+            //new setters
+
+            ClientDetail clientDetail= new ClientDetail();
 
             String name=binding.etFullName.getText().toString();
             String email=binding.etEmail.getText().toString();
@@ -104,6 +108,34 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             String company_name=binding.etCompanyName.getText().toString();
             String company_address=binding.etCompanyAddress.getText().toString();
             String gst_no= binding.etGst.getText().toString();
+
+            clientDetail.setName(name);
+            clientDetail.setEmail(email);
+            clientDetail.setPhoneNumber(phone_number);
+            clientDetail.setCompanyName(company_name);
+            clientDetail.setCompanyAddress(company_address);
+            clientDetail.setGstNo(gst_no);
+            //TODO add image
+
+            try{
+                JSONObject jsonobj= new JSONObject();
+                jsonobj.put("name", clientDetail.getName()!= null? clientDetail.getName():"");
+                jsonobj.put("email", clientDetail.getEmail()!=null? clientDetail.getEmail():"");
+                jsonobj.put("phone", clientDetail.getPhoneNumber()!= null? clientDetail.getPhoneNumber():"");
+                jsonobj.put("companyname", clientDetail.getComapnyName()!=null? clientDetail.getComapnyName():"");
+                jsonobj.put("companyaddress", clientDetail.getCompanyAddress()!= null? clientDetail.getCompanyAddress():"");
+                jsonobj.put("gst", clientDetail.getGstNo()!=null? clientDetail.getGstNo():"");
+
+
+
+            }catch(JSONException e){
+                Log.d("erroraddclientdetailactivity", e.toString());
+            }
+
+
+
+            //end of new setters
+
 
             JSONObject jsonPayload= new JSONObject();
             try{
@@ -119,7 +151,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             }
 
             //TODO here- PENDING FROM BACKEND. PUT not working
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 0, 0);
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 0, 0, jsonPayload.toString());
         }
     }
 

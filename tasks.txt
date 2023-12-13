@@ -1,6 +1,6 @@
->line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
+line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
 -you need to use put method to edit client, when you are using PUT method each data should send by using query params
->implement clentdetail in addclientdetailactivity line 99
+>make api call line 306 apireferenceclass
 
 pass correct token in campaignlist in vendor dash 
 
