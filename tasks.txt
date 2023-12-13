@@ -1,21 +1,3 @@
-line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
--you need to use put method to edit client, when you are using PUT method each data should send by using query params
-make api call line 306 apireferenceclass- pending email
-
-pass correct token in campaignlist in vendor dash 
-
-check email about https://acme.warburttons.com/api/get_campaign_sites/18
--you need to select a image in postman while creating a campaign, after doing this you will not get this error
-https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
-
-add campaign admin file upload pending from backend
--you need to select a image in postman while creating a campaign, after doing this you will not get this error
-
-ask backend dev why adding site says site not found
-addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
->You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
->Site edit working check site add- line 324
-
 image upload
 convert to byte or file ask gpt
 -just upload file the entry is not required in backend
@@ -25,10 +7,28 @@ make api call
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
-add delete function line 348 admindash- send delete api call
+>add delete function line 348 admindash- send delete api call
 add code to dropdown a list which says delete
 delete code
 -have to send a delete crud call
+
+
+
+ask backend dev why adding site says site not found
+addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
+You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
+Site edit working check site add- line 324
+site add post not working- pending email
+
+line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
+-you need to use put method to edit client, when you are using PUT method each data should send by using query params
+make api call line 306 apireferenceclass- pending email
+
+check email about https://acme.warburttons.com/api/get_campaign_sites/18
+-you need to select a image in postman while creating a campaign, after doing this you will not get this error
+https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
+think this is create> edit test- says image required- pending till upload image is implemented
+
 
 
 
@@ -37,6 +37,7 @@ test on phone ask the monkes
 
 >notification icon- ask what it does
 
+//pass correct token in campaignlist in vendor dash 
 //fix otp box shake
 //backend tasks
 //Where do I send call to delete campaign, site, client, vendor?

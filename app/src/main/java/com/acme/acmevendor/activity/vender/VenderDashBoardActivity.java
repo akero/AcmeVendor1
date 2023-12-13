@@ -185,6 +185,11 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         int vendorclientorcampaign= 2;
         //TODO pass correct token
         String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+//TODO uncomment this
+        /*
+        FileHelper fh= new FileHelper();
+        logintoken= fh.readLoginToken(this);
+*/
         int a=0;
 
         //animation code

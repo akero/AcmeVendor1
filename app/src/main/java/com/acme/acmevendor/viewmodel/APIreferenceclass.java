@@ -415,10 +415,43 @@ public class APIreferenceclass {
     }
 
 
-    //addsitedetailactivity
+    //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
 
 
+
+        Log.d("tag21","1");
+
+        String url="https://acme.warburttons.com/api/sites/";
+        jsonString= fixjsonstring(jsonString);
+
+        String urlEncodedParams = encodeJsonToUrl(jsonString);
+
+
+
+        url= url+siteno+"?"+urlEncodedParams;
+
+        querytype= queryType;
+
+        Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
+
+
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+
+        callapi(headers, jsonPayload, context, querytype, url);
+    }
+
+    //addsitedetailactivity- add new site
+    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, int a) {
+
+        //here
 
         Log.d("tag21","1");
 
