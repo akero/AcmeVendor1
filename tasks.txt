@@ -1,10 +1,7 @@
 >image upload
-convert to byte or file ask gpt- have to upload file
 -just upload file the entry is not required in backend
 //plan making api call
->https://chat.openai.com/share/ff49c872-65d2-42f0-9d9c-8d443e12e3a3
-make api call
->line 459 apiref
+>line 459 apiref uncomment callapi2 and ask gpt to write it
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
