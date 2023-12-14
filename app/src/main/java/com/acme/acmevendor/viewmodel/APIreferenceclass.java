@@ -1,6 +1,7 @@
 package com.acme.acmevendor.viewmodel;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -414,8 +415,41 @@ public class APIreferenceclass {
         callapi(headers, jsonPayload, context, querytype ,url);
     }
 
+//here
+    //addsitedetailactivity- edit site (if image selected)
+    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
 
-    //addsitedetailactivity- edit site
+
+
+        Log.d("tag21","1");
+
+        String url="https://acme.warburttons.com/api/sites/";
+        jsonString= fixjsonstring(jsonString);
+
+        String urlEncodedParams = encodeJsonToUrl(jsonString);
+
+
+
+        url= url+siteno+"?"+urlEncodedParams;
+
+        querytype= queryType;
+
+        Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
+
+
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+
+        callapi(headers, jsonPayload, context, querytype, url);
+    }
+
+    //addsitedetailactivity- edit site (if image not selected)
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
 
 

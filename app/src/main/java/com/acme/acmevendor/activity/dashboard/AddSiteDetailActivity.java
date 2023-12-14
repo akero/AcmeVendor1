@@ -57,6 +57,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     private Calendar cal = Calendar.getInstance();
     private int yy, mm, dd;
+    Uri selectedImage;
+
     private String imageUrl = "";
     private final int REQUEST_IMAGE_CAPTURE = 101;
 
@@ -82,6 +84,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
         selectedItem="";
         selectedItem1="";
+        selectedImage= null;
 
         FileHelper fh= new FileHelper();
         loginToken= fh.readLoginToken(this);
@@ -319,8 +322,15 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             queryType= 2; //PUT
             siteno= siteDetail.getSiteNo();
             //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
-            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
-        }else{
+            if(selectedImage== null){
+            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);}
+            else{
+                //here
+                APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, selectedImage);
+                selectedImage= null;
+                }
+        }
+        else{
             //here make new call to add site
             queryType= 2; //PUT
             siteno= siteDetail.getSiteNo();
@@ -353,7 +363,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
   }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
          super.onActivityResult(requestCode, resultCode, data);
@@ -366,10 +375,13 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
             if (data != null) {
-                Uri selectedImage = data.getData();
+                selectedImage = data.getData();
                 Log.d("tag2321", "image picked");
                 // Use the Uri to load the image
                 // You might need to use ContentResolver to get the actual image path or perform other operations depending on your use case
+
+
+
             }
         }
 
