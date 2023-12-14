@@ -1,7 +1,9 @@
 package com.acme.acmevendor.viewmodel;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -433,7 +435,8 @@ public class APIreferenceclass {
 
         if (selectedImage != null) {
             // Handle multipart request with image
-            File imageFile = new File(selectedImage.getPath()); // Convert Uri to File
+            File imageFile = new File(getRealPathFromURI(context, selectedImage));
+            // Convert Uri to File
             byte[] fileBytes = convertFileToByteArray(imageFile); // Convert file to byte array
 
             // Prepare multipart body
@@ -455,7 +458,7 @@ public class APIreferenceclass {
             headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
 
             // Call the API with multipart data
-            //callapi2(headers, multipartBody, context, querytype, url);
+            callapi2(headers, multipartBody, context, querytype, url);
             //here
         } else {
             // Regular API call with JSON payload
@@ -469,6 +472,24 @@ public class APIreferenceclass {
             callapi(headers, jsonPayload, context, querytype, url);
         }
     }
+    private String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+
+
+
 
     // Method to convert file to byte array
     private byte[] convertFileToByteArray(File file) {
@@ -496,7 +517,7 @@ public class APIreferenceclass {
 
 
     //addsitedetailactivity- add new site
-    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, int a) {
+    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
 
         //here
 
@@ -788,4 +809,53 @@ public class APIreferenceclass {
             Log.d("tag21", e.toString());
         }
     }
+
+    //to upload image in addsitedetails. for edit
+    public void callapi2(Map<String, String> headers, final byte[] multipartBody, Context context, int queryType, String url) {
+        try {
+            CronetEngine cronetEngine = new CronetEngine.Builder(context).build();
+
+            UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
+                    url,
+                    new MyUrlRequestCallback((ApiInterface) context),
+                    Executors.newSingleThreadExecutor()
+            );
+
+            for (Map.Entry<String, String> header : headers.entrySet()) {
+                requestBuilder.addHeader(header.getKey(), header.getValue());
+            }
+
+            requestBuilder.setHttpMethod("PUT");
+            requestBuilder.setUploadDataProvider(new UploadDataProvider() {
+                @Override
+                public long getLength() {
+                    return multipartBody.length;
+                }
+
+                @Override
+                public void read(UploadDataSink uploadDataSink, ByteBuffer byteBuffer) {
+                    byteBuffer.put(multipartBody);
+                    byteBuffer.flip();
+                    uploadDataSink.onReadSucceeded(false);
+                }
+
+                @Override
+                public void rewind(UploadDataSink uploadDataSink) {
+                    uploadDataSink.onRewindSucceeded();
+                }
+
+                @Override
+                public void close() throws IOException {
+                    // No-op
+                }
+            }, Executors.newSingleThreadExecutor());
+
+            UrlRequest request = requestBuilder.build();
+            request.start();
+
+        } catch (Exception e) {
+            Log.e("APIreferenceclass", "Error in callapi2", e);
+        }
+    }
+
 }

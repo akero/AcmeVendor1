@@ -329,10 +329,10 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }
         else{
             //here make new call to add site
-            queryType= 2; //PUT
+            queryType= 1; //POST
             siteno= siteDetail.getSiteNo();
             //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
-            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, 1);
+            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
         }
     }
 
