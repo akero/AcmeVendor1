@@ -62,8 +62,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     private String imageUrl = "";
     private final int REQUEST_IMAGE_CAPTURE = 101;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
-
-
     private LocationManager locationManager;
 
     JSONObject jsonobj;
