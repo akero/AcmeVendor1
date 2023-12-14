@@ -19,6 +19,8 @@ import org.chromium.net.UrlRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -416,71 +418,82 @@ public class APIreferenceclass {
     }
 
 //here
-    //addsitedetailactivity- edit site (if image selected)
+    //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
+        Log.d("tag21", "1");
 
-
-
-        Log.d("tag21","1");
-
-        String url="https://acme.warburttons.com/api/sites/";
-        jsonString= fixjsonstring(jsonString);
+        String url = "https://acme.warburttons.com/api/sites/";
+        jsonString = fixjsonstring(jsonString);
 
         String urlEncodedParams = encodeJsonToUrl(jsonString);
+        url = url + siteno + "?" + urlEncodedParams;
 
+        int querytype = queryType;
+        Log.d("tg9", "url " + url + " querytype " + querytype + " jsonstring " + jsonString);
 
+        if (selectedImage != null) {
+            // Handle multipart request with image
+            File imageFile = new File(selectedImage.getPath()); // Convert Uri to File
+            byte[] fileBytes = convertFileToByteArray(imageFile); // Convert file to byte array
 
-        url= url+siteno+"?"+urlEncodedParams;
+            // Prepare multipart body
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+            StringBuilder bodyBuilder = new StringBuilder();
+            bodyBuilder.append("--").append(boundary).append("\r\n");
+            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
+                    .append(imageFile.getName()).append("\"\r\n");
+            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(imageFile.getName()))
+                    .append("\r\n\r\n");
+            bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
+            bodyBuilder.append("--").append(boundary).append("--");
 
-        querytype= queryType;
+            final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
 
-        Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
+            // Modify headers for multipart request
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
 
+            // Call the API with multipart data
+            //callapi2(headers, multipartBody, context, querytype, url);
+            //here
+        } else {
+            // Regular API call with JSON payload
+            String jsonPayload = "{\"Authorization\": \"" + logintoken + "\"}";
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
 
-        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+            Log.d("addbatest", "Inside admin api");
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + logintoken);
-        headers.put("Content-Type", "application/json");
-
-        Log.d("addbatest","Inside admin api");
-
-
-        callapi(headers, jsonPayload, context, querytype, url);
+            callapi(headers, jsonPayload, context, querytype, url);
+        }
     }
 
-    //addsitedetailactivity- edit site (if image not selected)
-    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
-
-
-
-        Log.d("tag21","1");
-
-        String url="https://acme.warburttons.com/api/sites/";
-        jsonString= fixjsonstring(jsonString);
-
-        String urlEncodedParams = encodeJsonToUrl(jsonString);
-
-
-
-        url= url+siteno+"?"+urlEncodedParams;
-
-        querytype= queryType;
-
-        Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
-
-
-        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + logintoken);
-        headers.put("Content-Type", "application/json");
-
-        Log.d("addbatest","Inside admin api");
-
-
-        callapi(headers, jsonPayload, context, querytype, url);
+    // Method to convert file to byte array
+    private byte[] convertFileToByteArray(File file) {
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            byte[] data = new byte[(int) file.length()];
+            fileInputStream.read(data);
+            return data;
+        } catch (IOException e) {
+            Log.e("APIreferenceclass", "Error reading file", e);
+            return null;
+        }
     }
+
+    // Method to guess content type from file name
+    private String guessContentTypeFromName(String fileName) {
+        // Simple implementation based on file extension
+        if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
+            return "image/jpeg";
+        } else if (fileName.endsWith(".png")) {
+            return "image/png";
+        } else {
+            return "application/octet-stream"; // Default MIME type
+        }
+    }
+
 
     //addsitedetailactivity- add new site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, int a) {
@@ -775,5 +788,4 @@ public class APIreferenceclass {
             Log.d("tag21", e.toString());
         }
     }
-
 }

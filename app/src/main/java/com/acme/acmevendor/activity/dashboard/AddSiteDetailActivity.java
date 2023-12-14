@@ -322,13 +322,10 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             queryType= 2; //PUT
             siteno= siteDetail.getSiteNo();
             //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
-            if(selectedImage== null){
-            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);}
-            else{
-                //here
+
                 APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, selectedImage);
                 selectedImage= null;
-                }
+
         }
         else{
             //here make new call to add site

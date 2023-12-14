@@ -4,8 +4,7 @@ convert to byte or file ask gpt- have to upload file
 //plan making api call
 >https://chat.openai.com/share/ff49c872-65d2-42f0-9d9c-8d443e12e3a3
 make api call
-
-line 418 apiref, 328 addsitedet, and 334
+>line 459 apiref
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
