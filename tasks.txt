@@ -1,7 +1,8 @@
 >image upload
 -just upload file the entry is not required in backend
 >line 436 apiref and ask gpt to write it
-                                                                                               java.io.FileNotFoundException: /storage/emulated/0/DCIM/Screenshot 2023-10-18 083133.png: open failed: EACCES (Permission denied)
+java.io.FileNotFoundException: /storage/emulated/0/DCIM/Screenshot 2023-10-18 083133.png: open failed: EACCES (Permission denied)
+line 365 addsitedet ask permission                                                                                               
 
 
 remove null from all image uploads

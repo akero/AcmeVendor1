@@ -61,6 +61,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     private String imageUrl = "";
     private final int REQUEST_IMAGE_CAPTURE = 101;
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
+
 
     private LocationManager locationManager;
 
@@ -351,13 +353,35 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     private static final int PICK_IMAGE = 1;
 
     public void dispatchTakePictureIntent() {
+        // Check if READ_EXTERNAL_STORAGE permission is granted
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                // Show an explanation to the user
+                // After the user sees the explanation, try again to request the permission.
+                // You can use a dialog or a toast to show the explanation
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+            }
+        } else {
+            // Permission has already been granted, proceed with picking the image
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             String[] mimeTypes = {"image/jpeg", "image/png"};
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
             startActivityForResult(intent, PICK_IMAGE);
-  }
+        }
+    }
+
 
 
     @Override
@@ -440,6 +464,24 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
                         Intent intent = new Intent();
                         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         Uri uri = Uri.fromParts("package", Build.DISPLAY, null);
+                        intent.setData(uri);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        // Check for the READ_EXTERNAL_STORAGE permission
+        else if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            } else {
+                showSnackbar("Permission was denied", "Settings", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
                         intent.setData(uri);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
