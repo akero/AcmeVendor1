@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -21,9 +22,11 @@ import org.chromium.net.UrlRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
@@ -434,18 +437,19 @@ public class APIreferenceclass {
         Log.d("tg9", "url " + url + " querytype " + querytype + " jsonstring " + jsonString);
 
         if (selectedImage != null) {
-            // Handle multipart request with image
-            File imageFile = new File(getRealPathFromURI(context, selectedImage));
-            // Convert Uri to File
-            byte[] fileBytes = convertFileToByteArray(imageFile); // Convert file to byte array
+            // Read file content directly from Uri
+            byte[] fileBytes = readFileContent(context, selectedImage);
 
-            // Prepare multipart body
+            // Assume you have a way to get the file name from Uri
+            String fileName = getFileName(context, selectedImage);
+
+            // Prepare multipart body using fileBytes and fileName
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
             StringBuilder bodyBuilder = new StringBuilder();
             bodyBuilder.append("--").append(boundary).append("\r\n");
             bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
-                    .append(imageFile.getName()).append("\"\r\n");
-            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(imageFile.getName()))
+                    .append(fileName).append("\"\r\n");
+            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
                     .append("\r\n\r\n");
             bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
             bodyBuilder.append("--").append(boundary).append("--");
@@ -459,7 +463,6 @@ public class APIreferenceclass {
 
             // Call the API with multipart data
             callapi2(headers, multipartBody, context, querytype, url);
-            //here
         } else {
             // Regular API call with JSON payload
             String jsonPayload = "{\"Authorization\": \"" + logintoken + "\"}";
@@ -472,6 +475,32 @@ public class APIreferenceclass {
             callapi(headers, jsonPayload, context, querytype, url);
         }
     }
+
+    private byte[] readFileContent(Context context, Uri uri) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+            return outputStream.toByteArray();
+        } catch (IOException e) {
+            // Handle the exception
+            return null;
+        }
+    }
+
+    private String getFileName(Context context, Uri uri) {
+        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+        int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        cursor.moveToFirst();
+        String name = cursor.getString(nameIndex);
+        cursor.close();
+        return name;
+    }
+
+
     private String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -827,20 +856,34 @@ public class APIreferenceclass {
 
             requestBuilder.setHttpMethod("PUT");
             requestBuilder.setUploadDataProvider(new UploadDataProvider() {
+
                 @Override
                 public long getLength() {
                     return multipartBody.length;
                 }
 
+                private int position = 0; // Position in multipartBody
+
                 @Override
                 public void read(UploadDataSink uploadDataSink, ByteBuffer byteBuffer) {
-                    byteBuffer.put(multipartBody);
-                    byteBuffer.flip();
-                    uploadDataSink.onReadSucceeded(false);
+                    while (byteBuffer.hasRemaining() && position < multipartBody.length) {
+                        int length = Math.min(byteBuffer.remaining(), multipartBody.length - position);
+                        byteBuffer.put(multipartBody, position, length);
+                        position += length;
+                    }
+
+                    if (position == multipartBody.length) {
+                        // All data has been written to the buffer, no more data to send
+                        uploadDataSink.onReadSucceeded(false);
+                    } else {
+                        // Buffer is full but there is still data left, Cronet will call read() again
+                        uploadDataSink.onReadSucceeded(false);
+                    }
                 }
 
                 @Override
                 public void rewind(UploadDataSink uploadDataSink) {
+                    position = 0; // Reset the position for rewinding
                     uploadDataSink.onRewindSucceeded();
                 }
 
@@ -857,5 +900,6 @@ public class APIreferenceclass {
             Log.e("APIreferenceclass", "Error in callapi2", e);
         }
     }
+
 
 }
