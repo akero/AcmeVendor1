@@ -351,34 +351,34 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     private static final int PICK_IMAGE = 1;
 
     public void dispatchTakePictureIntent() {
-        // Check if READ_EXTERNAL_STORAGE permission is granted
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-                // Show an explanation to the user
-                // After the user sees the explanation, try again to request the permission.
-                // You can use a dialog or a toast to show the explanation
-
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-            }
-        } else {
-            // Permission has already been granted, proceed with picking the image
-            Intent intent = new Intent(Intent.ACTION_PICK);
+        // For Android 10 (API 29) and above, use the system's media picker
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
             String[] mimeTypes = {"image/jpeg", "image/png"};
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
             startActivityForResult(intent, PICK_IMAGE);
+        } else {
+            // Check if READ_EXTERNAL_STORAGE permission is granted for older versions
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                // Explain why the permission is needed and request it
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Show an explanation...
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+            } else {
+                // Permission has already been granted, proceed with picking the image
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                String[] mimeTypes = {"image/jpeg", "image/png"};
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                startActivityForResult(intent, PICK_IMAGE);
+            }
         }
     }
+
 
 
 
@@ -442,7 +442,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     }
 
     private void requestPermissions() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS_REQUEST_CODE);
     }
 
     @Override
