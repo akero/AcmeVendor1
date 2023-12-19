@@ -215,8 +215,9 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
 
             }catch(Exception e){
                 Log.d("tg6", e.toString());
-            }
+            }Log.d("tg6", selectedImage.toString());
             APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage);
+            selectedImage= null;
         }
     }
     @Override
