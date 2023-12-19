@@ -32,6 +32,7 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -358,6 +359,59 @@ public class APIreferenceclass {
 
     //addcampaignactivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
+        String url = "https://acme.warburttons.com/api/campaigns";
+        querytype = 1; //post
+
+        Log.d("tg92", jsonPayload1.toString());
+
+        if (selectedImage != null) {
+            // Prepare multipart body
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+            StringBuilder bodyBuilder = new StringBuilder();
+
+            // Add JSON fields to multipart body
+            Iterator<String> keys = jsonPayload1.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                bodyBuilder.append("--").append(boundary).append("\r\n");
+                bodyBuilder.append("Content-Disposition: form-data; name=\"").append(key).append("\"\r\n\r\n");
+                bodyBuilder.append(jsonPayload1.optString(key)).append("\r\n");
+            }
+
+            // Read file content from Uri
+            byte[] fileBytes = readFileContent(context, selectedImage);
+            String fileName = getFileName(context, selectedImage);
+
+            // Add image to multipart body
+            bodyBuilder.append("--").append(boundary).append("\r\n");
+            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
+                    .append(fileName).append("\"\r\n");
+            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
+                    .append("\r\n\r\n");
+            bodyBuilder.append(fileBytes).append("\r\n");
+            bodyBuilder.append("--").append(boundary).append("--");
+
+            final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+
+            // Set headers for multipart request
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            // Call API with multipart data
+            Log.d("tg97", "multipart");
+            callapi2(headers, multipartBody, context, 1, url); // Using POST method
+        } else {
+            // Existing JSON payload handling
+            String jsonPayload = jsonPayload1.toString();
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            callapi(headers, jsonPayload, context, 1, url); // Using POST method
+        }
+    }
+   /* public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
 
         //TODO add siteNumber to api call
 
@@ -377,7 +431,7 @@ public class APIreferenceclass {
         callapi(headers, jsonPayload, context, querytype ,url);
 
     }
-
+*/
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 
@@ -838,6 +892,8 @@ public class APIreferenceclass {
 
     //to upload image in addsitedetails. for edit
     public void callapi2(Map<String, String> headers, final byte[] multipartBody, Context context, int queryType, String url) {
+        Log.d("tg92", Integer.toString(queryType)+ " "+ url);
+
         try {
             CronetEngine cronetEngine = new CronetEngine.Builder(context).build();
 
@@ -847,11 +903,18 @@ public class APIreferenceclass {
                     Executors.newSingleThreadExecutor()
             );
 
+            Log.d("tg23", Integer.toString(queryType));
+
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 requestBuilder.addHeader(header.getKey(), header.getValue());
             }
+if(querytype==2) {
+    Log.d("tg92", "put");
 
-            requestBuilder.setHttpMethod("PUT");
+    requestBuilder.setHttpMethod("PUT");
+}else{
+    requestBuilder.setHttpMethod("POST");
+}
             requestBuilder.setUploadDataProvider(new UploadDataProvider() {
 
                 @Override
