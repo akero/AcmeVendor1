@@ -357,7 +357,7 @@ public class APIreferenceclass {
     }
 
     //addcampaignactivity
-    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a){
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage){
 
         //TODO add siteNumber to api call
 

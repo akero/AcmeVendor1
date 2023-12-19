@@ -11,7 +11,11 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,7 +43,10 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     String selectedItem;
     String selectedItem1;
     private UploadHelper uploadHelper;
-
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
+    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+    private final int REQUEST_IMAGE_CAPTURE = 101;
+    Uri selectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         selectedItem="";
         selectedItem1="";
         imageStream= null;
+        selectedImage= null;
 
         Log.d("whichclass", "AddCampaignDetails");
 
@@ -208,7 +216,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             }catch(Exception e){
                 Log.d("tg6", e.toString());
             }
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 1);
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage);
         }
     }
     @Override
@@ -306,7 +314,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     }
 
     ByteArrayOutputStream imageStream;
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try{
@@ -318,7 +326,31 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }
         // Use the image stream as needed
     }
+*/
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+            binding.ivCampaignImage.setImageBitmap(imageBitmap);
+            //getlatlong();
+        }
+
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+            if (data != null) {
+                selectedImage = data.getData();
+                Log.d("tag2321", "image picked");
+                // Use the Uri to load the image
+                // You might need to use ContentResolver to get the actual image path or perform other operations depending on your use case
+
+
+
+            }
+        }
+
+    }
     private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 101;
 
     private void requestReadStoragePermission() {
@@ -327,7 +359,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }
     }
 
-    @Override
+  /*  @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == READ_STORAGE_PERMISSION_REQUEST_CODE) {
@@ -343,13 +375,109 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             }
         }
     }
-
+*/
     public void btnCloseClick(View view) {
         finish();
     }
 
-    public void addImage(View view){
-       //TODO remove
-        //requestReadStoragePermission();
-       }
+    public void addImage(View view) {
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
+        } else {
+            if (!checkPermissions()) {
+                requestPermissions();
+            } else {
+                dispatchTakePictureIntent();
+            }
+        }
+    }
+
+    private static final int PICK_IMAGE = 1;
+
+    public void dispatchTakePictureIntent() {
+        // For Android 10 (API 29) and above, use the system's media picker
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            String[] mimeTypes = {"image/jpeg", "image/png"};
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            startActivityForResult(intent, PICK_IMAGE);
+        } else {
+            // Check if READ_EXTERNAL_STORAGE permission is granted for older versions
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                // Explain why the permission is needed and request it
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Show an explanation...
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+            } else {
+                // Permission has already been granted, proceed with picking the image
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                String[] mimeTypes = {"image/jpeg", "image/png"};
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                startActivityForResult(intent, PICK_IMAGE);
+            }
+        }
+    }
+
+    private boolean checkPermissions() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        //super.onRequestPermissionsResult();
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            } else {
+                showSnackbar("Permission was denied", "Settings", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", Build.DISPLAY, null);
+                        intent.setData(uri);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        // Check for the READ_EXTERNAL_STORAGE permission
+        else if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            } else {
+                showSnackbar("Permission was denied", "Settings", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+    }
+
+    private void showSnackbar(String mainTextStringId, String actionStringId, View.OnClickListener listener) {
+        Toast.makeText(this, mainTextStringId, Toast.LENGTH_LONG).show();
+    }
 }
