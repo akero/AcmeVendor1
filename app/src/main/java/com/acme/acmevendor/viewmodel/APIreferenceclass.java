@@ -357,10 +357,9 @@ public class APIreferenceclass {
     }
 
     //addcampaignactivity
-    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage){
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
 
         //TODO add siteNumber to api call
-
 
         String url="https://acme.warburttons.com/api/campaigns";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
@@ -388,8 +387,7 @@ public class APIreferenceclass {
         String url="https://acme.warburttons.com/api/login";
         Log.d("tag23", "logintype "+ loginType + " email " + email);
 
-        String jsonPayload = "{\"email\": \"" + email +"\"}";
-
+        String jsonPayload = "{\"email\": \""+ email +"\"}";
         Map<String, String> headers = new HashMap<>();
         //headers.put("Authorization", "Bearer " + loginToken);
         headers.put("Content-Type", "application/json");
@@ -421,9 +419,8 @@ public class APIreferenceclass {
 
         callapi(headers, jsonPayload, context, querytype ,url);
     }
-
 //here
-    //addsitedetailactivity- edit site
+ //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
         Log.d("tag21", "1");
 

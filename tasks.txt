@@ -3,7 +3,8 @@ adding site change to url in api ref line 332 addsitedetail
 image upload
 -just upload file the entry is not required in backend
 working in addsitedetails add in others  
-add to campaign- edit the api class
+>add to campaign- edit the api class
+check if above broke edit campaign anywhere
 
 
 remove null from all image uploads
