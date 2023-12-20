@@ -400,7 +400,7 @@ public class APIreferenceclass {
 
             // Call API with multipart data
             Log.d("tg97", "multipart");
-            callapi2(headers, multipartBody, context, 1, url); // Using POST method
+            callapi3(headers, multipartBody, context, 1, url); // Using POST method
         } else {
             // Existing JSON payload handling
             String jsonPayload = jsonPayload1.toString();
@@ -890,8 +890,79 @@ public class APIreferenceclass {
         }
     }
 
-    //to upload image in addsitedetails. for edit
+    //to upload image in addsitedetails. for edit. and campaign add
     public void callapi2(Map<String, String> headers, final byte[] multipartBody, Context context, int queryType, String url) {
+        Log.d("tg92", Integer.toString(queryType)+ " "+ url);
+
+        try {
+            CronetEngine cronetEngine = new CronetEngine.Builder(context).build();
+
+            UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
+                    url,
+                    new MyUrlRequestCallback((ApiInterface) context),
+                    Executors.newSingleThreadExecutor()
+            );
+
+            Log.d("tg23", Integer.toString(queryType));
+
+            for (Map.Entry<String, String> header : headers.entrySet()) {
+                requestBuilder.addHeader(header.getKey(), header.getValue());
+            }
+if(querytype==2) {
+    Log.d("tg92", "put");
+
+    requestBuilder.setHttpMethod("PUT");
+}else{
+    requestBuilder.setHttpMethod("POST");
+}
+            requestBuilder.setUploadDataProvider(new UploadDataProvider() {
+
+                @Override
+                public long getLength() {
+                    return multipartBody.length;
+                }
+
+                private int position = 0; // Position in multipartBody
+
+                @Override
+                public void read(UploadDataSink uploadDataSink, ByteBuffer byteBuffer) {
+                    while (byteBuffer.hasRemaining() && position < multipartBody.length) {
+                        int length = Math.min(byteBuffer.remaining(), multipartBody.length - position);
+                        byteBuffer.put(multipartBody, position, length);
+                        position += length;
+                    }
+
+                    if (position == multipartBody.length) {
+                        // All data has been written to the buffer, no more data to send
+                        uploadDataSink.onReadSucceeded(false);
+                    } else {
+                        // Buffer is full but there is still data left, Cronet will call read() again
+                        uploadDataSink.onReadSucceeded(false);
+                    }
+                }
+
+                @Override
+                public void rewind(UploadDataSink uploadDataSink) {
+                    position = 0; // Reset the position for rewinding
+                    uploadDataSink.onRewindSucceeded();
+                }
+
+                @Override
+                public void close() throws IOException {
+                    // No-op
+                }
+            }, Executors.newSingleThreadExecutor());
+
+            UrlRequest request = requestBuilder.build();
+            request.start();
+
+        } catch (Exception e) {
+            Log.e("APIreferenceclass", "Error in callapi2", e);
+        }
+    }
+
+    //to upload image in addcampaign. POST
+    public void callapi3(Map<String, String> headers, final byte[] multipartBody, Context context, int queryType, String url) {
         Log.d("tg92", Integer.toString(queryType)+ " "+ url);
 
         try {
