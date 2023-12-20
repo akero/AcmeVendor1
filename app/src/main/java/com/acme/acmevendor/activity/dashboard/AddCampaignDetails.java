@@ -141,6 +141,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem = parent.getItemAtPosition(position).toString();
+                Log.d("tg92", selectedItem);
                 //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
             }
 
@@ -160,6 +161,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem1 = parent.getItemAtPosition(position).toString();
+                Log.d("tg92", selectedItem1);
+
                 //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
             }
 
@@ -182,6 +185,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 binding.etVendor.getText().toString().isEmpty() ||
                 binding.etStartDate.getText().toString().isEmpty() ||
                 binding.etEndDate.getText().toString().isEmpty() ||
+                binding.etclientid.getText().toString().isEmpty() ||
+                binding.etnumsites.getText().toString().isEmpty() ||
                 selectedItem.equals("")||
                 selectedItem1.equals("")){
 
@@ -194,6 +199,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             String vendor=binding.etVendor.getText().toString();
             String startdate=binding.etStartDate.getText().toString();
             String enddate=binding.etEndDate.getText().toString();
+            String clientid=binding.etclientid.getText().toString();
+            String numsites=binding.etnumsites.getText().toString();
             String mediatype=selectedItem;
             String illumination=selectedItem1;
 
@@ -203,14 +210,16 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 //jsonPayload.put("image", base64Image);
                 jsonPayload.put("name", name);
                 jsonPayload.put("vendor", vendor);
-                jsonPayload.put("startdate", startdate);
-                jsonPayload.put("enddate", enddate);
+                jsonPayload.put("start_date", startdate);
+                jsonPayload.put("end_date", enddate);
+                jsonPayload.put("client_id", clientid);
+                jsonPayload.put("num_of_site", numsites);
                 //jsonPayload.put("image", imageStream);
 
                 //TODO fix both
                 jsonPayload.put("uid", 1);
                 jsonPayload.put("user_id", 1);
-                jsonPayload.put("mediatype", mediatype);
+                jsonPayload.put("media_type", mediatype);
                 jsonPayload.put("illumination", illumination);
 
             }catch(Exception e){
@@ -235,6 +244,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                             binding.etVendor.setText("");
                             binding.etStartDate.setText("");
                             binding.etEndDate.setText("");
+                            binding.etnumsites.setText("");
+                            binding.etclientid.setText("");
                             showSuccessMessage();
                         }
                         else{

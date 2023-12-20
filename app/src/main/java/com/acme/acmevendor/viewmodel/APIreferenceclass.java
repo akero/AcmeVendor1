@@ -205,16 +205,6 @@ public class APIreferenceclass {
     public APIreferenceclass(Context context) {
     }
 
-  /*  public APIreferenceclass(String countrycode, String mobile, Context context){
-
-        //TODO- change
-        String url="https://acme.warburttons.com/api/register";
-        querytype=1; //POST
-        Map<String, String> headers= new HashMap<>();
-        headers.put("Content-Type", "application/json");
-    } */
-
-
     //for viewsitedetail
     public APIreferenceclass(String loginToken, String siteNumber, Context context){
 
@@ -360,7 +350,7 @@ public class APIreferenceclass {
     //addcampaignactivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
         String url = "https://acme.warburttons.com/api/campaigns";
-        querytype = 1; //post
+        querytype = 1; // POST
 
         Log.d("tg92", jsonPayload1.toString());
 
@@ -382,16 +372,29 @@ public class APIreferenceclass {
             byte[] fileBytes = readFileContent(context, selectedImage);
             String fileName = getFileName(context, selectedImage);
 
-            // Add image to multipart body
+            // Start image part of multipart body
             bodyBuilder.append("--").append(boundary).append("\r\n");
             bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
                     .append(fileName).append("\"\r\n");
             bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
                     .append("\r\n\r\n");
-            bodyBuilder.append(fileBytes).append("\r\n");
-            bodyBuilder.append("--").append(boundary).append("--");
 
-            final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+            // Convert the initial part of the multipart body to bytes
+            byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+
+            try {
+
+                // Create a ByteArrayOutputStream to combine everything
+                ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
+                multipartOutputStream.write(initialPartBytes);
+                multipartOutputStream.write(fileBytes);
+
+                // Write the final boundary
+                String finalBoundary = "\r\n--" + boundary + "--\r\n";
+                multipartOutputStream.write(finalBoundary.getBytes(StandardCharsets.UTF_8));
+                // Final multipart body
+                final byte[] multipartBody = multipartOutputStream.toByteArray();
+
 
             // Set headers for multipart request
             Map<String, String> headers = new HashMap<>();
@@ -400,7 +403,10 @@ public class APIreferenceclass {
 
             // Call API with multipart data
             Log.d("tg97", "multipart");
-            callapi3(headers, multipartBody, context, 1, url); // Using POST method
+            callapi2(headers, multipartBody, context, 1, url); // Using POST method
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             // Existing JSON payload handling
             String jsonPayload = jsonPayload1.toString();
@@ -411,7 +417,8 @@ public class APIreferenceclass {
             callapi(headers, jsonPayload, context, 1, url); // Using POST method
         }
     }
-   /* public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
+
+    /* public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
 
         //TODO add siteNumber to api call
 
@@ -473,8 +480,8 @@ public class APIreferenceclass {
 
         callapi(headers, jsonPayload, context, querytype ,url);
     }
-//here
- //addsitedetailactivity- edit site
+
+    //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
         Log.d("tag21", "1");
 
@@ -551,7 +558,6 @@ public class APIreferenceclass {
         return name;
     }
 
-
     private String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -566,9 +572,6 @@ public class APIreferenceclass {
             }
         }
     }
-
-
-
 
 
     // Method to convert file to byte array
@@ -683,8 +686,6 @@ public class APIreferenceclass {
         }
     }
 
-
-
     public String encodeJsonToUrl(String jsonstring) {
         try {
             // Parse the JSON string into a map
@@ -720,8 +721,6 @@ public class APIreferenceclass {
             return null; // Handle the exception as needed
         }
     }
-
-
 
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
 
@@ -817,7 +816,6 @@ public class APIreferenceclass {
             Log.d("tag21", e.toString());
         }
     }
-
 
     public void callapi1(Map<String, String> headers, String jsonPayload, Context context, String url) {
 
@@ -1031,6 +1029,5 @@ if(querytype==2) {
             Log.e("APIreferenceclass", "Error in callapi2", e);
         }
     }
-
 
 }
