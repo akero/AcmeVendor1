@@ -3,26 +3,21 @@ adding site change to url in api ref line 332 addsitedetail
 image upload
 -just upload file the entry is not required in backend
 working in addsitedetails add in others  
->add to campaign- edit the api class
+add to campaign- edit the api class
 check apireference add campaign
 2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
 -pending backend
 
-
-check if above broke edit campaign anywhere
-
-
-
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
-add delete function line 348 admindash- send delete api call
+>add delete function line 348 admindash- send delete api call
 add code to dropdown a list which says delete
 delete code
--have to send a delete crud call- pending designer
+-have to send a delete crud call
 https://chat.openai.com/c/1e8b7358-620f-4d11-beb0-b31b29f2209e
 
-
+implement edit campaign in dash
 
 line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
 -you need to use put method to edit client, when you are using PUT method each data should send by using query params
@@ -36,8 +31,10 @@ think this is create> edit test- says image required- pending till upload image 
 ask backend dev why adding site says site not found- have to send in form data
 addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
 You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
-Site edit working check site add- line 324
+Site edit working check site add- line 324- pending backend
+
 site add post not working- have to upload image- pending till upload image is implemented
+adding site POST not allowed- pending backend
 
 
 
