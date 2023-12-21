@@ -626,6 +626,53 @@ public class APIreferenceclass {
         }
     }
 
+    //delete
+    public APIreferenceclass(JSONObject jsonPayload, int vendorclientorcampaign, String logintoken, Context ctxt) {
+
+        int id= 0;
+        String url= "";
+
+        try {
+
+            if (vendorclientorcampaign == 0) {//campaign
+                id= jsonPayload.getInt("id");
+                url="https://acme.warburttons.com/api/campaigns/";
+                querytype= 0;
+
+
+            } else if (vendorclientorcampaign == 1) {//client
+                id= jsonPayload.getInt("id");
+                url="https://acme.warburttons.com/api/clients/";
+                querytype= 1;
+
+            } else if (vendorclientorcampaign == 2) {//vendor
+                id= jsonPayload.getInt("id");
+                url="https://acme.warburttons.com/api/vendors/";
+                querytype= 2;
+
+            }
+
+            url= url+Integer.toString(id);
+
+            String jsonPayload1 = "{\"Authorization\": \"" + logintoken + "\"}";
+
+            Log.d("tg94", jsonPayload1);
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            Log.d("addbatest","Inside admin api");
+
+            callapi4(headers, jsonPayload1, ctxt, querytype, url);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
 
         try {
@@ -931,6 +978,67 @@ if(querytype==2) {
 
         } catch (Exception e) {
             Log.e("APIreferenceclass", "Error in callapi2", e);
+        }
+    }
+
+    //DELETE
+    public void callapi4(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
+
+        try {
+            //adding api here
+            Log.d("tag21","2");
+
+            CronetEngine.Builder builder = new CronetEngine.Builder(context);
+            CronetEngine cronetEngine = builder.build();
+
+            // Create a JSON payload with the email and password
+            //String jsonPayload = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\"}";
+
+            // Convert the JSON payload to bytes for uploading
+            Log.d("tag21",jsonPayload);
+            final byte[] postData = jsonPayload.getBytes(StandardCharsets.UTF_8);
+
+
+            // Create an upload data provider to send the POST data
+            UploadDataProvider uploadDataProvider = new UploadDataProvider() {
+                @Override
+                public long getLength() throws IOException {
+                    return postData.length;
+                }
+
+                @Override
+                public void read(UploadDataSink uploadDataSink, ByteBuffer byteBuffer) throws IOException {
+                    byteBuffer.put(postData);
+                    uploadDataSink.onReadSucceeded(false);
+                }
+
+                @Override
+                public void rewind(UploadDataSink uploadDataSink) throws IOException {
+                    uploadDataSink.onRewindSucceeded();
+                }
+
+                @Override
+                public void close() throws IOException {
+                    // No-op
+                }
+            };
+
+                UrlRequest.Builder requestBuilder;
+                requestBuilder = cronetEngine.newUrlRequestBuilder(
+                                url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
+                        .setHttpMethod("DELETE")  // Set the method to POST
+                        .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
+                        .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
+
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    requestBuilder.addHeader(header.getKey(), header.getValue());
+
+            }
+
+                UrlRequest request = requestBuilder.build();
+                request.start();Log.d("tag21","4");
+        } catch (Exception e) {
+            Log.d("tag21", e.toString());
         }
     }
 }

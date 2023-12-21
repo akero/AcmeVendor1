@@ -22,6 +22,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.adapters.ClientListAdapter;
@@ -50,6 +52,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
     //TODO- populate this token
     String logintoken="";
+    int delete= 0;
     JSONArray jsonArray1;
     JSONArray jsonArray2;//client array
     JSONArray jsonArray3;//vendor array
@@ -92,7 +95,42 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
     public void onResponseReceived(String response){
         Log.d("addbatest", "response is "+ response);
         Log.d("tag21","5");
-        implementUi(response);
+        if(delete== 0) {
+            implementUi(response);
+        }else if(delete== 1 && vendorclientorcampaign== 0){
+            delete= 0;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"Campaign deleted successfully", Toast.LENGTH_SHORT).show();
+                    campaignList();
+
+                }
+            });
+
+        }else if(delete== 1 && vendorclientorcampaign== 1){
+            delete= 0;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"Client deleted successfully", Toast.LENGTH_SHORT).show();
+                    clientList();
+
+                }
+            });
+
+        }else if(delete== 1 && vendorclientorcampaign== 2){
+            delete= 0;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"Vendor deleted successfully", Toast.LENGTH_SHORT).show();
+                    venderList();
+
+                }
+            });
+
+        }
     }
 
     private void implementUi(String response){
@@ -323,15 +361,60 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         //add code to dropdown a list which says delete
         //delete code
         // Context should be your activity or fragment context
+        Log.d("tg98", Integer.toString(position));
         PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.delete) {
                     // Handle delete action
-                    
+                    JSONObject campaignItem= null;
+                    if(vendorclientorcampaign== 0){
+                    try {
+                        RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                        CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                        campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                        Log.d("tg93", campaignItem.toString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                    delete= 1;
+                    return true;
+                }else if(vendorclientorcampaign== 1){
+                    try {
+                        RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                        CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                        campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                        Log.d("tg93", campaignItem.toString());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                    delete= 1;
 
                     return true;
+                }else if(vendorclientorcampaign== 2){
+                    try {
+                        RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                        CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                        campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                        Log.d("tg93", campaignItem.toString());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                    delete= 1;
+
+                    return true;
+                }
+
+
                 }
                 return false;
             }

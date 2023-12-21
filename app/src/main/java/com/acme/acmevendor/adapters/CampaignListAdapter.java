@@ -26,7 +26,7 @@ import java.net.URL;
 
 public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapter.ViewHolder> {
     private Context context;
-    private JSONArray jsonArray;
+    public JSONArray jsonArray;
     private boolean showEdit;
     public void clearData() {
         // Clear the existing data
