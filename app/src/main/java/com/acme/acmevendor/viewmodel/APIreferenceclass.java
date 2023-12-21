@@ -138,19 +138,6 @@ public class APIreferenceclass {
         if (vendorclientorcampaign == 0) {
 
             Log.d("tag21","1");
-
-        /*    String url="https://acme.warburttons.com/api/login";
-            querytype=0;
-            String jsonPayload = "{\"Authorization\": \"";
-
-            Map<String, String> headers = new HashMap<>();
-            headers.put("Authorization", "Bearer " );
-            headers.put("Content-Type", "application/json");
-
-            Log.d("otptest","Inside otp api");
-
-
-            callapi(headers, jsonPayload, context, querytype, url);*/
         }
 
         //admin
@@ -158,43 +145,13 @@ public class APIreferenceclass {
 
             String url="https://acme.warburttons.com/api/login";
             querytype= 0;
-
-
-//TODO remove comments
-/*
-
-            String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
-
-            Map<String, String> headers= new HashMap<>();
-            headers.put("Authorization", "Bearer "+logintoken);
-            headers.put("Content-Type", "application/json");
-
-            Log.d("cldbatest","jsonpayload is "+ jsonPayload);
-
-
-            callapi(headers, jsonPayload, context, querytype, url); */
         }
 
         //vendor
         else if (vendorclientorcampaign == 2) {
 
             String url="https://acme.warburttons.com/api/login";
-
-            /*
-            querytype=0; //GET
-            String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";
-
-            Map<String, String> headers= new HashMap<>();
-            headers.put("Authorization", "Bearer "+logintoken);
-            headers.put("Content-Type", "application/json");
-
-            Log.d("vdbatest","Inside apirefapiclass");
-
-
-            callapi(headers, jsonPayload, context, querytype, url); */
-
         }
-
     }
 
 
@@ -224,7 +181,6 @@ public class APIreferenceclass {
 
         Log.d("tag41","Inside viewsitedetail api");
 
-
         callapi1(headers, jsonPayload, context, url);
 
     }
@@ -239,7 +195,6 @@ public class APIreferenceclass {
         String url="https://acme.warburttons.com/api/get_campaign_sites/"+id;
         Log.d("tag58",url);
 
-
         String jsonPayload = "{\"Authorization\": \"" + loginToken +"\"}";
 
         Map<String, String> headers = new HashMap<>();
@@ -248,9 +203,7 @@ public class APIreferenceclass {
 
         Log.d("tag58","Inside viewsitedetail api");
 
-
         callapi1(headers, jsonPayload, context, url);
-
     }
 
     //for AdminViewClientDetails
@@ -262,7 +215,6 @@ public class APIreferenceclass {
 
         String url="https://acme.warburttons.com/api/get_campaign_sites/"+id;
         Log.d("tag58",url);
-
 
         String jsonPayload = "{\"Authorization\": \"" + loginToken +"\"}";
 
@@ -279,7 +231,6 @@ public class APIreferenceclass {
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken){
 
         //TODO add siteNumber to api call
-
 
         String url="https://acme.warburttons.com/api/clients";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
@@ -302,7 +253,6 @@ public class APIreferenceclass {
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a, int b, String jsonString){
 
         //TODO add siteNumber to api call
-//here
 
         Log.d("tag21","1");
 
@@ -310,9 +260,6 @@ public class APIreferenceclass {
         jsonString= fixjsonstring(jsonString);
 
         String urlEncodedParams = encodeJsonToUrl(jsonString);
-
-
-
         url= url+"?"+urlEncodedParams;
 
         querytype= 2; //PUT
@@ -330,21 +277,6 @@ public class APIreferenceclass {
 
 
         callapi(headers, jsonPayload, context, querytype, url);
-      /*  String url="https://acme.warburttons.com/api/clients";
-        //Log.d("tag23", "logintype "+ loginType + " email " + email);
-
-        String jsonPayload = jsonPayload1.toString();
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + logintoken);
-        headers.put("Content-Type", "application/json");
-
-        Log.d("tag58","Inside viewsitedetail api");
-
-        querytype= 2; //TODO change to put (2)
-
-        callapi(headers, jsonPayload, context, querytype ,url);
-*/
     }
 
     //addcampaignactivity
@@ -418,32 +350,10 @@ public class APIreferenceclass {
         }
     }
 
-    /* public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage) {
-
-        //TODO add siteNumber to api call
-
-        String url="https://acme.warburttons.com/api/campaigns";
-        //Log.d("tag23", "logintype "+ loginType + " email " + email);
-
-        String jsonPayload = jsonPayload1.toString();
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + logintoken);
-        headers.put("Content-Type", "application/json");
-
-        Log.d("tag58","Inside ad campaign api");
-
-        querytype= 1; ////post
-
-        callapi(headers, jsonPayload, context, querytype ,url);
-
-    }
-*/
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 
         //TODO add siteNumber to api call
-
 
         String url="https://acme.warburttons.com/api/login";
         Log.d("tag23", "logintype "+ loginType + " email " + email);
@@ -459,7 +369,9 @@ public class APIreferenceclass {
 
         callapi(headers, jsonPayload, context, querytype ,url);
 
-    }//for otp enter
+    }
+
+    //for otp enter
     public APIreferenceclass(String otp, Context context, String email, int a){
 
         //TODO add siteNumber to api call
@@ -573,7 +485,6 @@ public class APIreferenceclass {
         }
     }
 
-
     // Method to convert file to byte array
     private byte[] convertFileToByteArray(File file) {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
@@ -598,27 +509,21 @@ public class APIreferenceclass {
         }
     }
 
-
     //addsitedetailactivity- add new site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
 
-        //here
-
-        Log.d("tag21","1");
+       Log.d("tag21","1");
 
         String url="https://acme.warburttons.com/api/sites/";
         jsonString= fixjsonstring(jsonString);
 
         String urlEncodedParams = encodeJsonToUrl(jsonString);
 
-
-
         url= url+siteno+"?"+urlEncodedParams;
 
         querytype= queryType;
 
         Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
-
 
         String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
 
@@ -627,7 +532,6 @@ public class APIreferenceclass {
         headers.put("Content-Type", "application/json");
 
         Log.d("addbatest","Inside admin api");
-
 
         callapi(headers, jsonPayload, context, querytype, url);
     }
@@ -1029,5 +933,4 @@ if(querytype==2) {
             Log.e("APIreferenceclass", "Error in callapi2", e);
         }
     }
-
 }
