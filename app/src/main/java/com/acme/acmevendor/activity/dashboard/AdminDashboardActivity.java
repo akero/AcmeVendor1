@@ -363,8 +363,14 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         // Context should be your activity or fragment context
         Log.d("tg98", Integer.toString(position));
         PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
-        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        if(vendorclientorcampaign== 0) {
+            popup.getMenuInflater().inflate(R.menu.popup_menu_campaign, popup.getMenu()); // Inflate your menu resource
+
+        }else{
+            popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
+
+        }
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.delete) {
                     // Handle delete action
@@ -410,9 +416,12 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
 
                     APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
                     delete= 1;
-
                     return true;
-                }
+
+                    }
+                }else if(item.getItemId()== R.id.edit){
+                    //to edit campaign info
+
 
 
                 }
