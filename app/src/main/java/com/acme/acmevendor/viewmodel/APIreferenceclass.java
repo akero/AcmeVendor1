@@ -671,6 +671,103 @@ public class APIreferenceclass {
 
     }
 
+    //edit campaign. EditCampaign class.
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage, int i) {
+        //here
+
+        String url = "https://acme.warburttons.com/api/campaigns";
+        querytype = 2; // PUT
+
+        Log.d("tg92", jsonPayload1.toString());
+
+        if (selectedImage != null) {
+            // Prepare multipart body
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+            StringBuilder bodyBuilder = new StringBuilder();
+
+            // Add JSON fields to multipart body
+            Iterator<String> keys = jsonPayload1.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                bodyBuilder.append("--").append(boundary).append("\r\n");
+                bodyBuilder.append("Content-Disposition: form-data; name=\"").append(key).append("\"\r\n\r\n");
+                bodyBuilder.append(jsonPayload1.optString(key)).append("\r\n");
+            }
+
+            // Read file content from Uri
+            byte[] fileBytes = readFileContent(context, selectedImage);
+            String fileName = getFileName(context, selectedImage);
+
+            // Start image part of multipart body
+            bodyBuilder.append("--").append(boundary).append("\r\n");
+            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
+                    .append(fileName).append("\"\r\n");
+            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
+                    .append("\r\n\r\n");
+
+            // Convert the initial part of the multipart body to bytes
+            byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+
+            try {
+
+                // Create a ByteArrayOutputStream to combine everything
+                ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
+                multipartOutputStream.write(initialPartBytes);
+                multipartOutputStream.write(fileBytes);
+
+                // Write the final boundary
+                String finalBoundary = "\r\n--" + boundary + "--\r\n";
+                multipartOutputStream.write(finalBoundary.getBytes(StandardCharsets.UTF_8));
+                // Final multipart body
+                final byte[] multipartBody = multipartOutputStream.toByteArray();
+
+
+                // Set headers for multipart request
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + logintoken);
+                headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+                // Call API with multipart data
+                Log.d("tg97", "multipart");
+                callapi2(headers, multipartBody, context, 1, url); // Using POST method
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Existing JSON payload handling
+            String jsonPayload = jsonPayload1.toString();
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            callapi(headers, jsonPayload, context, 1, url); // Using POST method
+        }
+    }
+
+
+    //edit campaign. to fetch site data
+    public APIreferenceclass(String logintoken, int id, Context context) {
+
+
+
+            Log.d("tag21", "1");
+
+            String url = "https://acme.warburttons.com/api/campaigns/";
+            url= url+ id;
+            querytype = 0;
+            String jsonPayload = "{\"Authorization\": \"" + logintoken + "\"}";
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            Log.d("addbatest", "Inside admin api");
+
+            callapi(headers, jsonPayload, context, querytype, url);
+        }
+
+
+
 
 
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {

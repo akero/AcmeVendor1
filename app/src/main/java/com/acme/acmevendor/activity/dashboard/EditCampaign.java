@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -48,20 +49,38 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     private final int REQUEST_IMAGE_CAPTURE = 101;
     Uri selectedImage;
+    String campaignItem;
+    JSONObject jsonobj;
+    int id;
+    int save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_campaign);
-        logintoken= getIntent().getStringExtra("logintoken");
 
-
+        id= 0;
+        save= 0;
+        campaignItem= "";
         selectedItem="";
         selectedItem1="";
         imageStream= null;
         selectedImage= null;
 
-        Log.d("whichclass", "AddCampaignDetails");
+        ctxt= this;
+        logintoken= getIntent().getStringExtra("logintoken");
+        campaignItem= getIntent().getStringExtra("campaignItem");
+
+        try {
+            JSONObject jsonobj = new JSONObject(campaignItem);
+            id= jsonobj.getInt("id");
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        Log.d("whichclass", "editCampaignDetails");
+        Log.d("tg95", campaignItem);
 
         binding.etStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,8 +194,17 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             }
         });
 
+        //fetching data
+        callapi(id);
+
         //end of spinner code
     }
+    Context ctxt;
+    //send campaign details api call
+    void callapi( int id){
+        APIreferenceclass api= new APIreferenceclass(logintoken, id, ctxt);
+    }
+
 
     //TODO ask content for spinner
     //TODO add image type post
@@ -184,6 +212,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
     String logintoken;
 
     public void btnSaveClick(View view) {
+        save= 1;
         if (    binding.etName.getText().toString().isEmpty() ||
                 binding.etVendor.getText().toString().isEmpty() ||
                 binding.etStartDate.getText().toString().isEmpty() ||
@@ -228,13 +257,16 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             }catch(Exception e){
                 Log.d("tg6", e.toString());
             }Log.d("tg6", selectedImage.toString());
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage);
+
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage, 1);
             selectedImage= null;
         }
     }
     @Override
     public void onResponseReceived(String response) {
-        Log.d("tg9", response);
+        Log.d("tg9", Integer.toString(save));
+
+        if(save== 1){
         try {
             JSONObject jsonobj = new JSONObject(response);
 
@@ -249,15 +281,18 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                             binding.etEndDate.setText("");
                             binding.etnumsites.setText("");
                             binding.etclientid.setText("");
+                            save= 0;
                             showSuccessMessage();
                         }
                         else{
+                            save= 0;
                             showFailureMessage();
                         }
                     }catch (Exception e){
                         runOnUiThread(new Runnable(){
                             @Override
                             public void run() {
+                                save= 0;
                                 showFailureMessage();
                             }});
                         Log.d("tagerw1", e.toString());
@@ -265,9 +300,42 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                 }
 
             });}catch(Exception e){
-
-
             Log.d("tag123", e.toString());
+
+        }
+        }
+        else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("tg9", response);
+
+                    implementUI(response);
+
+                }
+            });
+
+        }
+    }
+
+    public void implementUI(String response){
+        try {
+            Log.d("tg9", "IN IMPLEMENTUI");
+            JSONObject jsonobj1 = new JSONObject(response);
+            String data= jsonobj1.optString("data");
+            JSONObject jsonobj= new JSONObject(data);
+
+
+            binding.etName.setText(jsonobj.optString("name"));
+            binding.etVendor.setText(jsonobj.optString("vendor"));
+            binding.etStartDate.setText(jsonobj.optString("start_date"));
+            binding.etEndDate.setText(jsonobj.optString("end_date"));
+            binding.etnumsites.setText(jsonobj.optString("num_of_site"));
+            binding.etclientid.setText(jsonobj.optString("user_id"));
+            //TODO add illumination and mediatype and image
+
+        }catch(Exception e){
+            Log.d("tg92", e.toString());
         }
     }
 

@@ -8,12 +8,17 @@ add delete
 //delete code
 //-have to send a delete crud call
 //https://chat.openai.com/c/1e8b7358-620f-4d11-beb0-b31b29f2209e
-add delete to site in dash
+add delete to site in dash, only admin can delete
 
 
 >implement edit campaign in dash line 424
 edit campaign class work on
+have to upload image
+>line 326 editcampaign add image illu media
+>line 676 apiref
 
+
+ask what mediatype and illumination are
                                                                   
 
 image upload
