@@ -419,15 +419,33 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                     return true;
 
                     }
-                }else if(item.getItemId()== R.id.edit){
-                    //to edit campaign info
+                }
 
+                //to edit campaign info
+                else if(item.getItemId()== R.id.edit){
+                    JSONObject campaignItem= null;
 
+                try{
+                    RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                    CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                    campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+
+                    //Starting edit campaign
+                    Intent intent= new Intent(AdminDashboardActivity.this, EditCampaign.class);
+                    intent.putExtra("logintoken", logintoken);
+                    intent.putExtra("campaignItem", campaignItem.toString());
+                    startActivity(intent);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                return true;
 
                 }
-                return false;
-            }
-        });
+            return false;
+        }});
         popup.show(); // Show the popup menu
 
     }
