@@ -510,10 +510,11 @@ public class APIreferenceclass {
     }
 
     //addsitedetailactivity- add new site
-    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno) {
+    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
 
-       Log.d("tag21","1");
+        Log.d("tag21","1");
 
+        //TODO have to add data into form data not params
         String url="https://acme.warburttons.com/api/sites/";
         jsonString= fixjsonstring(jsonString);
 

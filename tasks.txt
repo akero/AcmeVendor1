@@ -1,3 +1,11 @@
+>ask backend dev why adding site says site not found- have to send in form data
+addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
+You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
+Site edit working check site add- line 324- pending backend
+
+site add post not working- have to upload image- pending till upload image is implemented
+adding site POST not allowed- pending backend
+
 adding site change to url in api ref line 332 addsitedetail    
 
 remove null from all image uploads
@@ -6,11 +14,11 @@ implement add image- on line 192 appcampdet
 
 
 
->implement edit campaign in dash line 424
+implement edit campaign in dash line 424
 edit campaign class work on
 have to upload image
->line 326 editcampaign add image illu media
->line 676 apiref
+line 326 editcampaign add image illu media
+line 676 apiref
 
 
 ask what mediatype and illumination are
@@ -33,13 +41,7 @@ check email about https://acme.warburttons.com/api/get_campaign_sites/18
 https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
 think this is create> edit test- says image required- pending till upload image is implemented which is pending from backend
 
-ask backend dev why adding site says site not found- have to send in form data
-addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
-You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
-Site edit working check site add- line 324- pending backend
 
-site add post not working- have to upload image- pending till upload image is implemented
-adding site POST not allowed- pending backend
 
 
 
