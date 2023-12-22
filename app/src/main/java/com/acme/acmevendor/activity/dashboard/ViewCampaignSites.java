@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
@@ -44,6 +45,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
     ActivityViewCampaignSitesBinding binding;
     //JSONArray jsonArray;
     boolean showMenus = false;
+    int delete= 0;
+
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
     //TODO- populate this token
@@ -73,7 +76,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, true);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList(idofcampaign);
     }
@@ -84,8 +87,18 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         Log.d("addbatest", "response is "+ response);
         Log.d("tag58","got response");
 
-
-        implementUi(response);
+        if(delete==0) {
+            implementUi(response);
+        }else if(delete==1){
+            delete= 0;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"Site deleted successfully", Toast.LENGTH_SHORT).show();
+                    campaignList(idofcampaign);
+                }
+    });
+}
 
     }
     JSONArray jsonArray1;
@@ -251,75 +264,27 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                 if (item.getItemId() == R.id.delete) {
                     // Handle delete action
                     JSONObject campaignItem= null;
-                    if(vendorclientorcampaign== 0){
+                    int siteid= 0;
+                    if(vendorclientorcampaign== 0) {
                         try {
                             RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
                             CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
                             campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
-                            Log.d("tg93", campaignItem.toString());
-                        }catch (Exception e){
+                            siteid= campaignItem.getInt("id");
+
+                            Log.d("tg93", Integer.toString(siteid));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
-                        delete= 1;
+
+
+                        APIreferenceclass api = new APIreferenceclass(siteid, logintoken, ctxt, 1);
+                        delete = 1;
                         return true;
-                    }else if(vendorclientorcampaign== 1){
-                        try {
-                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
-                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
-                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
-                            Log.d("tg93", campaignItem.toString());
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-                        APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
-                        delete= 1;
-
-                        return true;
-                    }else if(vendorclientorcampaign== 2){
-                        try {
-                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
-                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
-                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
-                            Log.d("tg93", campaignItem.toString());
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-                        APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
-                        delete= 1;
-                        return true;
-
                     }
                 }
 
-                //to edit campaign info
-                else if(item.getItemId()== R.id.edit){
-                    JSONObject campaignItem= null;
-
-                    try{
-                        RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
-                        CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
-                        campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
-
-                        //Starting edit campaign
-                        Intent intent= new Intent(AdminDashboardActivity.this, EditCampaign.class);
-                        intent.putExtra("logintoken", logintoken);
-                        intent.putExtra("campaignItem", campaignItem.toString());
-                        startActivity(intent);
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                    //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
-                    return true;
-
-                }
                 return false;
             }});
         popup.show(); // Show the popup menu

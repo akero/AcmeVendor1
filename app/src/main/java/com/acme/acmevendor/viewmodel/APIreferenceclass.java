@@ -671,6 +671,27 @@ public class APIreferenceclass {
 
     }
 
+    //delete site
+    public APIreferenceclass(int siteid, String logintoken, Context ctxt, int i) {
+
+        int id= 0;
+        String url= "https://acme.warburttons.com/api/sites/"+ siteid;
+
+            String jsonPayload1 = "{\"Authorization\": \"" + logintoken + "\"}";
+
+            Log.d("tg94", jsonPayload1);
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+            querytype= 2;
+
+
+            callapi4(headers, jsonPayload1, ctxt, querytype, url);
+
+
+    }
+
     //edit campaign. EditCampaign class.
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage, int i) {
         //here
@@ -1123,7 +1144,7 @@ if(querytype==2) {
                 UrlRequest.Builder requestBuilder;
                 requestBuilder = cronetEngine.newUrlRequestBuilder(
                                 url, new MyUrlRequestCallback((ApiInterface) context), cronetExecutor)
-                        .setHttpMethod("DELETE")  // Set the method to POST
+                        .setHttpMethod("DELETE")
                         .addHeader("Content-Type", "application/json")  // Indicate we're sending JSON data
                         .setUploadDataProvider(uploadDataProvider, cronetExecutor);  // Attach the payload
 
