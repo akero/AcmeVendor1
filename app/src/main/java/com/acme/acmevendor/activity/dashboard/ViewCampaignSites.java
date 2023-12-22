@@ -3,6 +3,7 @@ package com.acme.acmevendor.activity.dashboard;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,9 +13,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
 import com.acme.acmevendor.R;
@@ -83,22 +86,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
 
         implementUi(response);
-
-        /*
-        //TODO: handle population
-        String[] dataStrings = extractDataStrings(response);
-        // Usage example
-        for(String dataStr : dataStrings) {
-            Log.d("tag2222",dataStr);
-        }
-        //id array. send to ui
-        String[] idArray= extractIds(dataStrings);
-
-        //TODO extract the unit id and pass that too
-        implementUi(response);
-        Log.d("MyApp", "Extracted IDs: " + Arrays.toString(idArray));
-
- */
 
     }
     JSONArray jsonArray1;
@@ -244,6 +231,99 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
             Log.d("tag123", e.toString());
             // Handle exception (e.g. show a Toast to the user indicating an error)
         }
+    }
+
+    public void onEditClick(int position, View view){
+        //add code to dropdown a list which says delete
+        //delete code
+        // Context should be your activity or fragment context
+        Log.d("tg98", Integer.toString(position));
+        PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
+        if(vendorclientorcampaign== 0) {
+            popup.getMenuInflater().inflate(R.menu.popup_menu_campaign, popup.getMenu()); // Inflate your menu resource
+
+        }else{
+            popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
+
+        }
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.delete) {
+                    // Handle delete action
+                    JSONObject campaignItem= null;
+                    if(vendorclientorcampaign== 0){
+                        try {
+                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                            Log.d("tg93", campaignItem.toString());
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                        delete= 1;
+                        return true;
+                    }else if(vendorclientorcampaign== 1){
+                        try {
+                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                            Log.d("tg93", campaignItem.toString());
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                        delete= 1;
+
+                        return true;
+                    }else if(vendorclientorcampaign== 2){
+                        try {
+                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                            Log.d("tg93", campaignItem.toString());
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                        delete= 1;
+                        return true;
+
+                    }
+                }
+
+                //to edit campaign info
+                else if(item.getItemId()== R.id.edit){
+                    JSONObject campaignItem= null;
+
+                    try{
+                        RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                        CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                        campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+
+                        //Starting edit campaign
+                        Intent intent= new Intent(AdminDashboardActivity.this, EditCampaign.class);
+                        intent.putExtra("logintoken", logintoken);
+                        intent.putExtra("campaignItem", campaignItem.toString());
+                        startActivity(intent);
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                    return true;
+
+                }
+                return false;
+            }});
+        popup.show(); // Show the popup menu
+
     }
 
     public void onPlusClick(View view) {
