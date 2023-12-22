@@ -252,13 +252,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         // Context should be your activity or fragment context
         Log.d("tg98", Integer.toString(position));
         PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
-        if(vendorclientorcampaign== 0) {
-            popup.getMenuInflater().inflate(R.menu.popup_menu_campaign, popup.getMenu()); // Inflate your menu resource
-
-        }else{
             popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
 
-        }
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.delete) {

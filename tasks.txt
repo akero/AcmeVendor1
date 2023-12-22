@@ -3,12 +3,7 @@ adding site change to url in api ref line 332 addsitedetail
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
-add delete
-//add code to dropdown a list which says delete
-//delete code
-//-have to send a delete crud call
-//https://chat.openai.com/c/1e8b7358-620f-4d11-beb0-b31b29f2209e
-add delete to site in dash, only admin can delete
+
 
 
 >implement edit campaign in dash line 424
@@ -54,6 +49,13 @@ test on phone ask the monkes
 
 >notification icon- ask what it does
 
+//add delete
+//add code to dropdown a list which says delete
+//delete code
+//-have to send a delete crud call
+//https://chat.openai.com/c/1e8b7358-620f-4d11-beb0-b31b29f2209e
+//add delete to site in dash, only admin can delete
+//remove edit from menu
 //pass correct token in campaignlist in vendor dash 
 //fix otp box shake
 //backend tasks
