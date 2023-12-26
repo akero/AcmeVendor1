@@ -1,15 +1,17 @@
-ask backend dev why adding site says site not found- have to send in form data
+>ask backend dev why adding site says site not found- have to send in form data
 addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
 -You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
 -Site edit working check site add- line 324- pending email
 -add multipartdata line 540 apiref
--all parameters should be pass into form data while creating a site, u are passing data in media query which is for updation- pending email
+-all parameters should be pass into form data while creating a site, u are passing data in media query which is for updation- pending email- remove forward slash, make sure campaign_id is an existing campaign- working
 
 
 site add post not working- have to upload image- pending till upload image is implemented
 adding site POST not allowed- pending backend- need to add to formdata- pending
 
 adding site change to url in api ref line 332 addsitedetail    
+
+edit site says site updated but data is not updated- send email 
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
@@ -20,8 +22,9 @@ line 521 apiref addsite remove placeholder
 add new campaign- `user_id`, `client_id` must be active user ids- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending backend- you can create client by using clients api
 
 
->edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can create client by using clients api
+edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
 
+remove add photo in create client
 
 
 implement edit campaign in dash line 424
@@ -31,7 +34,7 @@ line 326 editcampaign add image illu media
 line 676 apiref
                                                                   
 
->image upload
+image upload
 -just upload file the entry is not required in backend
 working in addsitedetails add in others  
 add to campaign- edit the api class
@@ -39,7 +42,7 @@ check apireference add campaign
 2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
 -pending backend
 
-line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
+>line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
 -you need to use put method to edit client, when you are using PUT method each data should send by using query params
 make api call line 306 apireferenceclass- pending email
 

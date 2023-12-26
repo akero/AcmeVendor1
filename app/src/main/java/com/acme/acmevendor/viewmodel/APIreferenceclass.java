@@ -233,7 +233,7 @@ public class APIreferenceclass {
         //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/clients";
-        //Log.d("tag23", "logintype "+ loginType + " email " + email);
+        Log.d("tag23", "jsonpayload"+ jsonPayload1.toString());
 
         String jsonPayload = jsonPayload1.toString();
 
@@ -284,6 +284,14 @@ public class APIreferenceclass {
         String url = "https://acme.warburttons.com/api/campaigns";
         querytype = 1; // POST
 
+        /*TODO DELETE THIS
+        String meme = "{\"name\":\"tttt\",\"vendor\":\"6\",\"start_date\":\"26-12-2023\",\"end_date\":\"26-12-2023\",\"client_id\":\"5\",\"num_of_site\":\"12\",\"uid\":5,\"user_id\":5,\"media_type\":\"Item 1\",\"illumination\":\"Item 1\"}";        try {
+            JSONObject jsonobj = new JSONObject(meme);
+            jsonPayload1 = jsonobj;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+*/
         Log.d("tg92", jsonPayload1.toString());
 
         if (selectedImage != null) {
@@ -395,7 +403,7 @@ public class APIreferenceclass {
 
     //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
-        Log.d("tag21", "1");
+        Log.d("tag21", "addsitedetailactivity edit site");
 
         String url = "https://acme.warburttons.com/api/sites/";
         jsonString = fixjsonstring(jsonString);
@@ -511,10 +519,11 @@ public class APIreferenceclass {
 
     //addsitedetailactivity- add new site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
-        Log.d("tag21", "1");
+        Log.d("tag21", "addsitedetailactivity add site");
+
 
         //TODO have to add data into form data not params
-        String url = "https://acme.warburttons.com/api/sites/";
+        String url = "https://acme.warburttons.com/api/sites";
         Log.d("tg3", jsonString);
 
         //TODO remove placeholders
@@ -1034,7 +1043,7 @@ public class APIreferenceclass {
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 requestBuilder.addHeader(header.getKey(), header.getValue());
             }
-if(querytype==2) {
+if(queryType== 2) {
     Log.d("tg92", "put");
 
     requestBuilder.setHttpMethod("PUT");
