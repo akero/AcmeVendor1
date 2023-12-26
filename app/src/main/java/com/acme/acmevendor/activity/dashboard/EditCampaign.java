@@ -264,6 +264,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
     }
     @Override
     public void onResponseReceived(String response) {
+        Log.d("tg9", response);
         Log.d("tg9", Integer.toString(save));
 
         if(save== 1){

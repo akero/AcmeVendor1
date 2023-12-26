@@ -511,31 +511,89 @@ public class APIreferenceclass {
 
     //addsitedetailactivity- add new site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
-
-        Log.d("tag21","1");
+        Log.d("tag21", "1");
 
         //TODO have to add data into form data not params
-        String url="https://acme.warburttons.com/api/sites/";
-        jsonString= fixjsonstring(jsonString);
+        String url = "https://acme.warburttons.com/api/sites/";
+        Log.d("tg3", jsonString);
 
-        String urlEncodedParams = encodeJsonToUrl(jsonString);
+        //TODO remove placeholders
+        jsonString = fixjsonstring(jsonString); //placeholder
+        Log.d("tg3", jsonString);
+        Log.d("tg3", url);
 
-        url= url+siteno+"?"+urlEncodedParams;
+        int querytype = queryType;
 
-        querytype= queryType;
+        //image call
+        if (selectedImage != null) {
+            // Read file content directly from Uri
+            byte[] fileBytes = readFileContent(context, selectedImage);
+            String fileName = getFileName(context, selectedImage);
 
-        Log.d("tg9", "url "+ url + " querytype" +queryType+ "jsonstring"+ jsonString );
+            // Prepare multipart body using fileBytes and fileName
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+            StringBuilder bodyBuilder = new StringBuilder();
+            bodyBuilder.append("--").append(boundary).append("\r\n");
+            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
+                    .append(fileName).append("\"\r\n");
+            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
+                    .append("\r\n\r\n");
+            bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
 
-        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+            // Add other form fields from formData
+            String formData = convertJsonToFormData(jsonString);
+            for (String field : formData.split("&")) {
+                String[] keyValue = field.split("=");
+                bodyBuilder.append("--").append(boundary).append("\r\n");
+                bodyBuilder.append("Content-Disposition: form-data; name=\"")
+                        .append(keyValue[0]).append("\"\r\n\r\n");
+                bodyBuilder.append(keyValue.length > 1 ? keyValue[1] : "").append("\r\n");
+            }
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Authorization", "Bearer " + logintoken);
-        headers.put("Content-Type", "application/json");
+            bodyBuilder.append("--").append(boundary).append("--");
 
-        Log.d("addbatest","Inside admin api");
+            final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
 
-        callapi(headers, jsonPayload, context, querytype, url);
+            // Modify headers for multipart request
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            // Call the API with multipart data
+            callapi2(headers, multipartBody, context, querytype, url);
+        } else {//normal call
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/x-www-form-urlencoded");
+
+            Log.d("addbatest", "Inside admin api");
+            String formData = convertJsonToFormData(jsonString);
+            //TODO add image
+            //here
+            callapi(headers, formData, context, querytype, url);
+        }
     }
+
+    private String convertJsonToFormData(String jsonString) {
+        StringBuilder formData = new StringBuilder();
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                formData.append(URLEncoder.encode(key, "UTF-8"))
+                        .append("=")
+                        .append(URLEncoder.encode(jsonObject.getString(key), "UTF-8"));
+                if (keys.hasNext()) {
+                    formData.append("&");
+                }
+            }
+        } catch (JSONException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return formData.toString();
+    }
+
 
     String fixjsonstring(String originalJsonString) {
         try {
@@ -698,7 +756,7 @@ public class APIreferenceclass {
         //here
 
         String url = "https://acme.warburttons.com/api/campaigns";
-        querytype = 2; // PUT
+        querytype = 1; // POST
 
         Log.d("tg92", jsonPayload1.toString());
 

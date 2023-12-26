@@ -267,7 +267,7 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
         }
 
         queryType= 2; //PUT
-        APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
+//        APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno);
     }
 
     public void addImage(View view) {

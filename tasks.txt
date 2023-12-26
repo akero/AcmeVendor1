@@ -1,16 +1,26 @@
->ask backend dev why adding site says site not found- have to send in form data
+ask backend dev why adding site says site not found- have to send in form data
 addsitedetailactivity line 311 pendng from backend. After this accept site id from backend in case user wants to edit further.
-You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
-Site edit working check site add- line 324- pending backend
+-You are passing datas in params instead of form-data,you must pass data into form-data for creating a new site
+-Site edit working check site add- line 324- pending email
+-add multipartdata line 540 apiref
+-all parameters should be pass into form data while creating a site, u are passing data in media query which is for updation- pending email
+
 
 site add post not working- have to upload image- pending till upload image is implemented
-adding site POST not allowed- pending backend
+adding site POST not allowed- pending backend- need to add to formdata- pending
 
 adding site change to url in api ref line 332 addsitedetail    
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 
+line 521 apiref addsite remove placeholder
+
+
+add new campaign- `user_id`, `client_id` must be active user ids- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending backend- you can create client by using clients api
+
+
+>edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can create client by using clients api
 
 
 
@@ -19,12 +29,9 @@ edit campaign class work on
 have to upload image
 line 326 editcampaign add image illu media
 line 676 apiref
-
-
-ask what mediatype and illumination are
                                                                   
 
-image upload
+>image upload
 -just upload file the entry is not required in backend
 working in addsitedetails add in others  
 add to campaign- edit the api class
@@ -50,6 +57,8 @@ test
 test on phone ask the monkes
 
 >notification icon- ask what it does
+
+ask what mediatype and illumination are- placeholders
 
 //add delete
 //add code to dropdown a list which says delete
