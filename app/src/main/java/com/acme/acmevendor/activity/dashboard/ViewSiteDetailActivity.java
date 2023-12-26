@@ -111,6 +111,26 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         siteDetail.setHeight(dataObject.optString("height"));
                         siteDetail.setTotalArea(dataObject.optString("total_area"));
                         siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
+
+                        Log.d("SiteDetailLog",
+                                "ID: " + siteDetail.getId() +
+                                        ", Vendor ID: " + siteDetail.getVendorId() +
+                                        ", Location: " + siteDetail.getLocation() +
+                                        ", Created At: " + siteDetail.getCreatedAt() +
+                                        ", End Date: " + siteDetail.getEndDate() +
+                                        ", Latitude: " + siteDetail.getLatitude() +
+                                        ", Longitude: " + siteDetail.getLongitude() +
+                                        ", Media Type: " + siteDetail.getMediaType() +
+                                        ", Illumination: " + siteDetail.getIllumination() +
+                                        ", Start Date: " + siteDetail.getStartDate() +
+                                        ", Name: " + siteDetail.getName() +
+                                        ", Site No: " + siteDetail.getSiteNo() +
+                                        ", Width: " + siteDetail.getWidth() +
+                                        ", Height: " + siteDetail.getHeight() +
+                                        ", Total Area: " + siteDetail.getTotalArea() +
+                                        ", Updated At: " + siteDetail.getUpdatedAt());
+
+
                         try {
                             String imageUrl = dataObject.optString("image");
                             imageUrl= "https://acme.warburttons.com/"+ imageUrl;

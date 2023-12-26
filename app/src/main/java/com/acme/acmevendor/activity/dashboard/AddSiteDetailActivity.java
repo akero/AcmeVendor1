@@ -161,6 +161,24 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             siteDetail.setHeight(dataObject.optString("height"));
             siteDetail.setTotalArea(dataObject.optString("total_area"));
             siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
+            Log.d("AddSiteDetailLog",
+                    "ID: " + siteDetail.getId() +
+                            ", Vendor ID: " + siteDetail.getVendorId() +
+                            ", Location: " + siteDetail.getLocation() +
+                            ", Created At: " + siteDetail.getCreatedAt() +
+                            ", End Date: " + siteDetail.getEndDate() +
+                            ", Latitude: " + siteDetail.getLatitude() +
+                            ", Longitude: " + siteDetail.getLongitude() +
+                            ", Media Type: " + siteDetail.getMediaType() +
+                            ", Illumination: " + siteDetail.getIllumination() +
+                            ", Start Date: " + siteDetail.getStartDate() +
+                            ", Name: " + siteDetail.getName() +
+                            ", Site No: " + siteDetail.getSiteNo() +
+                            ", Width: " + siteDetail.getWidth() +
+                            ", Height: " + siteDetail.getHeight() +
+                            ", Total Area: " + siteDetail.getTotalArea() +
+                            ", Updated At: " + siteDetail.getUpdatedAt());
+
             try {
                 String imageUrl = dataObject.optString("image");
                 imageUrl= "https://acme.warburttons.com/"+ imageUrl;
@@ -246,7 +264,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     public void btnSaveClick(View view) {
 
 // Create a SiteDetail object
-        SiteDetail siteDetail = new SiteDetail();
+        //siteDetail = new SiteDetail();
 
 // Set the site number
         TextView tvSiteId = findViewById(R.id.etSiteNo);
@@ -288,6 +306,24 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         TextView tvTotalArea = findViewById(R.id.etTotalArea);
         siteDetail.setTotalArea(tvTotalArea.getText().toString());
 
+        Log.d("AddSiteDetailLog1",
+                "ID: " + siteDetail.getId() +
+                        ", Vendor ID: " + siteDetail.getVendorId() +
+                        ", Location: " + siteDetail.getLocation() +
+                        ", Created At: " + siteDetail.getCreatedAt() +
+                        ", End Date: " + siteDetail.getEndDate() +
+                        ", Latitude: " + siteDetail.getLatitude() +
+                        ", Longitude: " + siteDetail.getLongitude() +
+                        ", Media Type: " + siteDetail.getMediaType() +
+                        ", Illumination: " + siteDetail.getIllumination() +
+                        ", Start Date: " + siteDetail.getStartDate() +
+                        ", Name: " + siteDetail.getName() +
+                        ", Site No: " + siteDetail.getSiteNo() +
+                        ", Width: " + siteDetail.getWidth() +
+                        ", Height: " + siteDetail.getHeight() +
+                        ", Total Area: " + siteDetail.getTotalArea() +
+                        ", Updated At: " + siteDetail.getUpdatedAt());
+
 // Now you have populated the SiteDetail object with data from the EditText views
 
 // Create a JSON object from the SiteDetail object
@@ -297,12 +333,12 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             int idValue = id != null ? id : 0; // Replace 0 with your default value
             siteDetailJson.put("id", idValue);
             siteDetailJson.put("campaign_id", campaignId);
-            siteDetailJson.put("id", id);siteDetailJson.put("vendor_id", siteDetail.getVendorId() != null ? siteDetail.getVendorId() : "");
+            siteDetailJson.put("vendor_id", siteDetail.getVendorId() != null ? siteDetail.getVendorId() : "");
             siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
             siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
             siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
             siteDetailJson.put("latitude", siteDetail.getLatitude() != null ? siteDetail.getLatitude() : "");
-            siteDetailJson.put("longitude", siteDetail.getLongitude() != null ? siteDetail.getLongitude() : "");
+            siteDetailJson.put("longitute", siteDetail.getLongitude() != null ? siteDetail.getLongitude() : "");
             siteDetailJson.put("media_type", siteDetail.getMediaType() != null ? siteDetail.getMediaType() : "");
             siteDetailJson.put("illumination", siteDetail.getIllumination() != null ? siteDetail.getIllumination() : "");
             siteDetailJson.put("start_date", siteDetail.getStartDate() != null ? siteDetail.getStartDate() : "");
@@ -313,6 +349,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             siteDetailJson.put("total_area", siteDetail.getTotalArea() != null ? siteDetail.getTotalArea() : "");
             siteDetailJson.put("updated_at", siteDetail.getUpdatedAt() != null ? siteDetail.getUpdatedAt() : "");
 
+            Log.d("tg77", siteDetailJson.toString());
+
             // Add more properties as needed
         } catch (JSONException e) {
             Log.d("tg9", e.toString());
@@ -321,11 +359,11 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
         if(editingsite!= null && editingsite.equals("yes")){
             queryType= 2; //PUT
-            siteno= siteDetail.getSiteNo();
+            siteno= Integer.toString(siteDetail.getId());
             //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
 
                 APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, selectedImage);
-                selectedImage= null;
+
 
         }
         else{
@@ -628,6 +666,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     public void onResponseReceived(String response) {
         Log.d("tg9", response);
         try {
+            selectedImage= null;
             JSONObject jsonobj = new JSONObject(response);
 
                 runOnUiThread(new Runnable(){

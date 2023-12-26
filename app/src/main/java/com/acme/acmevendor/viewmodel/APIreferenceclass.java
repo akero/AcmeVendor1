@@ -412,11 +412,11 @@ public class APIreferenceclass {
         url = url + siteno + "?" + urlEncodedParams;
 
         int querytype = queryType;
-        Log.d("tg9", "url " + url + " querytype " + querytype + " jsonstring " + jsonString);
+        Log.d("tg9", "url " + url + " querytype " + querytype + " jsonstring " + jsonString+ selectedImage);
 
         if (selectedImage != null) {
             // Read file content directly from Uri
-            byte[] fileBytes = readFileContent(context, selectedImage);
+            /*byte[] fileBytes = readFileContent(context, selectedImage);
 
             // Assume you have a way to get the file name from Uri
             String fileName = getFileName(context, selectedImage);
@@ -433,14 +433,18 @@ public class APIreferenceclass {
             bodyBuilder.append("--").append(boundary).append("--");
 
             final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+*/
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
 
             // Modify headers for multipart request
             Map<String, String> headers = new HashMap<>();
             headers.put("Authorization", "Bearer " + logintoken);
             headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
 
+            Log.d("yes", "yes");
+
             // Call the API with multipart data
-            callapi2(headers, multipartBody, context, querytype, url);
+            callapi2(headers, multipart(context, selectedImage, jsonString), context, querytype, url);
         } else {
             // Regular API call with JSON payload
             String jsonPayload = "{\"Authorization\": \"" + logintoken + "\"}";
@@ -536,6 +540,9 @@ public class APIreferenceclass {
         //image call
         if (selectedImage != null) {
             // Read file content directly from Uri
+
+
+/*
             byte[] fileBytes = readFileContent(context, selectedImage);
             String fileName = getFileName(context, selectedImage);
 
@@ -562,14 +569,16 @@ public class APIreferenceclass {
             bodyBuilder.append("--").append(boundary).append("--");
 
             final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+*/
 
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
             // Modify headers for multipart request
             Map<String, String> headers = new HashMap<>();
             headers.put("Authorization", "Bearer " + logintoken);
             headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
 
             // Call the API with multipart data
-            callapi2(headers, multipartBody, context, querytype, url);
+            callapi2(headers, multipart(context, selectedImage, jsonString), context, querytype, url);
         } else {//normal call
             Map<String, String> headers = new HashMap<>();
             headers.put("Authorization", "Bearer " + logintoken);
@@ -581,6 +590,38 @@ public class APIreferenceclass {
             //here
             callapi(headers, formData, context, querytype, url);
         }
+    }
+
+    byte[] multipart(Context context, Uri selectedImage, String jsonString){
+        // Read file content directly from Uri
+        byte[] fileBytes = readFileContent(context, selectedImage);
+        String fileName = getFileName(context, selectedImage);
+
+        // Prepare multipart body using fileBytes and fileName
+        String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+        StringBuilder bodyBuilder = new StringBuilder();
+        bodyBuilder.append("--").append(boundary).append("\r\n");
+        bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
+                .append(fileName).append("\"\r\n");
+        bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
+                .append("\r\n\r\n");
+        bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
+
+        // Add other form fields from formData
+        String formData = convertJsonToFormData(jsonString);
+        for (String field : formData.split("&")) {
+            String[] keyValue = field.split("=");
+            bodyBuilder.append("--").append(boundary).append("\r\n");
+            bodyBuilder.append("Content-Disposition: form-data; name=\"")
+                    .append(keyValue[0]).append("\"\r\n\r\n");
+            bodyBuilder.append(keyValue.length > 1 ? keyValue[1] : "").append("\r\n");
+        }
+
+        bodyBuilder.append("--").append(boundary).append("--");
+
+        final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
+        return multipartBody;
+
     }
 
     private String convertJsonToFormData(String jsonString) {

@@ -4,14 +4,18 @@ addsitedetailactivity line 311 pendng from backend. After this accept site id fr
 -Site edit working check site add- line 324- pending email
 -add multipartdata line 540 apiref
 -all parameters should be pass into form data while creating a site, u are passing data in media query which is for updation- pending email- remove forward slash, make sure campaign_id is an existing campaign- working
+site edit working, image upload not working just skip it
 
+/site edit working, image upload not working just skip it
 
 site add post not working- have to upload image- pending till upload image is implemented
 adding site POST not allowed- pending backend- need to add to formdata- pending
 
 adding site change to url in api ref line 332 addsitedetail    
 
-edit site says site updated but data is not updated- send email 
+//edit site says site updated but data is not updated- send email 
+
+fix multipart in api ref for everything to include the jsonstrng
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
