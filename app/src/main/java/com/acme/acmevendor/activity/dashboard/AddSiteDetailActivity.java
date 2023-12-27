@@ -73,6 +73,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
+        siteDetail = new SiteDetail();
+
         Log.d("whichclass", "AddSiteDetailActivity");
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
@@ -145,6 +147,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     void populateFields(JSONObject dataObject){
         if(dataObject != null) {
             siteDetail = new SiteDetail();
+            Log.d("tg66", "not null");
             siteDetail.setId(dataObject.optInt("id"));
             siteDetail.setVendorId(dataObject.optString("vendor_id"));
             siteDetail.setLocation(dataObject.optString("location"));
@@ -268,7 +271,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
 // Set the site number
         TextView tvSiteId = findViewById(R.id.etSiteNo);
-        siteDetail.setSiteNo(tvSiteId.getText().toString());
+        siteDetail.setSiteNo(tvSiteId.getText().toString()!= null? tvSiteId.getText().toString():"");
 
 // Set the location
         TextView tvLocation = findViewById(R.id.etLocation);

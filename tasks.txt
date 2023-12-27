@@ -8,7 +8,7 @@ site edit working, image upload not working just skip it
 
 /site edit working, image upload not working just skip it
 
-site add post not working- have to upload image- pending till upload image is implemented
+>site add post not working- have to upload image- pending till upload image is implemented
 adding site POST not allowed- pending backend- need to add to formdata- pending
 
 adding site change to url in api ref line 332 addsitedetail    

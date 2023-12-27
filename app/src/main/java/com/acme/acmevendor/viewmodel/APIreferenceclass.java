@@ -570,7 +570,7 @@ public class APIreferenceclass {
 
             final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
 */
-
+            Log.d("tg33", "not null");
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
             // Modify headers for multipart request
             Map<String, String> headers = new HashMap<>();
