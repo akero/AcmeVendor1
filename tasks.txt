@@ -10,6 +10,8 @@ site edit working, image upload not working just skip it
 
 >site add post not working- have to upload image- pending till upload image is implemented
 adding site POST not allowed- pending backend- need to add to formdata- pending
+>/campaign id, name, /vendor id
+
 
 adding site change to url in api ref line 332 addsitedetail    
 
@@ -24,7 +26,8 @@ line 521 apiref addsite remove placeholder
 
 
 add new campaign- `user_id`, `client_id` must be active user ids- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending backend- you can create client by using clients api
-
+user_id, means id of user
+uid , means any unique no.
 
 edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
 

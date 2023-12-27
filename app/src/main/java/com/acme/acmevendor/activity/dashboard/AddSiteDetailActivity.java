@@ -47,6 +47,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -67,6 +69,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     JSONObject jsonobj;
     String loginToken;
     String campaignId;
+    String vendorId;
     String selectedItem, selectedItem1;
     String editingsite;
     @Override
@@ -75,19 +78,31 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
         siteDetail = new SiteDetail();
 
+
+        campaignId="";
         Log.d("whichclass", "AddSiteDetailActivity");
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
-            campaignId= getIntent().getStringExtra("campaignId");
+
+
+
             editingsite= "";
             editingsite= getIntent().getStringExtra("editingsite");
 
         }catch(Exception e){
-            Log.d("tg90", e.toString());}
+            Log.d("tg90", "3"+e.toString());}
+        try {
+        campaignId= getIntent().getStringExtra("campaignId")!=null?getIntent().getStringExtra("campaignId"):"" ;
+        vendorId= getIntent().getStringExtra("vendorId")!=null?getIntent().getStringExtra("vendorId"):"" ;
+            editingsite= "";
+            editingsite= getIntent().getStringExtra("editingsite");
+        }catch(Exception e){
+            Log.d("tg90", "3"+e.toString());}
 
         selectedItem="";
         selectedItem1="";
         selectedImage= null;
+        Log.d("tg90", "2"+campaignId);
 
         FileHelper fh= new FileHelper();
         loginToken= fh.readLoginToken(this);
@@ -277,13 +292,23 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         TextView tvLocation = findViewById(R.id.etLocation);
         siteDetail.setLocation(tvLocation.getText().toString());
 
+        try {
+            siteDetail.setVendorId(vendorId);
+        }catch (Exception e){
+            e.printStackTrace();//siteDetail.setCampaignId(campaignId);
+        }
+
 // Set the site name
         TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
         siteDetail.setName(tvSiteName.getText().toString());
 
-// Set the last inspection date
+// Set the start date
         TextView tvLastInspection = findViewById(R.id.etStartDate);
-        siteDetail.setCreatedAt(tvLastInspection.getText().toString());
+        siteDetail.setStartDate(tvLastInspection.getText().toString());
+
+        // Set the end date
+        TextView tvEndDate = findViewById(R.id.etEndDate);
+        siteDetail.setEndDate(tvEndDate.getText().toString());
 
 // Set the latitude
         TextView tvLatitude = findViewById(R.id.etLatitude);
@@ -304,6 +329,8 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 // Set the height
         TextView tvHeight = findViewById(R.id.etHeight);
         siteDetail.setHeight(tvHeight.getText().toString());
+//Set created at
+        siteDetail.setCreatedAt(setCurrentDate());
 
 // Set the total area
         TextView tvTotalArea = findViewById(R.id.etTotalArea);
@@ -336,7 +363,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             int idValue = id != null ? id : 0; // Replace 0 with your default value
             siteDetailJson.put("id", idValue);
             siteDetailJson.put("campaign_id", campaignId);
-            siteDetailJson.put("vendor_id", siteDetail.getVendorId() != null ? siteDetail.getVendorId() : "");
+            siteDetailJson.put("vendor_id", vendorId);
             siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
             siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
             siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
@@ -378,6 +405,11 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }
     }
 
+
+    public String setCurrentDate() {
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return currentDate;
+    }
     public void addImage(View view) {
         if (!NetworkUtils.isNetworkAvailable(this)) {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
@@ -629,11 +661,15 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
                 yy = year;
                 mm = month;
                 dd = dayOfMonth;
-                String dateStr = String.format(Locale.getDefault(), "%02d-%02d-%02d", dd, mm + 1, yy);
+                String dateStr = String.format(Locale.getDefault(), "%04d-%02d-%02d", yy, mm + 1, dd);
 
                 Log.d("tag322", Integer.toString(view.getId()));
 
+                //TODO remove
+                dateStr= "2023-07-24";
                     binding.etStartDate.setText(dateStr);
+                Log.d("tag322", dateStr);
+
             }
         }, yy, mm, dd);
         dialog.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -651,10 +687,11 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
                 yy = year;
                 mm = month;
                 dd = dayOfMonth;
-                String dateStr = String.format(Locale.getDefault(), "%02d-%02d-%02d", dd, mm + 1, yy);
+                String dateStr = String.format(Locale.getDefault(), "%04d-%02d-%02d", yy, mm + 1, dd);
 
                 Log.d("tag322", Integer.toString(view.getId()));
-
+                //TODO remove
+                dateStr= "2023-07-24";
                 binding.etEndDate.setText(dateStr);
             }
         }, yy, mm, dd);

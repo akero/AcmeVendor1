@@ -597,32 +597,36 @@ public class APIreferenceclass {
         byte[] fileBytes = readFileContent(context, selectedImage);
         String fileName = getFileName(context, selectedImage);
 
-        // Prepare multipart body using fileBytes and fileName
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
-        StringBuilder bodyBuilder = new StringBuilder();
-        bodyBuilder.append("--").append(boundary).append("\r\n");
-        bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
-                .append(fileName).append("\"\r\n");
-        bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
-                .append("\r\n\r\n");
-        bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    try {
+        // Add File Part
+        outputStream.write(("--" + boundary + "\r\n").getBytes());
+        outputStream.write(("Content-Disposition: form-data; name=\"image\"; filename=\"" + fileName + "\"\r\n").getBytes());
+        outputStream.write(("Content-Type: " + guessContentTypeFromName(fileName) + "\r\n\r\n").getBytes());
+        outputStream.write(fileBytes);
+        outputStream.write(("\r\n").getBytes());
 
-        // Add other form fields from formData
+        // Add JSON Part
         String formData = convertJsonToFormData(jsonString);
         for (String field : formData.split("&")) {
             String[] keyValue = field.split("=");
-            bodyBuilder.append("--").append(boundary).append("\r\n");
-            bodyBuilder.append("Content-Disposition: form-data; name=\"")
-                    .append(keyValue[0]).append("\"\r\n\r\n");
-            bodyBuilder.append(keyValue.length > 1 ? keyValue[1] : "").append("\r\n");
+            outputStream.write(("--" + boundary + "\r\n").getBytes());
+            outputStream.write(("Content-Disposition: form-data; name=\"" + keyValue[0] + "\"\r\n\r\n").getBytes());
+            outputStream.write((keyValue.length > 1 ? keyValue[1] : "").getBytes());
+            outputStream.write(("\r\n").getBytes());
         }
 
-        bodyBuilder.append("--").append(boundary).append("--");
+        // End of multipart/form-data
+        outputStream.write(("--" + boundary + "--").getBytes());
 
-        final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
-        return multipartBody;
-
+        return outputStream.toByteArray();
+        }catch (Exception e){
+        e.printStackTrace();
     }
+    return outputStream.toByteArray();
+    }
+
 
     private String convertJsonToFormData(String jsonString) {
         StringBuilder formData = new StringBuilder();

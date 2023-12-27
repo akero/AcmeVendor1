@@ -101,6 +101,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 }
 
     }
+
+
+    String vendorid;
     JSONArray jsonArray1;
     private void implementUi(String response){
         try {
@@ -111,6 +114,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getBoolean("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
+
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
 
@@ -123,6 +127,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                             if(dataObject != null) {
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+
+                                vendorid= dataObject.optString("vendor_id");
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("uid", dataObject.optString("uid"));
@@ -291,6 +297,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
         Log.d("tag20", "onplugtreehththtsclick");
         Intent intent= new Intent(ViewCampaignSites.this, AddSiteDetailActivity.class);
+        intent.putExtra("campaignId",idofcampaign);
+        intent.putExtra("vendorId",vendorid);
         startActivity(intent);
     }
 
