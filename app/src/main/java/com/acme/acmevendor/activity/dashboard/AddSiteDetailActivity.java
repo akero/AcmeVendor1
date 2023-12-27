@@ -226,7 +226,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
                     TextView tvLocation = findViewById(R.id.etLocation);
                     tvLocation.setText(siteDetail.getLocation());
 
-                    TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+                    TextView tvSiteName = findViewById(R.id.etSiteName);
                     tvSiteName.setText(siteDetail.getName());
 
                     TextView tvLastInspection = findViewById(R.id.etStartDate);
@@ -299,7 +299,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         }
 
 // Set the site name
-        TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+        TextView tvSiteName = findViewById(R.id.etSiteName);
         siteDetail.setName(tvSiteName.getText().toString());
 
 // Set the start date

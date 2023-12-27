@@ -6,24 +6,8 @@ addsitedetailactivity line 311 pendng from backend. After this accept site id fr
 -all parameters should be pass into form data while creating a site, u are passing data in media query which is for updation- pending email- remove forward slash, make sure campaign_id is an existing campaign- working
 site edit working, image upload not working just skip it
 
-/site edit working, image upload not working just skip it
-
->site add post not working- have to upload image- pending till upload image is implemented
-adding site POST not allowed- pending backend- need to add to formdata- pending
->/campaign id, name, /vendor id
-
-
-adding site change to url in api ref line 332 addsitedetail    
-
-//edit site says site updated but data is not updated- send email 
-
-fix multipart in api ref for everything to include the jsonstrng
-
 remove null from all image uploads
 implement add image- on line 192 appcampdet
-
-line 521 apiref addsite remove placeholder
-
 
 add new campaign- `user_id`, `client_id` must be active user ids- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending backend- you can create client by using clients api
 user_id, means id of user
@@ -33,14 +17,12 @@ edit campaign- same issue as above- make a dropdown for client selection in camp
 
 remove add photo in create client
 
-
 implement edit campaign in dash line 424
 edit campaign class work on
 have to upload image
 line 326 editcampaign add image illu media
 line 676 apiref
                                                                   
-
 image upload
 -just upload file the entry is not required in backend
 working in addsitedetails add in others  
@@ -49,7 +31,7 @@ check apireference add campaign
 2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
 -pending backend
 
->line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
+line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
 -you need to use put method to edit client, when you are using PUT method each data should send by using query params
 make api call line 306 apireferenceclass- pending email
 
@@ -70,6 +52,16 @@ test on phone ask the monkes
 
 ask what mediatype and illumination are- placeholders
 
+
+/site edit working, image upload not working just skip it
+
+//line 521 apiref addsite remove placeholder
+//fix multipart in api ref for everything to include the jsonstrng
+//site add post not working- have to upload image- pending till upload image is implemented
+adding site POST not allowed- pending backend- need to add to formdata- pending
+//campaign id, name, /vendor id
+//adding site change to url in api ref line 332 addsitedetail    
+//edit site says site updated but data is not updated- send email 
 //add delete
 //add code to dropdown a list which says delete
 //delete code

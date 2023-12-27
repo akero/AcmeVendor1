@@ -56,8 +56,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/llUnit"
+            android:id="@+id/sitename"
             android:layout_below="@id/tvAddSiteDetail"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/_2sdp">
+
+                <TextView
+                    android:id="@+id/tvSitename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Site Name"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_10ssp" />
+
+                <EditText
+                    android:id="@+id/etSiteName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvSitename"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/texthintcolor"
+                    android:textSize="@dimen/_12ssp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/llUnit"
+            android:layout_below="@id/sitename"
             android:orientation="horizontal">
 
                <RelativeLayout
@@ -90,6 +128,8 @@
                        android:textSize="@dimen/_12ssp" />
             </RelativeLayout>
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
