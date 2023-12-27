@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -42,11 +43,13 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     String siteNumber;
     String selectedItem;
     String selectedItem1;
+    String selectedClient;
     private UploadHelper uploadHelper;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     private final int REQUEST_IMAGE_CAPTURE = 101;
     Uri selectedImage;
+    int clientspinnerboolean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +58,10 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         logintoken= getIntent().getStringExtra("logintoken");
         selectedItem="";
         selectedItem1="";
+        selectedClient="";
         imageStream= null;
         selectedImage= null;
+        clientspinnerboolean= 0;
 
         Log.d("whichclass", "AddCampaignDetails");
 
@@ -172,6 +177,49 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             }
         });
 
+        //code for select client
+
+        //TODO fill with client names
+        FileHelper fh= new FileHelper();
+
+        Context ctxt= this;
+        try {
+            clientspinnerboolean= 1;
+            APIreferenceclass api = new APIreferenceclass(ctxt, fh.readLoginToken(this));
+        }catch(Exception e){
+            Log.d("tg343", e.toString());
+        }
+
+        //TODO put this spinner code after response is received
+        String[] items2 = new String[]{"Item 1", "Item 2", "Item 3"};
+
+
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        binding.spinnermediatype.setAdapter(adapter2);
+
+        // Inside your onCreate method
+        binding.spinnermediatype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+
+
+
+                selectedClient = parent.getItemAtPosition(position).toString();
+                Log.d("tg92", "selectedClient"+ selectedClient);
+
+
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
         //end of spinner code
     }
 
@@ -231,9 +279,20 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             selectedImage= null;
         }
     }
+
+    void clientlist(String response){
+        //TODO retreive client list
+    }
+
     @Override
     public void onResponseReceived(String response) {
-        Log.d("tg9", "response "+response);
+        //client list retreive
+        if(clientspinnerboolean== 1){
+            clientspinnerboolean=0;
+            clientlist(response);
+        }
+        else{
+            Log.d("tg9", "response "+response);
         try {
             JSONObject jsonobj = new JSONObject(response);
 
@@ -267,7 +326,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
 
 
             Log.d("tag123", e.toString());
-        }
+        }}
     }
 
     public void showFailureMessage() {
