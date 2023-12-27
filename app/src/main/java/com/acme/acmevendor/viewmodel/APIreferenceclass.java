@@ -250,7 +250,7 @@ public class APIreferenceclass {
     }
 
     //addclientdetailactivity
-    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a, int b, String jsonString){
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, String clientid, int b, String jsonString){
 
         //TODO add siteNumber to api call
 
@@ -260,7 +260,7 @@ public class APIreferenceclass {
         jsonString= fixjsonstring(jsonString);
 
         String urlEncodedParams = encodeJsonToUrl(jsonString);
-        url= url+"?"+urlEncodedParams;
+        url= url+clientid+"?"+urlEncodedParams;
 
         querytype= 2; //PUT
 

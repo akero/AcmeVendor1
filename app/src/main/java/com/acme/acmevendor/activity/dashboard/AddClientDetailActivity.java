@@ -35,6 +35,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
     private ActivityAddClientDetailBinding binding;
     String response1;
     String logintoken;
+    String clientid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
             //api response from last thread
             response1 = getIntent().getStringExtra("response");
+            Log.d("tg74", response1);
+
             //siteNumber= getIntent().getStringExtra("siteNumber");
         }catch(Exception e){
             e.printStackTrace();
@@ -63,6 +66,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
         try {
         jsonobj= new JSONObject(apiresponse);
+        clientid= jsonobj.getString("id");
         }catch(Exception e){
             Log.d("tg23", e.toString());
         }
@@ -151,7 +155,7 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             }
 
             //TODO here- PENDING FROM BACKEND. PUT not working
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 0, 0, jsonPayload.toString());
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, clientid, 0, jsonPayload.toString());
         }
     }
 

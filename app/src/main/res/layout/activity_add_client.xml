@@ -240,65 +240,13 @@
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_110sdp"
-                    android:id="@+id/rlAddImage"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/primarystroke"
-                    android:layout_below="@id/etGst">
 
-
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="1dp"
-                        android:layout_height="1dp"
-                        android:layout_centerInParent="true" />
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/view"
-                        android:layout_marginBottom="@dimen/_2sdp"
-                        android:onClick="addImage"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_gallery" />
-
-                    <TextView
-                        android:id="@+id/tvAddSite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/view"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:fontFamily="@font/dmsansregular"
-                        android:text="Add Site Photograph"
-                        android:onClick="addImage"
-                        android:layout_centerHorizontal="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_10ssp" />
-
-
-                    <com.acme.acmevendor.utility.RoundRectCornerImageView
-                        android:id="@+id/ivCampaignImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_1sdp"
-                        android:layout_marginTop="@dimen/_1sdp"
-                        android:layout_marginEnd="@dimen/_1sdp"
-                        android:layout_marginBottom="@dimen/_1sdp"
-                        android:background="@color/colorPrimarylight"
-                        android:onClick="addImage"
-                        android:scaleType="fitXY" />
-
-
-                </RelativeLayout>
 
                 <Button
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rlAddImage"
+                    android:layout_below="@id/etGst"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:background="@drawable/primarystroke"
                     android:fontFamily="@font/dmsansbold"

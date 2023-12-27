@@ -217,8 +217,10 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 //jsonPayload.put("image", imageStream);
 
                 //TODO fix both
+
+                //TODO fill below 2 with correct values
                 jsonPayload.put("uid", 1);
-                jsonPayload.put("user_id", 1);
+                jsonPayload.put("user_id", 5);
                 jsonPayload.put("media_type", mediatype);
                 jsonPayload.put("illumination", illumination);
 
