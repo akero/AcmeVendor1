@@ -1,4 +1,6 @@
+>line 831 apiref change to put, url query params and attach pic
 edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
+
 
 implement edit campaign in dash line 424
 edit campaign class work on

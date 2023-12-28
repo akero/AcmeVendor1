@@ -33,6 +33,7 @@ import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -248,9 +249,13 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                 jsonPayload.put("num_of_site", numsites);
                 //jsonPayload.put("image", imageStream);
 
-                //TODO fix both
-                jsonPayload.put("uid", 1);
-                jsonPayload.put("user_id", 1);
+
+                JSONObject a= new JSONObject(latestresponse);
+                JSONObject j= a.getJSONObject("data");
+                Log.d("qwer", j.toString());
+
+                jsonPayload.put("uid", j.optString("uid"));
+                jsonPayload.put("user_id", j.optString("user_id"));
                 jsonPayload.put("media_type", mediatype);
                 jsonPayload.put("illumination", illumination);
 
@@ -262,10 +267,14 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             selectedImage= null;
         }
     }
+
+    String latestresponse;
+
     @Override
     public void onResponseReceived(String response) {
         Log.d("tg9", response);
         Log.d("tg9", Integer.toString(save));
+        latestresponse= response;
 
         if(save== 1){
         try {
@@ -332,7 +341,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             binding.etStartDate.setText(jsonobj.optString("start_date"));
             binding.etEndDate.setText(jsonobj.optString("end_date"));
             binding.etnumsites.setText(jsonobj.optString("num_of_site"));
-            binding.etclientid.setText(jsonobj.optString("user_id"));
+            binding.etclientid.setText(jsonobj.optString("client_id"));
             //TODO add illumination and mediatype and image
 
         }catch(Exception e){

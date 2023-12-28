@@ -828,6 +828,7 @@ public class APIreferenceclass {
         //here
 
         String url = "https://acme.warburttons.com/api/campaigns";
+        //here change to put
         querytype = 1; // POST
 
         Log.d("tg92", jsonPayload1.toString());
