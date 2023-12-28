@@ -523,9 +523,9 @@ public class APIreferenceclass {
 
     //fetch clients
     public APIreferenceclass(Context context, String logintoken){
-        String url= "https://acme.warbuttons.com/api/clients";
+        String url= "https://acme.warburttons.com/api/clients/";
 
-        String jsonPayload = "";
+        String jsonPayload = "{\"Authorization\": \"" + logintoken + "\"}";
         Log.d("tg4", jsonPayload);
 
         Map<String, String> headers = new HashMap<>();

@@ -32,6 +32,8 @@ import com.acme.acmevendor.databinding.ActivityAddCampaignDetailsBinding;
 import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -190,35 +192,6 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             Log.d("tg343", e.toString());
         }
 
-        //TODO put this spinner code after response is received
-        String[] items2 = new String[]{"Item 1", "Item 2", "Item 3"};
-
-
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
-        binding.spinnermediatype.setAdapter(adapter2);
-
-        // Inside your onCreate method
-        binding.spinnermediatype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
-
-
-
-                selectedClient = parent.getItemAtPosition(position).toString();
-                Log.d("tg92", "selectedClient"+ selectedClient);
-
-
-                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Another interface callback
-            }
-        });
 
         //end of spinner code
     }
@@ -233,7 +206,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 binding.etVendor.getText().toString().isEmpty() ||
                 binding.etStartDate.getText().toString().isEmpty() ||
                 binding.etEndDate.getText().toString().isEmpty() ||
-                binding.etclientid.getText().toString().isEmpty() ||
+                //TODO uncomment
+                //binding.etclientid.getText().toString().isEmpty() ||
                 binding.etnumsites.getText().toString().isEmpty() ||
                 selectedItem.equals("")||
                 selectedItem1.equals("")){
@@ -247,7 +221,9 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             String vendor=binding.etVendor.getText().toString();
             String startdate=binding.etStartDate.getText().toString();
             String enddate=binding.etEndDate.getText().toString();
-            String clientid=binding.etclientid.getText().toString();
+
+            //TODO uncomment
+            //String clientid=binding.etclientid.getText().toString();
             String numsites=binding.etnumsites.getText().toString();
             String mediatype=selectedItem;
             String illumination=selectedItem1;
@@ -260,7 +236,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 jsonPayload.put("vendor", vendor);
                 jsonPayload.put("start_date", startdate);
                 jsonPayload.put("end_date", enddate);
-                jsonPayload.put("client_id", clientid);
+                jsonPayload.put("client_id", selectedClient);
                 jsonPayload.put("num_of_site", numsites);
                 //jsonPayload.put("image", imageStream);
 
@@ -280,8 +256,76 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }
     }
 
+    JSONArray jsonArray;
+
     void clientlist(String response){
         //TODO retreive client list
+
+        Log.d("clientlist", response);
+        //TODO put this spinner code after response is received
+
+        String[] items2= null;
+
+        try{
+            JSONObject json= new JSONObject(response);
+            jsonArray= json.getJSONArray("data");
+            items2 = new String[jsonArray.length()];
+
+            for(int i=0; i<jsonArray.length(); i++){
+                JSONObject json1= jsonArray.getJSONObject(i);
+                items2[i]= json1.optString("name");
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        final String[] items3= items2;
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        binding.spinnermediatype1.setAdapter(adapter2);
+
+        // Inside your onCreate method
+        binding.spinnermediatype1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+
+
+
+                selectedClient = parent.getItemAtPosition(position).toString();
+
+                try {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject json1 = jsonArray.getJSONObject(i);
+                        items3[i] = json1.optString("name");
+                        if(items3[i].equals(selectedClient)){
+                            Log.d("selectedclient", json1.optString("id")+ " "+ selectedClient);
+                            selectedClient= json1.optString("id");
+
+                            break;
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                Log.d("tg92", "selectedClient"+ selectedClient);
+
+
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
     }
 
     @Override
@@ -289,7 +333,12 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         //client list retreive
         if(clientspinnerboolean== 1){
             clientspinnerboolean=0;
-            clientlist(response);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    clientlist(response);
+                }
+            });
         }
         else{
             Log.d("tg9", "response "+response);
@@ -306,7 +355,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                             binding.etStartDate.setText("");
                             binding.etEndDate.setText("");
                             binding.etnumsites.setText("");
-                            binding.etclientid.setText("");
+                            //TODO uncomment
+                            //binding.etclientid.setText("");
                             showSuccessMessage();
                         }
                         else{

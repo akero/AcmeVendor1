@@ -1,13 +1,3 @@
-add client selection add campaign
-
-SORT UID USER_ID IN ADDCAMPAIGN
-
->addcampaign line 193, finish the client dropdown
-
-add new campaign- `user_id`, `client_id` must be active user ids- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending backend- you can create client by using clients api
-user_id, means id of user
-uid , means any unique no.
-
 edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
 
 implement edit campaign in dash line 424
@@ -33,7 +23,7 @@ think this is create> edit test- says image required- pending till upload image 
 
 remove null from all image uploads
 implement add image- on line 192 appcampdet
-
+fix size of spinner in add campaign
 
 
 test
@@ -43,7 +33,12 @@ test on phone ask the monkes
 
 ask what mediatype and illumination are- placeholders
 
-
+//add client selection add campaign
+//SORT UID USER_ID IN ADDCAMPAIGN
+//addcampaign line 193, finish the client dropdown
+//add new campaign- `user_id`, `client_id` must be active user ids- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending backend- you can create client by using clients api
+user_id, means id of user
+uid , means any unique no.
 //line 123 addclentdetailactivity- pending from backend. follow up- wait for email, api call return seems to ask for logintoken- add login token to call. line 319 apireference
 -you need to use put method to edit client, when you are using PUT method each data should send by using query params
 make api call line 306 apireferenceclass- pending email
