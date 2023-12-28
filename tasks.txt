@@ -5,8 +5,12 @@ edit campaign class work on
 have to upload image
 line 326 editcampaign add image illu media
 line 676 apiref
-                              
-                                   
+               
+edit campaign spinner client
+>maybe vendor               
+
+maybe vendor spinner for add campaign                                   
+
 image upload
 -just upload file the entry is not required in backend
 working in addsitedetails add in others  
