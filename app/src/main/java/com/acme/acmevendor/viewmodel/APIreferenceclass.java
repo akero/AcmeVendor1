@@ -824,17 +824,22 @@ public class APIreferenceclass {
     }
 
     //edit campaign. EditCampaign class.
-    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage, int i) {
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage, int campaignId) {
         //here
 
         String url = "https://acme.warburttons.com/api/campaigns";
         //here change to put
-        querytype = 1; // POST
+        querytype = 2; // PUT
+
+        String jsonString= fixjsonstring(jsonPayload1.toString());
+
+        String urlEncodedParams= encodeJsonToUrl(jsonString);
+        url= url+"/"+ campaignId+ "?"+ urlEncodedParams;
 
         Log.d("tg92", jsonPayload1.toString());
 
         if (selectedImage != null) {
-            // Prepare multipart body
+         /*   // Prepare multipart body
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
             StringBuilder bodyBuilder = new StringBuilder();
 
@@ -886,6 +891,23 @@ public class APIreferenceclass {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+          */
+
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+
+            // Modify headers for multipart request
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            Log.d("yes", "yes");
+
+            int querytype= 2;
+
+            // Call the API with multipart data
+            callapi2(headers, multipart(context, selectedImage, jsonString), context, querytype, url);
+
         } else {
             // Existing JSON payload handling
             String jsonPayload = jsonPayload1.toString();
@@ -893,7 +915,7 @@ public class APIreferenceclass {
             headers.put("Authorization", "Bearer " + logintoken);
             headers.put("Content-Type", "application/json");
 
-            callapi(headers, jsonPayload, context, 1, url); // Using POST method
+            callapi(headers, jsonPayload, context, 2, url); // Using POST method
         }
     }
 

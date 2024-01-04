@@ -5,6 +5,9 @@ add header with details
 >line 831 apiref change to put, url query params and attach pic
 edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
 
+update url- https://acme.warburttons.com/api/campaigns/4?uid=4353&user_id=5&start_date=2023/09/22&end_date=2023/09/22&vendor=6&name=a&illumination=digital&num_of_site=10&media_type=led&image=1682335036&client_id=5
+
+4 is id
 
 implement edit campaign in dash line 424
 edit campaign class work on

@@ -67,6 +67,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         selectedItem1="";
         imageStream= null;
         selectedImage= null;
+        campaignId= 0;
 
         ctxt= this;
         logintoken= getIntent().getStringExtra("logintoken");
@@ -261,14 +262,22 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
             }catch(Exception e){
                 Log.d("tg6", e.toString());
-            }Log.d("tg6", selectedImage.toString());
+            }
 
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage, 1);
+            try {
+                Log.d("tg6", selectedImage.toString());
+            }catch (Exception e){
+                Log.d("tag12", e.toString());
+            }
+
+            Log.d("jsonpayloaeditcampaign", jsonPayload.toString());
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage, campaignId);
             selectedImage= null;
         }
     }
 
     String latestresponse;
+    int campaignId;
 
     @Override
     public void onResponseReceived(String response) {
@@ -335,7 +344,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             String data= jsonobj1.optString("data");
             JSONObject jsonobj= new JSONObject(data);
 
-
+            campaignId= jsonobj.optInt("id");
             binding.etName.setText(jsonobj.optString("name"));
             binding.etVendor.setText(jsonobj.optString("vendor"));
             binding.etStartDate.setText(jsonobj.optString("start_date"));
