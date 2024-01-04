@@ -920,9 +920,6 @@ public class APIreferenceclass {
         }
 
 
-
-
-
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
 
         try {
