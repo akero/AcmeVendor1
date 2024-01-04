@@ -539,6 +539,24 @@ public class APIreferenceclass {
         callapi(headers, jsonPayload, context, querytype ,url);
     }
 
+    //fetch vendors
+    public APIreferenceclass(Context context, String logintoken, int i){
+        String url= "https://acme.warburttons.com/api/vendors/";
+
+        String jsonPayload = "{\"Authorization\": \"" + logintoken + "\"}";
+        Log.d("tg4", jsonPayload);
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+        querytype=0; //get
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+    }
+
     //addsitedetailactivity- add new site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
         Log.d("tag21", "addsitedetailactivity add site");

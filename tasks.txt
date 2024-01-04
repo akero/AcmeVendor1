@@ -1,12 +1,10 @@
+Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
+
 New- Swipe in client to move clients
 admin client dash connects to campaigns first then sites
 add header with details
                
-edit campaign-spinner client
->maybe vendor               
-
-add campaign-maybe vendor spinner                              
-
+edit campaign-spinner client vendor
 
 faltu-
 ask what mediatype and illumination are- placeholders
@@ -35,6 +33,7 @@ check apireference add campaign
 2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
 -pending backend
 
+//add campaign-maybe vendor spinner                              
 //implement edit campaign in dash line 424
 //edit campaign class work on
 //have to upload image
