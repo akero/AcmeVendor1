@@ -373,8 +373,6 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 }
 
             });}catch(Exception e){
-
-
             Log.d("tag123", e.toString());
         }}
     }

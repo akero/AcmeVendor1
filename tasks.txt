@@ -1,51 +1,45 @@
-swipe in client to move clients
+New- Swipe in client to move clients
 admin client dash connects to campaigns first then sites
 add header with details
-
->line 831 apiref change to put, url query params and attach pic
-edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
-
-update url- https://acme.warburttons.com/api/campaigns/4?uid=4353&user_id=5&start_date=2023/09/22&end_date=2023/09/22&vendor=6&name=a&illumination=digital&num_of_site=10&media_type=led&image=1682335036&client_id=5
-
-4 is id
-
-implement edit campaign in dash line 424
-edit campaign class work on
-have to upload image
-line 326 editcampaign add image illu media
-line 676 apiref
                
-edit campaign spinner client
+edit campaign-spinner client
 >maybe vendor               
 
-maybe vendor spinner for add campaign                                   
-
-image upload
--just upload file the entry is not required in backend
-working in addsitedetails add in others  
-add to campaign- edit the api class
-check apireference add campaign
-2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
--pending backend
+add campaign-maybe vendor spinner                              
 
 
-check email about https://acme.warburttons.com/api/get_campaign_sites/18
+faltu-
+ask what mediatype and illumination are- placeholders
+remove null from all image uploads
+implement add image- on line 192 appcampdet
+fix size of spinner in add campaign
+notification icon- remove it
+test
+test on phone ask the monkes
+
+
+//line 831 apiref change to put, url query params and attach pic
+edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
+
+//check email about https://acme.warburttons.com/api/get_campaign_sites/18
 -you need to select a image in postman while creating a campaign, after doing this you will not get this error
 https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
 think this is create> edit test- says image required- pending till upload image is implemented which is pending from backend
 
-remove null from all image uploads
-implement add image- on line 192 appcampdet
-fix size of spinner in add campaign
 
+//update url- https://acme.warburttons.com/api/campaigns/4?uid=4353&user_id=5&start_date=2023/09/22&end_date=2023/09/22&vendor=6&name=a&illumination=digital&num_of_site=10&media_type=led&image=1682335036&client_id=5
+4 is id
 
-test
-test on phone ask the monkes
+//add to campaign- edit the api class
+check apireference add campaign
+2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
+-pending backend
 
->notification icon- ask what it does
-
-ask what mediatype and illumination are- placeholders
-
+//implement edit campaign in dash line 424
+//edit campaign class work on
+//have to upload image
+//line 326 editcampaign add image illu media
+//line 676 apiref
 //add client selection add campaign
 //SORT UID USER_ID IN ADDCAMPAIGN
 //addcampaign line 193, finish the client dropdown
