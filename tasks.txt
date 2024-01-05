@@ -4,7 +4,8 @@ New- Swipe in client to move clients
 admin client dash connects to campaigns first then sites
 add header with details
                
-edit campaign-spinner client vendor
+>edit campaign-spinner client vendor
+line 525 populate the spinners
 
 faltu-
 ask what mediatype and illumination are- placeholders

@@ -45,6 +45,8 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
     String siteNumber;
     String selectedItem;
     String selectedItem1;
+    String selectedClient;
+    String selectedVendor;
     private UploadHelper uploadHelper;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
@@ -65,9 +67,12 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         campaignItem= "";
         selectedItem="";
         selectedItem1="";
+        selectedClient="";
+        selectedVendor="";
         imageStream= null;
         selectedImage= null;
         campaignId= 0;
+        callap= 0;
 
         ctxt= this;
         logintoken= getIntent().getStringExtra("logintoken");
@@ -201,9 +206,12 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
         //end of spinner code
     }
+
+    int callap;
     Context ctxt;
     //send campaign details api call
     void callapi( int id){
+        callap= 1;
         APIreferenceclass api= new APIreferenceclass(logintoken, id, ctxt);
     }
 
@@ -216,10 +224,10 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
     public void btnSaveClick(View view) {
         save= 1;
         if (    binding.etName.getText().toString().isEmpty() ||
-                binding.etVendor.getText().toString().isEmpty() ||
+                //binding.etVendor.getText().toString().isEmpty() ||
                 binding.etStartDate.getText().toString().isEmpty() ||
                 binding.etEndDate.getText().toString().isEmpty() ||
-                binding.etclientid.getText().toString().isEmpty() ||
+                //binding.etclientid.getText().toString().isEmpty() ||
                 binding.etnumsites.getText().toString().isEmpty() ||
                 selectedItem.equals("")||
                 selectedItem1.equals("")){
@@ -230,10 +238,10 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         } else {
 
             String name=binding.etName.getText().toString();
-            String vendor=binding.etVendor.getText().toString();
+            //String vendor=binding.etVendor.getText().toString();
             String startdate=binding.etStartDate.getText().toString();
             String enddate=binding.etEndDate.getText().toString();
-            String clientid=binding.etclientid.getText().toString();
+            //String clientid=binding.etclientid.getText().toString();
             String numsites=binding.etnumsites.getText().toString();
             String mediatype=selectedItem;
             String illumination=selectedItem1;
@@ -243,10 +251,10 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                 //String base64Image = Base64.encodeToString(imageStream.toByteArray(), Base64.DEFAULT);
                 //jsonPayload.put("image", base64Image);
                 jsonPayload.put("name", name);
-                jsonPayload.put("vendor", vendor);
+                jsonPayload.put("vendor", selectedVendor);
                 jsonPayload.put("start_date", startdate);
                 jsonPayload.put("end_date", enddate);
-                jsonPayload.put("client_id", clientid);
+                jsonPayload.put("client_id", selectedClient);
                 jsonPayload.put("num_of_site", numsites);
                 //jsonPayload.put("image", imageStream);
 
@@ -276,6 +284,151 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         }
     }
 
+    JSONArray jsonArray;
+
+    void clientlist(String response){
+        //TODO retreive client list
+
+        Log.d("clientlist", response);
+        //TODO put this spinner code after response is received
+
+        String[] items2= null;
+
+        try{
+            JSONObject json= new JSONObject(response);
+            jsonArray= json.getJSONArray("data");
+            items2 = new String[jsonArray.length()];
+
+            for(int i=0; i<jsonArray.length(); i++){
+                JSONObject json1= jsonArray.getJSONObject(i);
+                items2[i]= json1.optString("name");
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        final String[] items3= items2;
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        binding.spinnermediatype1.setAdapter(adapter2);
+
+        // Inside your onCreate method
+        binding.spinnermediatype1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+
+
+
+                selectedClient = parent.getItemAtPosition(position).toString();
+
+                try {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject json1 = jsonArray.getJSONObject(i);
+                        items3[i] = json1.optString("name");
+                        if(items3[i].equals(selectedClient)){
+                            Log.d("selectedclient", json1.optString("id")+ " "+ selectedClient);
+                            selectedClient= json1.optString("id");
+
+                            break;
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                Log.d("tg92", "selectedClient"+ selectedClient);
+
+
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
+    }
+
+    //for vendor fetch
+    JSONArray jsonArray1;
+
+    void vendorlist(String response){
+        //TODO retreive client list
+
+        Log.d("vendorlist", response);
+        //TODO put this spinner code after response is received
+
+        String[] items2= null;
+
+        try{
+            JSONObject json= new JSONObject(response);
+            jsonArray1= json.getJSONArray("data");
+            items2 = new String[jsonArray1.length()];
+
+            for(int i=0; i<jsonArray1.length(); i++){
+                JSONObject json1= jsonArray1.getJSONObject(i);
+                items2[i]= json1.optString("name");
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        final String[] items3= items2;
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        binding.spinnervendor.setAdapter(adapter2);
+
+        // Inside your onCreate method
+        binding.spinnervendor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+
+
+
+                selectedVendor = parent.getItemAtPosition(position).toString();
+
+                try {
+                    for (int i = 0; i < jsonArray1.length(); i++) {
+                        JSONObject json1 = jsonArray1.getJSONObject(i);
+                        items3[i] = json1.optString("name");
+                        if(items3[i].equals(selectedVendor)){
+                            Log.d("selectedvendor", json1.optString("id")+ " "+ selectedVendor);
+                            selectedVendor= json1.optString("id");
+
+                            break;
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                Log.d("tg92", "selectedVendor"+ selectedVendor);
+
+
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
+    }
+
     String latestresponse;
     int campaignId;
 
@@ -284,6 +437,12 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         Log.d("tg9", response);
         Log.d("tg9", Integer.toString(save));
         latestresponse= response;
+        JSONObject jsono= null;
+        try {
+
+            jsono = new JSONObject(response);
+
+
 
         if(save== 1){
         try {
@@ -295,11 +454,11 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                     try{
                         if(jsonobj.getBoolean("success")== true){
                             binding.etName.setText("");
-                            binding.etVendor.setText("");
+                            //binding.etVendor.setText("");
                             binding.etStartDate.setText("");
                             binding.etEndDate.setText("");
                             binding.etnumsites.setText("");
-                            binding.etclientid.setText("");
+                            //binding.etclientid.setText("");
                             save= 0;
                             showSuccessMessage();
                         }
@@ -323,17 +482,34 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
         }
         }
-        else{
+        else if(callap== 1){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     Log.d("tg9", response);
-
+                    callap= 0;
                     implementUI(response);
 
                 }
             });
 
+        }else if(jsono.getString("message").equals("Vendors retrieved successfully.")){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() { vendorlist(response);
+                        }
+                    });
+                }else if(jsono.getString("message").equals("Clients retrieved successfully.")){
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            clientlist(response);
+                        }
+                    });
+                }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -346,6 +522,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
             campaignId= jsonobj.optInt("id");
             binding.etName.setText(jsonobj.optString("name"));
+            //here
             binding.etVendor.setText(jsonobj.optString("vendor"));
             binding.etStartDate.setText(jsonobj.optString("start_date"));
             binding.etEndDate.setText(jsonobj.optString("end_date"));
