@@ -205,6 +205,29 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         callapi(id);
 
         //end of spinner code
+
+        //code for select client
+
+        //TODO fill with client names
+        FileHelper fh= new FileHelper();
+
+        Context ctxt= this;
+        try {
+            //clientspinnerboolean= 1;
+            APIreferenceclass api = new APIreferenceclass(ctxt, fh.readLoginToken(this));
+        }catch(Exception e){
+            Log.d("tg343", e.toString());
+        }
+
+        try {
+            //vendorspinnerboolean= 1;
+            APIreferenceclass api = new APIreferenceclass(ctxt, fh.readLoginToken(this), 1);
+        }catch(Exception e){
+            Log.d("tg343", e.toString());
+        }
+
+
+
     }
 
     int callap;
@@ -499,7 +522,9 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                         public void run() { vendorlist(response);
                         }
                     });
-                }else if(jsono.getString("message").equals("Clients retrieved successfully.")){
+                }
+
+        else if(jsono.getString("message").equals("Clients retrieved successfully.")){
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -518,16 +543,18 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             Log.d("tg9", "IN IMPLEMENTUI");
             JSONObject jsonobj1 = new JSONObject(response);
             String data= jsonobj1.optString("data");
+            Log.d("data", data);
+
             JSONObject jsonobj= new JSONObject(data);
 
             campaignId= jsonobj.optInt("id");
             binding.etName.setText(jsonobj.optString("name"));
             //here
-            binding.etVendor.setText(jsonobj.optString("vendor"));
+            //binding.etVendor.setText(jsonobj.optString("vendor"));
             binding.etStartDate.setText(jsonobj.optString("start_date"));
             binding.etEndDate.setText(jsonobj.optString("end_date"));
             binding.etnumsites.setText(jsonobj.optString("num_of_site"));
-            binding.etclientid.setText(jsonobj.optString("client_id"));
+            //binding.etclientid.setText(jsonobj.optString("client_id"));
             //TODO add illumination and mediatype and image
 
         }catch(Exception e){
