@@ -48,7 +48,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
 
     ProgressBar progressBar;
     Animation rotateAnimation;
-
+    int clientId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +57,27 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
 
         Log.d("tag199", "1");
         Log.d("whichclass", "ClientDashFirstPage");
+        clientId= 0;
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
         //animation code
+
+        String jsonArray= "";
+        try {
+            jsonArray = getIntent().getStringExtra("jsonArray");
+            Log.d("tag234", jsonArray);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject jsonobj = new JSONObject(jsonArray);
+            clientId= jsonobj.getInt("id");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         ctxt= this;
 
@@ -127,7 +143,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         //view.setVisibility(View.VISIBLE);
         //animation code
 
-        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, loginToken, this);
+        APIreferenceclass api= new APIreferenceclass(clientId, vendorclientorcampaign, loginToken, this);
     }
 
     public void onPlusClick(View view) {

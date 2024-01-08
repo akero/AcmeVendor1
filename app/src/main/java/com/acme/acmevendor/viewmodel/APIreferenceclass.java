@@ -112,6 +112,23 @@ public class APIreferenceclass {
       }
     }
 
+    //to fetch client's campaigns in clientdashfirstpage
+    public APIreferenceclass(int clientId, int vendorclientorcampaign, String logintoken, Context context) {
+        String url="https://acme.warburttons.com/api/clients";
+        querytype= 0;
+        url= url+"/"+clientId;
+
+        String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
+
+        Map<String, String> headers= new HashMap<>();
+        headers.put("Authorization", "Bearer "+logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+
+        callapi(headers, jsonPayload, context, querytype, url);
+    }
+
     //for vendor flow first page
     public APIreferenceclass(String logintoken, Context context, int a) {
             Log.d("tag21","1");

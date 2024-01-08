@@ -2,11 +2,12 @@ Identify first 5% of the task after break to help with task switching before sta
 
 New- Swipe in client to move clients
 admin client dash connects to campaigns first then sites
-add header with details
-old campaign, live campaign
+>add header with details
+>old campaign, live campaign
 
 on right click menu connect to AdminViewClientDetails
->correctly retreive data for cliient>campaigns
+correctly retreive data for cliient>campaigns- emailed
+line 161 check what response is once email gets reply
 
 After all done-
 fetch correct campaignlist for client login
