@@ -5,7 +5,8 @@ admin client dash connects to campaigns first then sites
 add header with details
 old campaign, live campaign
 
-faltu-
+After all done-
+fetch correct campaignlist for client login
 ask what mediatype and illumination are- placeholders
 remove null from all image uploads
 implement add image- on line 192 appcampdet
@@ -13,6 +14,7 @@ fix size of spinner in add campaign
 notification icon- remove it
 test
 test on phone ask the monkes
+
 
 
 //line 831 apiref change to put, url query params and attach pic

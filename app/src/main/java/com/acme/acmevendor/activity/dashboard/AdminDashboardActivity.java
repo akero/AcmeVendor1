@@ -488,7 +488,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 Log.d("tag91",Integer.toString(position));
                 Log.d("tg11", id);
 
-                startActivity(new Intent(this, AdminViewClientDetails.class)
+                startActivity(new Intent(this, ClientDashFirstPage.class)
                         .putExtra("id", id)
                         .putExtra("logintoken", logintoken)
                         .putExtra("vendorclientorcampaign", vendorclientorcampaign)

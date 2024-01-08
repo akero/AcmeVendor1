@@ -46,5 +46,6 @@
     </string>
     <string name="title_activity_view_campaign_sites">ViewCampaignSites</string>
     <string name="title_activity_add_client_detail">AddClientDetailActivity</string>
+    <string name="title_activity_client_dash_first_page">ClientDashFirstPage</string>
 
 </resources>
