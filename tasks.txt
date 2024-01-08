@@ -3,6 +3,7 @@ Identify first 5% of the task after break to help with task switching before sta
 New- Swipe in client to move clients
 admin client dash connects to campaigns first then sites
 add header with details
+old campaign, live campaign
 
 faltu-
 ask what mediatype and illumination are- placeholders
