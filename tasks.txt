@@ -5,6 +5,9 @@ admin client dash connects to campaigns first then sites
 add header with details
 old campaign, live campaign
 
+on right click menu connect to AdminViewClientDetails
+>correctly retreive data for cliient>campaigns
+
 After all done-
 fetch correct campaignlist for client login
 ask what mediatype and illumination are- placeholders
