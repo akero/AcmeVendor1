@@ -398,6 +398,10 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             for(int i=0; i<jsonArray1.length(); i++){
                 JSONObject json1= jsonArray1.getJSONObject(i);
                 items2[i]= json1.optString("name");
+
+
+                //TODO make a double array and store ids along with names
+
             }
 
 
