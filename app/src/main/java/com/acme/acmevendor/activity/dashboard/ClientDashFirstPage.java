@@ -262,7 +262,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
             Log.d("tag122", id);
 
             // Start new activity and pass the retrieved data
-            startActivity(new Intent(this, ViewCampaignSites.class)
+            startActivity(new Intent(this, ViewCampaignSitesClientDash.class)
                     .putExtra("campaignType", "old")
 
                     .putExtra("id", id)

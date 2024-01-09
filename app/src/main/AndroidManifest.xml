@@ -27,10 +27,16 @@
         android:theme="@style/Theme.TestingProject"
         tools:targetApi="31">
         <activity
+            android:name=".activity.dashboard.ViewSiteDetailActivityClientDash"
+            android:exported="false" />
+        <activity
+            android:name=".activity.dashboard.ViewCampaignSitesClientDash"
+            android:exported="false" />
+        <activity
             android:name=".activity.dashboard.ClientDashFirstPage"
             android:exported="false"
             android:label="@string/title_activity_client_dash_first_page"
-            android:theme="@style/NoActTheme"/>
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.EditCampaign"
             android:exported="false"

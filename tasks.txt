@@ -2,12 +2,16 @@ Identify first 5% of the task after break to help with task switching before sta
 
 New- Swipe in client to move clients
 admin client dash connects to campaigns first then sites
->add header with details
->old campaign, live campaign
+>add header with details- add ux to other classes and get padding right
+old campaign, live campaign java code
+
+make new viewsitedetail for client dash
 
 on right click menu connect to AdminViewClientDetails
 correctly retreive data for cliient>campaigns- emailed
 line 161 check what response is once email gets reply
+
+ask what last update in view sites client dash is
 
 After all done-
 fetch correct campaignlist for client login
@@ -29,7 +33,9 @@ edit campaign- same issue as above- make a dropdown for client selection in camp
 https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
 think this is create> edit test- says image required- pending till upload image is implemented which is pending from backend
 
-
+//copy viewcampaignsites
+//make new one for clientdashfirstpage
+//add the xml code (copy from clientdashfirstpage)
 //update url- https://acme.warburttons.com/api/campaigns/4?uid=4353&user_id=5&start_date=2023/09/22&end_date=2023/09/22&vendor=6&name=a&illumination=digital&num_of_site=10&media_type=led&image=1682335036&client_id=5
 4 is id
 
