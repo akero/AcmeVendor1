@@ -1,5 +1,6 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.acme.acmevendor.databinding.ActivityAddClientDetailDashBinding;
@@ -7,6 +8,7 @@ import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.SiteDetail;
+import com.google.android.gms.common.api.Api;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
@@ -29,6 +31,7 @@ import com.acme.acmevendor.databinding.ActivityAddClientDetailBinding;
 
 import com.acme.acmevendor.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +40,7 @@ public class AddClientDetailDashActivity extends AppCompatActivity implements Ap
     String response1;
     String logintoken;
     String clientid;
+    int apicall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,8 @@ public class AddClientDetailDashActivity extends AppCompatActivity implements Ap
         setContentView(binding.getRoot());
         logintoken= "";
 
-        Log.d("whichclass", "AddClientDetailActivity");
+        int id= 0;
+        Log.d("whichclass", "AddClientDetailDashActivity");
         try {
             FileHelper fh= new FileHelper();
             logintoken= fh.readLoginToken(this);
@@ -55,11 +60,20 @@ public class AddClientDetailDashActivity extends AppCompatActivity implements Ap
             response1 = getIntent().getStringExtra("response");
             Log.d("tg74", response1);
 
+            JSONObject jsonobj= new JSONObject(response1);
+            id= jsonobj.getInt("id");
+
             //siteNumber= getIntent().getStringExtra("siteNumber");
         }catch(Exception e){
             e.printStackTrace();
         }
         //TODO fetch client details
+
+
+        Context ctxt= this;
+
+        apicall= 1;
+        APIreferenceclass api= new APIreferenceclass(id, logintoken, ctxt, true);
 
         //implementUI(response1);
     }
@@ -165,6 +179,8 @@ public class AddClientDetailDashActivity extends AppCompatActivity implements Ap
     @Override
     public void onResponseReceived(String response) {
         Log.d("tg99", response);
+
+        if(apicall== 0){
         try {
             JSONObject jsonobj = new JSONObject(response);
 
@@ -195,6 +211,22 @@ public class AddClientDetailDashActivity extends AppCompatActivity implements Ap
                 }});
 
             Log.d("tag123", e.toString());
+        }}else{
+            apicall= 0;
+            try {
+                JSONObject jsonobj= new JSONObject(response);
+                JSONObject jsonobj1= jsonobj.getJSONObject("data");
+
+runOnUiThread(new Runnable() {
+    @Override
+    public void run() {
+        implementUI(jsonobj1.toString());
+    }
+});
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

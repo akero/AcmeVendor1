@@ -8,8 +8,6 @@ code for all new classes
 correctly retreive data for cliient>campaigns- emailed
 line 161 check what response is once email gets reply
 
->make a different addclientdetailactivity for right click client edit on admin dash- line 62 addclientdetaildash
-
 ask what last update in view sites client dash is
 
 After all done-
@@ -19,11 +17,13 @@ remove null from all image uploads
 implement add image- on line 192 appcampdet
 fix size of spinner in add campaign
 notification icon- remove it
+check all todos
 test
 test on phone ask the monkes
 
 
 
+//make a different addclientdetailactivity for right click client edit on 
 //on right click menu connect to AdminViewClientDetails
 //line 831 apiref change to put, url query params and attach pic
 edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
