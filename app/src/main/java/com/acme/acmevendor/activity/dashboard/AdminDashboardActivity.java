@@ -364,7 +364,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         // Context should be your activity or fragment context
         Log.d("tg98", Integer.toString(position));
         PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
-        if(vendorclientorcampaign== 0) {
+        if(vendorclientorcampaign== 0|| vendorclientorcampaign==1) {
             popup.getMenuInflater().inflate(R.menu.popup_menu_campaign, popup.getMenu()); // Inflate your menu resource
 
         }else{
@@ -423,27 +423,49 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                 }
 
                 //to edit campaign info
-                else if(item.getItemId()== R.id.edit){
-                    JSONObject campaignItem= null;
+                else if(item.getItemId()== R.id.edit) {
 
-                try{
-                    RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
-                    CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
-                    campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+                    if(vendorclientorcampaign==0){
+                    JSONObject campaignItem = null;
 
-                    //Starting edit campaign
-                    Intent intent= new Intent(AdminDashboardActivity.this, EditCampaign.class);
-                    intent.putExtra("logintoken", logintoken);
-                    intent.putExtra("campaignItem", campaignItem.toString());
-                    startActivity(intent);
+                    try {
+                        RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                        CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                        campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
 
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                        //Starting edit campaign
+                        Intent intent = new Intent(AdminDashboardActivity.this, EditCampaign.class);
+                        intent.putExtra("logintoken", logintoken);
+                        intent.putExtra("campaignItem", campaignItem.toString());
+                        startActivity(intent);
 
-                //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
-                return true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
+                    //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                    return true;
+                }else if(vendorclientorcampaign==1){
+                        JSONObject campaignItem = null;
+
+                        try {
+                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+
+                            //Starting edit campaign
+                            Intent intent = new Intent(AdminDashboardActivity.this, AddClientDetailDashActivity.class);
+                            intent.putExtra("logintoken", logintoken);
+                            intent.putExtra("response", campaignItem.toString());
+                            startActivity(intent);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                        return true;
+                    }
                 }
             return false;
         }});

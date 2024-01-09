@@ -1,15 +1,14 @@
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
 
 New- Swipe in client to move clients
-admin client dash connects to campaigns first then sites
->add header with details- add ux to other classes and get padding right
+
 old campaign, live campaign java code
+code for all new classes
 
-make new viewsitedetail for client dash
-
-on right click menu connect to AdminViewClientDetails
 correctly retreive data for cliient>campaigns- emailed
 line 161 check what response is once email gets reply
+
+>make a different addclientdetailactivity for right click client edit on admin dash- line 62 addclientdetaildash
 
 ask what last update in view sites client dash is
 
@@ -25,10 +24,13 @@ test on phone ask the monkes
 
 
 
+//on right click menu connect to AdminViewClientDetails
 //line 831 apiref change to put, url query params and attach pic
 edit campaign- same issue as above- make a dropdown for client selection in campaign creation,and send client_id of selected client- pending- you can >create client by using clients api- user_id and uid arent being entered, ask developer- pending
-
+//admin client dash connects to campaigns first then sites
+//add header with details- add ux to other classes and get padding right
 //check email about https://acme.warburttons.com/api/get_campaign_sites/18
+//make new viewsitedetail for client dash
 -you need to select a image in postman while creating a campaign, after doing this you will not get this error
 https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
 think this is create> edit test- says image required- pending till upload image is implemented which is pending from backend
