@@ -215,7 +215,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -225,7 +225,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -234,7 +234,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -245,7 +245,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
             @Override
             public void onClick(View v) {
 
-                Intent intent= new Intent(ViewSiteDetailActivity.this, AddSiteDetailActivity.class);
+                Intent intent= new Intent(ViewSiteDetailActivityClientDash.this, AddSiteDetailActivity.class);
                 intent.putExtra("loginToken", logintoken);
                 intent.putExtra("campaignId", campaignId);
                 intent.putExtra("editingsite", "yes");
