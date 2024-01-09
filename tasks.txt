@@ -10,6 +10,8 @@ line 161 check what response is once email gets reply
 
 ask what last update in view sites client dash is
 
+dropdown for client in addcampaigndetails size fix
+
 After all done-
 fetch correct campaignlist for client login
 ask what mediatype and illumination are- placeholders
