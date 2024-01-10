@@ -1,9 +1,10 @@
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
 
-Swipe in client to move sites
+//Swipe in client to move sites
+test swipe in viewsitedetailactivity after below is done
 
->old campaign, live campaign java code- test when the email gets reply
->wait for email
+old campaign, live campaign java code- test when the email gets reply
+wait for email
 
 code for all new classes
 

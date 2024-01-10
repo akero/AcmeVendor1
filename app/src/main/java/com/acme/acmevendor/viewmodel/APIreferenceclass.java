@@ -242,7 +242,7 @@ public class APIreferenceclass {
     //for viewcampaignsites
     public APIreferenceclass(String loginToken, Context context, String id){
 
-        //TODO add siteNumber to api callYou explained
+        //TODO add siteNumber to api call
 
         Log.d("tag58",id);
 //id="18";

@@ -18,6 +18,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,6 +59,8 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
     String siteNumber= "";
     String logintoken="";
     String campaignId="";
+    private GestureDetector gestureDetector;
+
     private ActivityViewSiteDetailClientDashBinding binding;
 
     //TODO populate all fields. pass api call data from prev activity
@@ -80,10 +84,49 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
             Log.d("tg2", siteNumber);
         }
 
+        gestureDetector = new GestureDetector(this, new MyGestureListener());
+        View rootView = findViewById(R.id.scrollview);
+        rootView.setOnTouchListener((v, event) -> {
+            gestureDetector.onTouchEvent(event);
+            return true;
+        });
+
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
+
+        apicallgetcampaigns(logintoken, campaignId);
     }
+
+    private void handleSwipeLeft() {
+        //TODO Update your content here (e.g., fetch new data, update views)
+
+        for(int i= 0; i<siteIdArray.length; i++){
+            if(siteIdArray[i]== Integer.parseInt(siteNumber)){
+
+                if((i+1)<= siteIdArray.length) {
+                    siteNumber = String.valueOf(siteIdArray[i + 1]);
+                    apicall(logintoken, siteNumber);
+                }
+            }
+        }
+
+    }
+
+    private void handleSwipeRight() {
+
+        //TODO Update your content here (e.g., fetch new data, update views)
+        for(int i= 0; i<siteIdArray.length; i++){
+            if(siteIdArray[i]== Integer.parseInt(siteNumber)){
+
+                if((i-1)>=0) {
+                    siteNumber = String.valueOf(siteIdArray[i - 1]);
+                    apicall(logintoken, siteNumber);
+                }
+            }
+        }
+    }
+
     SiteDetail siteDetail;
     JSONObject jsonobj;
 
@@ -285,14 +328,62 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         Log.d("tag41", "7");
     }
 
+    void apicallgetcampaigns(String logintoken, String campaignId){
+        Log.d("tag41", "6");
+        Context context= this;
+        APIreferenceclass api= new APIreferenceclass(logintoken, context, campaignId);
+        Log.d("tag41", "7");
+    }
+
+    int[] siteIdArray;
+
+    void extractsiteids(String response){
+
+        try{
+            JSONObject jsonobj= new JSONObject(response);
+            if(jsonobj.getBoolean("success")== true){
+
+                JSONArray jsonArray= jsonobj.getJSONArray("data");
+                siteIdArray= new int[jsonArray.length()];
+
+                for(int i=0; i< jsonArray.length(); i++){
+                    JSONObject jsonobj1= jsonArray.getJSONObject(i);
+                    siteIdArray[i]= jsonobj1.getInt("id");
+
+                }
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     String response1="";
 
     @Override
     public void onResponseReceived(String response){
 
+        JSONObject jsonno= null;
+
+        try{
+            jsonno= new JSONObject(response);
+
+
         response1= response;
-        implementUI(response);
-        Log.d("tag41", response);
+
+        if(jsonno.getString("message").equals("Sites retrieved successfully.")) {
+
+            //todo here
+            extractsiteids(response);
+
+        }else{
+            implementUI(response);
+            Log.d("tag41", response);
+        }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void btnCloseClick(View view) {
@@ -451,6 +542,32 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final int SWIPE_THRESHOLD = 100;
+        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            float diffX = e2.getX() - e1.getX();
+            float diffY = e2.getY() - e1.getY();
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Horizontal swipe detected
+                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffX > 0) {
+                        // Swipe left
+                        handleSwipeLeft();
+                    } else {
+                        // Swipe right
+                        handleSwipeRight();
+                    }
+                }
+            }
+
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
     }
 
    /* @Override
