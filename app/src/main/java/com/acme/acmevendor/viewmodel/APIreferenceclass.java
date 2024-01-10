@@ -132,7 +132,7 @@ public class APIreferenceclass {
 
     //to fetch client's campaigns in clientdashfirstpage
     public APIreferenceclass(int clientId, int vendorclientorcampaign, String logintoken, Context context) {
-        String url="https://acme.warburttons.com/api/clients";
+        String url="https://acme.warburttons.com/api/get_client_campaigns";
         querytype= 0;
         url= url+"/"+clientId;
 
@@ -142,7 +142,9 @@ public class APIreferenceclass {
         headers.put("Authorization", "Bearer "+logintoken);
         headers.put("Content-Type", "application/json");
 
-        Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+        Log.d("clientdashfirstpage","url is "+ url);
+
+        Log.d("clientdashfirstpage","jsonpayload is "+ jsonPayload);
 
         callapi(headers, jsonPayload, context, querytype, url);
     }

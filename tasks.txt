@@ -6,7 +6,7 @@ old campaign, live campaign java code- test when the email gets reply
 
 code for all new classes
 
-correctly retreive data for cliient>campaigns- emailed
+line 135 apiref correctly retreive data for cliient>campaigns- emailed
 line 161 check what response is once email gets reply
 
 ask what last update in view sites client dash is

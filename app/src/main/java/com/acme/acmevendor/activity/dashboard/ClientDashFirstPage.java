@@ -75,6 +75,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         try {
             JSONObject jsonobj = new JSONObject(jsonArray);
             clientId= jsonobj.getInt("id");
+            Log.d("clientid", Integer.toString(clientId));
         }catch(Exception e){
             e.printStackTrace();
         }
