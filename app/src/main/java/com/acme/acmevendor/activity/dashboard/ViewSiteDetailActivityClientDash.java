@@ -110,7 +110,6 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                 }
             }
         }
-
     }
 
     private void handleSwipeRight() {
@@ -349,7 +348,6 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                 for(int i=0; i< jsonArray.length(); i++){
                     JSONObject jsonobj1= jsonArray.getJSONObject(i);
                     siteIdArray[i]= jsonobj1.getInt("id");
-
                 }
 
             }
