@@ -1,8 +1,9 @@
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
 
-New- Swipe in client to move clients
+Swipe in client to move sites
 
-old campaign, live campaign java code- test when the email gets reply
+>old campaign, live campaign java code- test when the email gets reply
+>wait for email
 
 code for all new classes
 
@@ -11,10 +12,10 @@ line 161 check what response is once email gets reply
 
 ask what last update in view sites client dash is
 
->dropdown for client in addcampaigndetails size fix
+dropdown for client in addcampaigndetails size fix
 
 After all done-
-fetch correct campaignlist for client login
+fetch correct campaignlist for client login- emailed
 ask what mediatype and illumination are- placeholders
 remove null from all image uploads
 implement add image- on line 192 appcampdet
