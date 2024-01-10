@@ -113,7 +113,8 @@
                             android:layout_below="@id/tvVendor"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:id="@+id/frame_vendor_id"
-                            android:padding="@dimen/_8sdp"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:paddingLeft="@dimen/_8sdp"
                             android:background="@drawable/primarystroke">
 
                             <Spinner
@@ -174,7 +175,8 @@
                             android:layout_below="@id/tvclientid"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:id="@+id/frame_client_id"
-                            android:padding="@dimen/_8sdp"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:paddingLeft="@dimen/_8sdp"
                             android:background="@drawable/primarystroke">
 
                             <Spinner
