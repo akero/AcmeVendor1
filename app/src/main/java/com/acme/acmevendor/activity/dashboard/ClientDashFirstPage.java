@@ -92,39 +92,6 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         // jsonArray2=new JSONArray();
         // jsonArray3= new JSONArray();
 
-
-      /*  //TODO remove
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        binding.rvCampaignList.setLayoutManager(layoutManager);
-
-        JSONArray jsonArray = new JSONArray();
-        try {
-            JSONObject jsonObjectairbnb = new JSONObject();
-            jsonObjectairbnb.put("sitenumber", "001");
-            jsonObjectairbnb.put("unitnumber", "#887001");
-            jsonArray.put(jsonObjectairbnb);
-
-            JSONObject jsonObjecthyundai = new JSONObject();
-            jsonObjecthyundai.put("sitenumber", "002");
-            jsonObjecthyundai.put("unitnumber", "#878002");
-            jsonArray.put(jsonObjecthyundai);
-
-            JSONObject jsonObjectford = new JSONObject();
-            jsonObjectford.put("sitenumber", "003");
-            jsonObjectford.put("unitnumber", "#765003");
-            jsonArray.put(jsonObjectford);
-
-            JSONObject jsonObjectpatanjli = new JSONObject();
-            jsonObjectpatanjli.put("sitenumber", "004");
-            jsonObjectpatanjli.put("unitnumber", "#432004");
-            jsonArray.put(jsonObjectpatanjli);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray);
-        binding.rvCampaignList.setAdapter(adapter);
-*/
         campaignList();
     }
 
@@ -159,6 +126,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
     @Override
     public void onResponseReceived(String response){
         Log.d("cldbatest","response is "+ response);
+
 
         implementUi(response);
     }
@@ -277,4 +245,44 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         }
     }
 
+    void oldCampaign(){
+
+        int vendorclientorcampaign= 1;
+        //anim code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //anim code
+
+        APIreferenceclass api= new APIreferenceclass(clientId, vendorclientorcampaign, loginToken, this, 1);
+
+    }
+
+    void liveCampaignClick(View v){
+        clearUi();
+        campaignList();
+    }
+
+    void oldCampaignClick(View v){
+        clearUi();
+        oldCampaign();
+    }
+
+    private void clearUi() {
+        // Clear the RecyclerView
+        if (binding.rvCampaignList.getAdapter() != null) {
+            CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
+            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
+
+
+
+            /*if (vendorclientorcampaign == 0) {
+                jsonArray1 = new JSONArray();
+            } else if (vendorclientorcampaign == 1) {
+                jsonArray2 = new JSONArray();
+            } else if(vendorclientorcampaign == 2){
+                jsonArray3= new JSONArray();
+            }*/
+        }
+        // Reset any other UI elements here as needed
+    }
 }

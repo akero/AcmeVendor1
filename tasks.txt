@@ -2,7 +2,8 @@ Identify first 5% of the task after break to help with task switching before sta
 
 New- Swipe in client to move clients
 
-old campaign, live campaign java code
+old campaign, live campaign java code- test when the email gets reply
+
 code for all new classes
 
 correctly retreive data for cliient>campaigns- emailed
