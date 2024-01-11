@@ -4,8 +4,7 @@ Identify first 5% of the task after break to help with task switching before sta
 test swipe in viewsitedetailactivity after below is done
 implementui will need to update the header for all
 
-old campaign, live campaign java code- test when the email gets reply
-wait for email
+>old campaign, live campaign java
 
 code for all new classes
 
