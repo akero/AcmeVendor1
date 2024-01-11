@@ -6,6 +6,8 @@ implementui will need to update the header for all
 
 old campaign, live campaign java- fix colors
 
+>ViewCampaignSitesClientDash- connect to view site details
+make dropdown functional
 
 code for all new classes
 
