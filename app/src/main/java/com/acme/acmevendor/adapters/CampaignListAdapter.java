@@ -16,6 +16,7 @@ import com.acme.acmevendor.activity.dashboard.CampaignListActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashFirstPage;
 import com.acme.acmevendor.activity.dashboard.ViewCampaignSites;
+import com.acme.acmevendor.activity.dashboard.ViewCampaignSitesClientDash;
 import com.acme.acmevendor.activity.dashboard.ViewVendorSites;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.bumptech.glide.Glide;
@@ -74,6 +75,9 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                 }if(context instanceof ViewCampaignSites){
                     ((ViewCampaignSites) context).onEditClick(position, v);
 
+                }if(context instanceof ViewCampaignSitesClientDash){
+                    ((ViewCampaignSitesClientDash) context).onEditClick(position, v);
+
                 }
             });
 
@@ -118,6 +122,8 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                     ((ClientDashBoardActivity) context).onItemClick(position);
                 }else if (context instanceof ClientDashFirstPage) {
                     ((ClientDashFirstPage) context).onItemClick(position);
+                }else if (context instanceof ViewCampaignSitesClientDash) {
+                    ((ViewCampaignSitesClientDash) context).onItemClick(position);
                 }
             });
         } catch (Exception e) {

@@ -298,12 +298,29 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
     public void liveCampaignClick(View v){
         clearUi();
         liveold=0;
+
+        binding.tvOldCampaign.setBackgroundResource(0);
+        binding.tvOldCampaign.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
+        binding.tvLiveCampaign.setTextColor(Color.WHITE);
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+
         campaignList();
     }
 
     public void oldCampaignClick(View v){
         clearUi();
         liveold=1;
+
+        binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
+        binding.tvOldCampaign.setTextColor(Color.WHITE);
+
+        binding.tvLiveCampaign.setBackgroundResource(0);
+        binding.tvLiveCampaign.setTextColor(R.color.colorPrimaryDark);
+
         campaignList();
     }
 
