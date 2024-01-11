@@ -229,6 +229,22 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                     //animation code
 
                     binding.rvCampaignList.setAdapter(adapter);
+
+                    //updating header
+
+                    try {
+                        String live_campaigns_count= jsonResponse.getString("live_campaigns_count");
+                        String old_campaigns_count= jsonResponse.getString("old_campaigns__count");
+
+                        binding.campaign.setText("Live :- "+ live_campaigns_count+" - "+"Old :- "+old_campaigns_count);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+
                 }});
         }catch (Exception e){
             Log.d("tag40",e.toString());
