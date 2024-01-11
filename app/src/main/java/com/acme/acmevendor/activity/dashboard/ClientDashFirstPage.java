@@ -40,6 +40,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
     private boolean oldcampaign = true;
 
     String loginToken="";
+    int liveold; //0 live
 
     //TODO handle clicks on old and live campaign, make api call, parse data, populate. pass site details api data to viewsitedetailactivity
     //TODO access token save to memory add to api call
@@ -58,6 +59,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         Log.d("tag199", "1");
         Log.d("whichclass", "ClientDashFirstPage");
         clientId= 0;
+        liveold= 0;
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
@@ -146,8 +148,10 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
             jsonArray3= new JSONArray();
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
+            if(jsonResponse.getString("status").equals("success")) {
+
+                if(liveold== 0){
+                JSONArray dataArray = jsonResponse.getJSONArray("live_campaigns");
                 if(dataArray != null && dataArray.length() > 0) {
                     // if(vendorclientorcampaign==0){
 
@@ -175,6 +179,39 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                     }
                     // }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                }
+                }else{
+
+                    JSONArray dataArray = jsonResponse.getJSONArray("old_campaigns");
+                    if(dataArray != null && dataArray.length() > 0) {
+                        // if(vendorclientorcampaign==0){
+
+                        for(int i=0; i< dataArray.length();i++){
+
+                            JSONObject dataObject = dataArray.getJSONObject(i);
+                            if(dataObject != null) {
+                                jsonObject = new JSONObject();
+                                Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                                //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                jsonObject.putOpt("id", dataObject.optInt("id"));
+                                jsonObject.putOpt("uid", dataObject.optString("uid"));
+                                jsonObject.putOpt("image", dataObject.optString("logo"));
+                                jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                //siteDetail.setName(dataObject.optString("name"));
+
+                                // Inside the for-loop where you process each `dataObject`
+                                //String imageUrl = dataObject.optString("image");
+                                //jsonObject.putOpt("image", imageUrl);
+
+                                jsonArray1.put(jsonObject);
+//TODO here
+                            }
+                        }
+                        // }
+                        Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                    }
+
                 }
             }
             runOnUiThread(new Runnable() {
@@ -258,14 +295,16 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
 
     }
 
-    void liveCampaignClick(View v){
+    public void liveCampaignClick(View v){
         clearUi();
+        liveold=0;
         campaignList();
     }
 
-    void oldCampaignClick(View v){
+    public void oldCampaignClick(View v){
         clearUi();
-        oldCampaign();
+        liveold=1;
+        campaignList();
     }
 
     private void clearUi() {

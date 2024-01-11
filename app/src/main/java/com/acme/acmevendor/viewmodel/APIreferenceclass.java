@@ -132,7 +132,7 @@ public class APIreferenceclass {
 
     //to fetch client's campaigns in clientdashfirstpage
     public APIreferenceclass(int clientId, int vendorclientorcampaign, String logintoken, Context context) {
-        String url="https://acme.warburttons.com/api/get_client_campaigns";
+        String url="https://acme.warburttons.com/api/get_admin_client_campaigns";
         querytype= 0;
         url= url+"/"+clientId;
 
