@@ -74,6 +74,14 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         idofcampaign=getIntent().getStringExtra("id");
         Log.d("tag58", idofcampaign);
 
+        try{
+            if(getIntent().getStringExtra("camefrom").equals("ClientDashBoardActivity")){
+                binding.ivPlus.setVisibility(View.GONE);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, true);

@@ -49,6 +49,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     ProgressBar progressBar;
     Animation rotateAnimation;
     int clientid;
+    int live;
 
 
     @Override
@@ -60,6 +61,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         Log.d("whichclass", "ClientDashBoardActivity");
 
         clientid= 0;
+        live= 1;
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
@@ -152,7 +154,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     public void onResponseReceived(String response){
         Log.d("cldbatest","response is "+ response);
 
-        //implementUi(response);
+        implementUi(response);
     }
 
     JSONArray jsonArray1;
@@ -169,8 +171,10 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                 jsonArray3= new JSONArray();
                 String ids[];
                 JSONObject jsonResponse = new JSONObject(response);
-                if(jsonResponse.getBoolean("success")) {
-                    JSONArray dataArray = jsonResponse.getJSONArray("data");
+                if(jsonResponse.getString("status").equals("success")) {
+
+                    if(live== 1){
+                    JSONArray dataArray = jsonResponse.getJSONArray("live_campaigns");
                     if(dataArray != null && dataArray.length() > 0) {
                        // if(vendorclientorcampaign==0){
 
@@ -198,6 +202,39 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                             }
                        // }
                         Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                    }
+                }else{
+                        JSONArray dataArray = jsonResponse.getJSONArray("old_campaigns");
+                        if(dataArray != null && dataArray.length() > 0) {
+                            // if(vendorclientorcampaign==0){
+
+                            for(int i=0; i< dataArray.length();i++){
+
+                                JSONObject dataObject = dataArray.getJSONObject(i);
+                                if(dataObject != null) {
+                                    jsonObject = new JSONObject();
+                                    Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                                    //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                    jsonObject.putOpt("id", dataObject.optInt("id"));
+                                    jsonObject.putOpt("uid", dataObject.optString("uid"));
+                                    jsonObject.putOpt("image", dataObject.optString("logo"));
+                                    jsonObject.putOpt("name", dataObject.optString("name"));
+
+                                    //siteDetail.setName(dataObject.optString("name"));
+
+                                    // Inside the for-loop where you process each `dataObject`
+                                    //String imageUrl = dataObject.optString("image");
+                                    //jsonObject.putOpt("image", imageUrl);
+
+                                    jsonArray1.put(jsonObject);
+//TODO here
+                                }
+                            }
+                            // }
+                            Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                        }
+
+
                     }
                 }
                 runOnUiThread(new Runnable() {
@@ -233,6 +270,46 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         intent.putExtra("logintoken", loginToken);
         startActivity( intent);
     */
+
+    public void oldCampaignClick(View v){
+        live= 0;
+        clearUi();
+
+        binding.tvLiveCampaign.setBackgroundResource(0);
+        binding.tvLiveCampaign.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
+        binding.tvOldCampaign.setTextColor(Color.WHITE);
+
+
+        //animation code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //view.setVisibility(View.VISIBLE);
+        //animation code
+
+        APIreferenceclass api= new APIreferenceclass(1, loginToken, this, clientid, 2);
+    }
+
+    public void liveCampaignClick(View v){
+        live= 1;
+        clearUi();
+
+        binding.tvOldCampaign.setBackgroundResource(0);
+        binding.tvOldCampaign.setTextColor(R.color.colorPrimaryDark);
+
+        binding.tvLiveCampaign.setBackgroundResource(R.drawable.primaryround);
+        binding.tvLiveCampaign.setTextColor(Color.WHITE);
+
+        //animation code
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+        //view.setVisibility(View.VISIBLE);
+        //animation code
+
+        APIreferenceclass api= new APIreferenceclass(1, loginToken, this, clientid, 2);
+    }
+
         public void onItemClick(int position) {
             try {
                 Log.d("tag51", Integer.toString(position));
@@ -256,7 +333,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                     // Start new activity and pass the retrieved data
                     startActivity(new Intent(this, ViewCampaignSites.class)
                             .putExtra("campaignType", "old")
-
+                            .putExtra("camefrom", "ClientDashBoardActivity")
                             .putExtra("id", id)
                             .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                             .putExtra("logintoken", loginToken)
@@ -268,5 +345,24 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                 // Handle exception (e.g. show a Toast to the user indicating an error)
             }
         }
+
+    private void clearUi() {
+        // Clear the RecyclerView
+        if (binding.rvCampaignList.getAdapter() != null) {
+            CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
+            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
+
+
+
+            /*if (vendorclientorcampaign == 0) {
+                jsonArray1 = new JSONArray();
+            } else if (vendorclientorcampaign == 1) {
+                jsonArray2 = new JSONArray();
+            } else if(vendorclientorcampaign == 2){
+                jsonArray3= new JSONArray();
+            }*/
+        }
+        // Reset any other UI elements here as needed
+    }
 
     }

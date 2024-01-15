@@ -7,16 +7,20 @@ implementui will need to update the header for all- emailed
 client viewsite add header- make new class- emailed
 
 
->correctly retreive data for cliient>campaigns
+//correctly retreive data for cliient>campaigns
 //add retreived client id to api call
-add old live code
+//add old live code
 //fetch campaigns
->populate the activity for live
-for old
-
+//populate the activity for live
+//for old
+//add header
+fill data for header- emailed
 
 correctly retreive data for vendor>campaigns- emailed
-https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
+//https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
+//correct client login
+correct vendor login
+remove + from  view sites vendor, use camefrom in intent
 
 
 dropdown for client in addcampaigndetails size fix
@@ -35,7 +39,7 @@ test on phone ask the monkes
 
 
 /ask what last update in view sites client dash is
-
+//remove + from  view sites client 
 //line 161 check what response is once email gets reply
 //old campaign, live campaign java- fix colors
 //ViewCampaignSitesClientDash- connect to view site details
