@@ -9,9 +9,10 @@ client viewsite add header- make new class- emailed
 
 >correctly retreive data for cliient>campaigns
 //add retreived client id to api call
->add old live code
-fetch campaigns
-populate the activity
+add old live code
+//fetch campaigns
+>populate the activity for live
+for old
 
 
 correctly retreive data for vendor>campaigns- emailed
