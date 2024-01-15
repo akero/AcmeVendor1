@@ -112,6 +112,23 @@ public class APIreferenceclass {
       }
     }
 
+    //get campaigns in client login
+    public APIreferenceclass(int vendorclientorcampaign, String logintoken, Context context, int clientid, int b) {
+        String url="https://acme.warburttons.com/api/get_admin_client_campaigns/";
+        url= url+ clientid;
+        querytype= 0;
+
+        String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
+
+        Map<String, String> headers= new HashMap<>();
+        headers.put("Authorization", "Bearer "+logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+
+        callapi(headers, jsonPayload, context, querytype, url);
+    }
+
     public APIreferenceclass(int id, String logintoken, Context context, boolean a){
         String url= "https://acme.warburttons.com/api/clients/"+ id;
         querytype= 0;

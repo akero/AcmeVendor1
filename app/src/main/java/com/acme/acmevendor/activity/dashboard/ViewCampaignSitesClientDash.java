@@ -239,7 +239,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
             // Start new activity and pass the retrieved data
-            startActivity(new Intent(this, ViewSiteDetailActivity.class)
+            startActivity(new Intent(this, ViewSiteDetailActivityClientDash.class)
                     .putExtra("campaignType", "old")
                     .putExtra("campaignId", idofcampaign)
                     .putExtra("siteNumber", id)

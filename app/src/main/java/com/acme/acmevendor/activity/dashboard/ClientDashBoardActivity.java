@@ -48,6 +48,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
     ProgressBar progressBar;
     Animation rotateAnimation;
+    int clientid;
 
 
     @Override
@@ -57,6 +58,8 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
         Log.d("tag199", "1");
         Log.d("whichclass", "ClientDashBoardActivity");
+
+        clientid= 0;
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
@@ -68,6 +71,11 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         loginToken= FileHelper.readLoginToken(this);
         Log.d("tg4", loginToken);
 
+        try{
+            clientid= getIntent().getIntExtra("clientid" , 0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
@@ -127,7 +135,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
         //view.setVisibility(View.VISIBLE);
         //animation code
 
-        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, loginToken, this);
+        APIreferenceclass api= new APIreferenceclass(vendorclientorcampaign, loginToken, this, clientid, 2);
     }
 
     public void onPlusClick(View view) {
@@ -144,7 +152,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
     public void onResponseReceived(String response){
         Log.d("cldbatest","response is "+ response);
 
-        implementUi(response);
+        //implementUi(response);
     }
 
     JSONArray jsonArray1;
