@@ -20,6 +20,7 @@ correctly retreive data for vendor>campaigns- emailed
 //https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
 //correct client login
 correct vendor login
+Vendor will continue to work as he was doing before
 remove + from  view sites vendor, use camefrom in intent
 
 

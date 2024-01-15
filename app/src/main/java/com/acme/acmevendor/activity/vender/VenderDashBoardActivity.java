@@ -81,6 +81,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
         Log.d("whichclass", "VendorDashBoardActivity");
 
+        binding.ivPlus.setVisibility(View.GONE);
+
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
@@ -184,7 +186,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
         int vendorclientorcampaign= 2;
         //TODO pass correct token
-        String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
+        //String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 //TODO uncomment this
         /*
         FileHelper fh= new FileHelper();
@@ -199,7 +201,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         //animation code
 
 
-        APIreferenceclass apiref= new APIreferenceclass(logintoken, this, a);
+        APIreferenceclass apiref= new APIreferenceclass(loginToken, this, a);
     }
 
     public static String[] extractDataStrings(String apiResponse) {
