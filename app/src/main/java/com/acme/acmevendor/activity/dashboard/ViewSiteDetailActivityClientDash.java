@@ -132,7 +132,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
     private void implementUI(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
+            if(jsonResponse.getString("status").equals("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("site");
                 if(dataArray != null && dataArray.length() > 0) {
                     JSONObject dataObject = dataArray.getJSONObject(0);
@@ -244,6 +244,17 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                                 tvTotalArea.setText(siteDetail.getTotalArea()); // assuming getter method exists
                                 Log.d("tg2", "image code not executing");
 
+                                binding.siteno.setText(siteDetail.getSiteNo());
+                                binding.clientid.setText(siteDetail.getId());
+                                try {
+                                    binding.campaign.setText(jsonResponse.getString("campaign_name"));
+                                    binding.vendorname.setText(jsonResponse.getString("vendor_name"));
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
                                 RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
                                 if(siteDetail.getImage()!=null) {
                                     Log.d("tg2", "image code executing");
@@ -321,17 +332,17 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
 
     void apicall(String logintoken, String siteNumber){
 
-        Log.d("tag41", "6");
+        Log.d("tag41", "6apicall");
         Context context= this;
         APIreferenceclass api= new APIreferenceclass(logintoken, siteNumber, context);
-        Log.d("tag41", "7");
+        Log.d("tag41", "7apicall");
     }
 
     void apicallgetcampaigns(String logintoken, String campaignId){
-        Log.d("tag41", "6");
+        Log.d("tag41", "6apicallcampaigns");
         Context context= this;
         APIreferenceclass api= new APIreferenceclass(logintoken, context, campaignId);
-        Log.d("tag41", "7");
+        Log.d("tag41", "7apicallcampaigns");
     }
 
     int[] siteIdArray;

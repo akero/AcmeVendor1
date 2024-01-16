@@ -4,7 +4,7 @@ Identify first 5% of the task after break to help with task switching before sta
 test swipe in viewsitedetailactivity after below is done
 
 implementui will need to update the header for all- emailed
-client viewsite add header- make new class- emailed
+>client viewsite add header- make new class- emailed- wait for fix to api site call response
 
 
 //correctly retreive data for cliient>campaigns
