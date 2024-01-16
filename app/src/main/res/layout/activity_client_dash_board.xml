@@ -178,7 +178,7 @@
                                 android:layout_marginRight="@dimen/_5sdp"
                                 android:layout_marginBottom="@dimen/_5sdp"
                                 android:fontFamily="@font/dmsansregular"
-                                android:text="Campaign"
+                                android:text="Campaigns"
                                 android:textColor="#0084ED"
                                 android:textSize="12sp" />
                         </LinearLayout>

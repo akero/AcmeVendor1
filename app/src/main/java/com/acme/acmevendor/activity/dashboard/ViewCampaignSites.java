@@ -194,7 +194,19 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                     }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
-            }
+            }else{
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Your UI update code goes here
+                        //animation code
+                        progressBar.clearAnimation();
+                        progressBar.setVisibility(View.GONE);
+                        //animation code
+
+                        Toast.makeText(getApplicationContext(), "No sites.", Toast.LENGTH_SHORT).show();
+                    }});}
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -211,8 +223,20 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
                     binding.rvCampaignList.setAdapter(adapter);
                 }});
-        }catch (Exception e){}
-    }
+        }catch (Exception e){
+            Log.d("tg222", e.toString());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // Your UI update code goes here
+                    //animation code
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.GONE);
+                    //animation code
+
+                    Toast.makeText(getApplicationContext(), "No sites.", Toast.LENGTH_SHORT).show();
+                }});}}
+
 
     ProgressBar progressBar;
     Animation rotateAnimation;

@@ -251,6 +251,15 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
                         progressBar.setVisibility(View.GONE);
                         //animation code
 
+                        binding.clientid.setText(Integer.toString(clientid));
+                        try {
+                            binding.clientname.setText(jsonResponse.getString("client_name"));
+                            binding.title.setText(jsonResponse.getString("client_name"));
+                            binding.campaign.setText("Live - "+jsonResponse.getString("live_campaigns_count")+" - Old :- "+jsonResponse.getString("old_campaigns__count"));
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
                         binding.rvCampaignList.setAdapter(adapter);
                     }});
             }catch (Exception e){

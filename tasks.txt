@@ -4,8 +4,9 @@ Identify first 5% of the task after break to help with task switching before sta
 test swipe in viewsitedetailactivity after below is done
 
 implementui will need to update the header for all- emailed
->client viewsite add header- make new class- emailed- wait for fix to api site call response
+client viewsite add header- make new class- emailed- wait for fix to api site call response
 
+check emails
 
 //correctly retreive data for cliient>campaigns
 //add retreived client id to api call
@@ -16,7 +17,9 @@ implementui will need to update the header for all- emailed
 //add header
 fill data for header- emailed
 
-correctly retreive data for vendor>campaigns- emailed
+logo in headers
+
+>correctly retreive data for vendor>campaigns- emailed
 line 191 apiref when url is made then change line
 //https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
 //correct client login
