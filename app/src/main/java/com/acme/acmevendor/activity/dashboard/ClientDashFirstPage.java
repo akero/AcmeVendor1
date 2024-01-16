@@ -42,9 +42,6 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
     String loginToken="";
     int liveold; //0 live
 
-    //TODO handle clicks on old and live campaign, make api call, parse data, populate. pass site details api data to viewsitedetailactivity
-    //TODO access token save to memory add to api call
-
     Context ctxt;
 
     ProgressBar progressBar;
@@ -87,21 +84,16 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         loginToken= FileHelper.readLoginToken(this);
         Log.d("tg4", loginToken);
 
-
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
-        //TODO remove after adding to ui
-        // jsonArray1= new JSONArray();
-        // jsonArray2=new JSONArray();
-        // jsonArray3= new JSONArray();
 
         campaignList();
     }
 
     public void onNotificationClick(View v){
-        //TODO ask lodu what this does
+        //TODO ask dev what this does
     }
-    //String logintoken="534|ehyJudmoAsTjmkbTLBcIjzUOCFIui40OSBL01JJJ";
+
     private void campaignList() {
         int vendorclientorcampaign= 1;
 
@@ -110,7 +102,6 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         //animation code
         progressBar.setVisibility(View.VISIBLE);
         progressBar.startAnimation(rotateAnimation);
-        //view.setVisibility(View.VISIBLE);
         //animation code
 
         APIreferenceclass api= new APIreferenceclass(clientId, vendorclientorcampaign, loginToken, this);
@@ -125,12 +116,9 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         startActivity(intent);
     }
 
-    //TODO add token to future activity
     @Override
     public void onResponseReceived(String response){
         Log.d("cldbatest","response is "+ response);
-
-
         implementUi(response);
     }
 
@@ -146,7 +134,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
             jsonArray1= new JSONArray();
             jsonArray2= new JSONArray();
             jsonArray3= new JSONArray();
-            String ids[];
+
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getString("status").equals("success")) {
 
@@ -161,30 +149,21 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                         if(dataObject != null) {
                             jsonObject = new JSONObject();
                             Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
-                            //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+
                             jsonObject.putOpt("id", dataObject.optInt("id"));
                             jsonObject.putOpt("uid", dataObject.optString("uid"));
                             jsonObject.putOpt("image", dataObject.optString("logo"));
                             jsonObject.putOpt("name", dataObject.optString("name"));
 
-                            //siteDetail.setName(dataObject.optString("name"));
-
-                            // Inside the for-loop where you process each `dataObject`
-                            //String imageUrl = dataObject.optString("image");
-                            //jsonObject.putOpt("image", imageUrl);
-
                             jsonArray1.put(jsonObject);
-//TODO here
                         }
                     }
-                    // }
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
                 }else{
 
                     JSONArray dataArray = jsonResponse.getJSONArray("old_campaigns");
                     if(dataArray != null && dataArray.length() > 0) {
-                        // if(vendorclientorcampaign==0){
 
                         for(int i=0; i< dataArray.length();i++){
 
@@ -192,32 +171,22 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                             if(dataObject != null) {
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
-                                //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("uid", dataObject.optString("uid"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
 
-                                //siteDetail.setName(dataObject.optString("name"));
-
-                                // Inside the for-loop where you process each `dataObject`
-                                //String imageUrl = dataObject.optString("image");
-                                //jsonObject.putOpt("image", imageUrl);
-
                                 jsonArray1.put(jsonObject);
-//TODO here
                             }
                         }
-                        // }
                         Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                     }
-
                 }
             }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    // Your UI update code goes here
 
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
@@ -240,29 +209,12 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-
-
-
                 }});
         }catch (Exception e){
             Log.d("tag40",e.toString());
         }
     }
 
-
-    //TODO replace. this is for response for the current page's data.
-    //TODO implement response into UI
-    String campaignType="";
-    int position= 0;
-
-    /*Intent intent= new Intent(VenderDashBoardActivity.this, UpdateSiteDetailActivity.class);
-    intent.putExtra("campaigntype", campaignType);
-    intent.putExtra("position", position);
-    intent.putExtra("logintoken", loginToken);
-    startActivity( intent);
-*/
     public void onItemClick(int position) {
         try {
             Log.d("tag51", Integer.toString(position));
@@ -270,15 +222,11 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
             JSONObject jsonObject = jsonArray1.getJSONObject(position);
             Log.d("tag51", jsonArray1.getJSONObject(position).toString());
 
-
-            //logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
-
             // Get site id or site no from the JSONObject
             String id = jsonObject.getString("id"); // Or get an id if you have that
             Log.d("tag51", jsonObject.getString("id"));
             Log.d("tag60", jsonObject.toString());
 
-            // String siteId = jsonObject.getString("siteId"); // If you have a site id.
             int vendorclientorcampaign= 1;
 
             Log.d("tag122", id);
@@ -286,29 +234,14 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
             // Start new activity and pass the retrieved data
             startActivity(new Intent(this, ViewCampaignSitesClientDash.class)
                     .putExtra("campaignType", "old")
-
                     .putExtra("id", id)
                     .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                     .putExtra("logintoken", loginToken)
                     .putExtra("apiresponse", jsonObject.toString()));
 
-            // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {
             Log.d("tag123", e.toString());
-            // Handle exception (e.g. show a Toast to the user indicating an error)
-        }
-    }
-
-    void oldCampaign(){
-
-        int vendorclientorcampaign= 1;
-        //anim code
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.startAnimation(rotateAnimation);
-        //anim code
-
-        APIreferenceclass api= new APIreferenceclass(clientId, vendorclientorcampaign, loginToken, this, 1);
-
+            }
     }
 
     public void liveCampaignClick(View v){
@@ -344,18 +277,7 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         // Clear the RecyclerView
         if (binding.rvCampaignList.getAdapter() != null) {
             CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
-            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
-
-
-
-            /*if (vendorclientorcampaign == 0) {
-                jsonArray1 = new JSONArray();
-            } else if (vendorclientorcampaign == 1) {
-                jsonArray2 = new JSONArray();
-            } else if(vendorclientorcampaign == 2){
-                jsonArray3= new JSONArray();
-            }*/
+            adapter.clearData();
         }
-        // Reset any other UI elements here as needed
     }
 }

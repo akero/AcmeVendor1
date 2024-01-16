@@ -54,14 +54,12 @@ public class APIreferenceclass {
 
     int querytype=0; //0 for get, 1 for post, 2 for put
 
-    //constructors
-    //for admin dashboard
+    //constructors for admin dashboard
     //campaign is 0, client is 1, vendor is 2
     public APIreferenceclass(int vendorclientorcampaign, String logintoken, Context context) {
 
         //campaign
         if (vendorclientorcampaign == 0) {
-
             Log.d("tag21","1");
 
             String url="https://acme.warburttons.com/api/campaigns";
@@ -79,7 +77,6 @@ public class APIreferenceclass {
 
         //client
         else if (vendorclientorcampaign == 1) {
-
             String url="https://acme.warburttons.com/api/clients";
             querytype= 0;
 
@@ -96,7 +93,6 @@ public class APIreferenceclass {
 
         //vendor
         else if (vendorclientorcampaign == 2) {
-
             String url="https://acme.warburttons.com/api/vendors";
 
             querytype=0; //GET
@@ -228,14 +224,6 @@ public class APIreferenceclass {
         }
     }
 
-
-
-    public APIreferenceclass(String email, String pass, String logintoken, Context context) {
-    }
-
-    public APIreferenceclass(Context context) {
-    }
-
     //for viewsitedetail
     public APIreferenceclass(String loginToken, String siteNumber, Context context){
 
@@ -265,7 +253,7 @@ public class APIreferenceclass {
         //TODO add siteNumber to api call
 
         Log.d("tag58",id);
-//id="18";
+        //id="18";
         String url="https://acme.warburttons.com/api/get_campaign_sites/"+id;
         Log.d("tag58",url);
 
@@ -298,7 +286,6 @@ public class APIreferenceclass {
 
         Log.d("tag58","Inside viewsitedetail api");
         callapi1(headers, jsonPayload, context, url);
-
     }
 
     //addclientactivity
@@ -320,7 +307,6 @@ public class APIreferenceclass {
         querytype= 1; ////post
 
         callapi(headers, jsonPayload, context, querytype ,url);
-
     }
 
     //addclientdetailactivity
@@ -340,7 +326,6 @@ public class APIreferenceclass {
 
         Log.d("tg99", "url "+ url +  "jsonstring"+ jsonString );
 
-
         String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
 
         Map<String, String> headers = new HashMap<>();
@@ -348,7 +333,6 @@ public class APIreferenceclass {
         headers.put("Content-Type", "application/json");
 
         Log.d("addbatest","Inside admin api");
-
 
         callapi(headers, jsonPayload, context, querytype, url);
     }
@@ -358,14 +342,6 @@ public class APIreferenceclass {
         String url = "https://acme.warburttons.com/api/campaigns";
         querytype = 1; // POST
 
-        /*TODO DELETE THIS
-        String meme = "{\"name\":\"tttt\",\"vendor\":\"6\",\"start_date\":\"26-12-2023\",\"end_date\":\"26-12-2023\",\"client_id\":\"5\",\"num_of_site\":\"12\",\"uid\":5,\"user_id\":5,\"media_type\":\"Item 1\",\"illumination\":\"Item 1\"}";        try {
-            JSONObject jsonobj = new JSONObject(meme);
-            jsonPayload1 = jsonobj;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-*/
         Log.d("tg92", jsonPayload1.toString());
 
         if (selectedImage != null) {
@@ -397,7 +373,6 @@ public class APIreferenceclass {
             byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
 
             try {
-
                 // Create a ByteArrayOutputStream to combine everything
                 ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
                 multipartOutputStream.write(initialPartBytes);
@@ -408,7 +383,6 @@ public class APIreferenceclass {
                 multipartOutputStream.write(finalBoundary.getBytes(StandardCharsets.UTF_8));
                 // Final multipart body
                 final byte[] multipartBody = multipartOutputStream.toByteArray();
-
 
             // Set headers for multipart request
             Map<String, String> headers = new HashMap<>();
@@ -442,7 +416,6 @@ public class APIreferenceclass {
 
         String jsonPayload = "{\"email\": \""+ email +"\"}";
         Map<String, String> headers = new HashMap<>();
-        //headers.put("Authorization", "Bearer " + loginToken);
         headers.put("Content-Type", "application/json");
 
         Log.d("tag58","Inside viewsitedetail api");
@@ -450,7 +423,6 @@ public class APIreferenceclass {
         querytype= 1; ////post
 
         callapi(headers, jsonPayload, context, querytype ,url);
-
     }
 
     //for otp enter
@@ -490,24 +462,6 @@ public class APIreferenceclass {
 
         if (selectedImage != null) {
             // Read file content directly from Uri
-            /*byte[] fileBytes = readFileContent(context, selectedImage);
-
-            // Assume you have a way to get the file name from Uri
-            String fileName = getFileName(context, selectedImage);
-
-            // Prepare multipart body using fileBytes and fileName
-            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
-            StringBuilder bodyBuilder = new StringBuilder();
-            bodyBuilder.append("--").append(boundary).append("\r\n");
-            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
-                    .append(fileName).append("\"\r\n");
-            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
-                    .append("\r\n\r\n");
-            bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
-            bodyBuilder.append("--").append(boundary).append("--");
-
-            final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
-*/
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
 
             // Modify headers for multipart request
@@ -635,7 +589,6 @@ public class APIreferenceclass {
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
         Log.d("tag21", "addsitedetailactivity add site");
 
-
         //TODO have to add data into form data not params
         String url = "https://acme.warburttons.com/api/sites";
         Log.d("tg3", jsonString);
@@ -651,35 +604,6 @@ public class APIreferenceclass {
         if (selectedImage != null) {
             // Read file content directly from Uri
 
-
-/*
-            byte[] fileBytes = readFileContent(context, selectedImage);
-            String fileName = getFileName(context, selectedImage);
-
-            // Prepare multipart body using fileBytes and fileName
-            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
-            StringBuilder bodyBuilder = new StringBuilder();
-            bodyBuilder.append("--").append(boundary).append("\r\n");
-            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
-                    .append(fileName).append("\"\r\n");
-            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
-                    .append("\r\n\r\n");
-            bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
-
-            // Add other form fields from formData
-            String formData = convertJsonToFormData(jsonString);
-            for (String field : formData.split("&")) {
-                String[] keyValue = field.split("=");
-                bodyBuilder.append("--").append(boundary).append("\r\n");
-                bodyBuilder.append("Content-Disposition: form-data; name=\"")
-                        .append(keyValue[0]).append("\"\r\n\r\n");
-                bodyBuilder.append(keyValue.length > 1 ? keyValue[1] : "").append("\r\n");
-            }
-
-            bodyBuilder.append("--").append(boundary).append("--");
-
-            final byte[] multipartBody = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
-*/
             Log.d("tg33", "not null");
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
             // Modify headers for multipart request
@@ -706,7 +630,6 @@ public class APIreferenceclass {
         // Read file content directly from Uri
         byte[] fileBytes = readFileContent(context, selectedImage);
         String fileName = getFileName(context, selectedImage);
-
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     try {
@@ -763,46 +686,42 @@ public class APIreferenceclass {
         try {
             // Create a JSON object from the original JSON string
             JSONObject jsonObject = new JSONObject(originalJsonString);
-
             Log.d("tg09", originalJsonString);
 
-            // Assuming you are using org.json.JSONObject;
-
-// Check for "campaign_id"
+            // Check for "campaign_id"
             if (!jsonObject.has("campaign_id") || jsonObject.isNull("campaign_id")) {
                 jsonObject.put("campaign_id", "placeholder_campaign_id");
             }
 
-// Check for "vendor_id"
+            // Check for "vendor_id"
             if (!jsonObject.has("vendor_id") || jsonObject.isNull("vendor_id") || "".equals(jsonObject.optString("vendor_id"))) {
                 jsonObject.put("vendor_id", "placeholder_vendor_id");
             }
 
-// Check for "end_date"
+            // Check for "end_date"
             if (!jsonObject.has("end_date") || jsonObject.isNull("end_date")) {
                 jsonObject.put("end_date", "placeholder_end_date");
             }
 
-// Check for "longitude"
+            // Check for "longitude"
             if (!jsonObject.has("longitute") || jsonObject.isNull("longitute") || "".equals(jsonObject.optString("longitute"))) {
                 jsonObject.put("longitute", "placeholder_longitute");
             }
 
-// Check for "media_type"
+            // Check for "media_type"
             if (!jsonObject.has("media_type") || jsonObject.isNull("media_type") || jsonObject.get("media_type").equals("")) {
                 jsonObject.put("media_type", "placeholder_media_type");
             }
 
-// Check for "illumination"
+            // Check for "illumination"
             if (!jsonObject.has("illumination") || jsonObject.isNull("illumination") || jsonObject.get("illumination").equals("")) {
                 jsonObject.put("illumination", "placeholder_illumination");
             }
 
-// Check for "updated_at"
+            // Check for "updated_at"
             if (!jsonObject.has("updated_at") || jsonObject.isNull("updated_at")) {
                 jsonObject.put("updated_at", "placeholder_updated_at");
             }
-
 
             // Convert the modified JSON object back to a JSON string
             String jsonStringWithPlaceholders = jsonObject.toString();
@@ -851,7 +770,6 @@ public class APIreferenceclass {
 
     //delete
     public APIreferenceclass(JSONObject jsonPayload, int vendorclientorcampaign, String logintoken, Context ctxt) {
-
         int id= 0;
         String url= "";
 
@@ -862,7 +780,6 @@ public class APIreferenceclass {
                 url="https://acme.warburttons.com/api/campaigns/";
                 querytype= 0;
 
-
             } else if (vendorclientorcampaign == 1) {//client
                 id= jsonPayload.getInt("id");
                 url="https://acme.warburttons.com/api/clients/";
@@ -872,11 +789,9 @@ public class APIreferenceclass {
                 id= jsonPayload.getInt("id");
                 url="https://acme.warburttons.com/api/vendors/";
                 querytype= 2;
-
             }
 
             url= url+Integer.toString(id);
-
             String jsonPayload1 = "{\"Authorization\": \"" + logintoken + "\"}";
 
             Log.d("tg94", jsonPayload1);
@@ -909,15 +824,11 @@ public class APIreferenceclass {
             headers.put("Content-Type", "application/json");
             querytype= 2;
 
-
             callapi4(headers, jsonPayload1, ctxt, querytype, url);
-
-
     }
 
     //edit campaign. EditCampaign class.
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage, int campaignId) {
-        //here
 
         String url = "https://acme.warburttons.com/api/campaigns";
         //here change to put
@@ -931,61 +842,6 @@ public class APIreferenceclass {
         Log.d("tg92", jsonPayload1.toString());
 
         if (selectedImage != null) {
-         /*   // Prepare multipart body
-            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
-            StringBuilder bodyBuilder = new StringBuilder();
-
-            // Add JSON fields to multipart body
-            Iterator<String> keys = jsonPayload1.keys();
-            while (keys.hasNext()) {
-                String key = keys.next();
-                bodyBuilder.append("--").append(boundary).append("\r\n");
-                bodyBuilder.append("Content-Disposition: form-data; name=\"").append(key).append("\"\r\n\r\n");
-                bodyBuilder.append(jsonPayload1.optString(key)).append("\r\n");
-            }
-
-            // Read file content from Uri
-            byte[] fileBytes = readFileContent(context, selectedImage);
-            String fileName = getFileName(context, selectedImage);
-
-            // Start image part of multipart body
-            bodyBuilder.append("--").append(boundary).append("\r\n");
-            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
-                    .append(fileName).append("\"\r\n");
-            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
-                    .append("\r\n\r\n");
-
-            // Convert the initial part of the multipart body to bytes
-            byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
-
-            try {
-
-                // Create a ByteArrayOutputStream to combine everything
-                ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
-                multipartOutputStream.write(initialPartBytes);
-                multipartOutputStream.write(fileBytes);
-
-                // Write the final boundary
-                String finalBoundary = "\r\n--" + boundary + "--\r\n";
-                multipartOutputStream.write(finalBoundary.getBytes(StandardCharsets.UTF_8));
-                // Final multipart body
-                final byte[] multipartBody = multipartOutputStream.toByteArray();
-
-
-                // Set headers for multipart request
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + logintoken);
-                headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
-
-                // Call API with multipart data
-                Log.d("tg97", "multipart");
-                callapi2(headers, multipartBody, context, 1, url); // Using POST method
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-          */
-
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
 
             // Modify headers for multipart request
@@ -1014,9 +870,6 @@ public class APIreferenceclass {
 
     //edit campaign. to fetch site data
     public APIreferenceclass(String logintoken, int id, Context context) {
-
-
-
             Log.d("tag21", "1");
 
             String url = "https://acme.warburttons.com/api/campaigns/";
@@ -1035,7 +888,6 @@ public class APIreferenceclass {
 
 
     public void callapi(Map<String, String> headers, String jsonPayload, Context context, int querytype, String url) {
-
         try {
             //adding api here
             Log.d("tag21","2");
@@ -1049,7 +901,6 @@ public class APIreferenceclass {
             // Convert the JSON payload to bytes for uploading
             Log.d("tag21",jsonPayload);
             final byte[] postData = jsonPayload.getBytes(StandardCharsets.UTF_8);
-
 
             // Create an upload data provider to send the POST data
             UploadDataProvider uploadDataProvider = new UploadDataProvider() {
@@ -1130,7 +981,6 @@ public class APIreferenceclass {
     }
 
     public void callapi1(Map<String, String> headers, String jsonPayload, Context context, String url) {
-
         try {
             //adding api here
             Log.d("tag21","2");
@@ -1194,7 +1044,6 @@ public class APIreferenceclass {
 
             request.start();Log.d("tag21","4");
             Log.d("tag58","Inside callapi1 8");
-
         } catch (Exception e) {
             Log.d("tag21", e.toString());
         }
@@ -1218,13 +1067,12 @@ public class APIreferenceclass {
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 requestBuilder.addHeader(header.getKey(), header.getValue());
             }
-if(queryType== 2) {
-    Log.d("tg92", "put");
-
-    requestBuilder.setHttpMethod("PUT");
-}else{
-    requestBuilder.setHttpMethod("POST");
-}
+        if(queryType== 2) {
+            Log.d("tg92", "put");
+            requestBuilder.setHttpMethod("PUT");
+        }else{
+            requestBuilder.setHttpMethod("POST");
+        }
             requestBuilder.setUploadDataProvider(new UploadDataProvider() {
 
                 @Override
@@ -1289,13 +1137,12 @@ if(queryType== 2) {
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 requestBuilder.addHeader(header.getKey(), header.getValue());
             }
-if(querytype==2) {
-    Log.d("tg92", "put");
-
-    requestBuilder.setHttpMethod("PUT");
-}else{
-    requestBuilder.setHttpMethod("POST");
-}
+        if(querytype==2) {
+            Log.d("tg92", "put");
+            requestBuilder.setHttpMethod("PUT");
+        }else{
+            requestBuilder.setHttpMethod("POST");
+        }
             requestBuilder.setUploadDataProvider(new UploadDataProvider() {
 
                 @Override
@@ -1393,7 +1240,6 @@ if(querytype==2) {
 
                 for (Map.Entry<String, String> header : headers.entrySet()) {
                     requestBuilder.addHeader(header.getKey(), header.getValue());
-
             }
 
                 UrlRequest request = requestBuilder.build();
