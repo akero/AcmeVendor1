@@ -17,17 +17,18 @@ client viewsite add header- make new class- emailed
 fill data for header- emailed
 
 correctly retreive data for vendor>campaigns- emailed
+line 191 apiref when url is made then change line
 //https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
 //correct client login
-correct vendor login
+//correct vendor login
 Vendor will continue to work as he was doing before
 remove + from  view sites vendor, use camefrom in intent
 
 
-dropdown for client in addcampaigndetails size fix
+>dropdown for client in addcampaigndetails size fix
 
 After all done-
-fetch correct campaignlist for client login- emailed
+fetch correct campaignlist for client login
 ask what mediatype and illumination are- placeholders
 remove null from all image uploads
 implement add image- on line 192 appcampdet

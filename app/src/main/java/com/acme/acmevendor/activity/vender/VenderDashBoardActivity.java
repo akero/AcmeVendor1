@@ -72,6 +72,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     JSONArray jsonArray2;
     ProgressBar progressBar;
     Animation rotateAnimation;
+    int vendorid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,12 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
         //animation code
+
+        try{
+            vendorid= getIntent().getIntExtra("vendorid", 0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         //TODO implement this
         loginToken= FileHelper.readLoginToken(this);
@@ -200,8 +207,8 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         //view.setVisibility(View.VISIBLE);
         //animation code
 
-
-        APIreferenceclass apiref= new APIreferenceclass(loginToken, this, a);
+//here
+        APIreferenceclass apiref= new APIreferenceclass(loginToken, this, vendorid);
     }
 
     public static String[] extractDataStrings(String apiResponse) {

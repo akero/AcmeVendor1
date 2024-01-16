@@ -184,10 +184,13 @@ public class APIreferenceclass {
     }
 
     //for vendor flow first page
-    public APIreferenceclass(String logintoken, Context context, int a) {
+    public APIreferenceclass(String logintoken, Context context, int vendorid) {
             Log.d("tag21","1");
 
-            String url="https://acme.warburttons.com/api/get_vendor_campaigns";
+
+            //TODO here
+            String url="https://acme.warburttons.com/api/get_vendor_campaigns/";
+            url= url+ vendorid;
             querytype=0;
             String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
 
