@@ -204,7 +204,11 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                     try {
                         String live_campaigns_count= jsonResponse.getString("live_campaigns_count");
                         String old_campaigns_count= jsonResponse.getString("old_campaigns__count");
+                        String client_name= jsonResponse.getString("client_name");
 
+                        binding.clientid.setText(Integer.toString(clientId));
+                        binding.title.setText(client_name);
+                        binding.clientname.setText(client_name);
                         binding.campaign.setText("Live :- "+ live_campaigns_count+" - "+"Old :- "+old_campaigns_count);
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -218,11 +218,13 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
-                    TextView tvSiteId = findViewById(R.id.etSiteNo);
-                    //TODO after person implements site name then change this
-                    tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
-
+try {
+    TextView tvSiteId = findViewById(R.id.etSiteNo);
+    //TODO after person implements site name then change this
+    tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
+}catch (Exception e){
+    Log.d("tg55",e.toString());
+}
                     TextView tvLocation = findViewById(R.id.etLocation);
                     tvLocation.setText(siteDetail.getLocation());
 

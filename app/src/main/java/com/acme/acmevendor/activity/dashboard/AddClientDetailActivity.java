@@ -73,7 +73,6 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
 
         if(jsonobj!=null){
 
-            //TODO here
             Log.d("tg23", "sadasgdsgds"+apiresponse);
             try {
                 //inserting data into UI
@@ -119,7 +118,6 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
             clientDetail.setCompanyName(company_name);
             clientDetail.setCompanyAddress(company_address);
             clientDetail.setGstNo(gst_no);
-            //TODO add image
 
             try{
                 JSONObject jsonobj= new JSONObject();
@@ -154,7 +152,6 @@ public class AddClientDetailActivity extends AppCompatActivity implements ApiInt
                 Log.d("tg6", e.toString());
             }
 
-            //TODO here- PENDING FROM BACKEND. PUT not working
             APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, clientid, 0, jsonPayload.toString());
         }
     }

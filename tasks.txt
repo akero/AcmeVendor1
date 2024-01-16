@@ -24,12 +24,14 @@ line 191 apiref when url is made then change line
 Vendor will continue to work as he was doing before
 remove + from  view sites vendor, use camefrom in intent
 
+clientviewsites add edit
+>clicking on site causes crash
 
 >dropdown for client in addcampaigndetails size fix
 
 After all done-
 fetch correct campaignlist for client login
-ask what mediatype and illumination are- placeholders
+ask what mediatype and illumination are- placeholders- ask what real data is
 remove null from all image uploads
 implement add image- on line 192 appcampdet
 fix size of spinner in add campaign

@@ -143,24 +143,21 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
             }
         });
 
-//spinner code
+        //spinner code
         String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         binding.spinnermediatype.setAdapter(adapter);
 
-        // Inside your onCreate method
         binding.spinnermediatype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem = parent.getItemAtPosition(position).toString();
                 Log.d("tg92", selectedItem);
-                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Another interface callback
             }
         });
 
@@ -169,25 +166,22 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
         binding.spinnerillumination.setAdapter(adapter1);
 
-        // Inside your onCreate method
         binding.spinnerillumination.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem1 = parent.getItemAtPosition(position).toString();
                 Log.d("tg92", selectedItem1);
-
-                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Another interface callback
             }
         });
+        //end of spinner code
 
-        //code for select client
+        //code to select client
+        //TODO fill with client names- emailed
 
-        //TODO fill with client names
         FileHelper fh= new FileHelper();
 
         Context ctxt= this;
@@ -204,13 +198,9 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }catch(Exception e){
             Log.d("tg343", e.toString());
         }
-
-        //end of spinner code
     }
 
-    //TODO ask content for spinner
     //TODO add image type post
-    //Byte[] logo;
     String logintoken;
 
     public void btnSaveClick(View view) {
