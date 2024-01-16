@@ -224,6 +224,7 @@
                     android:layout_below= "@+id/linearlayout"
                     />
 
+                
                 <com.acme.acmevendor.utility.RoundRectCornerImageView
                     android:id="@+id/ivCampaignImage"
                     android:layout_width="match_parent"
