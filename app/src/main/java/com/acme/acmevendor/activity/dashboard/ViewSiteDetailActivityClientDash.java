@@ -439,58 +439,6 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         }
     }
 
-    void writeToFile(String response, Context context){
-        String name="logintoken";
-        String content= response;
-        FileOutputStream fostream= null;
-
-        try{
-            fostream= context.openFileOutput(name,Context.MODE_PRIVATE);
-            fostream.write(response.getBytes());
-            fostream.close();
-
-        }catch(Exception e){
-            Log.d("tag24", "error-" +e.toString());
-        }
-        finally{
-            try{
-
-                if(fostream!=null){
-                    fostream.close();
-                }
-            }catch(Exception e){
-                Log.d("tag25","Closing outputstream failed");
-            }
-        }
-    }
-
-    public String formatJSONString(String unformattedJson) {
-        try {
-            JSONObject jsonObject = new JSONObject(unformattedJson);
-            return jsonObject.toString(4); // `4` is the number of spaces to use for indentation
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void writeToFile(String data, String fileName) {
-        File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "YourAppName");
-        // Create the folder if it doesn't exist
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-        // Create the file
-        File file = new File(directory, fileName);
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write(data);
-            Toast.makeText(this, "Data saved at " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error saving data to file", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     public void oldCampaignClick(View view) {
         //binding.tvOldCampaign.setBackgroundResource(R.drawable.primaryround);
         //binding.tvLiveCampaign.setBackgroundResource(R.color.coloryellow);
@@ -505,49 +453,6 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    /*   private boolean checkPermission() {
-           int result = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
-           int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
-           return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
-       }
-
-       private void requestPermission() {
-
-           Log.d("tag45","5");
-           View v= null;
-           ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-       }
-   */
-   /* private long downloadReference;
-    private BroadcastReceiver onDownloadComplete;
-
-    private void startDownload(String fileURL, String fileName) {
-        try {
-            if (checkPermission()) {
-                Uri downloadUri = Uri.parse(fileURL);
-                String destination = Environment.DIRECTORY_DOWNLOADS;
-
-                // Set up the request
-                DownloadManager.Request request = new DownloadManager.Request(downloadUri);
-                request.setTitle(fileName);
-                request.setDescription("Downloading...");
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(destination, fileName);
-
-                // Enqueue the download
-                DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                downloadReference = downloadManager.enqueue(request);
-
-                Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show();
-            } else {
-                requestPermission();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-*/
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -578,24 +483,4 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
             return super.onFling(e1, e2, velocityX, velocityY);
         }
     }
-
-   /* @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // permissions granted, continue with download
-                Log.d("tag45","7");
-                View v = null;
-                onDownloadClick(v);
-            } else {
-                Log.d("tag45","8");
-
-                // permissions denied, show a message to the user
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-*/
 }

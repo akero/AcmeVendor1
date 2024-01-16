@@ -6,7 +6,7 @@ test swipe in viewsitedetailactivity after below is done
 implementui will need to update the header for all- emailed
 client viewsite add header- make new class- emailed- wait for fix to api site call response
 
-check emails
+>make new content and test everything especially client login> campaigns
 
 //correctly retreive data for cliient>campaigns
 //add retreived client id to api call
@@ -19,7 +19,7 @@ fill data for header- emailed
 
 logo in headers
 
->correctly retreive data for vendor>campaigns- emailed
+correctly retreive data for vendor>campaigns- emailed
 line 191 apiref when url is made then change line
 //https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
 //correct client login
