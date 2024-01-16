@@ -25,7 +25,8 @@ Vendor will continue to work as he was doing before
 remove + from  view sites vendor, use camefrom in intent
 
 clientviewsites add edit
->clicking on site causes crash
+//clicking on site causes crash
+>viewsite
 
 >dropdown for client in addcampaigndetails size fix
 

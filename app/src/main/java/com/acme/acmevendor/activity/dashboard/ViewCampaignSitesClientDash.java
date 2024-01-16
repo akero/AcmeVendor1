@@ -113,8 +113,8 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
 
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
+            if(jsonResponse.getString("status").equals("success")) {
+                JSONArray dataArray = jsonResponse.getJSONArray("sites");
 
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
@@ -201,7 +201,16 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                     progressBar.clearAnimation();
                     progressBar.setVisibility(View.GONE);
                     //animation code
+                try{
 
+                    binding.clientid.setText(Integer.toString(jsonResponse.getInt("client_id")));
+                    binding.clientname.setText(jsonResponse.getString("client_name"));
+                    binding.campaign.setText(jsonResponse.getString("campaign_name"));
+                    binding.totalsites.setText(jsonResponse.getString("site_count"));
+
+                }catch (Exception e){
+                    Log.d("tag222", e.toString());
+                }
                     binding.rvCampaignList.setAdapter(adapter);
                 }});
         }catch (Exception e){}

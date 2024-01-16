@@ -72,7 +72,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail_client_dash);
 
         Log.d("tag41", "1");
-        Log.d("whichclass", "ViewSiteDetailActivity");
+        Log.d("whichclass", "ViewSiteDetailActivityClientDash");
 
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
@@ -133,7 +133,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         try {
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getBoolean("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
+                JSONArray dataArray = jsonResponse.getJSONArray("site");
                 if(dataArray != null && dataArray.length() > 0) {
                     JSONObject dataObject = dataArray.getJSONObject(0);
                     jsonobj= dataObject;
