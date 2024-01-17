@@ -78,7 +78,7 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
                 Log.d("tg6", e.toString());
             }
 
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken);
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 0);
 
 
            /* binding.etFullName.setText("");

@@ -309,6 +309,27 @@ public class APIreferenceclass {
         callapi(headers, jsonPayload, context, querytype ,url);
     }
 
+    //addclientactivity
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a){
+
+        //TODO add siteNumber to api call
+
+        String url="https://acme.warburttons.com/api/vendors";
+        Log.d("tag23", "jsonpayload"+ jsonPayload1.toString());
+
+        String jsonPayload = jsonPayload1.toString();
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside addvendor api");
+
+        querytype= 1; ////post
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+    }
+
     //addclientdetailactivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, String clientid, int b, String jsonString){
 

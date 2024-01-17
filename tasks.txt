@@ -1,11 +1,25 @@
 >Ship
->make new content and test everything especially client login> campaigns
->viewsite- fixed
+make new content and test everything especially client login> campaigns
+viewsite- fixed
 fill data for header- emailed- fixed
 client viewsite add header- make new class- emailed- wait for fix to api site call response
 implementui will need to update the header for all- emailed
+>test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
 
+addvendor add logo
+addvendor when editing insert data
 
+editcampaigndetails put correct spinner location all spinners
+check other spinners for edit
+editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}
+
+addsitedetailactivity when editing put correct position of spinners
+when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
+when adding site the media type and illumination are entered as placeholder_media_type
+
+addsitedetailactivity when editing, the end date doesnt auto fill
+when editing then clicking add more sites name, end date arent emptied
+adding more site says site updated successfully
 
 
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;

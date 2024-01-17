@@ -88,10 +88,10 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     private void implementUI(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
+            if(jsonResponse.getString("status").equals("success")) {
+                JSONObject dataArray = new JSONObject(jsonResponse.getString("site"));
                 if(dataArray != null && dataArray.length() > 0) {
-                    JSONObject dataObject = dataArray.getJSONObject(0);
+                    JSONObject dataObject = dataArray;
                     jsonobj= dataObject;
                     if(dataObject != null) {
                         siteDetail = new SiteDetail();
@@ -213,7 +213,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data.", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -223,7 +223,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data..", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -232,6 +232,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("tag123", e.toString());
                         Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
                     }
                 });

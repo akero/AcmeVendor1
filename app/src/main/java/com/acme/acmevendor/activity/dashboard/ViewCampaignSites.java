@@ -120,8 +120,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
+            if(jsonResponse.getString("status").equals("success")) {
+                JSONArray dataArray = jsonResponse.getJSONArray("sites");
 
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
