@@ -1,12 +1,18 @@
+>Ship
+>make new content and test everything especially client login> campaigns
+>viewsite- fixed
+fill data for header- emailed- fixed
+client viewsite add header- make new class- emailed- wait for fix to api site call response
+implementui will need to update the header for all- emailed
+
+
+
+
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
 
 //Swipe in client to move sites
-test swipe in viewsitedetailactivity after below is done
+test swipe in viewsitedetailactivity after below is done- could leave
 
-implementui will need to update the header for all- emailed
-client viewsite add header- make new class- emailed- wait for fix to api site call response
-
->make new content and test everything especially client login> campaigns
 
 //correctly retreive data for cliient>campaigns
 //add retreived client id to api call
@@ -15,7 +21,6 @@ client viewsite add header- make new class- emailed- wait for fix to api site ca
 //populate the activity for live
 //for old
 //add header
-fill data for header- emailed
 
 logo in headers
 
@@ -29,7 +34,7 @@ remove + from  view sites vendor, use camefrom in intent
 
 clientviewsites add edit
 //clicking on site causes crash
->viewsite
+
 
 >dropdown for client in addcampaigndetails size fix
 
