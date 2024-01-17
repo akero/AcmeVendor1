@@ -1,15 +1,19 @@
 >Ship
 make new content and test everything especially client login> campaigns
 viewsite- fixed
-fill data for header- emailed- fixed
+>fill data for header- emailed- fixed
 client viewsite add header- make new class- emailed- wait for fix to api site call response
 implementui will need to update the header for all- emailed
->test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
+
+change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
+pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
 
 client dashboard, campaigns added are showing as old
 
 addvendor add logo
 addvendor when editing insert data
+
+client- testclient- testcampaign- testsite- data doesnt fill
 
 editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
@@ -32,7 +36,8 @@ test swipe in viewsitedetailactivity after below is done- could leave
 
 logo in headers
 
-correctly retreive data for vendor>campaigns- emailed
+//test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
+//correctly retreive data for vendor>campaigns- emailed
 line 191 apiref when url is made then change line
 //https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
 //correct client login
@@ -56,6 +61,7 @@ notification icon- remove it
 check all todos
 test
 test on phone ask the monkes
+add icons to dropdown
 
 
 //correctly retreive data for cliient>campaigns

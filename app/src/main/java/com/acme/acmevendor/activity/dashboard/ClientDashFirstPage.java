@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -206,10 +209,11 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
                         String old_campaigns_count= jsonResponse.getString("old_campaigns__count");
                         String client_name= jsonResponse.getString("client_name");
 
-                        binding.clientid.setText(Integer.toString(clientId));
                         binding.title.setText(client_name);
-                        binding.clientname.setText(client_name);
-                        binding.campaign.setText("Live :- "+ live_campaigns_count+" - "+"Old :- "+old_campaigns_count);
+                        binding.clientid.setText(":- "+Integer.toString(clientId));
+                        binding.clientname.setText(":- "+client_name);
+                        String formattedText = ":- Live :- " + live_campaigns_count + " - Old :- " + old_campaigns_count;
+                        binding.campaign.setText(getColoredText(formattedText, Integer.parseInt(old_campaigns_count)));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -218,6 +222,17 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
             Log.d("tag40",e.toString());
         }
     }
+
+    private SpannableString getColoredText(String text, int oldCount) {
+        SpannableString spannableString = new SpannableString(text);
+
+        // Set the color for the "Old :-" part
+        ForegroundColorSpan oldColorSpan = new ForegroundColorSpan(Color.RED);
+        spannableString.setSpan(oldColorSpan, text.indexOf("Old :-"), text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return spannableString;
+    }
+
 
     public void onItemClick(int position) {
         try {
