@@ -74,10 +74,12 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_vendor_sites);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         Log.d("whichclass", "ViewVendorSites");
+
+        binding.ivPlus.setVisibility(View.GONE);
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
@@ -127,14 +129,21 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
  */
 
     }
+
+    String campaignName;
     JSONArray jsonArray1;
     private void implementUi(String response){
         try {
             JSONObject jsonObject = new JSONObject();
             jsonArray1= new JSONArray();
 
+            Log.d("tg111", response);
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
+
+            campaignName="";
+            campaignName= jsonResponse.getString("campaign_name");
+
             if(jsonResponse.getString("status").equals("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("sites");
                 if(dataArray != null && dataArray.length() > 0) {
@@ -246,10 +255,12 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
                 public void run() {
                     // Your UI update code goes here
 
-                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 1);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, false);
 
+
+                    binding.tvCampaign.setText(campaignName);
                     progressBar.clearAnimation();
                     progressBar.setVisibility(View.GONE);
                     //view.setVisibility(View.GONE);

@@ -52,6 +52,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
     //TODO- populate this token
     String logintoken="";
     String idofcampaign;
+    boolean showedit;
 
     //todo access token save to memory add to api call
 
@@ -77,6 +78,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         try{
             if(getIntent().getStringExtra("camefrom").equals("ClientDashBoardActivity")){
                 binding.ivPlus.setVisibility(View.GONE);
+                showedit= false;
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -84,7 +86,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
         //TODO remove after adding to ui
         jsonArray1= new JSONArray();
-        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, true);
+        CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, showedit);
         binding.rvCampaignList.setAdapter(adapter);
         campaignList(idofcampaign);
     }
@@ -214,7 +216,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
-                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, true);
+                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, showedit);
 
                     //animation code
                             progressBar.clearAnimation();

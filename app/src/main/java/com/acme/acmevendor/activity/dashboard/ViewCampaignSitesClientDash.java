@@ -44,10 +44,8 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
 
     int id=0;
     ActivityViewCampaignSitesClientDashBinding binding;
-
     boolean showMenus = false;
     int delete= 0;
-
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
     //TODO- populate this token
