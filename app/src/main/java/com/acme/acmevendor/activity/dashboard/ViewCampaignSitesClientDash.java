@@ -44,7 +44,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
 
     int id=0;
     ActivityViewCampaignSitesClientDashBinding binding;
-    //JSONArray jsonArray;
+
     boolean showMenus = false;
     int delete= 0;
 
@@ -100,9 +100,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                 }
             });
         }
-
     }
-
 
     String vendorid;
     JSONArray jsonArray1;
@@ -118,7 +116,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
 
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
-
                         //TODO here. have to filter based on whether this class is called from admin dash or client dash or vendor dash. Right now only 0 being called
 
                         Log.d("tag998", "1");
@@ -137,7 +134,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                                 jsonObject.putOpt("name", dataObject.optString("name"));
                                 //siteDetail.setName(dataObject.optString("name"));
 
-
                                 jsonArray1.put(jsonObject);
 //TODO here
                             }
@@ -155,9 +151,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
-
-
-
                                 jsonArray1.put(jsonObject);
 //TODO here
                             }
@@ -176,9 +169,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
                                 jsonObject.putOpt("name", dataObject.optString("name"));
-
-
-
 
 //TODO here
                                 jsonArray1.put(jsonObject);
@@ -202,7 +192,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                     progressBar.setVisibility(View.GONE);
                     //animation code
                 try{
-
                     binding.clientid.setText(Integer.toString(jsonResponse.getInt("client_id")));
                     binding.clientname.setText(jsonResponse.getString("client_name"));
                     binding.campaign.setText(jsonResponse.getString("campaign_name"));
@@ -270,7 +259,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
         PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
         popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
 
-
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.delete) {
@@ -289,8 +277,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                             e.printStackTrace();
                         }
 
-
-
                         APIreferenceclass api = new APIreferenceclass(siteid, logintoken, ctxt, 1);
                         delete = 1;
                         return true;
@@ -304,7 +290,6 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
     }
 
     public void onPlusClick(View view) {
-
         Log.d("tag20", "onplugtreehththtsclick");
         Intent intent= new Intent(ViewCampaignSitesClientDash.this, AddSiteDetailActivity.class);
         intent.putExtra("campaignId",idofcampaign);
