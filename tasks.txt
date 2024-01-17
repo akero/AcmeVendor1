@@ -19,9 +19,6 @@ addsitedetailactivity when editing put correct position of spinners
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
 
-//addsitedetailactivity when editing, the end date doesnt auto fill
-//when editing then clicking add more sites name, end date arent emptied
-//adding more site says site updated successfully
 
 
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
@@ -30,13 +27,7 @@ Identify first 5% of the task after break to help with task switching before sta
 test swipe in viewsitedetailactivity after below is done- could leave
 
 
-//correctly retreive data for cliient>campaigns
-//add retreived client id to api call
-//add old live code
-//fetch campaigns
-//populate the activity for live
-//for old
-//add header
+
 
 logo in headers
 
@@ -66,7 +57,16 @@ test
 test on phone ask the monkes
 
 
-
+//correctly retreive data for cliient>campaigns
+//add retreived client id to api call
+//add old live code
+//fetch campaigns
+//populate the activity for live
+//for old
+//add header
+//addsitedetailactivity when editing, the end date doesnt auto fill
+//when editing then clicking add more sites name, end date arent emptied
+//adding more site says site updated successfully
 /ask what last update in view sites client dash is
 //remove + from  view sites client 
 //line 161 check what response is once email gets reply
