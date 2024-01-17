@@ -6,6 +6,8 @@ client viewsite add header- make new class- emailed- wait for fix to api site ca
 implementui will need to update the header for all- emailed
 >test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
 
+client dashboard, campaigns added are showing as old
+
 addvendor add logo
 addvendor when editing insert data
 
