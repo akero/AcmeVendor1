@@ -5,10 +5,9 @@ viewsite- fixed
 client viewsite add header- make new class- emailed- wait for fix to api site call response
 implementui will need to update the header for all- emailed
 
+client dashboard, campaigns added are showing as old-
 change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
 pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
-
-client dashboard, campaigns added are showing as old
 
 addvendor add logo
 addvendor when editing insert data
