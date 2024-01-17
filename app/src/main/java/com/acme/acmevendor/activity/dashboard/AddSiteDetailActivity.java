@@ -84,8 +84,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
 
-
-
             editingsite= "";
             editingsite= getIntent().getStringExtra("editingsite");
 
@@ -232,7 +230,7 @@ try {
                     tvSiteName.setText(siteDetail.getName());
 
                     TextView tvLastInspection = findViewById(R.id.etStartDate);
-                    tvLastInspection.setText(siteDetail.getCreatedAt());
+                    tvLastInspection.setText(siteDetail.getStartDate());
 
                     TextView tvLatitude = findViewById(R.id.etLatitude);
                     tvLatitude.setText(siteDetail.getLatitude());
@@ -248,8 +246,8 @@ try {
                    // TextView tvIllumination = findViewById(R.id.tvIllumination);
                    // tvIllumination.setText(siteDetail.getIllumination());
 
-                    TextView tvStartDate = findViewById(R.id.etStartDate);
-                    tvStartDate.setText(siteDetail.getStartDate());
+                    TextView tvStartDate = findViewById(R.id.etEndDate);
+                    tvStartDate.setText(siteDetail.getEndDate());
 
                     // Set the site number
                     TextView tvSiteNo = findViewById(R.id.etSiteNo);
@@ -567,11 +565,12 @@ try {
 
     public void addMoreSiteClick(View view) {
 
+        editingsite= null;
         siteno= "";
         //TODO here
         TextView tvSiteId = findViewById(R.id.etSiteNo);
         //TODO after person implements site name then change this
-        tvSiteId.requestFocus();
+        //tvSiteId.requestFocus();
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(tvSiteId, InputMethodManager.SHOW_IMPLICIT);
@@ -585,6 +584,10 @@ try {
 
         TextView tvLocation = findViewById(R.id.etLocation);
         tvLocation.setText("");
+
+        TextView tvSitename = findViewById(R.id.etSiteName);
+        tvSitename.setText("");
+        tvSitename.requestFocus();
 
         TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
         tvSiteName.setText("Add Site");
@@ -606,7 +609,7 @@ try {
         // TextView tvIllumination = findViewById(R.id.tvIllumination);
         // tvIllumination.setText(siteDetail.getIllumination());
 
-        TextView tvStartDate = findViewById(R.id.etStartDate);
+        TextView tvStartDate = findViewById(R.id.etEndDate);
         tvStartDate.setText("");
 
         // Set the site number
