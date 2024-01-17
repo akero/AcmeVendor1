@@ -566,6 +566,7 @@ try {
     public void addMoreSiteClick(View view) {
 
         editingsite= null;
+        //
         siteno= "";
         //TODO here
         TextView tvSiteId = findViewById(R.id.etSiteNo);
