@@ -19,7 +19,8 @@ addsitedetailactivity when editing put correct position of spinners
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
 
-
+vendor login need to add ui changes
+vendor remove edit and add
 
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
 

@@ -90,7 +90,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         //animation code
 
         try{
-            vendorid= getIntent().getIntExtra("vendorid", 0);
+            //vendorid= getIntent().getIntExtra("vendorid", 0);
         }catch (Exception e){
             e.printStackTrace();
         }

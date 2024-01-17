@@ -186,7 +186,7 @@ public class APIreferenceclass {
 
             //TODO here
             String url="https://acme.warburttons.com/api/get_vendor_campaigns/";
-            url= url+ vendorid;
+            //url= url+ vendorid;
             querytype=0;
             String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
 
