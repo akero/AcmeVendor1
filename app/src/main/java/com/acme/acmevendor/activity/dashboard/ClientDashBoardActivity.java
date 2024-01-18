@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -253,10 +256,13 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
                         binding.clientid.setText(Integer.toString(clientid));
                         try {
+
+                            String live_campaigns_count= jsonResponse.getString("live_campaigns_count");
+                            String old_campaigns_count= jsonResponse.getString("old_campaigns__count");
                             binding.clientname.setText(jsonResponse.getString("client_name"));
                             binding.title.setText(jsonResponse.getString("client_name"));
-                            binding.campaign.setText("Live - "+jsonResponse.getString("live_campaigns_count")+" - Old :- "+jsonResponse.getString("old_campaigns__count"));
-                        } catch (JSONException e) {
+                            String formattedText = "Live :- " + live_campaigns_count + " - Old :- " + old_campaigns_count;
+                            binding.campaign.setText(getColoredText(formattedText, Integer.parseInt(old_campaigns_count)));                        } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
 
@@ -267,6 +273,15 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
             }
         }
 
+    private SpannableString getColoredText(String text, int oldCount) {
+        SpannableString spannableString = new SpannableString(text);
+
+        // Set the color for the "Old :-" part
+        ForegroundColorSpan oldColorSpan = new ForegroundColorSpan(Color.RED);
+        spannableString.setSpan(oldColorSpan, text.indexOf("Old :-"), text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return spannableString;
+    }
 
         //TODO replace. this is for response for the current page's data.
         //TODO implement response into UI
