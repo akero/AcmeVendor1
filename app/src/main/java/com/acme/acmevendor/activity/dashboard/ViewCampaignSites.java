@@ -224,12 +224,24 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                     //animation code
 
                     binding.rvCampaignList.setAdapter(adapter);
+
+                    try {
+                        JSONObject jsonobject = new JSONObject(response);
+                        binding.title.setText(jsonobject.getString("campaign_name"));
+                        binding.clientid.setText(Integer.toString(jsonobject.getInt("client_id")));
+                        binding.clientname.setText(jsonobject.getString("client_name"));
+                        binding.campaign.setText(jsonobject.getString("campaign_name"));
+                        binding.totalsites.setText(jsonobject.getString("site_count"));
+                    }catch(Exception e){
+                        Log.d("tag322121", e.toString());
+                    }
                 }});
         }catch (Exception e){
             Log.d("tg222", e.toString());
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+
                     // Your UI update code goes here
                     //animation code
                     progressBar.clearAnimation();

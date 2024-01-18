@@ -1,11 +1,7 @@
 >Ship
-make new content and test everything especially client login> campaigns
-viewsite- fixed
->fill data for header- emailed- fixed
-//client viewsite add header- make new class- emailed- wait for fix to api site call //response
->implementui will need to update the header for all- emailed
+>add code for clinet login all sites dash and view sites dash
 
-//scroll in admin- client- view site not working
+make new content and test everything especially client login> campaigns
 
 viewcampaignsites from client login- remove 3 dots
 add header
@@ -46,6 +42,11 @@ test swipe in viewsitedetailactivity after below is done- could leave
 
 
 logo in headers
+//fill data for header- emailed- fixed
+//client viewsite add header- make new class- emailed- wait for fix to api site call //response
+//implementui will need to update the header for all- emailed
+
+//scroll in admin- client- view site not working
 
 //test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
 //correctly retreive data for vendor>campaigns- emailed
