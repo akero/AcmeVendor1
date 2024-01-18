@@ -85,11 +85,11 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         }
 
         gestureDetector = new GestureDetector(this, new MyGestureListener());
-        View rootView = findViewById(R.id.scrollview);
-        rootView.setOnTouchListener((v, event) -> {
-            gestureDetector.onTouchEvent(event);
-            return true;
-        });
+        //View rootView = findViewById(R.id.scrollview);
+        //rootView.setOnTouchListener((v, event) -> {
+          //  gestureDetector.onTouchEvent(event);
+            //return true;
+        //});
 
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);

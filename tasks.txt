@@ -2,15 +2,21 @@
 make new content and test everything especially client login> campaigns
 viewsite- fixed
 >fill data for header- emailed- fixed
-client viewsite add header- make new class- emailed- wait for fix to api site call response
-implementui will need to update the header for all- emailed
+//client viewsite add header- make new class- emailed- wait for fix to api site call //response
+>implementui will need to update the header for all- emailed
 
-scroll in admin- client- view site not working
+//scroll in admin- client- view site not working
 
 viewcampaignsites from client login- remove 3 dots
 add header
 
 clientlogin- add header to all
+
+client login fix header old color
+all sites header
+view site header
+
+vendor login all sites fix margins
 
 client dashboard, campaigns added are showing as old-
 change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
@@ -49,6 +55,7 @@ line 191 apiref when url is made then change line
 //correct vendor login
 Vendor will continue to work as he was doing before
 remove + from  view sites vendor, use camefrom in intent
+remove text xml headers
 
 clientviewsites add edit
 //clicking on site causes crash
