@@ -157,7 +157,7 @@
                                     android:id="@+id/clientid"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Site Id"
+                                    android:text="Client Id"
                                     android:layout_marginTop="6dp"
                                     android:fontFamily="@font/dmsansregular"
                                     android:textColor="#0084ED"

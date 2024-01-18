@@ -95,7 +95,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
 
-        apicallgetcampaigns(logintoken, campaignId);
+        //apicallgetcampaigns(logintoken, campaignId);
     }
 
     private void handleSwipeLeft() {
@@ -133,9 +133,9 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         try {
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getString("status").equals("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("site");
+                JSONObject dataArray = new JSONObject(jsonResponse.getString("site"));
                 if(dataArray != null && dataArray.length() > 0) {
-                    JSONObject dataObject = dataArray.getJSONObject(0);
+                    JSONObject dataObject = dataArray;
                     jsonobj= dataObject;
                     if(dataObject != null) {
                         siteDetail = new SiteDetail();
@@ -206,7 +206,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                                 TextView tvLocation = findViewById(R.id.tvLocation);
                                 tvLocation.setText(siteDetail.getLocation());
 
-                                TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
+                                TextView tvSiteName = findViewById(R.id.title);
                                 tvSiteName.setText(siteDetail.getName());
 
                                 TextView tvLastInspection = findViewById(R.id.tvStartDate);
@@ -245,7 +245,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                                 Log.d("tg2", "image code not executing");
 
                                 binding.siteno.setText(siteDetail.getSiteNo());
-                                binding.clientid.setText(siteDetail.getId());
+                                binding.clientid.setText(Integer.toString(siteDetail.getId()));
                                 try {
                                     binding.campaign.setText(jsonResponse.getString("campaign_name"));
                                     binding.vendorname.setText(jsonResponse.getString("vendor_name"));
@@ -268,7 +268,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data.", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -278,7 +278,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data..", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -287,7 +287,8 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                    Log.d("tg41", e.toString());
+                    Toast.makeText(ViewSiteDetailActivityClientDash.this, "Error retrieving or parsing data...", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -350,10 +351,12 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
     void extractsiteids(String response){
 
         try{
-            JSONObject jsonobj= new JSONObject(response);
-            if(jsonobj.getBoolean("success")== true){
 
-                JSONArray jsonArray= jsonobj.getJSONArray("data");
+            Log.d("tg1234", response);
+            JSONObject jsonobj= new JSONObject(response);
+            if(jsonobj.getString("status").equals("success")){
+
+                JSONArray jsonArray= jsonobj.getJSONArray("site");
                 siteIdArray= new int[jsonArray.length()];
 
                 for(int i=0; i< jsonArray.length(); i++){
@@ -384,7 +387,8 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         if(jsonno.getString("message").equals("Sites retrieved successfully.")) {
 
             //todo here
-            extractsiteids(response);
+            //extractsiteids(response);
+            implementUI(response);
 
         }else{
             implementUI(response);

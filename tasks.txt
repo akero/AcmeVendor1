@@ -5,6 +5,8 @@ viewsite- fixed
 client viewsite add header- make new class- emailed- wait for fix to api site call response
 implementui will need to update the header for all- emailed
 
+scroll in admin- client- view site not working
+
 viewcampaignsites from client login- remove 3 dots
 add header
 
