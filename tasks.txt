@@ -1,16 +1,11 @@
 >Ship
->add code for clinet login all sites dash and view sites dash
+//add code for clinet login all sites dash and 
+>view sites dash
+remove edit from client login site
 
 make new content and test everything especially client login> campaigns
 
-viewcampaignsites from client login- remove 3 dots
-add header
-
-clientlogin- add header to all
-
-client login fix header old color
-all sites header
-view site header
+logo in headers
 
 vendor login all sites fix margins
 
@@ -40,14 +35,17 @@ Identify first 5% of the task after break to help with task switching before sta
 test swipe in viewsitedetailactivity after below is done- could leave
 
 
+//client login fix header old color
+//all sites header
+//view site header
 
-logo in headers
 //fill data for header- emailed- fixed
 //client viewsite add header- make new class- emailed- wait for fix to api site call //response
 //implementui will need to update the header for all- emailed
 
 //scroll in admin- client- view site not working
-
+//viewcampaignsites from client login- remove 3 dots
+/add header
 //test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
 //correctly retreive data for vendor>campaigns- emailed
 line 191 apiref when url is made then change line
