@@ -77,10 +77,9 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
         siteDetail = new SiteDetail();
-
-
         campaignId="";
         Log.d("whichclass", "AddSiteDetailActivity");
+
         try {
             jsonobj = new JSONObject(getIntent().getStringExtra("siteDetail"));
 
@@ -89,6 +88,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
         }catch(Exception e){
             Log.d("tg90", "3"+e.toString());}
+
         try {
         campaignId= getIntent().getStringExtra("campaignId")!=null?getIntent().getStringExtra("campaignId"):"" ;
         vendorId= getIntent().getStringExtra("vendorId")!=null?getIntent().getStringExtra("vendorId"):"" ;
