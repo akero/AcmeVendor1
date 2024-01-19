@@ -453,9 +453,6 @@ try {
         }
     }
 
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
          super.onActivityResult(requestCode, resultCode, data);
@@ -722,25 +719,23 @@ try {
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run() {
-try{
+                    try{
                         if(jsonobj.getBoolean("success")== true){
                             showSuccessMessage();}
                         else{
                             showFailureMessage();
                         }
                     }catch (Exception e){
-    runOnUiThread(new Runnable(){
-        @Override
-        public void run() {
+                runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
             showFailureMessage();
         }});
-    Log.d("tagerw1", e.toString());
+                    Log.d("tagerw1", e.toString());
                     }
                 }
-
-                });}catch(Exception e){
-
-
+                });
+        }catch(Exception e){
             Log.d("tag123", e.toString());
         }
     }
