@@ -43,6 +43,7 @@ import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.SiteDetail;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,6 +61,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     private Calendar cal = Calendar.getInstance();
     private int yy, mm, dd;
     Uri selectedImage;
+    String selectedVendor;
 
     private String imageUrl = "";
     private final int REQUEST_IMAGE_CAPTURE = 101;
@@ -72,12 +74,15 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     String vendorId;
     String selectedItem, selectedItem1;
     String editingsite;
+    int vendorspinnerboolean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
         siteDetail = new SiteDetail();
         campaignId="";
+        selectedVendor= "";
+        vendorspinnerboolean= 0;
         Log.d("whichclass", "AddSiteDetailActivity");
 
         try {
@@ -107,6 +112,14 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         Log.d("tag111", "addsitedetailactivity");
 
         //spinner code
+
+        try {
+            vendorspinnerboolean= 1;
+            APIreferenceclass api = new APIreferenceclass(ctxt, fh.readLoginToken(this), 1);
+        }catch(Exception e){
+            Log.d("tg343", e.toString());
+        }
+
         String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -155,6 +168,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
     String siteno;
     SiteDetail siteDetail;
+
 
 
     void populateFields(JSONObject dataObject){
@@ -396,7 +410,7 @@ try {
             int idValue = id != null ? id : 0; // Replace 0 with your default value
             siteDetailJson.put("id", idValue);
             siteDetailJson.put("campaign_id", campaignId);
-            siteDetailJson.put("vendor_id", vendorId);
+            siteDetailJson.put("vendor_id", selectedVendor);
             siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
             siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
             siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
@@ -673,11 +687,12 @@ try {
         TextView tvMsg = view.findViewById(R.id.tvMsg);
         TextView tvResubmit = view.findViewById(R.id.tvResubmit);
         tvResubmit.setVisibility(View.INVISIBLE);
-        if(editingsite.equals("")) {
+        if (editingsite == null || editingsite.isEmpty()) {
             tvMsg.setText("Site Added Successfully");
-        }else{
+        } else {
             tvMsg.setText("Site Updated Successfully");
         }
+
         Button btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);
         final AlertDialog dialog = builder.create();
@@ -745,32 +760,126 @@ try {
     @Override
     public void onResponseReceived(String response) {
         Log.d("tg9", response);
-        try {
-            selectedImage= null;
-            JSONObject jsonobj = new JSONObject(response);
 
-                runOnUiThread(new Runnable(){
+        try {
+            selectedImage = null;
+            JSONObject jsonobj2 = new JSONObject(response);
+            if (jsonobj2.getString("message").equals("Vendors retrieved successfully.")) {
+                vendorspinnerboolean = 0;
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                    try{
-                        if(jsonobj.getBoolean("success")== true){
-                            showSuccessMessage();}
-                        else{
-                            showFailureMessage();
-                        }
-                    }catch (Exception e){
-                runOnUiThread(new Runnable(){
-                @Override
-                public void run() {
-            showFailureMessage();
-        }});
-                    Log.d("tagerw1", e.toString());
+                        vendorlist(response);
                     }
-                }
                 });
-        }catch(Exception e){
-            Log.d("tag123", e.toString());
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject jsonobj1 = new JSONObject(response);
+                            Log.d("tg9", "jsonobj1: " + jsonobj1.toString());
+
+                            Log.d("tg9", "here");
+
+
+                            if (jsonobj1.getString("message").equals("Site created successfully.")) {
+                                Log.d("tg9", "here1");
+
+                                showSuccessMessage();
+                                Log.d("tg9", "here2");
+
+                            } else {
+                                showFailureMessage();
+                            }
+                        } catch (Exception e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showFailureMessage();
+                                }
+                            });
+                            e.printStackTrace();
+                            Log.d("tagerw1", e.toString());
+                        }
+                    }
+                });
+            }}catch(Exception e){
+                Log.d("tag123", e.toString());
+            }
+
+    }
+
+    JSONArray jsonArray1;
+
+    void vendorlist(String response){
+        //TODO retreive client list
+
+        Log.d("vendorlist", response);
+        //TODO put this spinner code after response is received
+
+        String[] items2= null;
+
+        try{
+            JSONObject json= new JSONObject(response);
+            jsonArray1= json.getJSONArray("data");
+            items2 = new String[jsonArray1.length()];
+
+            for(int i=0; i<jsonArray1.length(); i++){
+                JSONObject json1= jsonArray1.getJSONObject(i);
+                items2[i]= json1.optString("name");
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
+        final String[] items3= items2;
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        binding.spinnervendor.setAdapter(adapter2);
+
+        // Inside your onCreate method
+        binding.spinnervendor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+
+
+
+                selectedVendor = parent.getItemAtPosition(position).toString();
+
+                try {
+                    for (int i = 0; i < jsonArray1.length(); i++) {
+                        JSONObject json1 = jsonArray1.getJSONObject(i);
+                        items3[i] = json1.optString("name");
+                        if(items3[i].equals(selectedVendor)){
+                            Log.d("selectedvendor", json1.optString("id")+ " "+ selectedVendor);
+                            selectedVendor= json1.optString("id");
+
+                            break;
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                Log.d("tg92", "selectedVendor"+ selectedVendor);
+
+
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
     }
 
     public void showFailureMessage() {

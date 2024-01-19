@@ -1,10 +1,12 @@
 >Ship
 
-add vendor_id spiner in addsitedetails
+add vendor_id spinner in addsitedetails
 
 make new content and test everything especially client login> campaigns
 
 logo in headers
+
+add site- What is site_no in this? "id" is id so what's site_no. Number of sites?- emailed
 
 client dashboard, campaigns added are showing as old-
 change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 

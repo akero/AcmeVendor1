@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/dmsansregular"
-            android:text="Site No."
+            android:text="Number of Sites"
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_10ssp" />
@@ -129,13 +129,44 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvVendor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llUnit"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/dmsansregular"
+            android:text="Vendor"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_10ssp" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvVendor"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:id="@+id/flVendor"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/primarystroke">
+
+            <Spinner
+                android:id="@+id/spinnervendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"/>
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_arrow"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/llDates"
-            android:layout_below="@id/llUnit"
+            android:layout_below="@id/flVendor"
             android:orientation="horizontal">
 
             <RelativeLayout
