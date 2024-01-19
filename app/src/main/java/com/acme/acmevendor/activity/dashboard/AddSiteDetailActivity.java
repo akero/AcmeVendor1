@@ -238,13 +238,44 @@ try {
                     TextView tvLongitude = findViewById(R.id.etLongitude);
                     tvLongitude.setText(siteDetail.getLongitude());
 
-                    //TODO
+                    //TODO- backend needs correct values
 
-                    //TextView tvMediaType = findViewById(R.id.tvMediaType);
-                    //tvMediaType.setText(siteDetail.getMediaType());
+                    // Get the existing adapter
+                    ArrayAdapter<String> spinnerAdapter = (ArrayAdapter<String>) binding.spinnermediatype.getAdapter();
 
-                   // TextView tvIllumination = findViewById(R.id.tvIllumination);
-                   // tvIllumination.setText(siteDetail.getIllumination());
+                    int position = -1;
+                    for (int i = 0; i < spinnerAdapter.getCount(); i++) {
+                        if (spinnerAdapter.getItem(i).equals(siteDetail.getMediaType())) {
+                            position = i;
+                            break;
+                        }
+                    }
+
+// Set the selection if the item is found
+                    if (position != -1) {
+                        binding.spinnermediatype.setSelection(position);
+                    }
+
+
+
+                    // Get the existing adapter
+                    ArrayAdapter<String> spinnerAdapter1 = (ArrayAdapter<String>) binding.spinnerillumination.getAdapter();
+
+                    int position1 = -1;
+                    for (int i = 0; i < spinnerAdapter1.getCount(); i++) {
+                        if (spinnerAdapter1.getItem(i).equals(siteDetail.getIllumination())) {
+                            position1 = i;
+                            break;
+                        }
+                    }
+
+// Set the selection if the item is found
+                    if (position1 != -1) {
+                        binding.spinnerillumination.setSelection(position1);
+                    }
+
+
+
 
                     TextView tvStartDate = findViewById(R.id.etEndDate);
                     tvStartDate.setText(siteDetail.getEndDate());
@@ -331,6 +362,8 @@ try {
         siteDetail.setHeight(tvHeight.getText().toString());
 //Set created at
         siteDetail.setCreatedAt(setCurrentDate());
+        siteDetail.setIllumination(selectedItem1);
+        siteDetail.setMediaType(selectedItem);
 
 // Set the total area
         TextView tvTotalArea = findViewById(R.id.etTotalArea);

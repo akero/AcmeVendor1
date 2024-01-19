@@ -1,5 +1,7 @@
 >Ship
 
+add vendor_id spiner in addsitedetails
+
 make new content and test everything especially client login> campaigns
 
 logo in headers
@@ -15,6 +17,9 @@ editcampaigndetails when editing and pressing save response is {"success":false,
 >addsitedetailactivity when editing put correct position of spinners
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
+
+remove placeholders from edit site
+check other areas for placeholders
 
 After all done-
 fetch correct campaignlist for client login
