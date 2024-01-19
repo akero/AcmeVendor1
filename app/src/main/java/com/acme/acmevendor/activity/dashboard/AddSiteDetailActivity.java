@@ -643,7 +643,11 @@ try {
         TextView tvMsg = view.findViewById(R.id.tvMsg);
         TextView tvResubmit = view.findViewById(R.id.tvResubmit);
         tvResubmit.setVisibility(View.INVISIBLE);
-        tvMsg.setText("Site Added Successfully");
+        if(editingsite.equals("")) {
+            tvMsg.setText("Site Added Successfully");
+        }else{
+            tvMsg.setText("Site Updated Successfully");
+        }
         Button btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);
         final AlertDialog dialog = builder.create();
