@@ -86,8 +86,12 @@ import java.net.URL;
             Log.d("tag41", "5");
         }
 
+        String response2;
+
         private void implementUI(String response) {
             Log.d("tag60", response);
+            response2= "";
+            response2= response;
             //here
             try {
                 JSONObject jsonResponse = new JSONObject(response);
@@ -204,6 +208,8 @@ import java.net.URL;
                     // Handle next button click
                     Intent intent= new Intent(AdminViewVendorDetails.this, AddVenderActivity.class);
                     intent.putExtra("logintoken", logintoken);
+                    intent.putExtra("camefrom", "AdminViewVendorDetails");
+                    intent.putExtra("response", response2);
                     startActivity(intent);
                 }
             });

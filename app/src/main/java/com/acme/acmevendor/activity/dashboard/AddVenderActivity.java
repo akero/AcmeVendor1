@@ -19,20 +19,65 @@ import com.acme.acmevendor.utility.NetworkUtils;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AddVenderActivity extends AppCompatActivity implements ApiInterface {
 
     private ActivityAddVenderBinding binding;
     String siteNumber;
+    int edit;
+    String response1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_vender);
         logintoken= getIntent().getStringExtra("logintoken");
+        response1= "";
+        edit= 0;
+
+        try{
+            if(getIntent().getStringExtra("camefrom").equals("AdminViewVendorDetails")){
+                edit= 1;
+                response1= getIntent().getStringExtra("response");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        if(edit== 1){
+            fillDetails(response1);
+        }
+
         Log.d("whichclass", "AddVendorActivity");
         //siteNumber= getIntent().getStringExtra("siteNumber");
+    }
+
+    void fillDetails(String response){
+
+        try {
+            JSONObject jsonobj= new JSONObject(response);
+            Log.d("response", response);
+
+            binding.etFullName.setText(jsonobj.optString("name"));
+            binding.etLocation.setText(jsonobj.optString("company_address"));
+            binding.etEmail.setText(jsonobj.optString("email"));
+            binding.etPhone.setText(jsonobj.optString("phone_number"));
+            binding.etCompanyName.setText(jsonobj.optString("company_name"));
+            binding.etCompanyAddress.setText(jsonobj.optString("company_address"));
+            binding.etGst.setText(jsonobj.optString("gst_no"));
+            binding.etDescription.setText(jsonobj.optString(""));
+            vendorid= Integer.toString(jsonobj.optInt("id"));
+
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     String name="";
@@ -78,19 +123,16 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
                 Log.d("tg6", e.toString());
             }
 
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, 0);
+            if(edit==0) {
+                APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, 0);
+            }else{
+                APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, vendorid);
 
-
-           /* binding.etFullName.setText("");
-            binding.etEmail.setText("");
-            binding.etCompanyName.setText("");
-            binding.etCompanyAddress.setText("");
-            binding.etGst.setText("");
-            binding.etPhone.setText("");
-            showSuccessMessage();
-        */
+            }
         }
     }
+
+    String vendorid;
 
     @Override
     public void onResponseReceived(String response) {
@@ -109,6 +151,7 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
                             binding.etCompanyAddress.setText("");
                             binding.etGst.setText("");
                             binding.etPhone.setText("");
+                            binding.etLocation.setText("");
                             showSuccessMessage();}
                         else{
                             showFailureMessage();
@@ -192,8 +235,11 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
         TextView tvMsg = view.findViewById(R.id.tvMsg);
         TextView tvResubmit = view.findViewById(R.id.tvResubmit);
         tvResubmit.setVisibility(View.GONE);
-        tvMsg.setText("Vendor Added Successfully");
-
+        if(edit== 0) {
+            tvMsg.setText("Vendor Added Successfully");
+        }else{
+            tvMsg.setText("Vendor updated Successfully");
+        }
         Button btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);
         final AlertDialog dialog = builder.create();
