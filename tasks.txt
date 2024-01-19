@@ -4,51 +4,46 @@ make new content and test everything especially client login> campaigns
 
 logo in headers
 
-vendor login all sites fix margins
-
 client dashboard, campaigns added are showing as old-
 change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
 pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
 
-addvendor add logo
->addvendor when editing insert data
-
-client- testclient- testcampaign- testsite- data doesnt fill
-
 editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
-editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}
+editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- msged
 
-addsitedetailactivity when editing put correct position of spinners
+>addsitedetailactivity when editing put correct position of spinners
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
-
-vendor login need to add ui changes
-vendor remove edit and add
-
-Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
-
-test swipe in viewsitedetailactivity after below is done- could leave
 
 After all done-
 fetch correct campaignlist for client login
 ask what mediatype and illumination are- placeholders- ask what real data is
 remove null from all image uploads
 implement add image- on line 192 appcampdet
-fix size of spinner in add campaign
 notification icon- remove it
 check all todos
 test
 test on phone ask the monkes
 add icons to dropdown
-/Swipe in client to move sites
 >dropdown for client in addcampaigndetails size fix
 
+
+//vendor login need to add ui changes
+//vendor remove edit and add
+//Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
+/vendor login all sites fix margins
+//fix size of spinner in add campaign
+/addvendor add logo
+//addvendor when editing insert data
+/test swipe in viewsitedetailactivity after below is done- could leave
+//client- testclient- testcampaign- testsite- data doesnt fill
 //add code for clinet login all sites dash and 
 //view sites dash
 //remove edit from client login site
 //client login fix header old color
 //all sites header
+/Swipe in client to move sites
 //view site header
 //fill data for header- emailed- fixed
 //client viewsite add header- make new class- emailed- wait for fix to api site call //response

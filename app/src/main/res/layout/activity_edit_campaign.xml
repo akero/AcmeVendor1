@@ -111,13 +111,13 @@
                             android:layout_below="@id/tvVendor"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:id="@+id/frame_vendor_id"
-                            android:padding="@dimen/_8sdp"
+                            android:paddingRight="8dp"
                             android:background="@drawable/primarystroke">
 
                             <Spinner
                                 android:id="@+id/spinnervendor"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="32dp"
                                 android:background="@null"/>
 
                             <ImageView
@@ -126,20 +126,6 @@
                                 android:layout_gravity="center|right"
                                 android:src="@drawable/ic_arrow"/>
                         </FrameLayout>
-
-                    <!--
-                        <EditText
-                            android:id="@+id/etVendor"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvVendor"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" /> -->
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -173,13 +159,13 @@
                             android:layout_below="@id/tvclientid"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:id="@+id/frame_client_id"
-                            android:padding="@dimen/_8sdp"
+                            android:paddingRight="8dp"
                             android:background="@drawable/primarystroke">
 
                             <Spinner
                                 android:id="@+id/spinnermediatype1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="32dp"
                                 android:background="@null"/>
 
                             <ImageView
@@ -188,19 +174,6 @@
                                 android:layout_gravity="center|right"
                                 android:src="@drawable/ic_arrow"/>
                         </FrameLayout>
-
-                  <!--      <EditText
-                            android:id="@+id/etclientid"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvclientid"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" /> -->
                     </RelativeLayout>
 
                     <RelativeLayout
