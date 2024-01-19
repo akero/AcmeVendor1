@@ -77,10 +77,10 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
             campaignId = getIntent().getExtras().getString("campaignId", "");
-
             campaignType = getIntent().getExtras().getString("campaignType", "");
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
+
             Log.d("tg2", siteNumber);
         }
 

@@ -283,10 +283,18 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
             // String siteId = jsonObject.getString("siteId"); // If you have a site id.
 
+            String camefrom= "";
+            try{
+                camefrom= getIntent().getStringExtra("camefrom");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             // Start new activity and pass the retrieved data
             startActivity(new Intent(this, ViewSiteDetailActivity.class)
                     .putExtra("campaignType", "old")
                     .putExtra("campaignId", idofcampaign)
+                    .putExtra("camefrom", camefrom)
                     .putExtra("siteNumber", id)
                     .putExtra("logintoken", logintoken)
                     .putExtra("vendorclientorcampaign", vendorclientorcampaign));

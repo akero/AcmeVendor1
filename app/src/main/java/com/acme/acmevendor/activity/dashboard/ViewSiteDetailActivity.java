@@ -55,6 +55,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     String siteNumber= "";
     String logintoken="";
     String campaignId="";
+    String camefrom;
     private ActivityViewSiteDetailBinding binding;
 
     //TODO populate all fields. pass api call data from prev activity
@@ -64,7 +65,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
-        
+        camefrom= "";
         Log.d("tag41", "1");
         Log.d("whichclass", "ViewSiteDetailActivity");
 
@@ -74,6 +75,12 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             campaignType = getIntent().getExtras().getString("campaignType", "");
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
+            camefrom= getIntent().getExtras().getString("camefrom", "");
+
+            if(camefrom.equals("ClientDashBoardActivity")||camefrom.equals("ViewVendorSites")){
+                binding.btnNext.setVisibility(View.GONE);
+            }
+
             Log.d("tg2", siteNumber);
         }
 

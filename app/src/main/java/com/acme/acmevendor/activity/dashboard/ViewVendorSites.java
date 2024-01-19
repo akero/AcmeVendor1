@@ -308,6 +308,7 @@ public class ViewVendorSites extends AppCompatActivity implements ApiInterface {
             startActivity(new Intent(this, ViewSiteDetailActivity.class)
                     .putExtra("campaignType", "old")
                     .putExtra("siteNumber", id)
+                    .putExtra("camefrom", "ViewVendorSites")
                     .putExtra("campaignId", idofcampaign)
                     .putExtra("logintoken", logintoken)
                     .putExtra("vendorclientorcampaign", vendorclientorcampaign));

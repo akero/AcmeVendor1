@@ -1,7 +1,4 @@
 >Ship
-//add code for clinet login all sites dash and 
->view sites dash
-remove edit from client login site
 
 make new content and test everything especially client login> campaigns
 
@@ -14,7 +11,7 @@ change date type When creating campaign for a client, the campaign type is autom
 pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
 
 addvendor add logo
-addvendor when editing insert data
+>addvendor when editing insert data
 
 client- testclient- testcampaign- testsite- data doesnt fill
 
@@ -31,36 +28,7 @@ vendor remove edit and add
 
 Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
 
-//Swipe in client to move sites
 test swipe in viewsitedetailactivity after below is done- could leave
-
-
-//client login fix header old color
-//all sites header
-//view site header
-
-//fill data for header- emailed- fixed
-//client viewsite add header- make new class- emailed- wait for fix to api site call //response
-//implementui will need to update the header for all- emailed
-
-//scroll in admin- client- view site not working
-//viewcampaignsites from client login- remove 3 dots
-/add header
-//test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
-//correctly retreive data for vendor>campaigns- emailed
-line 191 apiref when url is made then change line
-//https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
-//correct client login
-//correct vendor login
-Vendor will continue to work as he was doing before
-remove + from  view sites vendor, use camefrom in intent
-remove text xml headers
-
-clientviewsites add edit
-//clicking on site causes crash
-
-
->dropdown for client in addcampaigndetails size fix
 
 After all done-
 fetch correct campaignlist for client login
@@ -73,8 +41,32 @@ check all todos
 test
 test on phone ask the monkes
 add icons to dropdown
+/Swipe in client to move sites
+>dropdown for client in addcampaigndetails size fix
 
-
+//add code for clinet login all sites dash and 
+//view sites dash
+//remove edit from client login site
+//client login fix header old color
+//all sites header
+//view site header
+//fill data for header- emailed- fixed
+//client viewsite add header- make new class- emailed- wait for fix to api site call //response
+//implementui will need to update the header for all- emailed
+//scroll in admin- client- view site not working
+//viewcampaignsites from client login- remove 3 dots
+/add header
+//test client login wajckbds@gmail.com, rish1994h@gmail.com for vendor
+//correctly retreive data for vendor>campaigns- emailed
+line 191 apiref when url is made then change line
+//https://acme.warburttons.com/api/verifyLogin- For vendor and client login need to add the client id in the response- emailed
+//correct client login
+//correct vendor login
+Vendor will continue to work as he was doing before
+remove + from  view sites vendor, use camefrom in intent
+remove text xml headers
+//clientviewsites add edit
+//clicking on site causes crash
 //correctly retreive data for cliient>campaigns
 //add retreived client id to api call
 //add old live code
@@ -102,13 +94,11 @@ edit campaign- same issue as above- make a dropdown for client selection in camp
 -you need to select a image in postman while creating a campaign, after doing this you will not get this error
 https://acme.warburttons.com/api/sites/22?campaign_id=18&vendor_id=18&start_date=2023-07-24 &end_date=2023-07-24 &location=Delhi&longitute=11&latitude=21&width=222&height=111&total_area=233&media_type=Digital&illumination=Banner&name=test&site_no=22-
 think this is create> edit test- says image required- pending till upload image is implemented which is pending from backend
-
 //copy viewcampaignsites
 //make new one for clientdashfirstpage
 //add the xml code (copy from clientdashfirstpage)
 //update url- https://acme.warburttons.com/api/campaigns/4?uid=4353&user_id=5&start_date=2023/09/22&end_date=2023/09/22&vendor=6&name=a&illumination=digital&num_of_site=10&media_type=led&image=1682335036&client_id=5
 4 is id
-
 //add to campaign- edit the api class
 check apireference add campaign
 2023-12-19 12:26:02.618  9114-9455  tg9                     com.acme.acmevendor                  D  {"success":false,"message":"Validation Error.","data":{"name":["The name field is required."],"uid":["The uid field is required."],"user_id":["The user id field is required."],"image":["The image must be an image.","The image must be a file of type: jpeg, png, jpg, gif, svg."]}}
@@ -139,7 +129,6 @@ addsitedetailactivity line 311 pendng from backend. After this accept site id fr
 -all parameters should be pass into form data while creating a site, u are passing data in media query which is for updation- pending email- remove forward slash, make sure campaign_id is an existing campaign- working
 site edit working, image upload not working just skip it
 /site edit working, image upload not working just skip it
-
 //line 521 apiref addsite remove placeholder
 //fix multipart in api ref for everything to include the jsonstrng
 //site add post not working- have to upload image- pending till upload image is implemented
