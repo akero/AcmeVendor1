@@ -11,14 +11,13 @@ logo in headers
 
 client dashboard, campaigns added are showing as old-
 
->change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
+change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. - emailed
 pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
+see which class
+change in api call and check if it works
 
->see which class
->change in api call and check if it works
 
-
-editcampaigndetails put correct spinner location all spinners
+>editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
 editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- msged
 

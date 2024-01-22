@@ -97,6 +97,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                                 // on below line we are setting date to our text view.
                                 Log.d("date", year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
                                 binding.etStartDate.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                                Log.d("date", String.valueOf(binding.etStartDate.getText()));
+
 
                             }
                         },
