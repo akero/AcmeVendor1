@@ -6,8 +6,6 @@ make new content and test everything especially client login> campaigns
 
 logo in headers
 
-add site- What is site_no in this? "id" is id so what's site_no. Number of sites?- emailed
-
 client dashboard, campaigns added are showing as old-
 change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
 pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
@@ -35,7 +33,7 @@ test on phone ask the monkes
 add icons to dropdown
 >dropdown for client in addcampaigndetails size fix
 
-
+//add site- What is site_no in this? "id" is id so what's site_no. Number of sites?- emailed
 //vendor login need to add ui changes
 //vendor remove edit and add
 //Identify first 5% of the task after break to help with task switching before starting a new task spend a few mins thinking of what is interesting or novel or challenging;
