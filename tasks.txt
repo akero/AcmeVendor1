@@ -1,20 +1,27 @@
 >Ship
 
-add vendor_id spinner in addsitedetails- emailed
+add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
+addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 
 make new content and test everything especially client login> campaigns
+
+add campaign details- fix spinner height
 
 logo in headers
 
 client dashboard, campaigns added are showing as old-
-change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
+
+>change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. 
 pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
+
+>see which class
+>change in api call and check if it works
+
 
 editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
 editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- msged
 
->addsitedetailactivity when editing put correct position of spinners
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
 

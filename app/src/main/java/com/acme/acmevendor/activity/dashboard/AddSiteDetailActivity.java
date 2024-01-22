@@ -843,14 +843,15 @@ try {
     }
 
     JSONArray jsonArray1;
+    String vendorName;
 
     void vendorlist(String response){
         //TODO retreive client list
-
         Log.d("vendorlist", response);
         //TODO put this spinner code after response is received
 
         String[] items2= null;
+        vendorName="";
 
         try{
             JSONObject json= new JSONObject(response);
@@ -861,7 +862,6 @@ try {
                 JSONObject json1= jsonArray1.getJSONObject(i);
                 items2[i]= json1.optString("name");
             }
-
 
         }catch (Exception e){
             e.printStackTrace();
@@ -890,6 +890,7 @@ try {
                         if(items3[i].equals(selectedVendor)){
                             Log.d("selectedvendor", json1.optString("id")+ " "+ selectedVendor);
                             selectedVendor= json1.optString("id");
+                            vendorName= json1.optString("name");
 
                             break;
                         }
@@ -912,11 +913,15 @@ try {
         });
 
 // Get the existing adapter
-        ArrayAdapter<String> vendorAdapter = (ArrayAdapter<String>) binding.spinnervendor.getAdapter();
+//        ArrayAdapter<String> vendorAdapter = (ArrayAdapter<String>) binding.spinnervendor.getAdapter();
 
         int position2 = -1;
-        for (int i = 0; i < vendorAdapter.getCount(); i++) {
-            if (vendorAdapter.getItem(i).equals(siteDetail.getVendorId())) {
+        for (int i = 0; i < adapter2.getCount(); i++) {
+            Log.d("position2", Integer.toString(position2));
+            Log.d("position2", siteDetail.getVendorId());
+            Log.d("position2", adapter2.getItem(i));
+
+            if (adapter2.getItem(i).equals(vendorName)) {
                 position2 = i;
                 break;
             }
@@ -924,6 +929,7 @@ try {
 
 // Set the selection if the item is found
         if (position2 != -1) {
+            Log.d("position2", Integer.toString(position2));
             binding.spinnervendor.setSelection(position2);
         }
     }

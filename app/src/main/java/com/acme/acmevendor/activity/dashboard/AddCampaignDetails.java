@@ -95,7 +95,8 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our text view.
-                                binding.etStartDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                Log.d("date", year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                                binding.etStartDate.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
 
                             }
                         },
@@ -130,7 +131,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our text view.
-                                binding.etEndDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                binding.etEndDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 
                             }
                         },
