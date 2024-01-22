@@ -772,6 +772,8 @@ public class APIreferenceclass {
 
             // Convert the modified JSON object back to a JSON string
             String jsonStringWithPlaceholders = jsonObject.toString();
+            Log.d("tg11", jsonStringWithPlaceholders);
+
             return jsonStringWithPlaceholders;
         } catch (JSONException e) {
             e.printStackTrace();

@@ -169,8 +169,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
     String siteno;
     SiteDetail siteDetail;
 
-
-
     void populateFields(JSONObject dataObject){
         if(dataObject != null) {
             siteDetail = new SiteDetail();
@@ -378,7 +376,9 @@ try {
         siteDetail.setCreatedAt(setCurrentDate());
         siteDetail.setIllumination(selectedItem1);
         siteDetail.setMediaType(selectedItem);
+        siteDetail.setVendorId(selectedVendor);
 
+        Log.d("tg33", selectedVendor);
 // Set the total area
         TextView tvTotalArea = findViewById(R.id.etTotalArea);
         siteDetail.setTotalArea(tvTotalArea.getText().toString());
@@ -410,7 +410,7 @@ try {
             int idValue = id != null ? id : 0; // Replace 0 with your default value
             siteDetailJson.put("id", idValue);
             siteDetailJson.put("campaign_id", campaignId);
-            siteDetailJson.put("vendor_id", selectedVendor);
+            siteDetailJson.put("vendor_id", siteDetail.getVendorId());
             siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
             siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
             siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
@@ -439,6 +439,7 @@ try {
             siteno= Integer.toString(siteDetail.getId());
             //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
 
+                Log.d("tag11", siteDetailJson.toString());
                 APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, selectedImage);
 
 
@@ -705,6 +706,32 @@ try {
         dialog.show();
     }
 
+    public void showUpdateSuccessMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.custom_emailsent, null);
+        TextView tvMsg = view.findViewById(R.id.tvMsg);
+        TextView tvResubmit = view.findViewById(R.id.tvResubmit);
+        tvResubmit.setVisibility(View.INVISIBLE);
+        if (editingsite == null || editingsite.isEmpty()) {
+            tvMsg.setText("Site Updated Successfully");
+        } else {
+            tvMsg.setText("Site Updated Successfully");
+        }
+
+        Button btnClose = view.findViewById(R.id.btnClose);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
     public void showCalendar(View view) {
         yy = cal.get(Calendar.YEAR);
         mm = cal.get(Calendar.MONTH);
@@ -782,11 +809,16 @@ try {
 
                             Log.d("tg9", "here");
 
-
                             if (jsonobj1.getString("message").equals("Site created successfully.")) {
                                 Log.d("tg9", "here1");
 
                                 showSuccessMessage();
+                                Log.d("tg9", "here2");
+
+                            }else if (jsonobj1.getString("message").equals("Site updated successfully.")) {
+                                Log.d("tg9", "here1");
+
+                                showUpdateSuccessMessage();
                                 Log.d("tg9", "here2");
 
                             } else {
@@ -879,7 +911,21 @@ try {
             }
         });
 
+// Get the existing adapter
+        ArrayAdapter<String> vendorAdapter = (ArrayAdapter<String>) binding.spinnervendor.getAdapter();
 
+        int position2 = -1;
+        for (int i = 0; i < vendorAdapter.getCount(); i++) {
+            if (vendorAdapter.getItem(i).equals(siteDetail.getVendorId())) {
+                position2 = i;
+                break;
+            }
+        }
+
+// Set the selection if the item is found
+        if (position2 != -1) {
+            binding.spinnervendor.setSelection(position2);
+        }
     }
 
     public void showFailureMessage() {

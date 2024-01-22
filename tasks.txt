@@ -1,6 +1,6 @@
 >Ship
 
-add vendor_id spinner in addsitedetails
+add vendor_id spinner in addsitedetails- emailed
 
 make new content and test everything especially client login> campaigns
 
