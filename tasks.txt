@@ -1,6 +1,6 @@
 >Ship
 
-new client. makecampaign. open campaign
+new client. makecampaign. open campaign. error- emailed
 
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
