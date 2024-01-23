@@ -1,5 +1,7 @@
 >Ship
 
+new client. makecampaign. open campaign
+
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 
