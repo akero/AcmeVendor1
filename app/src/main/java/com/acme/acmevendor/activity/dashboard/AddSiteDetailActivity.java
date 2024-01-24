@@ -324,132 +324,146 @@ try {
     int queryType;
     public void btnSaveClick(View view) {
 
+            if(binding.etSiteName.getText().toString().equals("")||
+               binding.etSiteNo.getText().toString().equals("")||
+               binding.etStartDate.getText().toString().equals("")||
+               binding.etEndDate.getText().toString().equals("")||
+               binding.etLocation.getText().toString().equals("")||
+               binding.etLatitude.getText().toString().equals("")||
+               binding.etLongitude.getText().toString().equals("")||
+               binding.etHeight.getText().toString().equals("")||
+               binding.etWidth.getText().toString().equals("")||
+               binding.etTotalArea.getText().toString().equals("")
+            ) {
+                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+        } else {
+                //Log.d("fck", binding.etTotalArea.getText());
 // Create a SiteDetail object
-        //siteDetail = new SiteDetail();
+            //siteDetail = new SiteDetail();
 
 // Set the site number
-        TextView tvSiteId = findViewById(R.id.etSiteNo);
-        siteDetail.setSiteNo(tvSiteId.getText().toString()!= null? tvSiteId.getText().toString():"");
+            TextView tvSiteId = findViewById(R.id.etSiteNo);
+            siteDetail.setSiteNo(tvSiteId.getText().toString() != null ? tvSiteId.getText().toString() : "");
 
 // Set the location
-        TextView tvLocation = findViewById(R.id.etLocation);
-        siteDetail.setLocation(tvLocation.getText().toString());
+            TextView tvLocation = findViewById(R.id.etLocation);
+            siteDetail.setLocation(tvLocation.getText().toString());
 
-        try {
-            siteDetail.setVendorId(vendorId);
-        }catch (Exception e){
-            e.printStackTrace();//siteDetail.setCampaignId(campaignId);
-        }
+            try {
+                siteDetail.setVendorId(vendorId);
+            } catch (Exception e) {
+                e.printStackTrace();//siteDetail.setCampaignId(campaignId);
+            }
 
 // Set the site name
-        TextView tvSiteName = findViewById(R.id.etSiteName);
-        siteDetail.setName(tvSiteName.getText().toString());
+            TextView tvSiteName = findViewById(R.id.etSiteName);
+            siteDetail.setName(tvSiteName.getText().toString());
 
 // Set the start date
-        TextView tvLastInspection = findViewById(R.id.etStartDate);
-        siteDetail.setStartDate(tvLastInspection.getText().toString());
+            TextView tvLastInspection = findViewById(R.id.etStartDate);
+            siteDetail.setStartDate(tvLastInspection.getText().toString());
 
-        // Set the end date
-        TextView tvEndDate = findViewById(R.id.etEndDate);
-        siteDetail.setEndDate(tvEndDate.getText().toString());
+            // Set the end date
+            TextView tvEndDate = findViewById(R.id.etEndDate);
+            siteDetail.setEndDate(tvEndDate.getText().toString());
 
 // Set the latitude
-        TextView tvLatitude = findViewById(R.id.etLatitude);
-        siteDetail.setLatitude(tvLatitude.getText().toString());
+            TextView tvLatitude = findViewById(R.id.etLatitude);
+            siteDetail.setLatitude(tvLatitude.getText().toString());
 
 // Set the longitude (correct the typo from "longitute" to "longitude" in your JSON or code)
-        TextView tvLongitude = findViewById(R.id.etLongitude);
-        siteDetail.setLongitude(tvLongitude.getText().toString());
+            TextView tvLongitude = findViewById(R.id.etLongitude);
+            siteDetail.setLongitude(tvLongitude.getText().toString());
 
 // Set the start date
-        TextView tvStartDate = findViewById(R.id.etStartDate);
-        siteDetail.setStartDate(tvStartDate.getText().toString());
+            TextView tvStartDate = findViewById(R.id.etStartDate);
+            siteDetail.setStartDate(tvStartDate.getText().toString());
 
 // Set the width
-        TextView tvWidth = findViewById(R.id.etWidth);
-        siteDetail.setWidth(tvWidth.getText().toString());
+            TextView tvWidth = findViewById(R.id.etWidth);
+            siteDetail.setWidth(tvWidth.getText().toString());
 
 // Set the height
-        TextView tvHeight = findViewById(R.id.etHeight);
-        siteDetail.setHeight(tvHeight.getText().toString());
+            TextView tvHeight = findViewById(R.id.etHeight);
+            siteDetail.setHeight(tvHeight.getText().toString());
 //Set created at
-        siteDetail.setCreatedAt(setCurrentDate());
-        siteDetail.setIllumination(selectedItem1);
-        siteDetail.setMediaType(selectedItem);
-        siteDetail.setVendorId(selectedVendor);
+            siteDetail.setCreatedAt(setCurrentDate());
+            siteDetail.setIllumination(selectedItem1);
+            siteDetail.setMediaType(selectedItem);
+            siteDetail.setVendorId(selectedVendor);
 
-        Log.d("tg33", selectedVendor);
+            Log.d("tg33", selectedVendor);
 // Set the total area
-        TextView tvTotalArea = findViewById(R.id.etTotalArea);
-        siteDetail.setTotalArea(tvTotalArea.getText().toString());
+            TextView tvTotalArea = findViewById(R.id.etTotalArea);
+            siteDetail.setTotalArea(tvTotalArea.getText().toString());
 
-        Log.d("AddSiteDetailLog1",
-                "ID: " + siteDetail.getId() +
-                        ", Vendor ID: " + siteDetail.getVendorId() +
-                        ", Location: " + siteDetail.getLocation() +
-                        ", Created At: " + siteDetail.getCreatedAt() +
-                        ", End Date: " + siteDetail.getEndDate() +
-                        ", Latitude: " + siteDetail.getLatitude() +
-                        ", Longitude: " + siteDetail.getLongitude() +
-                        ", Media Type: " + siteDetail.getMediaType() +
-                        ", Illumination: " + siteDetail.getIllumination() +
-                        ", Start Date: " + siteDetail.getStartDate() +
-                        ", Name: " + siteDetail.getName() +
-                        ", Site No: " + siteDetail.getSiteNo() +
-                        ", Width: " + siteDetail.getWidth() +
-                        ", Height: " + siteDetail.getHeight() +
-                        ", Total Area: " + siteDetail.getTotalArea() +
-                        ", Updated At: " + siteDetail.getUpdatedAt());
+            Log.d("AddSiteDetailLog1",
+                    "ID: " + siteDetail.getId() +
+                            ", Vendor ID: " + siteDetail.getVendorId() +
+                            ", Location: " + siteDetail.getLocation() +
+                            ", Created At: " + siteDetail.getCreatedAt() +
+                            ", End Date: " + siteDetail.getEndDate() +
+                            ", Latitude: " + siteDetail.getLatitude() +
+                            ", Longitude: " + siteDetail.getLongitude() +
+                            ", Media Type: " + siteDetail.getMediaType() +
+                            ", Illumination: " + siteDetail.getIllumination() +
+                            ", Start Date: " + siteDetail.getStartDate() +
+                            ", Name: " + siteDetail.getName() +
+                            ", Site No: " + siteDetail.getSiteNo() +
+                            ", Width: " + siteDetail.getWidth() +
+                            ", Height: " + siteDetail.getHeight() +
+                            ", Total Area: " + siteDetail.getTotalArea() +
+                            ", Updated At: " + siteDetail.getUpdatedAt());
 
 // Now you have populated the SiteDetail object with data from the EditText views
 
 // Create a JSON object from the SiteDetail object
-        JSONObject siteDetailJson = new JSONObject();
-        try {
-            Integer id = siteDetail.getId(); // Assuming getId() returns an Integer
-            int idValue = id != null ? id : 0; // Replace 0 with your default value
-            siteDetailJson.put("id", idValue);
-            siteDetailJson.put("campaign_id", campaignId);
-            siteDetailJson.put("vendor_id", siteDetail.getVendorId());
-            siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
-            siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
-            siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
-            siteDetailJson.put("latitude", siteDetail.getLatitude() != null ? siteDetail.getLatitude() : "");
-            siteDetailJson.put("longitute", siteDetail.getLongitude() != null ? siteDetail.getLongitude() : "");
-            siteDetailJson.put("media_type", siteDetail.getMediaType() != null ? siteDetail.getMediaType() : "");
-            siteDetailJson.put("illumination", siteDetail.getIllumination() != null ? siteDetail.getIllumination() : "");
-            siteDetailJson.put("start_date", siteDetail.getStartDate() != null ? siteDetail.getStartDate() : "");
-            siteDetailJson.put("name", siteDetail.getName() != null ? siteDetail.getName() : "");
-            siteDetailJson.put("site_no", siteDetail.getSiteNo() != null ? siteDetail.getSiteNo() : "");
-            siteDetailJson.put("width", siteDetail.getWidth() != null ? siteDetail.getWidth() : "");
-            siteDetailJson.put("height", siteDetail.getHeight() != null ? siteDetail.getHeight() : "");
-            siteDetailJson.put("total_area", siteDetail.getTotalArea() != null ? siteDetail.getTotalArea() : "");
-            siteDetailJson.put("updated_at", siteDetail.getUpdatedAt() != null ? siteDetail.getUpdatedAt() : "");
+            JSONObject siteDetailJson = new JSONObject();
+            try {
+                Integer id = siteDetail.getId(); // Assuming getId() returns an Integer
+                int idValue = id != null ? id : 0; // Replace 0 with your default value
+                siteDetailJson.put("id", idValue);
+                siteDetailJson.put("campaign_id", campaignId);
+                siteDetailJson.put("vendor_id", siteDetail.getVendorId());
+                siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
+                siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
+                siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
+                siteDetailJson.put("latitude", siteDetail.getLatitude() != null ? siteDetail.getLatitude() : "");
+                siteDetailJson.put("longitute", siteDetail.getLongitude() != null ? siteDetail.getLongitude() : "");
+                siteDetailJson.put("media_type", siteDetail.getMediaType() != null ? siteDetail.getMediaType() : "");
+                siteDetailJson.put("illumination", siteDetail.getIllumination() != null ? siteDetail.getIllumination() : "");
+                siteDetailJson.put("start_date", siteDetail.getStartDate() != null ? siteDetail.getStartDate() : "");
+                siteDetailJson.put("name", siteDetail.getName() != null ? siteDetail.getName() : "");
+                siteDetailJson.put("site_no", siteDetail.getSiteNo() != null ? siteDetail.getSiteNo() : "");
+                siteDetailJson.put("width", siteDetail.getWidth() != null ? siteDetail.getWidth() : "");
+                siteDetailJson.put("height", siteDetail.getHeight() != null ? siteDetail.getHeight() : "");
+                siteDetailJson.put("total_area", siteDetail.getTotalArea() != null ? siteDetail.getTotalArea() : "");
+                siteDetailJson.put("updated_at", siteDetail.getUpdatedAt() != null ? siteDetail.getUpdatedAt() : "");
 
-            Log.d("tg77", siteDetailJson.toString());
+                Log.d("tg77", siteDetailJson.toString());
 
-            // Add more properties as needed
-        } catch (JSONException e) {
-            Log.d("tg9", e.toString());
-            e.printStackTrace();
-        }
+                // Add more properties as needed
+            } catch (JSONException e) {
+                Log.d("tg9", e.toString());
+                e.printStackTrace();
+            }
 
-        if(editingsite!= null && editingsite.equals("yes")){
-            queryType= 2; //PUT
-            siteno= Integer.toString(siteDetail.getId());
-            //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
+            if (editingsite != null && editingsite.equals("yes")) {
+                queryType = 2; //PUT
+                siteno = Integer.toString(siteDetail.getId());
+                //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
 
                 Log.d("tag11", siteDetailJson.toString());
-                APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, selectedImage);
+                APIreferenceclass api = new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(), siteno, selectedImage);
 
 
-        }
-        else{
-            //here make new call to add site
-            queryType= 1; //POST
-            siteno= siteDetail.getSiteNo();
-            //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
-            APIreferenceclass api= new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(),siteno, selectedImage, 1);
+            } else {
+                //here make new call to add site
+                queryType = 1; //POST
+                siteno = siteDetail.getSiteNo();
+                //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
+                APIreferenceclass api = new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(), siteno, selectedImage, 1);
+            }
         }
     }
 
