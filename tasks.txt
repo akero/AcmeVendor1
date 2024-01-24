@@ -23,7 +23,7 @@ check other spinners for edit
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
 
->remove placeholders from edit site
+>remove placeholders from edit site- emailed on 24 jan
 check other areas for placeholders
 
 After all done-

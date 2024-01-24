@@ -201,7 +201,7 @@
                                 android:id="@+id/totalsites"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="005"
+                                android:text="000"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/dmsansregular"
                                 android:textColor="#0084ED"

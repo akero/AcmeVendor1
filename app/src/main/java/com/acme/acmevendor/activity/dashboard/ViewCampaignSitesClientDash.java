@@ -190,7 +190,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                     progressBar.setVisibility(View.GONE);
                     //animation code
                 try{
-                    binding.clientid.setText(Integer.toString(jsonResponse.getInt("client_id")));
+                    binding.clientid.setText(jsonResponse.getString("client_id"));
                     binding.clientname.setText(jsonResponse.getString("client_name"));
                     binding.campaign.setText(jsonResponse.getString("campaign_name"));
                     binding.totalsites.setText(jsonResponse.getString("site_count"));
