@@ -137,6 +137,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
     String name;
     String token;
+    String userid;
     String loginType;
     int clientid, vendorid;
 
@@ -145,6 +146,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         Log.d("tg4","otp response works" +response);
         clientid= 0;
         vendorid= 0;
+        userid="";
 
         try {
         JSONObject jsonObject = new JSONObject(response);
@@ -152,6 +154,8 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         if(jsonObject.getBoolean("success")== true){
             name= jsonObject1.getString("name");
             token= jsonObject1.getString("token");
+            userid= jsonObject1.getString("id");
+
             loginType= jsonObject1.getString("type");
             if(loginType.equals("client")){
                 clientid= jsonObject1.getInt("id");
@@ -163,6 +167,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             Log.d("tg4", loginType);
 
             boolean success = FileHelper.writeLoginToken(this, token);
+            boolean success1 = FileHelper.writeUserId(this, userid);
 
 
             if(loginType.equals("admin")){

@@ -34,10 +34,12 @@ import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
+import java.util.Optional;
 
 public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
@@ -47,6 +49,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
     String selectedItem1;
     String selectedClient;
     String selectedVendor;
+    String mediatype, illumination, vendor_id, client_id, vendor, client;
     private UploadHelper uploadHelper;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
@@ -62,6 +65,12 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_campaign);
 
+        mediatype= "";
+        illumination= "";
+        vendor_id= "";
+        client_id= "";
+        vendor= "";
+        client= "";
         id= 0;
         save= 0;
         campaignItem= "";
@@ -77,6 +86,8 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         ctxt= this;
         logintoken= getIntent().getStringExtra("logintoken");
         campaignItem= getIntent().getStringExtra("campaignItem");
+        Log.d("campaignitem",  campaignItem);
+
 
         try {
             JSONObject jsonobj = new JSONObject(campaignItem);
@@ -86,7 +97,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             e.printStackTrace();
         }
 
-        Log.d("whichclass", "editCampaignDetails");
+        Log.d("whichclass", "editCampaign");
         Log.d("tg95", campaignItem);
 
         binding.etStartDate.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +170,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             }
         });
 
-//spinner code
+        //spinner code
         String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -225,9 +236,6 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         }catch(Exception e){
             Log.d("tg343", e.toString());
         }
-
-
-
     }
 
     int callap;
@@ -286,13 +294,17 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                 JSONObject j= a.getJSONObject("data");
                 Log.d("qwer", j.toString());
 
-                jsonPayload.put("uid", j.optString("uid"));
-                jsonPayload.put("user_id", j.optString("user_id"));
+
+                Log.d("ijk", jsonPayload.getString("user_id"));
                 jsonPayload.put("media_type", mediatype);
                 jsonPayload.put("illumination", illumination);
 
+                FileHelper fh= new FileHelper();
+                jsonPayload.put("uid", id);
+                jsonPayload.put("user_id", fh.readUserId(this));
+
             }catch(Exception e){
-                Log.d("tg6", e.toString());
+                Log.d("tg66", e.toString());
             }
 
             try {
@@ -336,6 +348,19 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         binding.spinnermediatype1.setAdapter(adapter2);
+
+        for(int i=0; i< jsonArray.length(); i++){
+            try {
+                JSONObject json1= jsonArray.getJSONObject(i);
+                if(json1.optString("id").equals(client_id)){
+                    Log.d("client", json1.optString("id")+ " "+ i);
+                    binding.spinnermediatype1.setSelection(i);
+                }
+            } catch (JSONException e) {
+                Log.d("client", e.toString());
+
+            }
+        }
 
         // Inside your onCreate method
         binding.spinnermediatype1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -466,10 +491,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         latestresponse= response;
         JSONObject jsono= null;
         try {
-
             jsono = new JSONObject(response);
-
-
 
         if(save== 1){
         try {
@@ -507,13 +529,13 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             });}catch(Exception e){
             Log.d("tag123", e.toString());
 
-        }
+            }
         }
         else if(callap== 1){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("tg9", response);
+                    Log.d("tg99", response);
                     callap= 0;
                     implementUI(response);
 
@@ -560,6 +582,13 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             binding.etnumsites.setText(jsonobj.optString("num_of_site"));
             //binding.etclientid.setText(jsonobj.optString("client_id"));
             //TODO add illumination and mediatype and image
+
+            mediatype= jsonobj.optString("media_type");
+            illumination= jsonobj.optString("illumination");
+            client_id= jsonobj.optString("client_id");
+            vendor_id= jsonobj.optString("vendor");
+
+
 
         }catch(Exception e){
             Log.d("tg92", e.toString());

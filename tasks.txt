@@ -1,10 +1,13 @@
 >Ship
 
->editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- add uid (id of campaign) and user_id (id of user who made campaign) - line 289
-
-
-
+editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- add uid (id of campaign) and user_id (id of user who made campaign) - line 289- emailed
+https://acme.warburttons.com/api/clients/72
+type for this is "vendor" yet its showing up in get clients api call.
+Its not present in all clients api call (https://acme.warburttons.com/api/clients)
+Vendors are not also clients right so https://acme.warburttons.com/api/clients/72 should not return anything.
 new client. makecampaign. open campaign. error- emailed
+vendor dropdown not showing, sometimes client not show
+
 
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
