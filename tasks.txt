@@ -1,5 +1,9 @@
 >Ship
 
+>editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- add uid (id of campaign) and user_id (id of user who made campaign) - line 289
+
+
+
 new client. makecampaign. open campaign. error- emailed
 
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
@@ -19,9 +23,9 @@ see which class
 change in api call and check if it works
 
 
->editcampaigndetails put correct spinner location all spinners
+editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
-editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- msged
+
 
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
