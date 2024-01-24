@@ -1,39 +1,29 @@
 >Ship
 
-editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- add uid (id of campaign) and user_id (id of user who made campaign) - line 289- emailed
+editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- add uid (id of campaign) and user_id (id of user who made campaign) - line 289- emailed- fixed, test when rest of class is fixed
 https://acme.warburttons.com/api/clients/72
 type for this is "vendor" yet its showing up in get clients api call.
 Its not present in all clients api call (https://acme.warburttons.com/api/clients)
-Vendors are not also clients right so https://acme.warburttons.com/api/clients/72 should not return anything.
+Vendors are not also clients right so https://acme.warburttons.com/api/clients/72 should not return anything.- emailed
 new client. makecampaign. open campaign. error- emailed
 vendor dropdown not showing, sometimes client not show
-
 
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 
 make new content and test everything especially client login> campaigns
 
-add campaign details- fix spinner height
+add campaign- remove uid when backend dev finishes- line 255- emailed (think it already works)
 
 logo in headers
-
-client dashboard, campaigns added are showing as old-
-
-change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also. - emailed
-pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
-see which class
-change in api call and check if it works
-
 
 editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
 
-
 when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
 when adding site the media type and illumination are entered as placeholder_media_type
 
-remove placeholders from edit site
+>remove placeholders from edit site
 check other areas for placeholders
 
 After all done-
@@ -46,8 +36,14 @@ check all todos
 test
 test on phone ask the monkes
 add icons to dropdown
->dropdown for client in addcampaigndetails size fix
 
+//client dashboard, campaigns added are showing as old
+//change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also
+//pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
+//see which class
+//change in api call and check if it works
+//dropdown for client in addcampaigndetails size fix
+//add campaign details- fix spinner height
 //add site- What is site_no in this? "id" is id so what's site_no. Number of sites?- emailed
 //vendor login need to add ui changes
 //vendor remove edit and add

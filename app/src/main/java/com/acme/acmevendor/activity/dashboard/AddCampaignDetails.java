@@ -37,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.Calendar;
 
 public class AddCampaignDetails extends AppCompatActivity implements ApiInterface {
@@ -96,7 +97,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our text view.
                                 Log.d("date", year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
-                                binding.etStartDate.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                                binding.etStartDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                                 Log.d("date", String.valueOf(binding.etStartDate.getText()));
 
 
@@ -248,10 +249,13 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 //TODO fix both
 
                 //TODO fill below 2 with correct values
-                jsonPayload.put("uid", 1);
-                jsonPayload.put("user_id", 5);
+
                 jsonPayload.put("media_type", mediatype);
                 jsonPayload.put("illumination", illumination);
+                jsonPayload.put("uid", 1);
+
+                FileHelper fh= new FileHelper();
+                jsonPayload.put("user_id", fh.readUserId(this));
 
             }catch(Exception e){
                 Log.d("tg6", e.toString());
