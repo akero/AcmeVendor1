@@ -14,13 +14,10 @@ make new content and test everything especially client login> campaigns
 
 add campaign- remove uid when backend dev finishes- line 255- emailed (think it already works)
 
-logo in headers
+logo in headers- can skip
 
 editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
-
->when adding site and not all data is entered put toast that check fields, works if image not there, total area theres no error shown because error message is an error
-when adding site the media type and illumination are entered as placeholder_media_type
 
 remove placeholders from edit site- emailed on 24 jan
 check other areas for placeholders
@@ -32,6 +29,8 @@ check all todos
 test
 test on phone ask the monkes
 
+//when adding site and not all data is entered put toast that check fields, works if //image not there, total area theres no error shown because error message is an error
+//when adding site the media type and illumination are entered as placeholder_media_type
 //fetch correct campaignlist for client login
 //implement add image- on line 192 appcampdet
 //vendor dropdown not showing, sometimes client not show
