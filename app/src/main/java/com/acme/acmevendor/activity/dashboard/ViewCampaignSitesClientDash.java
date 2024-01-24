@@ -193,6 +193,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                     binding.clientid.setText(jsonResponse.getString("client_id"));
                     binding.clientname.setText(jsonResponse.getString("client_name"));
                     binding.campaign.setText(jsonResponse.getString("campaign_name"));
+                    binding.title.setText(jsonResponse.getString("campaign_name"));
                     binding.totalsites.setText(jsonResponse.getString("site_count"));
 
                 }catch (Exception e){
