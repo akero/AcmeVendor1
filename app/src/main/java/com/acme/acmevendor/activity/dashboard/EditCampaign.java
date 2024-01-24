@@ -423,19 +423,13 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             for(int i=0; i<jsonArray1.length(); i++){
                 JSONObject json1= jsonArray1.getJSONObject(i);
                 items2[i]= json1.optString("name");
-
-
                 //TODO make a double array and store ids along with names
-
             }
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
 
         final String[] items3= items2;
-
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         binding.spinnervendor.setAdapter(adapter2);
 
@@ -443,11 +437,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         binding.spinnervendor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
-
-
-
                 selectedVendor = parent.getItemAtPosition(position).toString();
 
                 try {
@@ -464,10 +454,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
-
                 Log.d("tg92", "selectedVendor"+ selectedVendor);
-
 
                 //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
             }
@@ -531,18 +518,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
             }
         }
-        else if(callap== 1){
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d("tg99", response);
-                    callap= 0;
-                    implementUI(response);
-
-                }
-            });
-
-        }else if(jsono.getString("message").equals("Vendors retrieved successfully.")){
+        else if(jsono.getString("message").equals("Vendors retrieved successfully.")){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() { vendorlist(response);
@@ -559,6 +535,17 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                         }
                     });
                 }
+        else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("tg99", response);
+                    callap= 0;
+                    implementUI(response);
+
+                }
+            });
+        }
         }catch (Exception e){
             e.printStackTrace();
         }

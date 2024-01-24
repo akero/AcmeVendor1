@@ -29,6 +29,7 @@
                 android:onClick="onNotificationClick"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:visibility="gone"
                 android:src="@drawable/ic_notification" />
         </RelativeLayout>
 

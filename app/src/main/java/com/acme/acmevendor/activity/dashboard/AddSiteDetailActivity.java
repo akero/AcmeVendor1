@@ -916,15 +916,18 @@ try {
 //        ArrayAdapter<String> vendorAdapter = (ArrayAdapter<String>) binding.spinnervendor.getAdapter();
 
         int position2 = -1;
+        try{
         for (int i = 0; i < adapter2.getCount(); i++) {
-            Log.d("position2", Integer.toString(position2));
-            Log.d("position2", siteDetail.getVendorId());
-            Log.d("position2", adapter2.getItem(i));
+            //Log.d("position2", Integer.toString(position2));
+            //Log.d("position2", siteDetail.getVendorId());
+            //Log.d("position2", adapter2.getItem(i));
 
             if (adapter2.getItem(i).equals(vendorName)) {
                 position2 = i;
                 break;
             }
+        }}catch(Exception e){
+            Log.d("tg333", e.toString());
         }
 
 // Set the selection if the item is found

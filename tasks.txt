@@ -6,7 +6,6 @@ type for this is "vendor" yet its showing up in get clients api call.
 Its not present in all clients api call (https://acme.warburttons.com/api/clients)
 Vendors are not also clients right so https://acme.warburttons.com/api/clients/72 should not return anything.- emailed
 new client. makecampaign. open campaign. error- emailed
-vendor dropdown not showing, sometimes client not show
 
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
@@ -31,12 +30,13 @@ fetch correct campaignlist for client login
 ask what mediatype and illumination are- placeholders- ask what real data is
 remove null from all image uploads
 implement add image- on line 192 appcampdet
-notification icon- remove it
 check all todos
 test
 test on phone ask the monkes
-add icons to dropdown
 
+//vendor dropdown not showing, sometimes client not show
+//notification icon- remove it
+//add icons to dropdown
 //client dashboard, campaigns added are showing as old
 //change date type When creating campaign for a client, the campaign type is automatically assigned as old. Fix this also
 //pls use start date and end date format like 2024-01-17 bcoz od date format you are not getting correct data
