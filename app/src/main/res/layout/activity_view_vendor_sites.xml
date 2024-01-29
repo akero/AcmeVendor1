@@ -52,7 +52,7 @@
             android:fontFamily="@font/dmsansregular"
             android:layout_below="@id/topBar"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginLeft="16dp"
             android:text="All Sites"
             android:textColor="@color/black"
             android:textSize="24sp" />
@@ -63,6 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvCampaign"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+
             android:layout_marginBottom="@dimen/_5sdp"
             >
 

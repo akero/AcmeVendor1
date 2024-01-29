@@ -44,6 +44,7 @@ import java.util.Optional;
 public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
     private ActivityEditCampaignBinding binding;
+    String user_id;
     String siteNumber;
     String selectedItem;
     String selectedItem1;
@@ -92,6 +93,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         try {
             JSONObject jsonobj = new JSONObject(campaignItem);
             id= jsonobj.getInt("id");
+            Log.d("campaign", Integer.toString(id));
 
         }catch(Exception e){
             e.printStackTrace();
@@ -224,6 +226,7 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
 
         Context ctxt= this;
         try {
+            user_id= fh.readUserId(this);
             //clientspinnerboolean= 1;
             APIreferenceclass api = new APIreferenceclass(ctxt, fh.readLoginToken(this));
         }catch(Exception e){
@@ -290,21 +293,21 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
                 //jsonPayload.put("image", imageStream);
 
 
-                JSONObject a= new JSONObject(latestresponse);
-                JSONObject j= a.getJSONObject("data");
-                Log.d("qwer", j.toString());
+                //JSONObject a= new JSONObject(latestresponse);
+                //JSONObject j= a.getJSONObject("data");
+                //Log.d("qwer", j.toString());
 
 
-                Log.d("ijk", jsonPayload.getString("user_id"));
+                //Log.d("ijk", jsonPayload.getString("user_id"));
                 jsonPayload.put("media_type", mediatype);
                 jsonPayload.put("illumination", illumination);
 
                 FileHelper fh= new FileHelper();
                 jsonPayload.put("uid", id);
-                jsonPayload.put("user_id", fh.readUserId(this));
+                jsonPayload.put("user_id", user_id);
 
             }catch(Exception e){
-                Log.d("tg66", e.toString());
+                e.printStackTrace();
             }
 
             try {
@@ -314,7 +317,8 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
             }
 
             Log.d("jsonpayloaeditcampaign", jsonPayload.toString());
-            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage, campaignId);
+            Log.d("jsonpayloaeditcampaign", Integer.toString(campaignId));
+            APIreferenceclass api= new APIreferenceclass(jsonPayload, this, logintoken, selectedImage, id);
             selectedImage= null;
         }
     }
