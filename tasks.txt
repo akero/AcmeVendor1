@@ -23,6 +23,7 @@ remove placeholders from edit site- emailed on 24 jan
 check other areas for placeholders
 
 After all done-
+fix up ui
 ask what mediatype and illumination are- placeholders- ask what real data is
 remove null from all image uploads
 check all todos
