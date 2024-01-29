@@ -7,10 +7,6 @@ campaign-
 //add site- working
 /edit site- name not updating- emailed
 
-//vendor
-//working
->fix up ui
-
 https://acme.warburttons.com/api/clients/72
 type for this is "vendor" yet its showing up in get clients api call.
 Its not present in all clients api call (https://acme.warburttons.com/api/clients)
@@ -20,25 +16,25 @@ new client. makecampaign. open campaign. error- emailed
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 
-logo in headers- can skip
-
 editcampaigndetails put correct spinner location all spinners
 check other spinners for edit
 
-//remove placeholders from edit site- emailed on 24 jan
-//check other areas for placeholders
-
 After all done-
->fix up ui
 ask what mediatype and illumination are- placeholders- ask what real data is- emailed
-remove null from all image uploads
 >check all todos
 test
 test on phone ask the monkes
 
->client
+//remove null from all image uploads
+//fix up ui
+//client
 //working
-
+//vendor
+//working
+//fix up ui
+//logo in headers- can skip
+//remove placeholders from edit site- emailed on 24 jan
+//check other areas for placeholders
 //make new content and test everything especially client login> campaigns
 //add campaign- remove uid when backend dev finishes- line 255- emailed (think it already works)
 //editcampaigndetails when editing and pressing save response is {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}- add uid (id of campaign) and user_id (id of user who made campaign) - line 289- emailed- fixed, test when rest of class is fixed
