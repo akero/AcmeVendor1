@@ -107,6 +107,8 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         progressBar.startAnimation(rotateAnimation);
         //animation code
 
+        Log.d("tg99", Integer.toString(clientId)+ vendorclientorcampaign);
+
         APIreferenceclass api= new APIreferenceclass(clientId, vendorclientorcampaign, loginToken, this);
     }
 

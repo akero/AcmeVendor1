@@ -166,7 +166,9 @@ public class APIreferenceclass {
     public APIreferenceclass(int clientId, int vendorclientorcampaign, String logintoken, Context context, int i) {
         String url="https://acme.warburttons.com/api/clients";
         querytype= 0;
-        url= url+"/"+clientId;
+        url= url+"/"+Integer.toString(clientId);
+
+        Log.d("tg99", url);
 
         String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
 
