@@ -1,30 +1,46 @@
 >Ship
 
-testing admin dashboard
-campaign-
-//edit campaign- working
-//add campaign- working
-//add site- working
-/edit site- name not updating- emailed
 
-https://acme.warburttons.com/api/clients/72
-type for this is "vendor" yet its showing up in get clients api call.
-Its not present in all clients api call (https://acme.warburttons.com/api/clients)
-Vendors are not also clients right so https://acme.warburttons.com/api/clients/72 should not return anything.- emailed
-new client. makecampaign. open campaign. error- emailed
+image and latlong implement
+vendor- 
+add old/ new campaigns
+ui stuck on refreshing
+
+med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
+
+>new client. makecampaign. open campaign. error- emailed
 
 add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 
-editcampaigndetails put correct spinner location all spinners
-check other spinners for edit
-
 After all done-
-ask what mediatype and illumination are- placeholders- ask what real data is- emailed
->check all todos
+check all todos
 test
-test on phone ask the monkes
 
+
+//fix issues that were fixed in email
+//https://acme.warburttons.com/api/clients/72
+type for this is "vendor" yet its showing up in get clients api call.
+Its not present in all clients api call (https://acme.warburttons.com/api/clients)
+//Vendors are not also clients right so https://acme.warburttons.com/api/clients/72 should not return anything.- emailed
+//ask what mediatype and illumination are- placeholders- ask what real data is- emailed
+//testing admin dashboard
+//campaign
+//edit campaign- working
+//add campaign- working
+//add site- working
+//client- working
+//edit site- name not updating
+//editcampaign put correct spinner location all spinners
+check other spinners for edit
+//move boxes
+//uid is just any number use math random
+//- crud-campaign, PUT. When editing campaign from admin dashboard I get this error-
+ {"success":false,"message":"Validation Error.","data":{"uid":["The uid field is required."],"user_id":["The user id field is required."]}}
+can u just remove user_id and uid requirement for editing campaign
+//9- POST in https://acme.warburttons.com/api/campaigns
+This asks for a uid. But as we are creating a new campaign a campaign id does not exist yet. So please remove the requirement for uid and when a create campaign call is sent auto assign a new id for the campaign.- if it works skip
+//fix scaling
 //remove null from all image uploads
 //fix up ui
 //client

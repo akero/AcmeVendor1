@@ -77,6 +77,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             logintoken= getIntent().getExtras().getString("logintoken","");
             camefrom= getIntent().getExtras().getString("camefrom", "");
 
+            Log.d("tag1001", campaignType+" "+ campaignId+" "+ siteNumber+" "+ logintoken+" "+ camefrom);
+
             if(camefrom.equals("ClientDashBoardActivity")||camefrom.equals("ViewVendorSites")){
                 binding.btnNext.setVisibility(View.GONE);
             }
