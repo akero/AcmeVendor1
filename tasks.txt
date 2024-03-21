@@ -4,10 +4,6 @@ image and latlong implement
 
 notif to vendor to put image
 
-beautification
-
->admin dash site delete
-
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
 
 After all done-
@@ -16,6 +12,7 @@ test
 
 /new client. makecampaign. open campaign. error- emailed 
 /dots not visible in dash- client and vendor
+//check if delete is there
 //ui stuck on refreshing-
 //add the edits to ui
 //add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)

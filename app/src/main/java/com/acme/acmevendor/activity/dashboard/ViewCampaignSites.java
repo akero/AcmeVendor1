@@ -64,6 +64,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
         binding.rvCampaignList.setLayoutManager(layoutManager);
         Log.d("whichclass", "ViewCampaignSites");
 
+        showedit= true;
+
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);

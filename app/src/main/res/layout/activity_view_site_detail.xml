@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:layout_below="@id/tvAddSiteDetail"
                 android:src="@drawable/temp_campaign" />
 
