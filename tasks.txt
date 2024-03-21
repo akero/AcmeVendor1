@@ -2,10 +2,11 @@
 
 image and latlong implement
 
->vendor- 
-add old/ new campaigns
-ui stuck on refreshing
 notif to vendor to put image
+
+beautification
+
+>admin dash site delete
 
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
 
@@ -15,6 +16,8 @@ test
 
 /new client. makecampaign. open campaign. error- emailed 
 /dots not visible in dash- client and vendor
+//ui stuck on refreshing-
+//add the edits to ui
 //add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
 //addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 //fix issues that were fixed in email

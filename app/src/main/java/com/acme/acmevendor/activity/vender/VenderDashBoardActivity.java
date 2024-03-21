@@ -126,7 +126,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getString("status").equals("success")) {
-                JSONArray dataArray = jsonResponse.getJSONArray("data");
+                JSONArray dataArray = jsonResponse.getJSONArray("live_campaigns");
                 if(dataArray != null && dataArray.length() > 0) {
 
                         for (int i = 0; i < dataArray.length(); i++) {
@@ -170,7 +170,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                 public void run() {
                     // Your UI update code goes here
 
-                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 1);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, false);
 

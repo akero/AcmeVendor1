@@ -54,7 +54,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="16dp"
             android:text="All Sites"
-            android:textColor="@color/black"
+            android:textColor="#071116"
             android:textSize="24sp" />
 
 
