@@ -1,6 +1,7 @@
->Ship
+Ship
 
 image and latlong implement
+>line502 viewsitedetailactivity
 
 notif to vendor to put image
 

@@ -17,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,10 +29,12 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
+import com.acme.acmevendor.databinding.ActivityViewSiteDetailVendorBinding;
 import com.acme.acmevendor.utility.RoundRectCornerImageView;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.SiteDetail;
+import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -51,12 +54,15 @@ import java.net.URL;
 public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface {
 
     private String campaignType = "";
+    static final int REQUEST_TAKE_PHOTO = 1;
+
     private int position = 0;
     String siteNumber= "";
     String logintoken="";
     String campaignId="";
     String camefrom;
     private ActivityViewSiteDetailBinding binding;
+    private ActivityViewSiteDetailVendorBinding binding1;
 
     //TODO populate all fields. pass api call data from prev activity
     //have to pass logintoken and siteid
@@ -64,11 +70,6 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
-        camefrom= "";
-        Log.d("tag41", "1");
-        Log.d("whichclass", "ViewSiteDetailActivity");
-
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
             campaignId = getIntent().getExtras().getString("campaignId", "");
@@ -79,12 +80,29 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
             Log.d("tag1001", campaignType+" "+ campaignId+" "+ siteNumber+" "+ logintoken+" "+ camefrom);
 
-            if(camefrom.equals("ClientDashBoardActivity")||camefrom.equals("ViewVendorSites")){
+
+        if(!camefrom.equals("ViewVendorSites")){
+            binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
+        }else{
+            binding1 = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail_vendor);
+        }
+
+            if(camefrom.equals("ClientDashBoardActivity")){
                 binding.btnNext.setVisibility(View.GONE);
+            }
+
+            if(camefrom.equals("ViewVendorSites")){
+                binding1.btnNext.setVisibility(View.GONE);
             }
 
             Log.d("tg2", siteNumber);
         }
+
+        //= "";
+        Log.d("tag41", "1");
+        Log.d("whichclass", "ViewSiteDetailActivity");
+
+
 
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);
@@ -247,6 +265,19 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         }
 
         // Assigning values and listeners to Buttons
+
+        Button btnUpdatePhoto = findViewById(R.id.btnUpdatePhoto);
+        btnUpdatePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                }
+            }
+        });
+
+
             Button btnNext = findViewById(R.id.btnNext);
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -460,23 +491,15 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         super.onDestroy();
     }
 
-   /* @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            //Bundle extras = data.getExtras();
+            //Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Uri imageUri = data.getData();
+            APIreferenceclass api= new APIreferenceclass(imageUri);
 
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // permissions granted, continue with download
-                Log.d("tag45","7");
-                View v = null;
-                onDownloadClick(v);
-            } else {
-                Log.d("tag45","8");
-
-                // permissions denied, show a message to the user
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
         }
     }
-*/
 }

@@ -249,6 +249,14 @@ public class APIreferenceclass {
 
     }
 
+
+    //TAKE THE FUCKING PHOTO
+    public APIreferenceclass(Uri selectedImage){
+
+
+
+    }
+
     //for viewcampaignsites
     public APIreferenceclass(String loginToken, Context context, String id){
 
