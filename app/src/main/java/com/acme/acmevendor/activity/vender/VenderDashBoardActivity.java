@@ -125,7 +125,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
             //jsonArray3= new JSONArray();
             String ids[];
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getBoolean("success")) {
+            if(jsonResponse.getString("status").equals("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
                 if(dataArray != null && dataArray.length() > 0) {
 
@@ -184,7 +184,10 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                     binding.rvCampaignList.setAdapter(adapter);
 
                 }});
-        }catch (Exception e){}
+        }catch (Exception e){
+            Log.d("tag21", e.toString());
+
+        }
     }
 
     private void campaignList() {
@@ -204,7 +207,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         //animation code
         progressBar.setVisibility(View.VISIBLE);
         progressBar.startAnimation(rotateAnimation);
-        //view.setVisibility(View.VISIBLE);
         //animation code
 
 //here

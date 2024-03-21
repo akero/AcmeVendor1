@@ -1,23 +1,22 @@
 >Ship
 
-
 image and latlong implement
-vendor- 
+
+>vendor- 
 add old/ new campaigns
 ui stuck on refreshing
+notif to vendor to put image
 
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
-
->new client. makecampaign. open campaign. error- emailed
-
-add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
-addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 
 After all done-
 check all todos
 test
 
-
+/new client. makecampaign. open campaign. error- emailed 
+/dots not visible in dash- client and vendor
+//add vendor_id spinner in addsitedetails- emailed (vendor id is not updating)
+//addsitedetailactivity when editing put correct position of spinners- emailed (vendor id is not updating)
 //fix issues that were fixed in email
 //https://acme.warburttons.com/api/clients/72
 type for this is "vendor" yet its showing up in get clients api call.
