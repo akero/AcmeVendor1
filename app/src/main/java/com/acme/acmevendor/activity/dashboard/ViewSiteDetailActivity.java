@@ -329,8 +329,9 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     public void onResponseReceived(String response){
 
         response1= response;
+        Log.d("tag41 response is", response);
         implementUI(response);
-        Log.d("tag41", response);
+
     }
 
     public void btnCloseClick(View view) {

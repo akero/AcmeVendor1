@@ -1,7 +1,9 @@
 Ship
 
 image and latlong implement
->line502 viewsitedetailactivity
+line502 viewsitedetailactivity
+
+Add new sites page. Url is campaignid/vendorid
 
 notif to vendor to put image
 
