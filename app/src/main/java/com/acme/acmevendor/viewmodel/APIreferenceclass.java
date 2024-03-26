@@ -201,6 +201,38 @@ public class APIreferenceclass {
             callapi(headers, jsonPayload, context, querytype, url);
         }
 
+    //admindashvendorsites- to get all campaigns for the vendor
+    public APIreferenceclass(String logintoken, Context context, String vendorid, boolean a){
+        querytype= 0;
+        String url="https://acme.warburttons.com/api/get_admin_vendor_campaigns/"+vendorid;
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+        callapi(headers, jsonPayload, context, querytype, url);
+
+    }
+
+    //admindashvendorsites- to get all sites for a campaign
+    public APIreferenceclass(String logintoken, Context context, String url1, boolean a, boolean b){
+        querytype= 0;
+        String url=url1;
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+        callapi(headers, jsonPayload, context, querytype, url);
+
+    }
+
     //TODO endpoint for otp get when this person gets his email
     //login
     public APIreferenceclass(int vendorclientorcampaign, Context context, String email) {

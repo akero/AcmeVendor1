@@ -521,19 +521,20 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
             }else if(vendorclientorcampaign==2){//vendor
 
                 JSONObject jsonObject1 = jsonArray3.getJSONObject(position);
-                //Log.d("tag91", jsonArray2.getJSONObject(position).toString());
-                //Log.d("tag91",jsonArray2.toString());
-                //Log.d("tag91",jsonObject1.toString());
-                //Log.d("tag91",Integer.toString(position));
 
-                startActivity(new Intent(this, AdminViewVendorDetails.class)
+                startActivity(new Intent(this, AdminDashVendorSites.class)
+                        .putExtra("id", id)
+                        .putExtra("logintoken", logintoken)
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                        .putExtra("jsonArray", jsonObject1.toString())
+                );
+
+               /* startActivity(new Intent(this, AdminViewVendorDetails.class)
                         .putExtra("id", id)
                         .putExtra("logintoken", logintoken)
                         .putExtra("vendorclientorcampaign", vendorclientorcampaign)
                         .putExtra("jsonArray", jsonObject1.toString()));
-                //jsonObject1= new JSONObject();
-                //jsonArray2= new JSONArray();
-            }
+                */}
 
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {

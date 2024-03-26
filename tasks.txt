@@ -3,7 +3,12 @@ Ship
 image and latlong implement
 line502 viewsitedetailactivity
 
-Add new sites page. Url is campaignid/vendorid
+>Add new sites page. Url is campaignid/vendorid
+//https://acme.warburttons.com/api/get_admin_vendor_campaigns/+ vendor id to get campaignids
+//get sites for all campaigns and 
+>show
+
+line525 admindash relink commented code
 
 notif to vendor to put image
 
