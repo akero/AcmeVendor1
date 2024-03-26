@@ -364,11 +364,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
         // Context should be your activity or fragment context
         Log.d("tg98", Integer.toString(position));
         PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
-        if(vendorclientorcampaign== 0|| vendorclientorcampaign==1) {
+        if(vendorclientorcampaign== 0|| vendorclientorcampaign==1|| vendorclientorcampaign==2) {
             popup.getMenuInflater().inflate(R.menu.popup_menu_campaign, popup.getMenu()); // Inflate your menu resource
-
-        }else{
-            popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
 
         }
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -458,6 +455,28 @@ public class AdminDashboardActivity extends AppCompatActivity implements ApiInte
                             intent.putExtra("logintoken", logintoken);
                             intent.putExtra("response", campaignItem.toString());
                             startActivity(intent);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        //APIreferenceclass api= new APIreferenceclass(campaignItem, vendorclientorcampaign, logintoken, ctxt);
+                        return true;
+                    }
+                else if(vendorclientorcampaign==2){
+                        JSONObject campaignItem = null;
+Log.d("tag41", "click detected");
+                        try {
+                            RecyclerView recyclerView = findViewById(R.id.rvCampaignList);
+                            CampaignListAdapter campaignAdapter = (CampaignListAdapter) recyclerView.getAdapter();
+                            campaignItem = campaignAdapter.jsonArray.getJSONObject(position);
+
+                            startActivity(new Intent(AdminDashboardActivity.this, AdminViewVendorDetails.class)
+                                    //.putExtra("id", id)
+                                    .putExtra("campaignItem", campaignItem.toString())
+                                    .putExtra("logintoken", logintoken)
+                                    .putExtra("vendorclientorcampaign", vendorclientorcampaign));
+                                    //.putExtra("jsonArray", jsonObject1.toString()));
 
                         } catch (Exception e) {
                             e.printStackTrace();

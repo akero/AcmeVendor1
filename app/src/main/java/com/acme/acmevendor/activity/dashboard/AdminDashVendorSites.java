@@ -70,7 +70,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_dash_vendor_sites);
             GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
             binding.rvCampaignList.setLayoutManager(layoutManager);
-            Log.d("whichclass", "ViewCampaignSites");
+            Log.d("whichclass", "AdminDashVendorSites");
             gettingcampaignids= false;
             lastsitecall= false;
             sitearray= new JSONArray();
@@ -104,6 +104,12 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             binding.rvCampaignList.setAdapter(adapter);
             //campaignList(idofcampaign);
 
+            //animation code
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.startAnimation(rotateAnimation);
+            //view.setVisibility(View.VISIBLE);
+            //animation code
+
             getvendorcampaigns(idofvendor);
         }
 
@@ -121,7 +127,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             Log.d("tag58","got response");
 
             if(delete==0&&!gettingcampaignids&sitesretrieved) {
-                implementUi(response);
+                implementUInew(sitearray);
             }else if(delete==1){
                 delete= 0;
                 runOnUiThread(new Runnable() {
@@ -163,14 +169,80 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                             Log.d("tag22", e.toString());                        }
                         }
 
+                    implementUInew(sitearray);
                 }
             }
-
-
         }
 
+    private void implementUInew(JSONArray sitearray){
 
-        void extractcampaignids(String response){
+            JSONObject jsonObject = new JSONObject();
+            jsonArray1 = new JSONArray();
+
+            String ids[];
+            //JSONObject jsonResponse = new JSONObject(response);
+            //if(jsonResponse.getString("status").equals("success")) {
+            JSONArray dataArray = sitearray;
+
+            if (dataArray != null && dataArray.length() > 0) {
+                try {
+                Log.d("tag998", "1");
+                for (int i = 0; i < dataArray.length(); i++) {
+
+                        JSONObject dataObject = dataArray.getJSONObject(i);
+                        if (dataObject != null) {
+                            jsonObject = new JSONObject();
+                            Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+
+                            vendorid = dataObject.optString("vendor_id");
+                            //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                            jsonObject.putOpt("id", dataObject.optInt("id"));
+                            jsonObject.putOpt("uid", dataObject.optString("uid"));
+                            jsonObject.putOpt("image", dataObject.optString("image"));
+                            jsonObject.putOpt("name", dataObject.optString("name"));
+                            //siteDetail.setName(dataObject.optString("name"));
+
+
+                            jsonArray1.put(jsonObject);
+//TODO here
+                        }
+                    }}catch(Exception e) {
+                    e.printStackTrace();
+                }
+                }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // Your UI update code goes here
+
+                    GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
+                    binding.rvCampaignList.setLayoutManager(layoutManager);
+                    CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, showedit);
+
+                    //animation code
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.GONE);
+                    //animation code
+
+                    binding.rvCampaignList.setAdapter(adapter);
+
+              /*      try {
+                        JSONObject jsonobject = new JSONObject(response);
+                        binding.title.setText(jsonobject.getString("campaign_name"));
+                        binding.clientid.setText(Integer.toString(jsonobject.getInt("client_id")));
+                        binding.clientname.setText(jsonobject.getString("client_name"));
+                        binding.campaign.setText(jsonobject.getString("campaign_name"));
+                        binding.totalsites.setText(jsonobject.getString("site_count"));
+                    }catch(Exception e){
+                        Log.d("tag322121", e.toString());
+                    }*/
+                }});
+
+           }
+
+
+    void extractcampaignids(String response){
             Log.d("extractcampaignidsresponse", response);
 
             JSONArray jsonArray;
@@ -219,8 +291,6 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
         for(int i=0; i< campaignIds.length; i++){
             Log.d("sites", campaignIds[i]);
         }
-
-
 
         for(int i=0; i<=campaignIds.length; i++){
 
@@ -353,7 +423,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
 
                         binding.rvCampaignList.setAdapter(adapter);
 
-                        try {
+                       /* try {
                             JSONObject jsonobject = new JSONObject(response);
                             binding.title.setText(jsonobject.getString("campaign_name"));
                             binding.clientid.setText(Integer.toString(jsonobject.getInt("client_id")));
@@ -362,7 +432,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                             binding.totalsites.setText(jsonobject.getString("site_count"));
                         }catch(Exception e){
                             Log.d("tag322121", e.toString());
-                        }
+                        }*/
                     }});
             }catch (Exception e){
                 Log.d("tg222", e.toString());
@@ -441,7 +511,6 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             Log.d("tg98", Integer.toString(position));
             PopupMenu popup = new PopupMenu(this, view); // 'view' is the anchor view for popup menu
             popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu()); // Inflate your menu resource
-
 
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {

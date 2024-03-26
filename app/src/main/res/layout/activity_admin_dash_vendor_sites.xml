@@ -50,7 +50,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             >
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id= "@+id/linearlayout"
@@ -215,24 +215,31 @@
 
                 </LinearLayout>
             </LinearLayout>
+            -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:elevation= "1dp"
-                android:id= "@+id/line"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="#D9D9D9"
-                android:layout_below= "@+id/linearlayout"
-                />
-
+            <TextView
+                android:id="@+id/title"
+                android:text="Sites"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:fontFamily="@font/dmsansregular"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCampaignList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/line"
-                android:layout_marginBottom="@dimen/_5sdp" />
+                android:layout_marginEnd="13dp"
+
+                android:layout_below="@id/title"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="13dp" />
 
         </RelativeLayout>
 
@@ -245,6 +252,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/_50sdp"
             android:onClick="onPlusClick"
+            android:visibility="gone"
             android:id="@+id/ivPlus"
             android:src="@drawable/ic_add" />
 

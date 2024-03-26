@@ -51,12 +51,15 @@ import java.net.URL;
         //have to pass logintoken and siteid
         String jsonArray;
 
+        String campaignitem;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_view_vendor_details);
             Log.d("tag41", "1");
             Log.d("whichclass", "AdminViewVendorDetails");
+            campaignitem="";
             if (getIntent().getExtras() != null) {
                 Log.d("tag41", "2");
                 logintoken = getIntent().getExtras().getString("logintoken", "");
@@ -65,8 +68,12 @@ import java.net.URL;
                 id= getIntent().getExtras().getString("id", "");
                 Log.d("tag41", "4");
 
-                apiresponse= getIntent().getExtras().getString("jsonArray");
+
+                apiresponse= getIntent().getExtras().getString("jsonArray", "");
                 Log.d("tag41", "5");
+
+                campaignitem= getIntent().getExtras().getString("campaignItem");
+                Log.d("tag41campaignitem", campaignitem);
 
                 try {
                     jsonArray = getIntent().getExtras().getString("jsonArray");
@@ -75,27 +82,39 @@ import java.net.URL;
                 }
                 Log.d("tag41", "3");
 
-                Log.d("tag90", apiresponse);
+                //Log.d("tag90", apiresponse);
                 Log.d("tag41", "3");
             }
 
-
+            try{
+                JSONObject jsonobj= new JSONObject(campaignitem);
+                id= Integer.toString(jsonobj.optInt("id"));
+            }catch(Exception e){
+                Log.d("tag333", e.toString());
+            }
             Log.d("tag41", "4");
-            implementUI(apiresponse);
-            //apicall(logintoken, id);
+            //implementUI(apiresponse);
+            apicall(logintoken, id);
             Log.d("tag41", "5");
         }
 
         String response2;
 
         private void implementUI(String response) {
-            Log.d("tag60", response);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+            Log.d("tag610", response);
             response2= "";
             response2= response;
+
             //here
             try {
-                JSONObject jsonResponse = new JSONObject(response);
-                Log.d("tag95", "1");
+
+                JSONObject jsonobj12= new JSONObject(response);
+
+                JSONObject jsonResponse = new JSONObject(jsonobj12.getString("data"));
+                Log.d("tag915", jsonResponse.toString());
 
                 if(jsonResponse != null) {
                     Log.d("tag95", "1");
@@ -110,27 +129,26 @@ import java.net.URL;
                     siteDetail.setGstNo(jsonResponse.optString("gst_no"));
                     siteDetail.setCreatedAt(jsonResponse.optString("created_at"));
                     siteDetail.setUpdatedAt(jsonResponse.optString("updated_at"));
-                    Log.d("tag95", "1");
+                    //Log.d("tag95", "1");
 
                     try {
                         String imageUrl = jsonResponse.optString("logo");
                         imageUrl= "https://acme.warburttons.com/"+ imageUrl;
-                        Log.d("tag41", "imageurl is "+ imageUrl);
+                        //Log.d("tag41", "imageurl is "+ imageUrl);
                         if(imageUrl != "null" && !imageUrl.isEmpty()) {
                             URL url = new URL(imageUrl);
                             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                             siteDetail.setLogo(bitmap);
                         }
                     } catch (Exception e) {
-                        Log.d("tag41", "error in implementui" +e.toString());
+                        e.printStackTrace();
                         // Handle error
                     }
-                    Log.d("tag95", "1");
+                    //Log.d("tag95", "1");
 
                     // Update UI
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+
+
 
                             TextView tvSiteId = findViewById(R.id.etTotalSites);
                             //TODO after person implements site name then change this
@@ -184,22 +202,20 @@ import java.net.URL;
                             if(siteDetail.getLogo()!=null) {
                                 tvImage.setImageBitmap(siteDetail.getLogo());
                             }
-                        }
-                    });
+
+
                 }
 
 
 
 
-            } catch (Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Toast.makeText(ViewSiteDetailActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
 
+            } catch (Exception e) {
+e.printStackTrace();
+                        Log.d("tag3232", e.toString());
+
+            }
+                }});
             // Assigning values and listeners to Buttons
             Button btnNext = findViewById(R.id.btnNext);
             btnNext.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +254,7 @@ import java.net.URL;
             Log.d("tag41", "6");
             Context context= this;
             String padding="";
-            APIreferenceclass api= new APIreferenceclass(logintoken, context, id, padding);
+            APIreferenceclass api= new APIreferenceclass(logintoken, context, id, 0, true);
             Log.d("tag41", "7");
         }
         public static String[] extractDataStrings(String apiResponse) {

@@ -233,6 +233,22 @@ public class APIreferenceclass {
 
     }
 
+    //admindashvendorsites- to get all sites for a campaign
+    public APIreferenceclass(String logintoken, Context context, String id,int a, boolean b){
+        querytype= 0;
+        String url="https://acme.warburttons.com/api/vendors/"+id;
+        String jsonPayload = "{\"Authorization\": \"" + logintoken +"\"}";
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("addbatest","Inside admin api");
+
+        callapi(headers, jsonPayload, context, querytype, url);
+
+    }
+
     //TODO endpoint for otp get when this person gets his email
     //login
     public APIreferenceclass(int vendorclientorcampaign, Context context, String email) {
@@ -574,6 +590,8 @@ public class APIreferenceclass {
             callapi(headers, jsonPayload, context, querytype, url);
         }
     }
+
+
 
     private byte[] readFileContent(Context context, Uri uri) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

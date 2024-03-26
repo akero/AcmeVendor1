@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.activity.dashboard.AdminDashVendorSites;
 import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.CampaignListActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
@@ -78,6 +79,9 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                 }if(context instanceof ViewCampaignSitesClientDash){
                     ((ViewCampaignSitesClientDash) context).onEditClick(position, v);
 
+                }if(context instanceof AdminDashVendorSites){
+                    ((AdminDashVendorSites) context).onEditClick(position, v);
+
                 }
             });
 
@@ -124,7 +128,9 @@ public class CampaignListAdapter extends RecyclerView.Adapter<CampaignListAdapte
                     ((ClientDashFirstPage) context).onItemClick(position);
                 }else if (context instanceof ViewCampaignSitesClientDash) {
                     ((ViewCampaignSitesClientDash) context).onItemClick(position);
-                }
+                }else if (context instanceof AdminDashVendorSites) {
+                ((AdminDashVendorSites) context).onItemClick(position);
+            }
             });
         } catch (Exception e) {
             Log.e("tag41", "Error in onBindViewHolder: " + e.getMessage());
