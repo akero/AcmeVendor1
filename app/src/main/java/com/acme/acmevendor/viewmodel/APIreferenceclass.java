@@ -447,7 +447,7 @@ public class APIreferenceclass {
         String url = "https://acme.warburttons.com/api/campaigns";
         querytype = 1; // POST
 
-        Log.d("tg92", jsonPayload1.toString());
+        Log.d("tg912", jsonPayload1.toString());
 
         if (selectedImage != null) {
             // Prepare multipart body

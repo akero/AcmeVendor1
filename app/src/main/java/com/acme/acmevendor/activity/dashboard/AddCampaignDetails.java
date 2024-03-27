@@ -47,7 +47,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
     String selectedItem;
     String selectedItem1;
     String selectedClient;
-    String selectedVendor;
+    int selectedVendor;
     private UploadHelper uploadHelper;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 102;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
@@ -65,7 +65,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         selectedItem="";
         selectedItem1="";
         selectedClient="";
-        selectedVendor="";
+        selectedVendor=0;
         imageStream= null;
         selectedImage= null;
         clientspinnerboolean= 0;
@@ -379,17 +379,19 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
 
                 //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
 
+                String selectedvendorint="";
 
-
-                selectedVendor = parent.getItemAtPosition(position).toString();
+                selectedvendorint = parent.getItemAtPosition(position).toString();
 
                 try {
                     for (int i = 0; i < jsonArray1.length(); i++) {
                         JSONObject json1 = jsonArray1.getJSONObject(i);
                         items3[i] = json1.optString("name");
-                        if(items3[i].equals(selectedVendor)){
+                        if(items3[i].equals(selectedvendorint)){
+                            Log.d("selectedvendor", json1.toString());
                             Log.d("selectedvendor", json1.optString("id")+ " "+ selectedVendor);
-                            selectedVendor= json1.optString("id");
+                            selectedVendor= json1.optInt("id");
+                            Log.d("selectedvendor", Integer.toString(selectedVendor));
 
                             break;
                         }

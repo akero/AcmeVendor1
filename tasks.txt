@@ -1,16 +1,10 @@
 Ship
 
 image and latlong implement
-line502 viewsitedetailactivity
-
->Add new sites page. Url is campaignid/vendorid
-//https://acme.warburttons.com/api/get_admin_vendor_campaigns/+ vendor id to get campaignids
-//get sites for all campaigns and 
->show
-
-line525 admindash relink commented code
+>line502 viewsitedetailactivity
 
 notif to vendor to put image
+add site to vendor admin
 
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
 
@@ -18,6 +12,15 @@ After all done-
 check all todos
 test
 
+//emailed vendors. not updating- 
+//In the campaign creation process, there's no need to add vendors directly. Vendors should be associated with sites during the site creation phase.
+//move vendor dropdown from add campaign
+//remove from edit
+//line525 admindash relink commented code
+//Add new sites page. Url is campaignid/vendorid
+//https://acme.warburttons.com/api/get_admin_vendor_campaigns/+ vendor id to get campaignids
+//get sites for all campaigns and 
+//show
 /new client. makecampaign. open campaign. error- emailed 
 /dots not visible in dash- client and vendor
 //check if delete is there
