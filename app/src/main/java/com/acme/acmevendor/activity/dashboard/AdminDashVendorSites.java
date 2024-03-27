@@ -549,6 +549,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             Log.d("tag20", "onplugtreehththtsclick");
             Intent intent= new Intent(com.acme.acmevendor.activity.dashboard.AdminDashVendorSites.this, AddSiteDetailActivity.class);
             //intent.putExtra("campaignId",idofcampaign);
+            Log.d("vendorid", vendorid);
             intent.putExtra("vendorId",vendorid);
             startActivity(intent);
         }

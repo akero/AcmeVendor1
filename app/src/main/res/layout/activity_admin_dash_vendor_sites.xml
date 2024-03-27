@@ -250,9 +250,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:layout_marginBottom="@dimen/_50sdp"
             android:onClick="onPlusClick"
-            android:visibility="gone"
             android:id="@+id/ivPlus"
             android:src="@drawable/ic_add" />
 
