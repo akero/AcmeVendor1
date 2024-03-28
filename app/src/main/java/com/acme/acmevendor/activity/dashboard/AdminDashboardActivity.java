@@ -601,7 +601,7 @@ Log.d("tag41", "click detected");
     }
 
     public void onAddClientClick(View view) {
-        startActivity(new Intent(this, AddClientActivity.class));
+        startActivity(new Intent(this, AddSiteDetailActivity.class));
     }
 
     public void onAddVenderClick(View view) {

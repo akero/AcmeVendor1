@@ -3,12 +3,13 @@ Ship
 image and latlong implement
 >line502 viewsitedetailactivity
 
+add site button to be added by kushagra- messaged
+
 notif to vendor to put image
-add site to vendor admin- ask kushagra where site will be added from
 
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
 
-addsitedetail, remove vendor dropdown. pass vendor from prev class, check if needs to be done for campaigns also
+addsitedetail add to the ui
 
 After all done-
 check all todos

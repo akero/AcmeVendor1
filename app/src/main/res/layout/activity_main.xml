@@ -170,7 +170,6 @@
             android:layout_above="@id/ivPlus"
             android:layout_centerHorizontal="true"
             android:scaleType="fitXY"
-            android:visibility="gone"
             android:onClick="onAddClientClick"
             android:src="@drawable/ic_addclient" />
 
