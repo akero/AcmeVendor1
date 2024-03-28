@@ -5,6 +5,8 @@ image and latlong implement
 
 add site button to be added by kushagra- messaged
 
+emailed about needing campaignid during site creation
+
 notif to vendor to put image
 
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity

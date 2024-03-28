@@ -29,7 +29,8 @@
         <activity
             android:name=".activity.dashboard.AdminDashVendorSites"
             android:exported="false"
-            android:theme="@style/NoActTheme" />
+            android:theme="@style/NoActTheme"
+            />
         <activity
             android:name=".activity.dashboard.AddClientDetailDashActivity"
             android:exported="false"

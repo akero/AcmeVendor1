@@ -6,6 +6,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
@@ -50,6 +52,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface {
 
@@ -85,6 +89,26 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             binding = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail);
         }else{
             binding1 = DataBindingUtil.setContentView(this, R.layout.activity_view_site_detail_vendor);
+            Log.d("camera", "click registered");
+
+            Button btn= findViewById(R.id.btnUpdatePhoto);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("camera", "click registered");
+                    if (ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                        Log.d("camera", "have permission");
+                        openCamera();
+                    } else {
+                        ActivityCompat.requestPermissions(ViewSiteDetailActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+                        Log.d("camera", "no permission");
+
+                        Toast.makeText(ViewSiteDetailActivity.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+            });
         }
 
             if(camefrom.equals("ClientDashBoardActivity")){
@@ -102,11 +126,79 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         Log.d("tag41", "1");
         Log.d("whichclass", "ViewSiteDetailActivity");
 
-
-
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
+    }
+
+
+    private void openCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Handle error
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(ViewSiteDetailActivity.this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
+            }
+        } else {
+           Log.d("camera", "no permission1");
+            Toast.makeText(ViewSiteDetailActivity.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
+
+    }
+    }
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 123;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(ViewSiteDetailActivity.this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        return imageFile;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            // Image captured successfully
+            // Access the image file using the Uri you provided earlier
+            Uri imageUri;
+            try {
+                imageUri = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        createImageFile());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            // Do something with the imageUri, e.g., display the image or upload it
+
+
+        }
     }
     SiteDetail siteDetail;
     JSONObject jsonobj;
@@ -266,7 +358,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
         // Assigning values and listeners to Buttons
 
-        Button btnUpdatePhoto = findViewById(R.id.btnUpdatePhoto);
+        /*Button btnUpdatePhoto = findViewById(R.id.btnUpdatePhoto);
         btnUpdatePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -277,7 +369,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             }
         });
 
-
+*/
             Button btnNext = findViewById(R.id.btnNext);
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -492,7 +584,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         super.onDestroy();
     }
 
-    @Override
+ /*   @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
@@ -502,5 +594,5 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             APIreferenceclass api= new APIreferenceclass(imageUri);
 
         }
-    }
+    }*/
 }

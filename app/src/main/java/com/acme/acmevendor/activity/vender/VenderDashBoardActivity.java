@@ -164,6 +164,45 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
 
                     Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
                 }
+
+                JSONArray dataArray1 = jsonResponse.getJSONArray("old_campaigns");
+                if(dataArray1 != null && dataArray1.length() > 0) {
+
+                    for (int i = 0; i < dataArray1.length(); i++) {
+
+                        JSONObject dataObject = dataArray1.getJSONObject(i);
+                        if (dataObject != null) {
+                            jsonObject = new JSONObject();
+                            Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+                            //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                            jsonObject.putOpt("id", dataObject.optInt("id"));
+                            jsonObject.putOpt("uid", dataObject.optString("uid"));
+                            jsonObject.putOpt("image", dataObject.optString("image"));
+                            jsonObject.putOpt("name", dataObject.optString("name"));
+
+                            //siteDetail.setName(dataObject.optString("name"));
+
+                            try {
+                                String imageUrl = dataObject.optString("image");
+                                imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                                Log.d("tag41", "imageurl is " + imageUrl);
+                                if (imageUrl != "null" && !imageUrl.isEmpty()) {
+                                    URL url = new URL(imageUrl);
+                                    Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                    //siteDetail.setImage(bitmap);
+                                }
+                            } catch (Exception e) {
+                                Log.d("tag41", "error in implementui" + e.toString());
+                                Log.e("tag41", "sdfdg", e);
+                                // Handle error
+                            }
+                            jsonArray1.put(jsonObject);
+//TODO here
+                        }
+                    }
+
+                    Log.d("JSONArrayContent", "JSONArray1: " + jsonArray1.toString());
+                }
             }
             runOnUiThread(new Runnable() {
                 @Override
