@@ -71,6 +71,10 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     //TODO populate all fields. pass api call data from prev activity
     //have to pass logintoken and siteid
 
+    String latlong;
+    private LocationHelper locationHelper;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
             camefrom= getIntent().getExtras().getString("camefrom", "");
+            latlong= "";
 
             Log.d("tag1001", campaignType+" "+ campaignId+" "+ siteNumber+" "+ logintoken+" "+ camefrom);
 
@@ -98,7 +103,14 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                     Log.d("camera", "click registered");
                     if (ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         Log.d("camera", "have permission");
-                        openCamera();
+
+                        //TODO add a camera here
+                        //openCamera();
+
+                        temporaryuploadchecker();
+                        latlong= latlong();
+                        Log.d("latlong", latlong);
+
                     } else {
                         ActivityCompat.requestPermissions(ViewSiteDetailActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
                         Log.d("camera", "no permission");
@@ -131,7 +143,37 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         Log.d("tag41", "5");
     }
 
+    String latlong(){
+        String latlong= "";
+        locationHelper = new LocationHelper();
+        locationHelper.requestLocationPermission(this);
 
+
+        return latlong;
+    }
+
+    void temporaryuploadchecker(){
+        File imageFile = new File("/storage/emulated/0/Pictures/image.jpg");
+        //TODO handle image here
+        Uri imageUri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", imageFile);
+
+
+
+    }
+
+    private void openCamera1() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
+            } else {
+                Log.d("camera", "no camera app found");
+                Toast.makeText(ViewSiteDetailActivity.this, "No camera app found", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+        }
+    }
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
@@ -156,6 +198,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     }
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 123;
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -164,6 +207,13 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 openCamera();
             } else {
                 Toast.makeText(ViewSiteDetailActivity.this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == LocationHelper.REQUEST_CODE_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationHelper.requestLocationPermission(this);
+            } else {
+                // Handle permission denied
             }
         }
     }
