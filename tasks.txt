@@ -1,12 +1,9 @@
 Ship
 
 image and latlong implement
->line502 viewsitedetailactivity
-line 102 viewsitedet add camera
+>test on real device (camera)
 
-add site button to be added by kushagra- messaged
-
-emailed about needing campaignid during site creation
+upload both location/uri in viewsitedetails
 
 notif to vendor to put image
 
@@ -14,12 +11,13 @@ med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
 
 addsitedetail add to the ui
 
-test latlong and photo on real device
-
 After all done-
 check all todos
 test
 
+//add site button to be added by kushagra- messaged- skip
+//emailed about needing campaignid during site creation
+//uncomment camera once its done in viewsitedetail.
 //emailed vendors. not updating- 
 //In the campaign creation process, there's no need to add vendors directly. Vendors should be associated with sites during the site creation phase.
 //move vendor dropdown from add campaign

@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 public class LocationHelper implements LocationListener {
     public static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private LocationManager locationManager;
-    private String locationString = "";
+    public String locationString = "";
 
 
     public void requestLocationPermission(Context context) {

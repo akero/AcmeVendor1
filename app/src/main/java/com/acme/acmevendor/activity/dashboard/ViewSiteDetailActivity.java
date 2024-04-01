@@ -86,6 +86,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             logintoken= getIntent().getExtras().getString("logintoken","");
             camefrom= getIntent().getExtras().getString("camefrom", "");
             latlong= "";
+            locationHelper = new LocationHelper();
+
 
             Log.d("tag1001", campaignType+" "+ campaignId+" "+ siteNumber+" "+ logintoken+" "+ camefrom);
 
@@ -101,22 +103,19 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 @Override
                 public void onClick(View view) {
                     Log.d("camera", "click registered");
-                    if (ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        Log.d("camera", "have permission");
+                    if (ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
-                        //TODO add a camera here
-                        //openCamera();
+                        Toast.makeText(ViewSiteDetailActivity.this, "Please give camera and location permissions", Toast.LENGTH_SHORT).show();
+
+                        ActivityCompat.requestPermissions(ViewSiteDetailActivity.this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+                        Log.d("camera", "dont have permission");
+                    } else {
 
                         temporaryuploadchecker();
-                        latlong= latlong();
+                        latlong = latlong();
                         Log.d("latlong", latlong);
-
-                    } else {
-                        ActivityCompat.requestPermissions(ViewSiteDetailActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
-                        Log.d("camera", "no permission");
-
-                        Toast.makeText(ViewSiteDetailActivity.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
-
+                        //TODO uncomment
+                        openCamera();
                     }
                 }
 
@@ -142,15 +141,81 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
     }
-
+    private static final String[] REQUIRED_PERMISSIONS = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION//,
+            //Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    private static final int REQUEST_CODE_PERMISSIONS = 123;
     String latlong(){
-        String latlong= "";
-        locationHelper = new LocationHelper();
+
         locationHelper.requestLocationPermission(this);
+        try {
+            Thread.sleep(2000); // Adjust the delay as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-
-        return latlong;
+        return locationHelper.locationString.isEmpty() ? "Location not available" : locationHelper.locationString;
     }
+
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 123;
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            boolean cameraGranted = false;
+            boolean locationGranted = false;
+            boolean storageGranted= false;
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equals(Manifest.permission.CAMERA) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    cameraGranted = true;
+                    Log.d("permissions", "camera");
+                } else if (permissions[i].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    locationGranted = true;
+
+                    Log.d("permissions", "location");
+                } else if (permissions[i].equals(WRITE_EXTERNAL_STORAGE) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    storageGranted = true;
+
+                    Log.d("permissions", "storage");
+                }
+            }
+
+            if (cameraGranted && locationGranted) {
+                // Both permissions granted, proceed with your app logic
+                temporaryuploadchecker();
+                latlong = latlong();
+                Log.d("latlong", latlong);
+                //TODO uncomment
+
+                openCamera();
+            } else {
+                // At least one permission was denied, handle accordingly
+                Toast.makeText(ViewSiteDetailActivity.this, "Location/camera permission denied", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+        /*
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(ViewSiteDetailActivity.this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == LocationHelper.REQUEST_CODE_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationHelper.requestLocationPermission(this);
+            } else {
+                Toast.makeText(ViewSiteDetailActivity.this, "Location permission denied", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    */}
+    public static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
 
     void temporaryuploadchecker(){
         File imageFile = new File("/storage/emulated/0/Pictures/image.jpg");
@@ -196,27 +261,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     }
     }
-    private static final int CAMERA_PERMISSION_REQUEST_CODE = 123;
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openCamera();
-            } else {
-                Toast.makeText(ViewSiteDetailActivity.this, "Camera permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == LocationHelper.REQUEST_CODE_LOCATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                locationHelper.requestLocationPermission(this);
-            } else {
-                // Handle permission denied
-            }
-        }
-    }
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -242,14 +287,19 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 imageUri = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         createImageFile());
+
+                apicallforvendorimageupdate(latlong, imageUri);
             }catch (Exception e){
                 e.printStackTrace();
             }
             // Do something with the imageUri, e.g., display the image or upload it
-
-
         }
     }
+
+    void apicallforvendorimageupdate(String latlong, Uri uri){
+
+    }
+
     SiteDetail siteDetail;
     JSONObject jsonobj;
 
