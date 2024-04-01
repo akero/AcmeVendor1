@@ -291,6 +291,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 apicallforvendorimageupdate(latlong, imageUri);
             }catch (Exception e){
                 e.printStackTrace();
+                Toast.makeText(this, "Image update failed", Toast.LENGTH_SHORT).show();
             }
             // Do something with the imageUri, e.g., display the image or upload it
         }
@@ -298,6 +299,17 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     void apicallforvendorimageupdate(String latlong, Uri uri){
 
+        String logintoken1= "";
+
+        try {
+            FileHelper fh = new FileHelper();
+            logintoken1 = fh.readLoginToken(this);
+        }catch(Exception e){
+            Log.d("tag22", e.toString());
+        }
+        APIreferenceclass api= new APIreferenceclass(latlong, this, uri, logintoken1);
+
+        //TODO handle response
     }
 
     SiteDetail siteDetail;

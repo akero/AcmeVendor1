@@ -1,9 +1,10 @@
 Ship
 
-image and latlong implement
+>image and latlong implement
 >test on real device (camera)
 
 upload both location/uri in viewsitedetails
+handle upload response
 
 notif to vendor to put image
 

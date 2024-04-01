@@ -552,6 +552,28 @@ public class APIreferenceclass {
         callapi(headers, jsonPayload, context, querytype ,url);
     }
 
+    //for vendor login image upload
+    public APIreferenceclass(String latlong, Context context, Uri imageUri, String loginToken){
+
+        //TODO add siteNumber to api call
+
+        String url="https://acme.warburttons.com/api/verifyLogin";
+        //Log.d("tag23", "logintype "+ loginType + " email " + email);
+
+        String jsonPayload = "{\"email\": \"" +"\", \"password\": \"" + "\"}";
+        //Log.d("tg4", jsonPayload);
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + loginToken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("tag58","Inside viewsitedetail api");
+
+        querytype=1; //post
+
+        callapi(headers, jsonPayload, context, querytype ,url);
+    }
+
     //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
         Log.d("tag21", "addsitedetailactivity edit site");
