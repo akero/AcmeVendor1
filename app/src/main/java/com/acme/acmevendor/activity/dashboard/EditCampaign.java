@@ -89,7 +89,6 @@ public class EditCampaign extends AppCompatActivity implements ApiInterface {
         campaignItem= getIntent().getStringExtra("campaignItem");
         Log.d("campaignitem",  campaignItem);
 
-
         try {
             JSONObject jsonobj = new JSONObject(campaignItem);
             id= jsonobj.getInt("id");

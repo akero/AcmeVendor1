@@ -42,7 +42,6 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
 
         Log.d("whichclass", "UpdateSiteDetailActivity");
 
-        //TODO add code for accepting input and pass to btn saveclick or global variable and add upload photo button code
         Intent intent= getIntent();
 
         if(intent!=null){
@@ -59,7 +58,6 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
 
     public void btnUpdateClick(View view) {
 
-        //TODO add dialog to select photo and make api call and finish
         finish();
     }
 
@@ -69,11 +67,10 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
             CronetEngine.Builder builder = new CronetEngine.Builder(this);
             CronetEngine cronetEngine = builder.build();
 
-            //TODO change payload
             String token = "474|Z94CA7l1NBZS1deYcnEhp8ZRyxrlWwPA0pp7jZ04";
             // Create a JSON payload with the email and password
 
-            //TODO
+
             String jsonPayload = "{\"token\":\"" + token + "\"}";
 
             // Convert the JSON payload to bytes for uploading
@@ -116,7 +113,6 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
         } catch (Exception e) {
             Log.d("tag12", e.toString());
         }
-        //TODO make api call to send data to api
         finish();
 
     }
@@ -125,7 +121,6 @@ public class UpdateSiteDetailActivity extends AppCompatActivity implements ApiIn
     public void onResponseReceived(String response){
         Log.d("tag12", "response is "+ response);
 
-        //TODO handle and put toast
         Toast.makeText(this, "Details saved successfully", Toast.LENGTH_SHORT);
 
         finish();

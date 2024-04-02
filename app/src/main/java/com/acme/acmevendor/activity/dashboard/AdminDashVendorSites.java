@@ -56,13 +56,11 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
 
         private final Context ctxt= this;
         int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
-        //TODO- populate this token
         String logintoken="";
         String idofvendor;
         boolean showedit;
         boolean gettingcampaignids;
 
-        //todo access token save to memory add to api call
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +96,6 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                 e.printStackTrace();
             }
 
-            //TODO remove after adding to ui
             jsonArray1= new JSONArray();
             CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, showedit);
             binding.rvCampaignList.setAdapter(adapter);

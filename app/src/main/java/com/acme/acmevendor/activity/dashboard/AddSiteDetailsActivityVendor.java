@@ -131,7 +131,6 @@ public class AddSiteDetailsActivityVendor extends AppCompatActivity implements L
                 public void run() {
 
                     TextView tvSiteId = findViewById(R.id.etSiteNo);
-                    //TODO after person implements site name then change this
                     tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
 
                     TextView tvLocation = findViewById(R.id.etLocation);

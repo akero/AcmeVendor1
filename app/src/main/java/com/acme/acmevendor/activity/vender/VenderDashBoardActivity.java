@@ -154,7 +154,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                                     // Handle error
                                 }
                                 jsonArray1.put(jsonObject);
-//TODO here
+
                             }
                         }
 
@@ -193,7 +193,7 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
                                 // Handle error
                             }
                             jsonArray1.put(jsonObject);
-//TODO here
+
                         }
                     }
 
@@ -230,9 +230,9 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         int vendorclientorcampaign= 2;
-        //TODO pass correct token
+
         //String logintoken= "322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
-//TODO uncomment this
+
         /*
         FileHelper fh= new FileHelper();
         logintoken= fh.readLoginToken(this);
@@ -269,10 +269,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
             // Retrieve JSONObject from your jsonArray at position
             JSONObject jsonObject = jsonArray1.getJSONObject(position);
             Log.d("tag51", jsonArray1.getJSONObject(position).toString());
-
-
-            //TODO add correct login token here
-            //String logintoken="Bearer 322|7Dor2CuPXz4orJV5GUleBAUcmgYnbswVMLQ5EUNM";
 
             // Get site id or site no from the JSONObject
             String id = jsonObject.getString("id"); // Or get an id if you have that

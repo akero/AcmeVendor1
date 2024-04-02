@@ -94,7 +94,6 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
     }
 
     public void onNotificationClick(View v){
-        //TODO ask dev what this does
     }
 
     private void campaignList() {

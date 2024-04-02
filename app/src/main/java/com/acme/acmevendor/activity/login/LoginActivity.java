@@ -83,9 +83,6 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
     public void btnloginClick(View view) {
         Context context= this;
 
-        //TODO check what type of login and pass to api. 1 is admin 2 is vendor. CLient is 0.
-        //TODO add api call, save login details, connect to relevant function and pass the details
-
         if (binding.etLoginid.getText().toString().isEmpty() || binding.etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG).show();
         } else if (!NetworkUtils.isNetworkAvailable(this)) {
@@ -184,7 +181,6 @@ try {
 
             Log.d("tag23", "0" +res);
 
-            //TODO in other class access the token first
             startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
 
         } else if (loginType == 1) {
@@ -195,7 +191,6 @@ try {
             res=res.substring(0,a-1);
             writeToFile(res, this);
 
-            //TODO in other class access the token first
             Log.d("tag23", "1"+ res);
 
             startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
@@ -207,7 +202,6 @@ try {
             int a= res.indexOf(",");
             res=res.substring(0,a-1);
             writeToFile(res, this);
-            //TODO in other class access the token first
             Log.d("tag23", "2"+res);
 
 

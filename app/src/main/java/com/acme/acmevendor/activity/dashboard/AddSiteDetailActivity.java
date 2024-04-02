@@ -230,7 +230,6 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
                 public void run() {
 try {
     TextView tvSiteId = findViewById(R.id.etSiteNo);
-    //TODO after person implements site name then change this
     tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
 }catch (Exception e){
     Log.d("tg55",e.toString());
@@ -250,7 +249,6 @@ try {
                     TextView tvLongitude = findViewById(R.id.etLongitude);
                     tvLongitude.setText(siteDetail.getLongitude());
 
-                    //TODO- backend needs correct values
 
                     // Get the existing adapter
                     ArrayAdapter<String> spinnerAdapter = (ArrayAdapter<String>) binding.spinnermediatype.getAdapter();
@@ -629,7 +627,6 @@ try {
         siteno= "";
         //TODO here
         TextView tvSiteId = findViewById(R.id.etSiteNo);
-        //TODO after person implements site name then change this
         //tvSiteId.requestFocus();
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

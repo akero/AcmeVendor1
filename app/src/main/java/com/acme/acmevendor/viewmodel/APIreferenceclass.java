@@ -249,11 +249,9 @@ public class APIreferenceclass {
 
     }
 
-    //TODO endpoint for otp get when this person gets his email
     //login
     public APIreferenceclass(int vendorclientorcampaign, Context context, String email) {
 
-        //TODO make api call now
 //client
         if (vendorclientorcampaign == 0) {
 
@@ -277,7 +275,6 @@ public class APIreferenceclass {
     //for viewsitedetail
     public APIreferenceclass(String loginToken, String siteNumber, Context context){
 
-        //TODO add siteNumber to api call
 
         Log.d("tag41","8");
 
@@ -308,7 +305,6 @@ public class APIreferenceclass {
     //for viewcampaignsites
     public APIreferenceclass(String loginToken, Context context, String id){
 
-        //TODO add siteNumber to api call
 
         Log.d("tag58",id);
         //id="18";
@@ -329,7 +325,6 @@ public class APIreferenceclass {
     //for AdminViewClientDetails
     public APIreferenceclass(String loginToken, Context context, String id, String padding){
 
-        //TODO add siteNumber to api call
 
         Log.d("tag58",id);
 
@@ -349,7 +344,6 @@ public class APIreferenceclass {
     //addclientactivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken){
 
-        //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/clients";
         Log.d("tag23", "jsonpayload"+ jsonPayload1.toString());
@@ -370,7 +364,6 @@ public class APIreferenceclass {
     //addvendoractivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int a){
 
-        //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/vendors";
         Log.d("tag23", "jsonpayload"+ jsonPayload1.toString());
@@ -391,7 +384,6 @@ public class APIreferenceclass {
     //editvendoractivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, String vendorid){
 
-        //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/vendors/";
         Log.d("tag23", "jsonpayload"+ jsonPayload1.toString());
@@ -417,7 +409,6 @@ public class APIreferenceclass {
     //addclientdetailactivity
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, String clientid, int b, String jsonString){
 
-        //TODO add siteNumber to api call
 
         Log.d("tag21","1");
 
@@ -514,7 +505,6 @@ public class APIreferenceclass {
     //for otp
     public APIreferenceclass(int loginType, Context context, String email, String a){
 
-        //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/login";
         Log.d("tag23", "logintype "+ loginType + " email " + email);
@@ -533,7 +523,6 @@ public class APIreferenceclass {
     //for otp enter
     public APIreferenceclass(String otp, Context context, String email, int a){
 
-        //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/verifyLogin";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
@@ -555,7 +544,6 @@ public class APIreferenceclass {
     //for vendor login image upload
     public APIreferenceclass(String latlong, Context context, Uri imageUri, String loginToken){
 
-        //TODO add siteNumber to api call
 
         String url="https://acme.warburttons.com/api/verifyLogin";
         //Log.d("tag23", "logintype "+ loginType + " email " + email);
@@ -718,7 +706,6 @@ public class APIreferenceclass {
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
         Log.d("tag21", "addsitedetailactivity add site");
 
-        //TODO have to add data into form data not params
         String url = "https://acme.warburttons.com/api/sites";
         Log.d("tg3", jsonString);
 
@@ -749,8 +736,6 @@ public class APIreferenceclass {
 
             Log.d("addbatest", "Inside admin api");
             String formData = convertJsonToFormData(jsonString);
-            //TODO add image
-            //here
             callapi(headers, formData, context, querytype, url);
         }
     }

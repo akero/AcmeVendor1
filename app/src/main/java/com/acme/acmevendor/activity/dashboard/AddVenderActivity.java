@@ -86,7 +86,6 @@ public class AddVenderActivity extends AppCompatActivity implements ApiInterface
     String company_name="";
     String company_address="";
     String gst_no="";
-    //TODO add image type post
     //Byte[] logo;
     String logintoken;
 

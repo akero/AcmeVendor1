@@ -169,6 +169,7 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_above="@id/ivPlus"
             android:layout_centerHorizontal="true"
+            android:visibility="gone"
             android:scaleType="fitXY"
             android:onClick="onAddClientClick"
             android:src="@drawable/ic_addclient" />
