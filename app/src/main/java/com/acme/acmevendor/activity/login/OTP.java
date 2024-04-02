@@ -83,13 +83,10 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                 }
                 // If the email input is valid, start the new activity.
                 else {
-                    //TODO: make api call here, put intent in onresponsereceived. pending till they guy gets email.
 
-                    //TODO call api with email and logintype then start the next class. comment this once otp is implemented
 
                     if (loginType == 0) {//client
 
-                        //TODO replace email1 with emailinput
                         Log.d("tag23", "0");
 
                         //animation code
@@ -102,7 +99,6 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
                     } else if (loginType == 1) {//admin
 
-                        //TODO replace email1 with emailinput
                         Log.d("tag23", "1");
 
                         //animation code
@@ -114,7 +110,6 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                         APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
                         //startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
                     } else {//vendor
-                        //TODO replace email1 with emailinput
                         Log.d("tag23", "2");
 
                         //animation code
@@ -142,7 +137,6 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
         Intent intent = new Intent(OTP.this, ContentOtp.class);
 
-        //TODO change 2nd param with emailInput
         intent.putExtra("email", emailInput);
         //intent.putExtra("loginType", loginType);
 

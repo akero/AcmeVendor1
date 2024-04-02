@@ -129,7 +129,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             //startActivity(intent);
         } else {
             Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show();
-            //TODO
+
             // Handle invalid OTP entry
             // This could be showing an error message, shaking animation, etc.
         }
@@ -250,7 +250,6 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
     }
 
     private boolean isValidOtp(String otp) {
-        //TODO Replace with your OTP validation logic
         return otp.length() == 4;
     }
 }

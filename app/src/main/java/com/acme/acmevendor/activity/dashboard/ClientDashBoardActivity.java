@@ -44,9 +44,6 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
 
     String loginToken="";
 
-    //TODO handle clicks on old and live campaign, make api call, parse data, populate. pass site details api data to viewsitedetailactivity
-    //TODO access token save to memory add to api call
-
     Context ctxt;
 
     ProgressBar progressBar;
@@ -90,7 +87,7 @@ public class ClientDashBoardActivity extends AppCompatActivity implements ApiInt
        // jsonArray3= new JSONArray();
 
 
-      /*  //TODO remove
+      /*
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 

@@ -48,11 +48,9 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
     int delete= 0;
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
-    //TODO- populate this token
     String logintoken="";
     String idofcampaign;
 
-    //todo access token save to memory add to api call
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -56,22 +56,18 @@ public class LoginActivity extends BaseActivity implements ApiInterface {
 
             AppPreferences.getInstance(LoginActivity.this).saveUserData(response.toString());
 
-            //TODO check if its an email
 
             if (loginType == 0) {//client
 
-                //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
 
                 Log.d("tg7", "client");
                 startActivity(new Intent(LoginActivity.this, ClientDashBoardActivity.class));
 
             } else if (loginType == 1) {//admin
-                //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tg7", "admin");
                 startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
 
             } else {//vendor
-                //todo implement fn to save/retreive login data and pass ot class. Then add receiver on other class.
                 Log.d("tg7", "vendor");
                 startActivity(new Intent(LoginActivity.this, VenderDashBoardActivity.class));
             }

@@ -25,7 +25,6 @@ public class WelcomeActivity extends BaseActivity {
     private ActivityWelcomeBinding binding;
     private WelcomeActivityViewModel welcomeActivityViewModel;
 
-    //TODO add flow to enter otp etc and finish login after saving login token
     int loginType=1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class WelcomeActivity extends BaseActivity {
             Toast.makeText(WelcomeActivity.this, errorMessage, Toast.LENGTH_LONG).show();
             //intent.putExtra("Email","rish1994@gmail.com");
             //startActivity(intent);
-    //TODO
 
 
             Log.d("tag2", "responseerror " + errorMessage);
@@ -68,7 +66,6 @@ public class WelcomeActivity extends BaseActivity {
             Toast.makeText(this, "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
         } else {
 
-            //TODO change
 
             Intent intent = new Intent(WelcomeActivity.this, OTP.class);
             intent.putExtra("Email", binding.etEmailId.getText().toString());
@@ -77,7 +74,6 @@ public class WelcomeActivity extends BaseActivity {
             //Intent intent= new Intent(WelcomeActivity.this, LoginActivity.class);
             //startActivity(intent);
 
-            //TODO uncomment this
             //showProgressDialog();
             //welcomeActivityViewModel.callOtp("+91", binding.etEmailId.getText().toString(), this);
         }

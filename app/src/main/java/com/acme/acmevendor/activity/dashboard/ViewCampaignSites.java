@@ -49,7 +49,6 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
     private final Context ctxt= this;
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
-    //TODO- populate this token
     String logintoken="";
     String idofcampaign;
     boolean showedit;

@@ -61,9 +61,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
     private ActivityVenderDashBoardBinding binding;
     Executor cronetExecutor= Executors.newSingleThreadExecutor();
 
-    //TODO add api call and populate
-    //>todo access token save to memory add to api call
-
     String loginToken="";
 
     JSONArray jsonArray1;
@@ -95,7 +92,6 @@ public class VenderDashBoardActivity extends AppCompatActivity implements ApiInt
             e.printStackTrace();
         }
 
-        //TODO implement this
         loginToken= FileHelper.readLoginToken(this);
         Log.d("tg4", loginToken);
 
