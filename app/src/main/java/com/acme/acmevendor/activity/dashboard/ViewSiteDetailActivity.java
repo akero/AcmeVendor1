@@ -56,7 +56,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface {
+public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface, LocationCallback {
 
     private String campaignType = "";
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -86,7 +86,9 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
             camefrom= getIntent().getExtras().getString("camefrom", "");
+            picturetaken= false;
             latlong= "";
+            locationtaken= false;
             locationHelper = new LocationHelper();
 
 
@@ -113,7 +115,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                     } else {
 
                         temporaryuploadchecker();
-                        latlong = latlong();
+                        latlong();
                         Log.d("latlong", latlong);
                         //TODO uncomment
                         openCamera();
@@ -142,22 +144,26 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         apicall(logintoken, siteNumber);
         Log.d("tag41", "5");
     }
+
+    boolean locationtaken;
+
+    @Override
+    public void callback(String a) {
+        latlong= a;
+            locationtaken= true;
+    }
+
     private static final String[] REQUIRED_PERMISSIONS = {
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_FINE_LOCATION//,
             //Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
     private static final int REQUEST_CODE_PERMISSIONS = 123;
-    String latlong(){
 
-        locationHelper.requestLocationPermission(this);
-        try {
-            Thread.sleep(2000); // Adjust the delay as needed
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    void latlong(){
 
-        return locationHelper.locationString.isEmpty() ? "Location not available" : locationHelper.locationString;
+        locationHelper.requestLocationPermission(this, this);
     }
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 123;
@@ -188,7 +194,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             if (cameraGranted && locationGranted) {
                 // Both permissions granted, proceed with your app logic
                 temporaryuploadchecker();
-                latlong = latlong();
+                latlong();
                 Log.d("latlong", latlong);
                 //TODO uncomment
 
@@ -277,19 +283,26 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         return imageFile;
     }
 
+    boolean picturetaken;
+    Uri imageUri;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
             // Image captured successfully
             // Access the image file using the Uri you provided earlier
-            Uri imageUri;
+
             try {
                 imageUri = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         createImageFile());
+                picturetaken= true;
+                if(locationtaken){
+                    apicallforvendorimageupdate(latlong, imageUri);
 
-                apicallforvendorimageupdate(latlong, imageUri);
+                }
+
             }catch (Exception e){
                 e.printStackTrace();
                 Toast.makeText(this, "Image update failed", Toast.LENGTH_SHORT).show();
