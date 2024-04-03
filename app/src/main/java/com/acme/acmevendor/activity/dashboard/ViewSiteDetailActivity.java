@@ -54,6 +54,7 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface {
 
@@ -300,6 +301,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     void apicallforvendorimageupdate(String latlong, Uri uri){
 
         String logintoken1= "";
+        //response is response1 (with site)
 
         try {
             FileHelper fh = new FileHelper();
@@ -307,7 +309,35 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         }catch(Exception e){
             Log.d("tag22", e.toString());
         }
-        APIreferenceclass api= new APIreferenceclass(latlong, this, uri, logintoken1);
+        String siteno= "";
+
+        try{
+            JSONObject jsonobj= new JSONObject(response1);
+            JSONObject jsonobj1= jsonobj.getJSONObject("site");
+            String latitude= "";
+            String longitude= "";
+
+            StringTokenizer str= new StringTokenizer(latlong, ",");
+            if(str!= null){
+                latitude= str.nextToken();
+                longitude= str.nextToken();
+            }
+
+            jsonobj1.putOpt("latitude", latitude);
+            jsonobj1.putOpt("longitute", longitude);
+            siteno= Integer.toString(jsonobj.getInt("id"));
+
+            jsonobj.putOpt("site", jsonobj1);
+
+
+
+        }catch (Exception e){
+            Log.d("tag41", e.toString());
+        }
+
+        Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri );
+
+        APIreferenceclass api= new APIreferenceclass(1, this, logintoken1, jsonobj.toString(), siteno, uri);
 
         //TODO handle response
     }
@@ -527,13 +557,14 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         Log.d("tag41", "7");
     }
 
-    String response1="";
+    public String response1="";
 
     @Override
     public void onResponseReceived(String response){
 
         response1= response;
         Log.d("tag41 response is", response);
+        response1= response;
         implementUI(response);
 
     }

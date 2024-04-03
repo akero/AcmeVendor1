@@ -1,26 +1,33 @@
 Ship
 
 
-
 ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.
 
 >image and latlong implement
 >test on real device (camera)
 
-upload both location/uri in viewsitedetails
-handle upload response
+>upload both location/uri in viewsitedetails
+>handle upload response
+
+latlong                 com.acme.acmevendor                  D  Location not available
+
+After photo capture- tag41 java.util.NoSuchElementException
+
+
+move otp boxes to left
 
 notif to vendor to put image
 
 med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity
-
-addsitedetail add to the ui
 
 After all done-
 >check all todos
 test
 fixjsonstring placeholders test in adpref
 addcampdet test todos
+
+pixelation in image in vendor login
+bottom right overflow
 
 //add site button to be added by kushagra- messaged- skip
 //emailed about needing campaignid during site creation
