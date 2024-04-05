@@ -114,7 +114,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         Log.d("camera", "dont have permission");
                     } else {
 
-                        temporaryuploadchecker();
+                       // temporaryuploadchecker();
                         latlong();
                         Log.d("latlong", latlong);
                         //TODO uncomment
@@ -193,7 +193,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
             if (cameraGranted && locationGranted) {
                 // Both permissions granted, proceed with your app logic
-                temporaryuploadchecker();
+               // temporaryuploadchecker();
                 latlong();
                 Log.d("latlong", latlong);
                 //TODO uncomment
@@ -227,8 +227,12 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
     void temporaryuploadchecker(){
         File imageFile = new File("/storage/emulated/0/Pictures/image.jpg");
         //TODO handle image here
-        Uri imageUri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", imageFile);
-
+        Uri imageUri;
+        try {
+            imageUri = FileProvider.getUriForFile(this, "com.example.android.fileprovider", imageFile);
+        }catch(Exception e){
+            Log.d("tag22", e.toString());
+        }
 
 
     }

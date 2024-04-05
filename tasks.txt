@@ -1,6 +1,5 @@
 Ship
 
-
 ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.
 
 >image and latlong implement
@@ -8,10 +7,11 @@ ok so the write external storage permission is not being asked for and not being
 
 >upload both location/uri in viewsitedetails
 >handle upload response
+>can only be tested on device
 
 latlong                 com.acme.acmevendor                  D  Location not available
 
-After photo capture- tag41 java.util.NoSuchElementException
+After photo capture- tag41 java.util.NoSuchElementException- because on emulator
 
 
 move otp boxes to left
