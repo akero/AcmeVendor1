@@ -363,7 +363,6 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                     JSONObject jsonobj1= jsonArray.getJSONObject(i);
                     siteIdArray[i]= jsonobj1.getInt("id");
                 }
-
             }
 
         }catch (Exception e){

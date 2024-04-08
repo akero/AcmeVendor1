@@ -204,7 +204,6 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         }
     }
 
-    //TODO add image type post
     String logintoken;
 
     public void btnSaveClick(View view) {
@@ -246,7 +245,6 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
                 jsonPayload.put("num_of_site", numsites);
                 //jsonPayload.put("image", imageStream);
 
-                //TODO fix both
 
                 //TODO fill below 2 with correct values
 
