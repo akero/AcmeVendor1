@@ -1,5 +1,9 @@
 Ship
 
+ex form
+
+test on phone
+
 /get_site_by_id doesnt work- emailed
 
 /ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
