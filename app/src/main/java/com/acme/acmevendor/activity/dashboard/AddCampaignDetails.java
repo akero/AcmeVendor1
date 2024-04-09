@@ -184,7 +184,7 @@ public class AddCampaignDetails extends AppCompatActivity implements ApiInterfac
         //end of spinner code
 
         //code to select client
-        //TODO fill with client names- emailed
+        //  fill with client names- emailed
 
         FileHelper fh= new FileHelper();
 

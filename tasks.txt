@@ -2,25 +2,29 @@ Ship
 
 ex form
 
+location takes too long to retrieve
+
+upload image test phone
+
 test on phone
 
-/get_site_by_id doesnt work- emailed
+get_site_by_id doesnt work- emailed
 
 /ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
 
-/image and latlong implement
-/test on real device (camera)
-/upload both location/uri in viewsitedetails
-/handle upload response
-/can only be tested on device- test
+image and latlong implement
+test on real device (camera)
+upload both location/uri in viewsitedetails
+handle upload response
+can only be tested on device- test
 
-/latlong                 com.acme.acmevendor                  D  Location not available- test
+latlong                 com.acme.acmevendor                  D  Location not available- test
 
-/After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test
+After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test
 
 notif to vendor to put image
 
-/med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity- emailed
+med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity- emailed
 
 //After all done-
 //check all todos

@@ -149,8 +149,13 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     @Override
     public void callback(String a) {
-        latlong= a;
-            locationtaken= true;
+        if(!locationtaken) {
+            latlong = a;
+            locationtaken = true;
+            apicallforvendorimageupdate(latlong, imageUri);
+
+        }
+        Log.d("tag22", "inside callback, latlong "+ latlong+ "locationtaken"+ locationtaken);
     }
 
     private static final String[] REQUIRED_PERMISSIONS = {
@@ -306,12 +311,15 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                     apicallforvendorimageupdate(latlong, imageUri);
 
                 }
+                Log.d("tag22", "activity result works");
 
             }catch (Exception e){
                 e.printStackTrace();
                 Toast.makeText(this, "Image update failed", Toast.LENGTH_SHORT).show();
             }
             // Do something with the imageUri, e.g., display the image or upload it
+        }else{
+            Log.d("tag22", "something went wrong");
         }
     }
 
@@ -338,13 +346,19 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             if(str!= null){
                 latitude= str.nextToken();
                 longitude= str.nextToken();
+
+                Log.d("tag44", "latitude"+ latitude+ "long"+ longitude);
             }
 
             jsonobj1.putOpt("latitude", latitude);
             jsonobj1.putOpt("longitute", longitude);
-            siteno= Integer.toString(jsonobj.getInt("id"));
+            Log.d("tag511", "jsonobj"+jsonobj.toString()+ " jsonobj1"+ jsonobj1.toString()+ "siteno"+ siteno);
+
+            siteno= Integer.toString(jsonobj1.getInt("id"));
 
             jsonobj.putOpt("site", jsonobj1);
+
+            Log.d("tag333", jsonobj.toString());
 
 
 
@@ -354,7 +368,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
         Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri );
 
-        APIreferenceclass api= new APIreferenceclass(1, this, logintoken1, jsonobj.toString(), siteno, uri);
+        APIreferenceclass api= new APIreferenceclass(2, this, logintoken1, jsonobj.toString(), siteno, uri);
 
         //TODO handle response
     }
