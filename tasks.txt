@@ -2,7 +2,9 @@ Ship
 
 ex form
 
-location takes too long to retrieve
+viewsite line 169 error
+
+//location takes too long to retrieve
 
 upload image test phone
 

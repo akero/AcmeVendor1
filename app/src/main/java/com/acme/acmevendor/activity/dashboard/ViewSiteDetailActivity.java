@@ -106,7 +106,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 @Override
                 public void onClick(View view) {
                     Log.d("camera", "click registered");
-                    if (ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
                         Toast.makeText(ViewSiteDetailActivity.this, "Please give camera and location permissions", Toast.LENGTH_SHORT).show();
 
@@ -160,7 +160,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     private static final String[] REQUIRED_PERMISSIONS = {
             Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_FINE_LOCATION//,
+            Manifest.permission.ACCESS_COARSE_LOCATION//,
             //Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
@@ -185,7 +185,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 if (permissions[i].equals(Manifest.permission.CAMERA) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     cameraGranted = true;
                     Log.d("permissions", "camera");
-                } else if (permissions[i].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                } else if (permissions[i].equals(Manifest.permission.ACCESS_COARSE_LOCATION) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     locationGranted = true;
 
                     Log.d("permissions", "location");
@@ -309,6 +309,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 picturetaken= true;
                 if(locationtaken){
                     apicallforvendorimageupdate(latlong, imageUri);
+                    Log.d("tag22", "activity result works.");
 
                 }
                 Log.d("tag22", "activity result works");
@@ -359,16 +360,16 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             jsonobj.putOpt("site", jsonobj1);
 
             Log.d("tag333", jsonobj.toString());
+            Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri );
 
+            APIreferenceclass api= new APIreferenceclass(2, this, logintoken1, jsonobj.toString(), siteno, uri);
 
 
         }catch (Exception e){
             Log.d("tag41", e.toString());
         }
 
-        Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri );
 
-        APIreferenceclass api= new APIreferenceclass(2, this, logintoken1, jsonobj.toString(), siteno, uri);
 
         //TODO handle response
     }
