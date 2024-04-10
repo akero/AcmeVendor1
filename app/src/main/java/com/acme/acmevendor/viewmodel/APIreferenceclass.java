@@ -745,6 +745,8 @@ public class APIreferenceclass {
         byte[] fileBytes = readFileContent(context, selectedImage);
         String fileName = getFileName(context, selectedImage);
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+        Log.d("tag99", fileName);
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     try {
         // Add File Part
@@ -753,6 +755,9 @@ public class APIreferenceclass {
         outputStream.write(("Content-Type: " + guessContentTypeFromName(fileName) + "\r\n\r\n").getBytes());
         outputStream.write(fileBytes);
         outputStream.write(("\r\n").getBytes());
+
+        Log.d("tag99", "3");
+
 
         // Add JSON Part
         String formData = convertJsonToFormData(jsonString);
@@ -764,12 +769,16 @@ public class APIreferenceclass {
             outputStream.write(("\r\n").getBytes());
         }
 
+        Log.d("tag99", "4");
+
+
         // End of multipart/form-data
         outputStream.write(("--" + boundary + "--").getBytes());
 
         return outputStream.toByteArray();
         }catch (Exception e){
         e.printStackTrace();
+        Log.d("tag99", e.toString());
     }
     return outputStream.toByteArray();
     }

@@ -338,8 +338,12 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         String siteno= "";
 
         try{
+
+
             JSONObject jsonobj= new JSONObject(response1);
+            Log.d("tag44", jsonobj.toString());
             JSONObject jsonobj1= jsonobj.getJSONObject("site");
+            Log.d("tag44", jsonobj1.toString());
             String latitude= "";
             String longitude= "";
 
@@ -360,13 +364,14 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             jsonobj.putOpt("site", jsonobj1);
 
             Log.d("tag333", jsonobj.toString());
-            Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri );
+            Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri + "jsonobj1"+ jsonobj1.toString());
 
-            APIreferenceclass api= new APIreferenceclass(2, this, logintoken1, jsonobj.toString(), siteno, uri);
+            APIreferenceclass api= new APIreferenceclass(2, this, logintoken1, jsonobj1.toString(), siteno, uri);
 
 
         }catch (Exception e){
             Log.d("tag41", e.toString());
+            e.printStackTrace();
         }
 
 
@@ -379,6 +384,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     private void implementUI(String response) {
         try {
+
+            Log.d("tagresponse is", response);
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getString("status").equals("success")) {
                 JSONObject dataArray = new JSONObject(jsonResponse.getString("site"));

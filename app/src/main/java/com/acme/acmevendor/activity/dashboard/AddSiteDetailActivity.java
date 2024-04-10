@@ -460,6 +460,7 @@ try {
                 queryType = 1; //POST
                 siteno = siteDetail.getSiteNo();
                 //TODO pending from backend. Ask him if siteno is "" then make new site.- check notes for how to implement new site
+                Log.d("uri", selectedImage.toString());
                 APIreferenceclass api = new APIreferenceclass(queryType, ctxt, loginToken, siteDetailJson.toString(), siteno, selectedImage, 1);
             }
         }

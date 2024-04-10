@@ -1,8 +1,18 @@
 Ship
 
+add site to vendor login
+swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown
+file not saving
+ask dev for illumination/ media type content
+
+
 ex form
 
+updating image issue- emailed
+
 viewsite line 169 error
+
+can try site_img endpoint check ifimage upload is fixed
 
 //location takes too long to retrieve
 
