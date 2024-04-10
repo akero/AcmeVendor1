@@ -1,19 +1,48 @@
 Ship
 
-add site to vendor login
 swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown
+
+line 305 admindashvendor
+
+>add vendor name to dash
 file not saving
+//ask dev for illumination/ media type content- emailed-
+//location takes too long to retrieve
+//After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test
+//get_site_by_id doesnt work- emailed
+//latlong                 com.acme.acmevendor                  D  Location not available- test
 
-ask dev for illumination/ media type content- emailed-
-Illumination type:
+ex form
 
+updating image issue- emailed- working- find where issue is in my code
+
+viewsite line 169 error
+
+can try site_img endpoint check ifimage upload is fixed
+
+
+
+add site to vendor login- pretend u didnt hear this
+
+/ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
+
+image and latlong implement
+test on real device (camera)
+upload both location/uri in viewsitedetails
+handle upload response
+
+notif to vendor to put image
+
+//can only be tested on device- test
+//upload image test phone
+//med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity- emailed
+//test on phone
+//Illumination type:
 Non Lit/Ambient Lit
 Front Lit
 Back Lit
 Digital
-
 media types:
-
 Billboard
 Unipole
 Hoarding
@@ -23,37 +52,6 @@ LED Screen
 MUPI
 Digital Wall Print
 
-ex form
-
-updating image issue- emailed- working
-
-viewsite line 169 error
-
-can try site_img endpoint check ifimage upload is fixed
-
-//location takes too long to retrieve
-
-upload image test phone
-
-test on phone
-
-get_site_by_id doesnt work- emailed
-
-/ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
-
-image and latlong implement
-test on real device (camera)
-upload both location/uri in viewsitedetails
-handle upload response
-can only be tested on device- test
-
-latlong                 com.acme.acmevendor                  D  Location not available- test
-
-After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test
-
-notif to vendor to put image
-
-med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity- emailed
 
 //After all done-
 //check all todos

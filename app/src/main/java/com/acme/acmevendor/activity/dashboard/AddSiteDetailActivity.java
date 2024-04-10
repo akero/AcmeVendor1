@@ -120,7 +120,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
             Log.d("tg343", e.toString());
         }
 
-        String[] items = new String[]{"Item 1", "Item 2", "Item 3"};
+        String[] items = new String[]{"Billboard", "Unipole", "Hoarding", "Gantry", "BQS","LED Screen", "MUPI", "Digital Wall Print"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         binding.spinnermediatype.setAdapter(adapter);
@@ -140,7 +140,7 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         });
 
 
-        String[] items1 = new String[]{"Item 1", "Item 2", "Item 3"};
+        String[] items1 = new String[]{"Non Lit/Ambient Lit", "Front Lit", "Back Lit", "Digital"};
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
         binding.spinnerillumination.setAdapter(adapter1);

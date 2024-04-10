@@ -71,6 +71,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             Log.d("whichclass", "AdminDashVendorSites");
             gettingcampaignids= false;
             lastsitecall= false;
+            vendorname= "";
             sitearray= new JSONArray();
             showedit= true;
             sitesretrieved= false;
@@ -112,9 +113,13 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
 
         void getvendorcampaigns(String id){
             gettingcampaignids= true;
+
+            Log.d("tag222", "1");
             APIreferenceclass api= new APIreferenceclass(logintoken, this, id, true);
 
         }
+
+        String vendorname;
 
         boolean sitesretrieved;
         //onresponsereceived from api
@@ -296,6 +301,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             if(i== campaignIds.length-1){
                 lastsitecall= true;
             }
+            Log.d("tag222", "2");
             APIreferenceclass api= new APIreferenceclass(logintoken, this, url1, true, true);
             Log.d("sites", "one loop"+ i+campaignIds.length);
 
@@ -459,6 +465,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             progressBar.startAnimation(rotateAnimation);
             //view.setVisibility(View.VISIBLE);
             //animation code
+            Log.d("tag222", "3");
             APIreferenceclass api= new APIreferenceclass(logintoken, this, id);
         }
 
@@ -528,7 +535,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                             }
 
 
-
+                            Log.d("tag222", "4");
                             APIreferenceclass api = new APIreferenceclass(siteid, logintoken, ctxt, 1);
                             delete = 1;
                             return true;
