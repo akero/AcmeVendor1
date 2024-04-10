@@ -3,6 +3,7 @@ package com.acme.acmevendor.viewmodel;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -603,6 +605,7 @@ public class APIreferenceclass {
 
 
 
+
     private byte[] readFileContent(Context context, Uri uri) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
@@ -613,6 +616,7 @@ public class APIreferenceclass {
             }
             return outputStream.toByteArray();
         } catch (IOException e) {
+            Log.d("tag222", e.toString());
             // Handle the exception
             return null;
         }
@@ -743,6 +747,7 @@ public class APIreferenceclass {
     byte[] multipart(Context context, Uri selectedImage, String jsonString){
         // Read file content directly from Uri
         byte[] fileBytes = readFileContent(context, selectedImage);
+        String outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/output.txt";
         String fileName = getFileName(context, selectedImage);
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
         Log.d("tag99", fileName);
@@ -774,6 +779,10 @@ public class APIreferenceclass {
 
         // End of multipart/form-data
         outputStream.write(("--" + boundary + "--").getBytes());
+        //FileOutputStream fos = new FileOutputStream(outputFilePath);
+        //fos.write(outputStream.toByteArray());
+        //fos.flush();
+        //fos.close();
 
         return outputStream.toByteArray();
         }catch (Exception e){

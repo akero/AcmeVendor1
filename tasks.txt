@@ -3,12 +3,29 @@ Ship
 add site to vendor login
 swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown
 file not saving
-ask dev for illumination/ media type content
 
+ask dev for illumination/ media type content- emailed-
+Illumination type:
+
+Non Lit/Ambient Lit
+Front Lit
+Back Lit
+Digital
+
+media types:
+
+Billboard
+Unipole
+Hoarding
+Gantry
+BQS
+LED Screen
+MUPI
+Digital Wall Print
 
 ex form
 
-updating image issue- emailed
+updating image issue- emailed- working
 
 viewsite line 169 error
 

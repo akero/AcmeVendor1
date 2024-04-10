@@ -152,8 +152,9 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         if(!locationtaken) {
             latlong = a;
             locationtaken = true;
-            apicallforvendorimageupdate(latlong, imageUri);
-
+            if(picturetaken) {
+                apicallforvendorimageupdate(latlong, imageUri);
+            }
         }
         Log.d("tag22", "inside callback, latlong "+ latlong+ "locationtaken"+ locationtaken);
     }
