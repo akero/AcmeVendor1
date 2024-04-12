@@ -9,34 +9,31 @@ line 305 admindashvendor
 no value for site- when updating image multiple times
 
 add vendor name to dash
+
+ex form
+
+updating image issue- emailed- working- find where issue is in my code- need permission to read file
+
+viewsite line 169 error
+
+add site to vendor login- pretend u didnt hear this
+
+/ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
+
+upload both location/uri in viewsitedetails
+handle upload response
+
+notif to vendor to put image
+
+//image and latlong implement
+//test on real device (camera)
+//can try site_img endpoint check ifimage upload is fixed
 //file not saving- its saving to internal storage
 //ask dev for illumination/ media type content- emailed- implemented
 //location takes too long to retrieve- fixed
 //After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test- works on phone
 //get_site_by_id doesnt work- emailed- works
 //latlong Location not available- test- fixed
-
-ex form
-
-updating image issue- emailed- working- find where issue is in my code
-
-viewsite line 169 error
-
-can try site_img endpoint check ifimage upload is fixed
-
-
-
-add site to vendor login- pretend u didnt hear this
-
-/ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
-
-image and latlong implement
-test on real device (camera)
-upload both location/uri in viewsitedetails
-handle upload response
-
-notif to vendor to put image
-
 //can only be tested on device- test
 //upload image test phone
 //med type, illu- editcampaigndetails, addcampaigndetails, addsitedetailactivity- emailed
@@ -55,7 +52,6 @@ BQS
 LED Screen
 MUPI
 Digital Wall Print
-
 
 //After all done-
 //check all todos
