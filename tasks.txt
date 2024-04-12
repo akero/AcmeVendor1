@@ -1,16 +1,20 @@
 Ship
 
+>line608 apiref- need permission to read file
+
 swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown
 
 line 305 admindashvendor
 
->add vendor name to dash
-file not saving
-//ask dev for illumination/ media type content- emailed-
-//location takes too long to retrieve
-//After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test
-//get_site_by_id doesnt work- emailed
-//latlong                 com.acme.acmevendor                  D  Location not available- test
+no value for site- when updating image multiple times
+
+add vendor name to dash
+//file not saving- its saving to internal storage
+//ask dev for illumination/ media type content- emailed- implemented
+//location takes too long to retrieve- fixed
+//After photo capture- tag41 java.util.NoSuchElementException- because on emulator- test- works on phone
+//get_site_by_id doesnt work- emailed- works
+//latlong Location not available- test- fixed
 
 ex form
 

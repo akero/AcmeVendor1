@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -50,6 +51,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -57,6 +60,7 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInterface, LocationCallback {
+    private final Context ctxt= this;
 
     private String campaignType = "";
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -161,7 +165,9 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     private static final String[] REQUIRED_PERMISSIONS = {
             Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_COARSE_LOCATION//,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+            //Manifest.permission.MANAGE_EXTERNAL_STORAGE
+            //,
             //Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
@@ -303,10 +309,44 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             // Image captured successfully
             // Access the image file using the Uri you provided earlier
 
+            Log.d("tag22", data.toString());
+
             try {
                 imageUri = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         createImageFile());
+                Log.d("tag222", imageUri.toString());
+
+                String imageuristring= imageUri.toString();
+                String[] a= imageuristring.split("Pictures/");
+                imageuristring= a[1];
+                imageuristring= "content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.acme.acmevendor%2Ffiles%2FPictures%2F"+ imageuristring;
+                imageUri= Uri.parse(imageuristring);
+
+               /* try (InputStream in = getContentResolver().openInputStream(imageUri)) {
+                    // Open a private file for writing
+                    try (FileOutputStream out = openFileOutput("ImageName.jpg", Context.MODE_PRIVATE)) {
+                        byte[] buffer = new byte[1024];
+                        Log.d("tag22", "copying file");
+
+                        int read;
+                        while ((read = in.read(buffer)) != -1) {
+                            Log.d("tag22", "copying file");
+
+                            out.write(buffer, 0, read);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                // Get a Uri for the file in internal storage
+                File file = new File(getFilesDir(), "ImageName.jpg");
+                imageUri = Uri.fromFile(file);
+
+*/
+
+
                 picturetaken= true;
                 if(locationtaken){
                     apicallforvendorimageupdate(latlong, imageUri);
@@ -362,21 +402,21 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
             siteno= Integer.toString(jsonobj1.getInt("id"));
 
+            jsonobj1.remove("image");
             jsonobj.putOpt("site", jsonobj1);
 
             Log.d("tag333", jsonobj.toString());
             Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri + "jsonobj1"+ jsonobj1.toString());
 
-            APIreferenceclass api= new APIreferenceclass(2, this, logintoken1, jsonobj1.toString(), siteno, uri);
+
+
+            APIreferenceclass api= new APIreferenceclass(2, ctxt, logintoken1, jsonobj1.toString(), siteno, uri);
 
 
         }catch (Exception e){
             Log.d("tag41", e.toString());
             e.printStackTrace();
         }
-
-
-
         //TODO handle response
     }
 

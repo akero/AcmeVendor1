@@ -605,13 +605,18 @@ public class APIreferenceclass {
 
 
 
-
+//HERE
     private byte[] readFileContent(Context context, Uri uri) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Log.d("tag22", "writing image");
+        Log.d("uri11", uri.toString());
+
+
         try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
             byte[] buf = new byte[1024];
             int len;
             while ((len = inputStream.read(buf)) > 0) {
+                Log.d("tag222", "writing image");
                 outputStream.write(buf, 0, len);
             }
             return outputStream.toByteArray();
@@ -713,6 +718,8 @@ public class APIreferenceclass {
         String url = "https://acme.warburttons.com/api/sites";
         Log.d("tg3", jsonString);
 
+        Log.d("tag22", selectedImage.toString());
+
         //TODO remove placeholders
         jsonString = fixjsonstring(jsonString); //placeholder
         Log.d("tg3", jsonString);
@@ -747,10 +754,12 @@ public class APIreferenceclass {
     byte[] multipart(Context context, Uri selectedImage, String jsonString){
         // Read file content directly from Uri
         byte[] fileBytes = readFileContent(context, selectedImage);
-        String outputFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/output.txt";
+        String outputFilePath = "/data/data/com.acme.acmevendor/files/output.txt";
         String fileName = getFileName(context, selectedImage);
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
         Log.d("tag99", fileName);
+        Log.d("tag99", outputFilePath);
+        Log.d("tag99", selectedImage.toString());
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     try {
@@ -779,10 +788,10 @@ public class APIreferenceclass {
 
         // End of multipart/form-data
         outputStream.write(("--" + boundary + "--").getBytes());
-        //FileOutputStream fos = new FileOutputStream(outputFilePath);
-        //fos.write(outputStream.toByteArray());
-        //fos.flush();
-        //fos.close();
+        FileOutputStream fos = new FileOutputStream(outputFilePath);
+        fos.write(outputStream.toByteArray());
+        fos.flush();
+        fos.close();
 
         return outputStream.toByteArray();
         }catch (Exception e){
