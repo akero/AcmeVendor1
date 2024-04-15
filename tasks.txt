@@ -1,34 +1,27 @@
 Ship
 
 imageupload- size limit is 2mb- emailed
-
->swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown or dash
->send sites array
-//viewcampaignsites
->campaignlistactivity
-viewvendorsites
-admindashvendorsites
-
-line 305 admindashvendor
+upload both location/uri in viewsitedetails
+handle upload response
+notif to vendor to put image
 
 no value for site- when updating image multiple times
 
 add vendor name to dash
 
+line 305 admindashvendor
+
 ex form
-
-
-viewsite line 169 error
 
 add site to vendor login- pretend u didnt hear this
 
-
-
-upload both location/uri in viewsitedetails
-handle upload response
-
-notif to vendor to put image
-
+//viewsite line 169 error
+//swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown or dash
+//send sites array
+//viewcampaignsites
+//campaignlistactivity
+//viewvendorsites
+//admindashvendorsites
 //updating image issue- emailed- working- find where issue is in my code- need permission to read file
 //ok so the write external storage permission is not being asked for and not being granted. why . also theres 2 popups now asking for camera and location permission each instead of 1.- test
 //line608 apiref- need permission to read file

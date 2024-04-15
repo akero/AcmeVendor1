@@ -51,6 +51,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
         //JSONArray jsonArray;
         JSONArray sitearray;
 
+
     boolean showMenus = false;
         int delete= 0;
 
@@ -61,7 +62,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
         boolean showedit;
         boolean gettingcampaignids;
 
-
+        String[] idarray;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -185,6 +186,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             //JSONObject jsonResponse = new JSONObject(response);
             //if(jsonResponse.getString("status").equals("success")) {
             JSONArray dataArray = sitearray;
+            idarray= new String[dataArray.length()];
 
             if (dataArray != null && dataArray.length() > 0) {
                 try {
@@ -198,6 +200,9 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
 
                             vendorid = dataObject.optString("vendor_id");
                             //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+
+                            idarray[i]= Integer.toString(dataObject.optInt("id"));
+
                             jsonObject.putOpt("id", dataObject.optInt("id"));
                             jsonObject.putOpt("uid", dataObject.optString("uid"));
                             jsonObject.putOpt("image", dataObject.optString("image"));
@@ -499,7 +504,8 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                         .putExtra("camefrom", camefrom)
                         .putExtra("siteNumber", id)
                         .putExtra("logintoken", logintoken)
-                        .putExtra("vendorclientorcampaign", vendorclientorcampaign));
+                        .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                        .putExtra("idarray", idarray));
 
                 // .putExtra("siteId", siteId)); // If you are passing site id
             } catch (JSONException e) {
