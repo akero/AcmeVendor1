@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,18 +79,30 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
     String latlong;
     private LocationHelper locationHelper;
-
+    String idarray[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
+
+            idarray= null;
             campaignId = getIntent().getExtras().getString("campaignId", "");
             campaignType = getIntent().getExtras().getString("campaignType", "");
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
             camefrom= getIntent().getExtras().getString("camefrom", "");
+            try {
+                idarray = getIntent().getExtras().getStringArray("idarray");
+                for(int i= 0; i<idarray.length; i++){
+                    Log.d("idarray", idarray[i]);
+                }
+
+            }catch (Exception e){
+                Log.d("tag22", e.toString());
+            }
+
             picturetaken= false;
             latlong= "";
             locationtaken= false;
@@ -140,6 +153,50 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             Log.d("tg2", siteNumber);
         }
 
+        //buttons to move to next or prev site
+        ImageView left= findViewById(R.id.lefticon);
+        left.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                String prevSite= "";
+                for(int i=0; i<idarray.length;i++){
+                    if(idarray[i].equals(siteNumber)){
+                        if(!prevSite.equals("")){
+                            siteNumber= prevSite;
+                            apicall(logintoken, prevSite);
+                            break;
+                        }
+                    }else{
+                        prevSite= idarray[i];
+                    }
+                }
+            }
+
+        });
+
+        ImageView right= findViewById(R.id.righticon);
+        right.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                String nextSite= "";
+                for(int i=0; i<idarray.length;i++){
+                    if(idarray[i].equals(siteNumber)){
+                        if(i!=idarray.length-1){
+                            nextSite= idarray[i+1];
+                            siteNumber= nextSite;
+                            apicall(logintoken, nextSite);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        });
+
+
+
         //= "";
         Log.d("tag41", "1");
         Log.d("whichclass", "ViewSiteDetailActivity");
@@ -167,8 +224,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_COARSE_LOCATION
             //Manifest.permission.MANAGE_EXTERNAL_STORAGE
-            //,
-            //Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ,Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
     private static final int REQUEST_CODE_PERMISSIONS = 123;
@@ -262,8 +318,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
+    Uri photoURI;
+
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        photoURI= null;
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             try {
@@ -272,10 +331,12 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                 // Handle error
             }
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(ViewSiteDetailActivity.this,
+                photoURI = FileProvider.getUriForFile(ViewSiteDetailActivity.this,
                         "com.example.android.fileprovider",
                         photoFile);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+                Log.d("opencamerauri", photoURI.toString());
                 startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
             }
         } else {
@@ -290,7 +351,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getFilesDir();
+        Log.d("tag222", "created image");
         File imageFile = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -317,11 +379,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         createImageFile());
                 Log.d("tag222", imageUri.toString());
 
-                String imageuristring= imageUri.toString();
-                String[] a= imageuristring.split("Pictures/");
-                imageuristring= a[1];
-                imageuristring= "content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.acme.acmevendor%2Ffiles%2FPictures%2F"+ imageuristring;
-                imageUri= Uri.parse(imageuristring);
+                //String imageuristring= imageUri.toString();
+                //String[] a= imageuristring.split("Pictures/");
+                //imageuristring= a[1];
+                //imageuristring= "content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.acme.acmevendor%2Ffiles%2FPictures%2F"+ imageuristring;
+                //imageUri= Uri.parse(imageuristring);
 
                /* try (InputStream in = getContentResolver().openInputStream(imageUri)) {
                     // Open a private file for writing
@@ -410,7 +472,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
 
 
-            APIreferenceclass api= new APIreferenceclass(2, ctxt, logintoken1, jsonobj1.toString(), siteno, uri);
+            APIreferenceclass api= new APIreferenceclass(2, ctxt, logintoken1, jsonobj1.toString(), siteno, photoURI);
 
 
         }catch (Exception e){

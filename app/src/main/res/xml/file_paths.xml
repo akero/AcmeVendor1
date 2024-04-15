@@ -3,4 +3,6 @@
     <external-path
         name="external_files"
         path="Android/data/com.acme.acmevendor/files/" />
+    <files-path name="files" path="./" />
+
 </paths>

@@ -113,7 +113,7 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
 
     }
 
-
+    String[] idarray;
     String vendorid;
     JSONArray jsonArray1;
     private void implementUi(String response){
@@ -121,10 +121,14 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
             JSONObject jsonObject = new JSONObject();
             jsonArray1= new JSONArray();
 
-            String ids[];
+
+
             JSONObject jsonResponse = new JSONObject(response);
             if(jsonResponse.getString("status").equals("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("sites");
+
+                idarray= new String[dataArray.length()];
+
 
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
@@ -138,6 +142,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                             if(dataObject != null) {
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
+
+                                idarray[i]= Integer.toString(dataObject.optInt("id"));
 
                                 vendorid= dataObject.optString("vendor_id");
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
@@ -161,6 +167,10 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+
+                                idarray[i]= Integer.toString(dataObject.optInt("id"));
+
+
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
@@ -182,6 +192,9 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+
+                                idarray[i]= Integer.toString(dataObject.optInt("id"));
+
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
@@ -298,7 +311,8 @@ public class ViewCampaignSites extends AppCompatActivity implements ApiInterface
                     .putExtra("camefrom", camefrom)
                     .putExtra("siteNumber", id)
                     .putExtra("logintoken", logintoken)
-                    .putExtra("vendorclientorcampaign", vendorclientorcampaign));
+                    .putExtra("vendorclientorcampaign", vendorclientorcampaign)
+                    .putExtra("idarray", idarray));
 
             // .putExtra("siteId", siteId)); // If you are passing site id
         } catch (JSONException e) {
