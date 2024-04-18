@@ -478,8 +478,16 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             Log.d("tag333", jsonobj.toString());
             Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri + "jsonobj2"+ jsonobj2.toString());
 
+            /*compress photoURI here
+            // Load the image from a file
+Bitmap bitmap = BitmapFactory.decodeFile("/path/to/your/image.jpg");
 
+// Compress the image
+FileOutputStream out = new FileOutputStream("/path/to/compressed/image.jpg");
+bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out); // 50 is the quality parameter
 
+out.close();
+            * */
             APIreferenceclass api= new APIreferenceclass(1, ctxt, logintoken1, jsonobj2.toString(), photoURI);
 
 
@@ -628,7 +636,14 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         });
 
                 }
-            } else {
+            }else if(jsonResponse.getString("message").equals("Data Saved successfully.")){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ViewSiteDetailActivity.this, "Image updated successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            }else {
 
                     runOnUiThread(new Runnable() {
                         @Override

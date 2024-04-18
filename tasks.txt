@@ -1,15 +1,15 @@
 Ship
 
-imageupload- size limit is 2mb- emailed- site not updating- emailed
-upload both location/uri in viewsitedetails
-handle upload response
+test performance- line 481 viewsitedetail compress image
+edit_site- large image not working- compress image
+add site test large image
+no value for site- when updating image multiple times
+
+edit site from admin dash vendor tab not working because need campaign id
+
 notif to vendor to put image
 
-edit_site- large image not working
-
-bottom left pixel
-
-no value for site- when updating image multiple times
+bottom left pixellation
 
 add vendor name to dash
 
@@ -19,6 +19,11 @@ ex form
 
 add site to vendor login- pretend u didnt hear this
 
+//edit_site- placeholder vendor id
+//when updating image from vendor login its sending placeholder_vendor_id fix that
+//handle upload response	
+//upload both location/uri in viewsitedetails
+//imageupload- size limit is 2mb- emailed- site not updating- emailed- says its fixed check
 //viewsite line 169 error
 //swipe/ button/ dropdown to see next site- drowndown has site number. to admin dash all, vendor and client login- go with dropdown or dash
 //send sites array

@@ -81,7 +81,10 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_site_detail);
         siteDetail = new SiteDetail();
         campaignId="";
+        vendorselected= 0;
+        String vendoridtemp= "";
         selectedVendor= "";
+        vendorId= "";
         vendorspinnerboolean= 0;
         Log.d("whichclass", "AddSiteDetailActivity");
 
@@ -90,16 +93,25 @@ public class AddSiteDetailActivity extends AppCompatActivity implements Location
 
             editingsite= "";
             editingsite= getIntent().getStringExtra("editingsite");
+            vendorId= jsonobj.getString("vendor_id");
+            Log.d("tag222", vendoridtemp);
+            Log.d("tag222", vendorId);
+
+
 
         }catch(Exception e){
             Log.d("tg90", "3"+e.toString());}
 
         try {
         campaignId= getIntent().getStringExtra("campaignId")!=null?getIntent().getStringExtra("campaignId"):"" ;
-        vendorId= getIntent().getStringExtra("vendorId")!=null?getIntent().getStringExtra("vendorId"):"" ;
+        //vendorId= getIntent().getStringExtra("vendorId")!=null?getIntent().getStringExtra("vendorId"):"" ;
+        Log.d("tag222", vendorId);
             editingsite= "";
             editingsite= getIntent().getStringExtra("editingsite");
-        }catch(Exception e){
+            //if(vendorId.equals("")) {
+              //  vendorId = vendoridtemp;
+            //}
+            }catch(Exception e){
             Log.d("tg90", "3"+e.toString());}
 
         selectedItem="";
@@ -348,9 +360,20 @@ try {
             siteDetail.setLocation(tvLocation.getText().toString());
 
             try {
-                siteDetail.setVendorId(vendorId);
+                if (!vendorId.equals("")) {
+                    Log.d("tag222", "works");
+                    siteDetail.setVendorId(vendorId);
+
+                }else {
+                    Log.d("tag222", "does not work");
+                    siteDetail.setVendorId(siteDetail.getVendorId());
+                }
+                Log.d("vendorid", siteDetail.getVendorId());
+
             } catch (Exception e) {
                 e.printStackTrace();//siteDetail.setCampaignId(campaignId);
+                //siteDetail.setVendorId(siteDetail.getVendorId());
+
             }
 
 // Set the site name
@@ -388,8 +411,12 @@ try {
             siteDetail.setCreatedAt(setCurrentDate());
             siteDetail.setIllumination(selectedItem1);
             siteDetail.setMediaType(selectedItem);
-            siteDetail.setVendorId(selectedVendor);
+            if(!vendorId.equals("")) {
+                siteDetail.setVendorId(vendorId);
+             }else{
+                siteDetail.setVendorId(selectedVendor);
 
+            }
             Log.d("tg33", selectedVendor);
 // Set the total area
             TextView tvTotalArea = findViewById(R.id.etTotalArea);
@@ -422,8 +449,15 @@ try {
                 int idValue = id != null ? id : 0; // Replace 0 with your default value
                 siteDetailJson.put("id", idValue);
                 siteDetailJson.put("campaign_id", campaignId);
-                siteDetailJson.put("vendor_id", siteDetail.getVendorId());
+                if(vendorselected>1) {
+                    siteDetailJson.put("vendor_id", selectedVendor);
+
+                }else{
+                    siteDetailJson.put("vendor_id", siteDetail.getVendorId());
+
+                }
                 siteDetailJson.put("location", siteDetail.getLocation() != null ? siteDetail.getLocation() : "");
+
                 siteDetailJson.put("created_at", siteDetail.getCreatedAt() != null ? siteDetail.getCreatedAt() : "");
                 siteDetailJson.put("end_date", siteDetail.getEndDate() != null ? siteDetail.getEndDate() : "");
                 siteDetailJson.put("latitude", siteDetail.getLatitude() != null ? siteDetail.getLatitude() : "");
@@ -854,7 +888,7 @@ try {
 
     JSONArray jsonArray1;
     String vendorName;
-
+int vendorselected;
     void vendorlist(String response){
         //TODO retreive client list
         Log.d("vendorlist", response);
@@ -882,15 +916,17 @@ try {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         binding.spinnervendor.setAdapter(adapter2);
 
+
         // Inside your onCreate method
         binding.spinnervendor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+                Log.d("clicked", "fk");
 
-
-
+                vendorselected+=1;
+                Log.d("vendorselected", Integer.toString(vendorselected));
                 selectedVendor = parent.getItemAtPosition(position).toString();
 
                 try {

@@ -3,7 +3,6 @@ package com.acme.acmevendor.viewmodel;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -566,7 +565,7 @@ public class APIreferenceclass {
 
     //addsitedetailactivity- edit site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage) {
-        Log.d("tag21", "addsitedetailactivity edit site");
+        Log.d("tag21", "addsitedetailactivity edit site1");
 
         String url = "https://acme.warburttons.com/api/sites/";
         jsonString = fixjsonstring(jsonString);
