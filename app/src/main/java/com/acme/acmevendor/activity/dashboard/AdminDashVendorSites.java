@@ -42,7 +42,6 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class AdminDashVendorSites extends AppCompatActivity implements ApiInterface{
-
         private AppBarConfiguration appBarConfiguration;
     private ActivityAdminDashVendorSitesBinding binding;
 
@@ -50,7 +49,6 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
         int id=0;
         //JSONArray jsonArray;
         JSONArray sitearray;
-
 
     boolean showMenus = false;
         int delete= 0;

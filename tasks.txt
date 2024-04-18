@@ -1,9 +1,13 @@
 Ship
 
-imageupload- size limit is 2mb- emailed
+imageupload- size limit is 2mb- emailed- site not updating- emailed
 upload both location/uri in viewsitedetails
 handle upload response
 notif to vendor to put image
+
+edit_site- large image not working
+
+bottom left pixel
 
 no value for site- when updating image multiple times
 

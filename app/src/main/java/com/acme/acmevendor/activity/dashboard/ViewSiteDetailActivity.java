@@ -442,7 +442,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
         try{
 
-
+            Log.d("response1", response1);
             JSONObject jsonobj= new JSONObject(response1);
             Log.d("tag44", jsonobj.toString());
             JSONObject jsonobj1= jsonobj.getJSONObject("site");
@@ -467,12 +467,20 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             jsonobj1.remove("image");
             jsonobj.putOpt("site", jsonobj1);
 
+            JSONObject jsonobj2= new JSONObject();
+            jsonobj2.putOpt("campaign_id", jsonobj1.getInt("campaign_id"));
+            jsonobj2.putOpt("vendor_id", jsonobj1.getString("vendor_id"));
+            jsonobj2.putOpt("site_id", jsonobj1.getString("id"));
+            jsonobj2.putOpt("longitute", longitude);
+            jsonobj2.putOpt("latitude", latitude);
+
+
             Log.d("tag333", jsonobj.toString());
-            Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri + "jsonobj1"+ jsonobj1.toString());
+            Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri + "jsonobj2"+ jsonobj2.toString());
 
 
 
-            APIreferenceclass api= new APIreferenceclass(2, ctxt, logintoken1, jsonobj1.toString(), siteno, photoURI);
+            APIreferenceclass api= new APIreferenceclass(1, ctxt, logintoken1, jsonobj2.toString(), photoURI);
 
 
         }catch (Exception e){

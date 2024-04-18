@@ -711,6 +711,44 @@ public class APIreferenceclass {
         callapi(headers, jsonPayload, context, querytype ,url);
     }
 
+    //vendor image upload
+    public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, Uri selectedImage){
+        String url = "https://acme.warburttons.com/api/site_img";
+        Log.d("tg3", jsonString);
+
+        Log.d("tag22", selectedImage.toString());
+
+        //TODO remove placeholders
+        //jsonString = fixjsonstring(jsonString); //placeholder
+        Log.d("tg3", jsonString);
+        Log.d("tg3", url);
+
+        int querytype = queryType;
+
+        //image call
+        if (selectedImage != null) {
+            // Read file content directly from Uri
+
+            Log.d("tg33", "not null");
+            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+            // Modify headers for multipart request
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            // Call the API with multipart data
+            callapi2(headers, multipart(context, selectedImage, jsonString), context, querytype, url);
+        } else {//normal call
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/x-www-form-urlencoded");
+
+            Log.d("addbatest", "Inside admin api");
+            String formData = convertJsonToFormData(jsonString);
+            callapi(headers, formData, context, querytype, url);
+        }
+    }
+
     //addsitedetailactivity- add new site
     public APIreferenceclass(int queryType, Context context, String logintoken, String jsonString, String siteno, Uri selectedImage, int i) {
         Log.d("tag21", "addsitedetailactivity add site");
