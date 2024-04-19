@@ -1,9 +1,9 @@
 Ship
 
-test performance- line 481 viewsitedetail compress image
-edit_site- large image not working- compress image
-add site test large image
-no value for site- when updating image multiple times
+//test performance- line 481 viewsitedetail compress image
+//edit_site- large image not working- compress image
+//add site test large image
+>no value for site- when updating image multiple times
 
 edit site from admin dash vendor tab not working because need campaign id
 
@@ -17,7 +17,7 @@ line 305 admindashvendor
 
 ex form
 
-add site to vendor login- pretend u didnt hear this
+add site to vendor login
 
 //edit_site- placeholder vendor id
 //when updating image from vendor login its sending placeholder_vendor_id fix that

@@ -617,7 +617,7 @@ public class APIreferenceclass {
         Log.d("tag22", "writing image");
         Log.d("uri11", uri.toString());
 
-        //String filename= getFileName(context, uri);
+        //compressing image
         try{
             Bitmap bmp= BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
             OutputStream outputStream1 = context.getContentResolver().openOutputStream(uri);
