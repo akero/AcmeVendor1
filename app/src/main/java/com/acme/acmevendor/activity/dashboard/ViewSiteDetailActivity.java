@@ -379,6 +379,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
                         createImageFile());
                 Log.d("tag222", imageUri.toString());
 
+
+
                 //String imageuristring= imageUri.toString();
                 //String[] a= imageuristring.split("Pictures/");
                 //imageuristring= a[1];

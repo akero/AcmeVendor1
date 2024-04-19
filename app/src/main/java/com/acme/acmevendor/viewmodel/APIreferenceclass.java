@@ -1,7 +1,11 @@
 package com.acme.acmevendor.viewmodel;
 
+import static java.lang.System.out;
+
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
@@ -22,12 +26,15 @@ import org.chromium.net.UrlRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
@@ -610,8 +617,24 @@ public class APIreferenceclass {
         Log.d("tag22", "writing image");
         Log.d("uri11", uri.toString());
 
+        //String filename= getFileName(context, uri);
+        try{
+            Bitmap bmp= BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
+            OutputStream outputStream1 = context.getContentResolver().openOutputStream(uri);
+
+            bmp.compress(Bitmap.CompressFormat.JPEG, 30, outputStream1);
+            outputStream1.flush();
+            outputStream1.close();
+            Log.d("tag212", "wsdasd");
+
+
+        }catch (Exception e)
+        {
+            Log.d("tag212", e.toString());
+        }
 
         try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
+
             byte[] buf = new byte[1024];
             int len;
             while ((len = inputStream.read(buf)) > 0) {
@@ -791,11 +814,14 @@ public class APIreferenceclass {
     byte[] multipart(Context context, Uri selectedImage, String jsonString){
         // Read file content directly from Uri
         byte[] fileBytes = readFileContent(context, selectedImage);
-        String outputFilePath = "/data/data/com.acme.acmevendor/files/output.txt";
+        //String outputFilePath = "/data/data/com.acme.acmevendor/files/output.txt";
         String fileName = getFileName(context, selectedImage);
+
+
+
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
         Log.d("tag99", fileName);
-        Log.d("tag99", outputFilePath);
+        //Log.d("tag99", outputFilePath);
         Log.d("tag99", selectedImage.toString());
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -825,10 +851,10 @@ public class APIreferenceclass {
 
         // End of multipart/form-data
         outputStream.write(("--" + boundary + "--").getBytes());
-        FileOutputStream fos = new FileOutputStream(outputFilePath);
-        fos.write(outputStream.toByteArray());
-        fos.flush();
-        fos.close();
+        //FileOutputStream fos = new FileOutputStream(outputFilePath);
+        //fos.write(outputStream.toByteArray());
+        //fos.flush();
+        //fos.close();
 
         return outputStream.toByteArray();
         }catch (Exception e){
