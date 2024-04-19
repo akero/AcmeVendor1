@@ -56,6 +56,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
         private final Context ctxt= this;
         int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
         String logintoken="";
+
         String idofvendor;
         boolean showedit;
         boolean gettingcampaignids;
@@ -71,6 +72,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             gettingcampaignids= false;
             lastsitecall= false;
             vendorname= "";
+            campaignid= "";
             sitearray= new JSONArray();
             showedit= true;
             sitesretrieved= false;
@@ -122,12 +124,21 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
 
         boolean sitesretrieved;
         //onresponsereceived from api
+
+
         public void onResponseReceived(String response){
 
             Log.d("addbatest", "response is "+ response);
             Log.d("tag58","got response");
 
             if(delete==0&&!gettingcampaignids&sitesretrieved) {
+                try{
+                    JSONObject jsonobj= new JSONObject(response);
+                    vendorname= jsonobj.getString("vendor_name");
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
                 implementUInew(sitearray);
             }else if(delete==1){
                 delete= 0;
@@ -179,7 +190,6 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
 
             JSONObject jsonObject = new JSONObject();
             jsonArray1 = new JSONArray();
-
             String ids[];
             //JSONObject jsonResponse = new JSONObject(response);
             //if(jsonResponse.getString("status").equals("success")) {
@@ -224,6 +234,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                     GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                     binding.rvCampaignList.setLayoutManager(layoutManager);
                     CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, showedit);
+                    binding.title.setText("Sites for "+ vendorname);
 
                     //animation code
                     progressBar.clearAnimation();
@@ -472,6 +483,8 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
             APIreferenceclass api= new APIreferenceclass(logintoken, this, id);
         }
 
+        String campaignid;
+
         public void onItemClick(int position) {
             try {
                 Log.d("tag51", Integer.toString(position));
@@ -491,6 +504,7 @@ public class AdminDashVendorSites extends AppCompatActivity implements ApiInterf
                 String camefrom= "";
                 try{
                     camefrom= getIntent().getStringExtra("camefrom");
+                    camefrom= "admindashvendorsites";
                 }catch (Exception e){
                     e.printStackTrace();
                 }

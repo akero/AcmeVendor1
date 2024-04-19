@@ -93,6 +93,8 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
             camefrom= getIntent().getExtras().getString("camefrom", "");
+
+            Log.d("camefrom", camefrom);
             try {
                 idarray = getIntent().getExtras().getStringArray("idarray");
                 for(int i= 0; i<idarray.length; i++){
@@ -110,6 +112,7 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
 
             Log.d("tag1001", campaignType+" "+ campaignId+" "+ siteNumber+" "+ logintoken+" "+ camefrom);
+
 
 
         if(!camefrom.equals("ViewVendorSites")){
@@ -144,6 +147,11 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
 
             if(camefrom.equals("ClientDashBoardActivity")){
                 binding.btnNext.setVisibility(View.GONE);
+            }
+
+            if(camefrom.equals("admindashvendorsites")){
+                binding.btnNext.setVisibility(View.GONE);
+
             }
 
             if(camefrom.equals("ViewVendorSites")){
@@ -443,11 +451,16 @@ public class ViewSiteDetailActivity extends AppCompatActivity implements ApiInte
         String siteno= "";
 
         try{
-
+            JSONObject jsonobj1= null;
             Log.d("response1", response1);
             JSONObject jsonobj= new JSONObject(response1);
             Log.d("tag44", jsonobj.toString());
-            JSONObject jsonobj1= jsonobj.getJSONObject("site");
+            if(jsonobj.has("site")) {
+                jsonobj1 = jsonobj.getJSONObject("site");
+            }else if(jsonobj.has("datas")){
+                jsonobj1 = jsonobj.getJSONObject("datas");
+                latlong();
+            }
             Log.d("tag44", jsonobj1.toString());
             String latitude= "";
             String longitude= "";
@@ -508,7 +521,8 @@ out.close();
 
             Log.d("tagresponse is", response);
             JSONObject jsonResponse = new JSONObject(response);
-            if(jsonResponse.getString("status").equals("success")) {
+
+            if(jsonResponse.getString("message").equals("Sites retrieved successfully.")) {
                 JSONObject dataArray = new JSONObject(jsonResponse.getString("site"));
                 if(dataArray != null && dataArray.length() > 0) {
                     JSONObject dataObject = dataArray;
@@ -656,6 +670,7 @@ out.close();
 
             }
         } catch (Exception e) {
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
