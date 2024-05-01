@@ -19,6 +19,10 @@ import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+//import org.chromium.net.CronetEngine;
+//import org.chromium.net.UploadDataProvider;
+//import org.chromium.net.UploadDataSink;
+//import org.chromium.net.UrlRequest;
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UploadDataProvider;
 import org.chromium.net.UploadDataSink;
@@ -814,7 +818,7 @@ public class APIreferenceclass {
     byte[] multipart(Context context, Uri selectedImage, String jsonString){
         // Read file content directly from Uri
         byte[] fileBytes = readFileContent(context, selectedImage);
-        //String outputFilePath = "/data/data/com.acme.acmevendor/files/output.txt";
+        String outputFilePath = "/data/data/com.acme.acmevendor/files/output.txt";
         String fileName = getFileName(context, selectedImage);
 
 
@@ -851,10 +855,10 @@ public class APIreferenceclass {
 
         // End of multipart/form-data
         outputStream.write(("--" + boundary + "--").getBytes());
-        //FileOutputStream fos = new FileOutputStream(outputFilePath);
-        //fos.write(outputStream.toByteArray());
-        //fos.flush();
-        //fos.close();
+        FileOutputStream fos = new FileOutputStream(outputFilePath);
+        fos.write(outputStream.toByteArray());
+        fos.flush();
+        fos.close();
 
         return outputStream.toByteArray();
         }catch (Exception e){
@@ -1273,10 +1277,14 @@ public class APIreferenceclass {
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 requestBuilder.addHeader(header.getKey(), header.getValue());
             }
-        if(queryType== 2) {
-            Log.d("tg92", "put");
-            requestBuilder.setHttpMethod("PUT");
-        }else{
+            long contentLength = computeMultipartBodyLength(multipartBody);
+
+            if (queryType == 2) {
+                Log.d("tg92", "put"+ contentLength);
+                requestBuilder.setHttpMethod("PUT");
+                // Add the Content-Length header for PUT requests
+                requestBuilder.addHeader("Content-Length", Long.toString(contentLength));
+            }else{
             requestBuilder.setHttpMethod("POST");
         }
             requestBuilder.setUploadDataProvider(new UploadDataProvider() {
@@ -1323,6 +1331,13 @@ public class APIreferenceclass {
         } catch (Exception e) {
             Log.e("APIreferenceclass", "Error in callapi2", e);
         }
+    }
+
+    private long computeMultipartBodyLength(byte[] multipartBody) {
+        // Implement the logic to calculate the total length of the multipart/form-data payload
+        // This should include the length of the multipart boundaries, headers, and file data
+        // You may need to parse the multipartBody byte array to calculate the correct length
+        return multipartBody.length;
     }
 
     //to upload image in addcampaign. POST

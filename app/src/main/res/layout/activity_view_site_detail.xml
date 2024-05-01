@@ -39,15 +39,11 @@
             android:layout_marginBottom="@dimen/_10sdp"
             >
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_20sdp"
            >
-
-
-
 
             <TextView
                 android:id="@+id/tvAddSiteDetail"
@@ -82,7 +78,6 @@
                 android:layout_below="@id/tvAddSiteDetail"
                 android:layout_above="@id/llUnit"/>
 
-
             <com.acme.acmevendor.utility.RoundRectCornerImageView
                 android:id="@+id/ivCampaignImage"
                 android:layout_width="match_parent"
@@ -92,14 +87,12 @@
                 android:layout_below="@id/tvAddSiteDetail"
                 android:src="@drawable/temp_campaign" />
 
-
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/llUnit"
                     android:layout_below="@id/ivCampaignImage"
                     android:orientation="horizontal">
-
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -117,7 +110,6 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
-
                         <TextView
                             android:id="@+id/etSiteNo"
                             android:layout_width="match_parent"
@@ -134,7 +126,6 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/tvStartDateText"
                     android:layout_width="match_parent"
@@ -145,7 +136,6 @@
                     android:layout_below="@id/llUnit"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
             <TextView
                 android:id="@+id/tvStartDate"
@@ -160,7 +150,6 @@
                 android:textColorHint="@color/texthintcolor"
                 android:textSize="@dimen/_12ssp" />
 
-
                 <TextView
                     android:id="@+id/tvLocationText"
                     android:layout_width="match_parent"
@@ -171,7 +160,6 @@
                     android:text="Location"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
-
 
                 <TextView
                     android:id="@+id/tvLocation"
@@ -186,7 +174,6 @@
                     android:textColorHint="@color/texthintcolor"
                     android:textSize="@dimen/_12ssp" />
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -194,13 +181,11 @@
                     android:layout_below="@id/tvLocation"
                     android:orientation="horizontal">
 
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginRight="@dimen/_2sdp">
-
 
                         <TextView
                             android:id="@+id/tvLatitudeText"
@@ -211,7 +196,6 @@
                             android:text="Latitude"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
-
 
                         <TextView
                             android:id="@+id/tvLatitude"
@@ -225,9 +209,7 @@
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/texthintcolor"
                             android:textSize="@dimen/_12ssp" />
-
                     </RelativeLayout>
-
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -245,7 +227,6 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
-
                         <TextView
                             android:id="@+id/tvLongitude"
                             android:layout_width="match_parent"
@@ -258,7 +239,6 @@
                             android:padding="@dimen/_8sdp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_12ssp" />
-
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -269,13 +249,11 @@
                     android:layout_below="@id/llLocation"
                     android:orientation="horizontal">
 
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginRight="@dimen/_2sdp">
-
 
                         <TextView
                             android:id="@+id/tvHeightText"
@@ -286,7 +264,6 @@
                             android:text="Dimension / Size in sq. ft"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
-
 
                         <TextView
                             android:id="@+id/tvHeight"
@@ -302,7 +279,6 @@
                             android:textColorHint="@color/texthintcolor"
                             android:textSize="@dimen/_12ssp" />
                     </RelativeLayout>
-
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -320,7 +296,6 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_10ssp" />
 
-
                         <TextView
                             android:id="@+id/tvWidth"
                             android:layout_width="match_parent"
@@ -334,7 +309,6 @@
                             android:hint="Width"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_12ssp" />
-
                     </RelativeLayout>
                 </LinearLayout>
 

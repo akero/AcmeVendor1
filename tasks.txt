@@ -1,5 +1,14 @@
 Ship
 
+req failed edit pic site from campaign admin dash- big image not updating
+/edit campaign not filling data
+add dashes to viewsitedetailclientdash
+
+For doing put big image The request failed.
+                                                                                                    iq: Exception in CronetUrlRequest: net::ERR_HTTP2_PROTOCOL_ERROR, ErrorCode=11, InternalErrorCode=-337, Retryable=false
+                                                                                                    	at org.chromium.net.impl.CronetUrlRequest.onError(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):5)
+
+
 notif to vendor to put image
 
 bottom left pixellation
