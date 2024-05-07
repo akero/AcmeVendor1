@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -277,6 +278,10 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
         progressBar.setVisibility(View.VISIBLE);
         progressBar.startAnimation(rotateAnimation);
 
+        ImageView iv= findViewById(R.id.ivPlus);
+        iv.setVisibility(View.VISIBLE);
+
+
         campaignList();
     }
 
@@ -289,6 +294,9 @@ public class ClientDashFirstPage extends AppCompatActivity implements ApiInterfa
 
         binding.tvLiveCampaign.setBackgroundResource(0);
         binding.tvLiveCampaign.setTextColor(R.color.colorPrimaryDark);
+
+        ImageView iv= findViewById(R.id.ivPlus);
+        iv.setVisibility(View.GONE);
 
         campaignList();
     }

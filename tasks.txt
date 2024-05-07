@@ -1,13 +1,8 @@
 Ship
 
 admin vendor- only show vendors whos campaigns are live- emailed
-//sites campaign tab- area will be auto
-in clients- remove plus from old campaign tab
+
 slow ticks movement
-//view sote det- end date
-old campaigns cant be edited anywhere
-clientdash- view site- area, remove edit from old campaigns
-//calendar not setting correct date
 
 req failed edit pic site from campaign admin dash- big image not updating
 /edit campaign not filling data
@@ -28,6 +23,12 @@ ex form
 
 add site to vendor login
 
+//sites campaign tab- area will be auto
+//in clients- remove plus from old campaign tab
+//view sote det- end date
+//old campaigns cant be edited anywhere
+//clientdash- view site- area, remove edit from old campaigns
+//calendar not setting correct date
 //test performance- line 481 viewsitedetail compress image
 //edit_site- large image not working- compress image
 //add site test large image
