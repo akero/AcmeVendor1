@@ -2,6 +2,7 @@ package com.acme.acmevendor.viewmodel;
 
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.util.Log;
 
 public class SiteDetail {
     private boolean success;
@@ -150,6 +151,13 @@ public class SiteDetail {
     }
 
     public String getTotalArea() {
+
+        try {
+            total_area = Integer.toString(Integer.parseInt(height) * Integer.parseInt(width));
+        }catch(Exception e){
+            Log.d("tag333", e.toString());
+            total_area= null;
+        }
         return total_area;
     }
 

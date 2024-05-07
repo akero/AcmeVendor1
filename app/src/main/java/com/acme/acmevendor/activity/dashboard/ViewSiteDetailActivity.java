@@ -539,6 +539,7 @@ out.close();
                         siteDetail.setMediaType(dataObject.optString("media_type"));
                         siteDetail.setIllumination(dataObject.optString("illumination"));
                         siteDetail.setStartDate(dataObject.optString("start_date"));
+                        siteDetail.setEndDate(dataObject.optString("end_date"));
                         siteDetail.setName(dataObject.optString("name"));
                         siteDetail.setSiteNo(dataObject.optString("site_no"));
                         siteDetail.setWidth(dataObject.optString("width"));
@@ -599,8 +600,8 @@ out.close();
                                 TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
                                 tvSiteName.setText(siteDetail.getName());
 
-                                TextView tvLastInspection = findViewById(R.id.tvStartDate);
-                                tvLastInspection.setText(siteDetail.getCreatedAt());
+                                //TextView tvLastInspection = findViewById(R.id.tvStartDate);
+                                //tvLastInspection.setText(siteDetail.getCreatedAt());
 
                                 TextView tvLatitude = findViewById(R.id.tvLatitude);
                                 tvLatitude.setText(siteDetail.getLatitude());
@@ -616,6 +617,9 @@ out.close();
 
                                 TextView tvStartDate = findViewById(R.id.tvStartDate);
                                 tvStartDate.setText(siteDetail.getStartDate());
+
+                                TextView tvEndDate = findViewById(R.id.tvEndDate);
+                                tvEndDate.setText(siteDetail.getEndDate());
 
                                 // Set the site number
                                 TextView tvSiteNo = findViewById(R.id.etSiteNo);

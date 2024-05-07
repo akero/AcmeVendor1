@@ -209,8 +209,8 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
                                 TextView tvSiteName = findViewById(R.id.title);
                                 tvSiteName.setText(siteDetail.getName());
 
-                                TextView tvLastInspection = findViewById(R.id.tvStartDate);
-                                tvLastInspection.setText(siteDetail.getCreatedAt());
+                                //TextView tvLastInspection = findViewById(R.id.tvStartDate);
+                                //tvLastInspection.setText(siteDetail.getCreatedAt());
 
                                 TextView tvLatitude = findViewById(R.id.tvLatitude);
                                 tvLatitude.setText(siteDetail.getLatitude());
@@ -226,6 +226,9 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
 
                                 TextView tvStartDate = findViewById(R.id.tvStartDate);
                                 tvStartDate.setText(siteDetail.getStartDate());
+
+                                TextView tvEndDate = findViewById(R.id.tvEndDate);
+                                tvEndDate.setText(siteDetail.getEndDate());
 
                                 // Set the site number
                                 TextView tvSiteNo = findViewById(R.id.etSiteNo);

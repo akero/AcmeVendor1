@@ -792,7 +792,7 @@ try {
                 Log.d("tag322", Integer.toString(view.getId()));
 
                 //TODO remove
-                dateStr= "2023-07-24";
+                //dateStr= "2023-07-24";
                     binding.etStartDate.setText(dateStr);
                 Log.d("tag322", dateStr);
 
@@ -817,7 +817,7 @@ try {
 
                 Log.d("tag322", Integer.toString(view.getId()));
                 //TODO remove
-                dateStr= "2023-07-24";
+                //dateStr= "2023-07-24";
                 binding.etEndDate.setText(dateStr);
             }
         }, yy, mm, dd);

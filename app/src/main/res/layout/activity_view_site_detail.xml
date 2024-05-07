@@ -126,6 +126,19 @@
                     </RelativeLayout>
                 </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llDimensions1"
+                android:layout_below="@id/llUnit"
+                android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/_2sdp">
+
                 <TextView
                     android:id="@+id/tvStartDateText"
                     android:layout_width="match_parent"
@@ -133,7 +146,6 @@
                     android:fontFamily="@font/dmsansregular"
                     android:text="Start Date"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_below="@id/llUnit"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_10ssp" />
 
@@ -149,12 +161,44 @@
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/texthintcolor"
                 android:textSize="@dimen/_12ssp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/_2sdp">
+
+                <TextView
+                    android:id="@+id/tvEndDateText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="End Date"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/tvEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:layout_below="@id/tvEndDateText"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/texthintcolor"
+                    android:textSize="@dimen/_12ssp" />
+            </RelativeLayout>
+            </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tvLocationText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvStartDate"
+                    android:layout_below="@id/llDimensions1"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/dmsansregular"
                     android:text="Location"
