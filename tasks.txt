@@ -1,6 +1,6 @@
 Ship
 
-admin vendor- only show vendors whos campaigns are live- emailed
+>admin vendor- only show vendors whos campaigns are live- emailed- api/admin_vendors
 
 slow ticks movement
 

@@ -105,7 +105,7 @@ public class APIreferenceclass {
 
         //vendor
         else if (vendorclientorcampaign == 2) {
-            String url="https://acme.warburttons.com/api/vendors";
+            String url="https://acme.warburttons.com/api/admin_vendors";
 
             querytype=0; //GET
             String jsonPayload="{\"Authorization\":\"" +logintoken+"\"}";

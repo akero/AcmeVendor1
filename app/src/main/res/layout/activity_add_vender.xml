@@ -69,71 +69,15 @@
                     android:textSize="@dimen/_16ssp" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/llUnit"
-                    android:layout_below="@id/tvAddVenderDetail"
-                    android:orientation="horizontal">
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/_2sdp">
-
-
-                        <TextView
-                            android:id="@+id/tvUnitIdText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Unit Id"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_10ssp" />
-
-
-                        <TextView
-                            android:id="@+id/tvUnitId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvUnitIdText"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:textAlignment="center"
-                            android:background="@drawable/primarystroke"
-                            android:fontFamily="@font/dmsansregular"
-                            android:padding="@dimen/_8sdp"
-                            android:text="#00001"
-                            android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/texthintcolor"
-                            android:textSize="@dimen/_12ssp" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:visibility="invisible"
-                        android:layout_marginLeft="@dimen/_2sdp">
-
-
-
-                    </RelativeLayout>
-
-
-
-                </LinearLayout>
 
 
                 <TextView
                     android:id="@+id/tvFullName"
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/llUnit"
+                    android:layout_below="@id/tvAddVenderDetail"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/dmsansregular"
                     android:text="Full Name:"
