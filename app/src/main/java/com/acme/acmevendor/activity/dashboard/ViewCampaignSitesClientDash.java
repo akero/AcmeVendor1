@@ -50,6 +50,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
     int vendorclientorcampaign=0; //campaign is 0, client is 1, vendor is 2
     String logintoken="";
     String idofcampaign;
+    String[] idarray;
 
 
     @Override
@@ -110,6 +111,8 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
             if(jsonResponse.getString("status").equals("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("sites");
 
+                idarray= new String[dataArray.length()];
+
                 if(dataArray != null && dataArray.length() > 0) {
                     if(vendorclientorcampaign==0){
                         //TODO here. have to filter based on whether this class is called from admin dash or client dash or vendor dash. Right now only 0 being called
@@ -121,7 +124,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                             if(dataObject != null) {
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
-
+                                idarray[i]= Integer.toString(dataObject.optInt("id"));
                                 vendorid= dataObject.optString("vendor_id");
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
@@ -143,6 +146,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                idarray[i]= Integer.toString(dataObject.optInt("id"));
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
@@ -161,6 +165,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                                 jsonObject = new JSONObject();
                                 Log.d("DataObjectContent", "Data Object: " + dataObject.toString());
                                 //AdminCrudDataClass siteDetail = new AdminCrudDataClass();
+                                idarray[i]= Integer.toString(dataObject.optInt("id"));
                                 jsonObject.putOpt("id", dataObject.optInt("id"));
                                 jsonObject.putOpt("company_name", dataObject.optString("company_name"));
                                 jsonObject.putOpt("image", dataObject.optString("logo"));
@@ -239,6 +244,7 @@ public class ViewCampaignSitesClientDash extends AppCompatActivity implements Ap
                     .putExtra("campaignId", idofcampaign)
                     .putExtra("siteNumber", id)
                     .putExtra("logintoken", logintoken)
+                    .putExtra("idarray", idarray)
                     .putExtra("vendorclientorcampaign", vendorclientorcampaign));
 
             // .putExtra("siteId", siteId)); // If you are passing site id

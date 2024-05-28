@@ -21,6 +21,7 @@ import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.FileHelper;
+import com.acme.acmevendor.activity.dashboard.RecceDashboardActivity;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
@@ -195,6 +196,15 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             }else if(loginType.equals("client")){
 
                 Intent intent= new Intent(ContentOtp.this, ClientDashBoardActivity.class);
+                intent.putExtra("logintoken", token);
+                intent.putExtra("clientid", clientid);
+
+                loadingSpinner();
+
+                startActivity(intent);
+            }else if(loginType.equals("recee")){
+
+                Intent intent= new Intent(ContentOtp.this, RecceDashboardActivity.class);
                 intent.putExtra("logintoken", token);
                 intent.putExtra("clientid", clientid);
 

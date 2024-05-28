@@ -22,6 +22,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
     private GestureDetector gestureDetector;
 
     private ActivityViewSiteDetailClientDashBinding binding;
+    String idarray[];
 
     //TODO populate all fields. pass api call data from prev activity
     //have to pass logintoken and siteid
@@ -76,10 +78,21 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
 
         if (getIntent().getExtras() != null) {
             Log.d("tag41", "2");
+            idarray= null;
             campaignId = getIntent().getExtras().getString("campaignId", "");
             campaignType = getIntent().getExtras().getString("campaignType", "");
             siteNumber= getIntent().getExtras().getString("siteNumber", "");
             logintoken= getIntent().getExtras().getString("logintoken","");
+
+            try {
+                idarray = getIntent().getExtras().getStringArray("idarray");
+                for(int i= 0; i<idarray.length; i++){
+                    Log.d("idarray", idarray[i]);
+                }
+
+            }catch (Exception e){
+                Log.d("tag22", e.toString());
+            }
 
             Log.d("tg2", siteNumber);
         }
@@ -90,6 +103,48 @@ public class ViewSiteDetailActivityClientDash extends AppCompatActivity implemen
           //  gestureDetector.onTouchEvent(event);
             //return true;
         //});
+
+        //buttons to move to next or prev site
+        ImageView left= findViewById(R.id.lefticon);
+        left.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                String prevSite= "";
+                for(int i=0; i<idarray.length;i++){
+                    if(idarray[i].equals(siteNumber)){
+                        if(!prevSite.equals("")){
+                            siteNumber= prevSite;
+                            apicall(logintoken, prevSite);
+                            break;
+                        }
+                    }else{
+                        prevSite= idarray[i];
+                    }
+                }
+            }
+
+        });
+
+        ImageView right= findViewById(R.id.righticon);
+        right.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                String nextSite= "";
+                for(int i=0; i<idarray.length;i++){
+                    if(idarray[i].equals(siteNumber)){
+                        if(i!=idarray.length-1){
+                            nextSite= idarray[i+1];
+                            siteNumber= nextSite;
+                            apicall(logintoken, nextSite);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        });
 
         Log.d("tag41", "4");
         apicall(logintoken, siteNumber);
