@@ -141,7 +141,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
     String token;
     String userid;
     String loginType;
-    int clientid, vendorid;
+    int clientid, vendorid, recceid, recceasmid;
 
     @Override
     public void onResponseReceived(String response){
@@ -149,6 +149,8 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
         clientid= 0;
         vendorid= 0;
         userid="";
+        recceid= 0;
+        recceasmid=0;
 
         try {
         JSONObject jsonObject = new JSONObject(response);
@@ -164,6 +166,14 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             }
             if(loginType.equals("vendor")){
                 vendorid= jsonObject1.getInt("id");
+            }
+
+            if(loginType.equals("recce")){
+                recceid= jsonObject1.getInt("id");
+            }
+
+            if(loginType.equals("recceasm")){
+                recceasmid= jsonObject1.getInt("id");
             }
 
             Log.d("tg4", loginType);
@@ -200,28 +210,24 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 intent.putExtra("logintoken", token);
                 intent.putExtra("clientid", clientid);
 
-                //TODO CHANGE THIS BACK
 
-                Intent intent1= new Intent(ContentOtp.this, RecceDashboardActivity.class);
-                intent.putExtra("logintoken", token);
-                intent.putExtra("clientid", clientid);
                 loadingSpinner();
 
-                startActivity(intent1);
-            }else if(loginType.equals("recee")){
+                startActivity(intent);
+            }else if(loginType.equals("recce")){
 //TODO
                 Intent intent= new Intent(ContentOtp.this, RecceDashboardActivity.class);
                 intent.putExtra("logintoken", token);
-                intent.putExtra("clientid", clientid);
+                intent.putExtra("recceid", recceid);
 
                 loadingSpinner();
                 startActivity(intent);
             }
-            else if(loginType.equals("recceclient")){
+            else if(loginType.equals("recceasm")){
 //TODO
                 Intent intent= new Intent(ContentOtp.this, RecceClientDashboardActivity.class);
                 intent.putExtra("logintoken", token);
-                intent.putExtra("clientid", clientid);
+                intent.putExtra("recceasmid", recceasmid);
 
                 loadingSpinner();
                 startActivity(intent);

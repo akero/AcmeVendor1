@@ -4,25 +4,27 @@ Ship
 rishabh@acmemedia.in
 type- reccee
 
+recce dash install phase
+
 //date code
 //image code
 //test
 //api call
 
->login for recce
+login for recce- stuck emailed
+test then onresponse received tag222
+
 login for asm
 
 
-test then onresponse received tag222
-
-recce dash install phase
-
-
-
 and recce admin dash
-client approval on app
-type- recceeasm
+
+
+>asm client approval
+type- recceasm
 email rish1994a
+>UI
+
 
 change contentotp hardcode back when api done
 
