@@ -2,7 +2,9 @@ Ship
 
 >make recce dashboard 
 rishabh@acmemedia.in
-type- reccee
+type- recce
+
+login issue solution
 
 recce dash install phase
 
@@ -17,16 +19,15 @@ test then onresponse received tag222
 login for asm
 
 
-and recce admin dash
-
-
 >asm client approval
 type- recceasm
 email rish1994a
 >UI
 
 
-change contentotp hardcode back when api done
+change contentotp hardcode back when api done line 212
+
+and recce admin dash
 
 
 //admin vendor- only show vendors whos campaigns are live- emailed- api/admin_vendors

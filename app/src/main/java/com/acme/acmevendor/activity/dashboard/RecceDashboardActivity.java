@@ -328,6 +328,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("location", binding.etTotalArea1.getText().toString());
             jsonPayload.put("lat", lat);
             jsonPayload.put("long", longitude);
+
+            double area= 0;
+            area= Double.parseDouble(binding.etHeight.getText().toString())*Double.parseDouble(binding.etWidth.getText().toString());
+            jsonPayload.put("area", String.valueOf(area));
             FileHelper fh = new FileHelper();
             jsonPayload.put("created_by", fh.readUserId(this));
 
