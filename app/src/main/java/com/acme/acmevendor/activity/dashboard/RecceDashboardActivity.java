@@ -39,7 +39,7 @@ public class RecceDashboardActivity extends AppCompatActivity {
         storePhotoButton2= findViewById(R.id.btnUpdatePhoto2);
         storePhotoButton3= findViewById(R.id.btnUpdatePhoto3);
         ownerSignButton= findViewById(R.id.btnUpdatePhoto4);
-        uploadSiteDetailsButton= findViewById(R.id.btnUpdatePhoto5);
+
 
         storePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +81,13 @@ public class RecceDashboardActivity extends AppCompatActivity {
         RoundRectCornerImageView imageButton= findViewById(R.id.ivCampaignImage);;
         Button uploadSignageDetails= findViewById(R.id.btnUpdatePhoto5);
 
+        uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
 
     }
@@ -90,10 +97,5 @@ public class RecceDashboardActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_recce_dashboard);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+
 }

@@ -1,6 +1,12 @@
 Ship
 
->admin vendor- only show vendors whos campaigns are live- emailed- api/admin_vendors
+>make recce dashboard 
+and recce admin dash
+
+change contentotp hardcode back when api done
+
+
+//admin vendor- only show vendors whos campaigns are live- emailed- api/admin_vendors
 
 slow ticks movement
 

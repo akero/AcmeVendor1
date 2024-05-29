@@ -74,7 +74,7 @@
                 android:layout_marginRight="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:fontFamily="@font/dmsansregular"
-                android:text="Recce"
+                android:text="Recce Dashboard"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
@@ -191,7 +191,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/dmsansregular"
-                        android:text="Dimension / Size in sq. ft"
+                        android:text="Dimensions / Size in sq. ft"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_10ssp" />
 
