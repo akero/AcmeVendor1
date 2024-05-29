@@ -3,6 +3,7 @@ package com.acme.acmevendor.activity.dashboard;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,6 +25,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -55,17 +58,18 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     private ActivityRecceDashboardBinding binding;
     private static final int REQUEST_CODE_PERMISSIONS = 123;
     static final int REQUEST_TAKE_PHOTO = 1;
-    private final Context ctxt= this;
+    private final Context ctxt = this;
+    boolean pictureandlatlongready; //in imageUri and latlong
 
     private static final String[] REQUIRED_PERMISSIONS = {
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_COARSE_LOCATION
             //Manifest.permission.MANAGE_EXTERNAL_STORAGE
-            ,Manifest.permission.READ_EXTERNAL_STORAGE
+            , Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
     Boolean locationtaken, picturetaken;
-    String latlong;
+    String latlong, logintoken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,25 +80,34 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         //init locationhelper
         locationHelper = new LocationHelper();
-        picturetaken= false;
-        latlong= "";
-        locationtaken= false;
+        picturetaken = false;
+        latlong = "";
+        locationtaken = false;
+        pictureandlatlongready = false;
+
+        try {
+            FileHelper fh = new FileHelper();
+            logintoken = fh.readLoginToken(this);
+
+        } catch (Exception e) {
+            Log.d("tg223", e.toString());
+        }
 
 
         //initializing photo buttons
         Button storePhotoButton, storePhotoButton1, storePhotoButton2, storePhotoButton3, ownerSignButton, uploadSiteDetailsButton;
-        storePhotoButton= findViewById(R.id.btnUpdatePhoto);
-        storePhotoButton1= findViewById(R.id.btnUpdatePhoto1);
-        storePhotoButton2= findViewById(R.id.btnUpdatePhoto2);
-        storePhotoButton3= findViewById(R.id.btnUpdatePhoto3);
-        ownerSignButton= findViewById(R.id.btnUpdatePhoto4);
+        storePhotoButton = findViewById(R.id.btnUpdatePhoto);
+        storePhotoButton1 = findViewById(R.id.btnUpdatePhoto1);
+        storePhotoButton2 = findViewById(R.id.btnUpdatePhoto2);
+        storePhotoButton3 = findViewById(R.id.btnUpdatePhoto3);
+        ownerSignButton = findViewById(R.id.btnUpdatePhoto4);
 
 
         storePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("camera", "click registered");
-                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
 
@@ -115,7 +128,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View view) {
                 Log.d("camera", "click registered");
-                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
 
@@ -127,7 +140,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     //latlong();
                     Log.d("latlong", latlong);
                     //TODO uncomment
-                    openCamera();
+                    //openCamera();
                 }
             }
         });
@@ -136,7 +149,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View view) {
                 Log.d("camera", "click registered");
-                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
 
@@ -148,7 +161,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     //latlong();
                     Log.d("latlong", latlong);
                     //TODO uncomment
-                    openCamera();
+                    //openCamera();
                 }
             }
         });
@@ -157,7 +170,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View view) {
                 Log.d("camera", "click registered");
-                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
 
@@ -169,7 +182,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     //latlong();
                     Log.d("latlong", latlong);
                     //TODO uncomment
-                    openCamera();
+                    //openCamera();
                 }
             }
         });
@@ -178,7 +191,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View view) {
                 Log.d("camera", "click registered");
-                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
 
@@ -190,15 +203,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     //latlong();
                     Log.d("latlong", latlong);
                     //TODO uncomment
-                    openCamera();
+                    //openCamera();
                 }
             }
         });
-
-
-
-
-
 
 
         //Signage area
@@ -207,32 +215,138 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         //EditText height, width, remarks, projectname, state, district, city, retailname, ownername, owneremail, ownerphone, yourname, location;
 
 
+        //date
+        binding.etWidth3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on below line we are getting
+                // the instance of our calendar.
+                final Calendar c = Calendar.getInstance();
 
-        EditText date;
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
 
-        RoundRectCornerImageView imageButton= findViewById(R.id.ivCampaignImage);
-        
-        Button uploadSignageDetails= findViewById(R.id.btnUpdatePhoto5);
+                // on below line we are creating a variable for date picker dialog.
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        // on below line we are passing context.
+                        RecceDashboardActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // on below line we are setting date to our text view.
+                                Log.d("date", year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                                binding.etWidth3.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                Log.d("date", String.valueOf(binding.etWidth3.getText()));
 
-        uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
+
+                            }
+                        },
+                        // on below line we are passing year,
+                        // month and day for selected date in our date picker.
+                        year, month, day);
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+            }
+        });
+
+        //photo
+        RoundRectCornerImageView imageButton = findViewById(R.id.ivCampaignImage);
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty()) {
-                    Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                Log.d("camera", "click registered");
+                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+
+                    Toast.makeText(RecceDashboardActivity.this, "Please give camera and location permissions", Toast.LENGTH_SHORT).show();
+
+                    ActivityCompat.requestPermissions(RecceDashboardActivity.this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+                    Log.d("camera", "dont have permission");
+                } else {
+
+                    // temporaryuploadchecker();
+                    latlong();
+                    Log.d("latlong", latlong);
+                    //TODO uncomment
+                    openCamera();
                 }
-
-                //TODO add check for image
             }
-        }
+
+        });
+
+        Button uploadSignageDetails = findViewById(R.id.btnUpdatePhoto5);
+
+        uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() || binding.etHeight1.getText().toString().isEmpty() || binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() || binding.etTotalArea.getText().toString().isEmpty() || binding.etTotalArea1.getText().toString().isEmpty() || !pictureandlatlongready) {
+                                                            Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            //api call
+
+                                                            apicall();
+
+                                                        }
+
+                                                        //TODO add check for image
+                                                    }
+                                                }
         );
-
-
-
     }
+
+    void apicall() {
+        String lat = "";
+        String longitude = "";
+
+        try {
+            StringTokenizer str = new StringTokenizer(latlong, ",");
+            lat = str.nextToken();
+            longitude = str.nextToken();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jsonPayload = new JSONObject();
+        try {
+
+            jsonPayload.put("project", binding.etHeight1.getText().toString());
+            jsonPayload.put("state", binding.etWidth1.getText().toString());
+            jsonPayload.put("district", binding.etHeight2.getText().toString());
+            jsonPayload.put("city", binding.etWidth2.getText().toString());
+            jsonPayload.put("retail_name", binding.etHeight3.getText().toString());
+            jsonPayload.put("length", binding.etHeight.getText().toString());
+            jsonPayload.put("width", binding.etWidth.getText().toString());
+            jsonPayload.put("date", binding.etWidth3.getText().toString());
+            jsonPayload.put("owner_name", binding.etHeight4.getText().toString());
+            jsonPayload.put("email", binding.etWidth4.getText().toString());
+            jsonPayload.put("mobile", binding.etHeight5.getText().toString());
+            jsonPayload.put("remarks", binding.etTotalArea.getText().toString());
+            jsonPayload.put("location", binding.etTotalArea1.getText().toString());
+            jsonPayload.put("lat", lat);
+            jsonPayload.put("long", longitude);
+            FileHelper fh = new FileHelper();
+            jsonPayload.put("created_by", fh.readUserId(this));
+
+        } catch (Exception e) {
+            Log.d("tg6", e.toString());
+        }
+        Log.d("tg6", imageUri.toString());
+        //apiboolean= 1;
+
+        Log.d("tg66", jsonPayload.toString());
+
+        APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, imageUri, "a");
+        imageUri = null;
+    }
+
 
     private LocationHelper locationHelper;
 
-    void latlong(){
+    void latlong() {
 
         locationHelper.requestLocationPermission(this, this);
     }
@@ -241,7 +355,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoURI= null;
+        photoURI = null;
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             try {
@@ -281,7 +395,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     }
 
     //auto opens when addimage is clicked
-    public void addImage(){
+    public void addImage() {
 
     }
 
@@ -301,7 +415,6 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                         "com.example.android.fileprovider",
                         createImageFile());
                 Log.d("tag222", imageUri.toString());
-
 
 
                 //String imageuristring= imageUri.toString();
@@ -334,70 +447,71 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 */
 
 
-                picturetaken= true;
-                if(locationtaken){
-                    apicallforvendorimageupdate(latlong, imageUri);
+                picturetaken = true;
+                if (locationtaken) {
+                    pictureandlatlongready = true;
+                    //apicallforvendorimageupdate(latlong, imageUri);
                     Log.d("tag22", "activity result works.");
 
                 }
                 Log.d("tag22", "activity result works");
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Image update failed", Toast.LENGTH_SHORT).show();
             }
             // Do something with the imageUri, e.g., display the image or upload it
-        }else{
+        } else {
             Log.d("tag22", "something went wrong");
         }
     }
 
-    void apicallforvendorimageupdate(String latlong, Uri uri){
+    void apicallforvendorimageupdate(String latlong, Uri uri) {
 
-        String logintoken1= "";
+        String logintoken1 = "";
         //response is response1 (with site)
 
         try {
             FileHelper fh = new FileHelper();
             logintoken1 = fh.readLoginToken(this);
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.d("tag22", e.toString());
         }
-        String siteno= "";
+        String siteno = "";
 
-        try{
-            JSONObject jsonobj1= null;
+        try {
+            JSONObject jsonobj1 = null;
             Log.d("response1", response1);
-            JSONObject jsonobj= new JSONObject(response1);
+            JSONObject jsonobj = new JSONObject(response1);
             Log.d("tag44", jsonobj.toString());
-            if(jsonobj.has("site")) {
+            if (jsonobj.has("site")) {
                 jsonobj1 = jsonobj.getJSONObject("site");
-            }else if(jsonobj.has("datas")){
+            } else if (jsonobj.has("datas")) {
                 jsonobj1 = jsonobj.getJSONObject("datas");
                 latlong();
             }
             Log.d("tag44", jsonobj1.toString());
-            String latitude= "";
-            String longitude= "";
+            String latitude = "";
+            String longitude = "";
 
-            StringTokenizer str= new StringTokenizer(latlong, ",");
-            if(str!= null){
-                latitude= str.nextToken();
-                longitude= str.nextToken();
+            StringTokenizer str = new StringTokenizer(latlong, ",");
+            if (str != null) {
+                latitude = str.nextToken();
+                longitude = str.nextToken();
 
-                Log.d("tag44", "latitude"+ latitude+ "long"+ longitude);
+                Log.d("tag44", "latitude" + latitude + "long" + longitude);
             }
 
             jsonobj1.putOpt("latitude", latitude);
             jsonobj1.putOpt("longitute", longitude);
-            Log.d("tag511", "jsonobj"+jsonobj.toString()+ " jsonobj1"+ jsonobj1.toString()+ "siteno"+ siteno);
+            Log.d("tag511", "jsonobj" + jsonobj.toString() + " jsonobj1" + jsonobj1.toString() + "siteno" + siteno);
 
-            siteno= Integer.toString(jsonobj1.getInt("id"));
+            siteno = Integer.toString(jsonobj1.getInt("id"));
 
             jsonobj1.remove("image");
             jsonobj.putOpt("site", jsonobj1);
 
-            JSONObject jsonobj2= new JSONObject();
+            JSONObject jsonobj2 = new JSONObject();
             jsonobj2.putOpt("campaign_id", jsonobj1.getInt("campaign_id"));
             jsonobj2.putOpt("vendor_id", jsonobj1.getString("vendor_id"));
             jsonobj2.putOpt("site_id", jsonobj1.getString("id"));
@@ -406,7 +520,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
 
             Log.d("tag333", jsonobj.toString());
-            Log.d("livetest", jsonobj.toString()+ "site no"+ siteno+ uri + "jsonobj2"+ jsonobj2.toString());
+            Log.d("livetest", jsonobj.toString() + "site no" + siteno + uri + "jsonobj2" + jsonobj2.toString());
 
             /*compress photoURI here
             // Load the image from a file
@@ -418,10 +532,10 @@ bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out); // 50 is the quality param
 
 out.close();
             * */
-            APIreferenceclass api= new APIreferenceclass(1, ctxt, logintoken1, jsonobj2.toString(), photoURI);
+            APIreferenceclass api = new APIreferenceclass(1, ctxt, logintoken1, jsonobj2.toString(), photoURI);
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("tag41", e.toString());
             e.printStackTrace();
         }
@@ -434,7 +548,7 @@ out.close();
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             boolean cameraGranted = false;
             boolean locationGranted = false;
-            boolean storageGranted= false;
+            boolean storageGranted = false;
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.CAMERA) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     cameraGranted = true;
@@ -465,27 +579,31 @@ out.close();
             }
         }
 
-}
+    }
+
+
     @Override
     public void callback(String a) {
-        if(!locationtaken) {
+        if (!locationtaken) {
             latlong = a;
             locationtaken = true;
-            if(picturetaken) {
-                apicallforvendorimageupdate(latlong, imageUri);
+            if (picturetaken) {
+                pictureandlatlongready = true;
+                //apicallforvendorimageupdate(latlong, imageUri);
             }
         }
-        Log.d("tag22", "inside callback, latlong "+ latlong+ "locationtaken"+ locationtaken);
+        Log.d("tag22", "inside callback, latlong " + latlong + "locationtaken" + locationtaken);
     }
 
     String response1;
-    @Override
-    public void onResponseReceived(String response){
 
-        response1= response;
-        Log.d("tag41 response is", response);
-        response1= response;
-        implementUI(response);
+    @Override
+    public void onResponseReceived(String response) {
+
+        response1 = response;
+        Log.d("tag222 response is", response);
+        response1 = response;
+        //implementUI(response);
     }
 
     SiteDetail siteDetail;
@@ -497,12 +615,12 @@ out.close();
             Log.d("tagresponse is", response);
             JSONObject jsonResponse = new JSONObject(response);
 
-            if(jsonResponse.getString("message").equals("Sites retrieved successfully.")) {
+            if (jsonResponse.getString("message").equals("Sites retrieved successfully.")) {
                 JSONObject dataArray = new JSONObject(jsonResponse.getString("site"));
-                if(dataArray != null && dataArray.length() > 0) {
+                if (dataArray != null && dataArray.length() > 0) {
                     JSONObject dataObject = dataArray;
-                    jsonobj= dataObject;
-                    if(dataObject != null) {
+                    jsonobj = dataObject;
+                    if (dataObject != null) {
                         siteDetail = new SiteDetail();
                         siteDetail.setId(dataObject.optInt("id"));
                         siteDetail.setVendorId(dataObject.optString("vendor_id"));
@@ -543,11 +661,11 @@ out.close();
 
                         try {
                             String imageUrl = dataObject.optString("image");
-                            imageUrl= "https://acme.warburttons.com/"+ imageUrl;
-                            Log.d("tag41", "imageurl is "+ imageUrl);
+                            imageUrl = "https://acme.warburttons.com/" + imageUrl;
+                            Log.d("tag41", "imageurl is " + imageUrl);
                             Log.d("tg2", "image code not executing 1");
 
-                            if(imageUrl != "null" && !imageUrl.isEmpty()) {
+                            if (imageUrl != "null" && !imageUrl.isEmpty()) {
                                 URL url = new URL(imageUrl);
                                 Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                                 Log.d("tg2", "image code executing");
@@ -555,7 +673,7 @@ out.close();
                             }
                         } catch (Exception e) {
                             Log.d("tg2", "image code not executing 2");
-                            Log.d("tag41", "error in implementui" +e.toString());
+                            Log.d("tag41", "error in implementui" + e.toString());
                             Log.e("tag41", "sdfdg", e);
                             // Handle error
                         }
@@ -614,7 +732,7 @@ out.close();
                                 Log.d("tg2", "image code not executing");
 
                                 RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
-                                if(siteDetail.getImage()!=null) {
+                                if (siteDetail.getImage() != null) {
                                     Log.d("tg2", "image code executing");
                                     tvImage.setImageBitmap(siteDetail.getImage());
                                 }
@@ -631,14 +749,14 @@ out.close();
                     });
 
                 }
-            }else if(jsonResponse.getString("message").equals("Data Saved successfully.")){
+            } else if (jsonResponse.getString("message").equals("Data Saved successfully.")) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(RecceDashboardActivity.this, "Image updated successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }else {
+            } else {
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -658,7 +776,6 @@ out.close();
                 }
             });
         }
-
 
 
     }
