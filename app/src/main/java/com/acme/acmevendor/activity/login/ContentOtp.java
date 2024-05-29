@@ -199,17 +199,21 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 intent.putExtra("logintoken", token);
                 intent.putExtra("clientid", clientid);
 
+                //TODO CHANGE THIS BACK
+
+                Intent intent1= new Intent(ContentOtp.this, RecceDashboardActivity.class);
+                intent.putExtra("logintoken", token);
+                intent.putExtra("clientid", clientid);
                 loadingSpinner();
 
-                startActivity(intent);
+                startActivity(intent1);
             }else if(loginType.equals("recee")){
-
+//TODO
                 Intent intent= new Intent(ContentOtp.this, RecceDashboardActivity.class);
                 intent.putExtra("logintoken", token);
                 intent.putExtra("clientid", clientid);
 
                 loadingSpinner();
-
                 startActivity(intent);
             }
         }else{

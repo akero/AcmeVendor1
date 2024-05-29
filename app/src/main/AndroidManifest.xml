@@ -30,11 +30,8 @@
         <activity
             android:name=".activity.dashboard.RecceDashboardActivity"
             android:exported="false"
-            android:theme="@style/Theme.TestingProject" />
-        <activity
-            android:name=".activity.dashboard.RecceActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TestingProject" />
+            android:theme="@style/NoActTheme" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
