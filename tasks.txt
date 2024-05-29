@@ -1,7 +1,9 @@
 Ship
 
 >make recce dashboard 
+recce dash install phase
 and recce admin dash
+client approval on app
 
 change contentotp hardcode back when api done
 
