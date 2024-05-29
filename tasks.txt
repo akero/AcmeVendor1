@@ -1,7 +1,16 @@
 Ship
 
 >make recce dashboard 
+
+>date code
+image code
+add setters/ getters
+api call
+
 recce dash install phase
+
+
+
 and recce admin dash
 client approval on app
 

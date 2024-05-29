@@ -81,7 +81,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         locationtaken= false;
 
 
-        //initializing buttons
+        //initializing photo buttons
         Button storePhotoButton, storePhotoButton1, storePhotoButton2, storePhotoButton3, ownerSignButton, uploadSiteDetailsButton;
         storePhotoButton= findViewById(R.id.btnUpdatePhoto);
         storePhotoButton1= findViewById(R.id.btnUpdatePhoto1);
@@ -201,17 +201,24 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
 
 
-//Signage area
-        EditText height, width, remarks;
-        String heightStr, widthStr, remarksStr= "";
-        RoundRectCornerImageView imageButton= findViewById(R.id.ivCampaignImage);;
+        //Signage area
+
+
+        //EditText height, width, remarks, projectname, state, district, city, retailname, ownername, owneremail, ownerphone, yourname, location;
+
+
+
+        EditText date;
+
+        RoundRectCornerImageView imageButton= findViewById(R.id.ivCampaignImage);
+        
         Button uploadSignageDetails= findViewById(R.id.btnUpdatePhoto5);
 
         uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty()) {
-                    Toast.makeText(ctxt, "Please enter height and width", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 }
 
                 //TODO add check for image
