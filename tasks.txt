@@ -4,6 +4,9 @@ Ship
 ask what happens once client approves and implement
 recce dash install phase- ask
 
+asm dashboard
+shopkeeper dashboard
+
 
 //make recce dashboard
 implement api- pending
@@ -13,25 +16,32 @@ rearrange UI according to data required for store photos -pending
 have to enter other details before store photo upload- pending
 
 //enter code for image upload
-
-
-login- pending
-
 //date code
 //image code
 //test
 //api call
 
+LOGIN
 login for recce- pending
 test then onresponse received tag222- pending
-
 login for asm- pending
+login for client approval- pending
+login for shopkeeper- pending
 
+DESIGN
 
-asm client approval
+>asm approval- same as client
 type- recceasm
 email rish1994a
-UI- pending
+
+
+shopkeeper- pending
+client approval- inform that its same as asm
+
+//recce
+
+
+
 
 
 change contentotp hardcode back when api done line 212

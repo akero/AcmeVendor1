@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -21,17 +20,13 @@ import com.acme.acmevendor.R;
 import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.FileHelper;
-import com.acme.acmevendor.activity.dashboard.RecceClientDashboardActivity;
+import com.acme.acmevendor.activity.dashboard.RecceAsmDashboard;
 import com.acme.acmevendor.activity.dashboard.RecceDashboardActivity;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
@@ -210,7 +205,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 intent.putExtra("logintoken", token);
                 intent.putExtra("clientid", clientid);
 //TODO remove after login api done
-                Intent intent1= new Intent(ContentOtp.this, RecceDashboardActivity.class);
+                Intent intent1= new Intent(ContentOtp.this, RecceAsmDashboard.class);
                 intent1.putExtra("logintoken", token);
                 intent1.putExtra("recceasmid", recceasmid);
 
@@ -228,7 +223,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
             }
             else if(loginType.equals("recceasm")){
 
-                Intent intent= new Intent(ContentOtp.this, RecceClientDashboardActivity.class);
+                Intent intent= new Intent(ContentOtp.this, RecceAsmDashboard.class);
                 intent.putExtra("logintoken", token);
                 intent.putExtra("recceasmid", recceasmid);
 
