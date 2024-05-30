@@ -31,12 +31,14 @@ login for shopkeeper- pending
 >DESIGN
 
 >asm approval
+>recceasmdashsite
 type- recceasm
 email rish1994a
 
 
+client approval- same as asm
+
 shopkeeper- pending
-client approval- inform that its same as asm and duplicate in code
 
 //recce
 

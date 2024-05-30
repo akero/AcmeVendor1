@@ -20,8 +20,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.acme.acmevendor.R;
 import com.acme.acmevendor.adapters.CampaignListAdapter;
+import com.acme.acmevendor.databinding.ActivityRecceAsmDashboardBinding;
 import com.acme.acmevendor.databinding.ActivityViewVendorSitesBinding;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.MainViewModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -35,7 +37,7 @@ import java.net.URL;
 
 //TODO line 294 api call
 
-public class RecceAsmDashboard extends AppCompatActivity {
+public class RecceAsmDashboard extends AppCompatActivity implements ApiInterface {
 
     int id = 0;
     String image = "";
@@ -54,7 +56,7 @@ public class RecceAsmDashboard extends AppCompatActivity {
     String created_at = "";
     String updated_at = "";
     MainViewModel mainViewModel;
-    ActivityViewVendorSitesBinding binding;
+    ActivityRecceAsmDashboardBinding binding;
     //JSONArray jsonArray;
     boolean showMenus = false;
     private final Context ctxt = this;
@@ -71,7 +73,7 @@ public class RecceAsmDashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_view_vendor_sites);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recce_asm_dashboard);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
@@ -295,6 +297,7 @@ public class RecceAsmDashboard extends AppCompatActivity {
 
         //TODO remove below and api call here
         Intent intent= new Intent(RecceAsmDashboard.this, RecceAsmDashboardSite.class);
+        intent.putExtra("logintoken", logintoken);
         startActivity(intent);
 
         //APIreferenceclass api = new APIreferenceclass(logintoken, this, id);
