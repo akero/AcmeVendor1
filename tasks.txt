@@ -1,28 +1,37 @@
 Ship
 
->make recce dashboard 
-rishabh@acmemedia.in
-type- recce
+>tell dev to give all stores that need to be approved by client in single call
+ask what happens once client approves and implement
+recce dash install phase- ask
 
-login issue solution
 
-recce dash install phase
+//make recce dashboard
+implement api- pending
+rearrange UI according to data required for store photos -pending
+/rishabh@acmemedia.in
+/type- recce
+have to enter other details before store photo upload- pending
+
+//enter code for image upload
+
+
+login- pending
 
 //date code
 //image code
 //test
 //api call
 
-login for recce- stuck emailed
-test then onresponse received tag222
+login for recce- pending
+test then onresponse received tag222- pending
 
-login for asm
+login for asm- pending
 
 
->asm client approval
+asm client approval
 type- recceasm
 email rish1994a
->UI
+UI- pending
 
 
 change contentotp hardcode back when api done line 212

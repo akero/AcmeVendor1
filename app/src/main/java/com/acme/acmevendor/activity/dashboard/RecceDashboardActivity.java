@@ -52,6 +52,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
+//TODO rearrange UI accoding to data required for store photos.
+//TODO implement all api calls.
+
+
 public class RecceDashboardActivity extends AppCompatActivity implements ApiInterface, LocationCallback {
 
     private AppBarConfiguration appBarConfiguration;
@@ -70,6 +74,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
     Boolean locationtaken, picturetaken;
     String latlong, logintoken;
+    int storephoto;//0 for init, 1 for store photo, 2 for sign, 3 for main upload with other stuff
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         latlong = "";
         locationtaken = false;
         pictureandlatlongready = false;
+        storephoto= 0;
 
         try {
             FileHelper fh = new FileHelper();
@@ -118,7 +124,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     // temporaryuploadchecker();
                     //latlong();
                     Log.d("latlong", latlong);
-                    //TODO uncomment
+
+                    storephoto= 1;
                     openCamera();
                 }
             }
@@ -139,8 +146,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     // temporaryuploadchecker();
                     //latlong();
                     Log.d("latlong", latlong);
-                    //TODO uncomment
-                    //openCamera();
+
+                    storephoto= 1;
+                    openCamera();
                 }
             }
         });
@@ -160,8 +168,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     // temporaryuploadchecker();
                     //latlong();
                     Log.d("latlong", latlong);
-                    //TODO uncomment
-                    //openCamera();
+
+                    storephoto= 1;
+                    openCamera();
                 }
             }
         });
@@ -181,8 +190,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     // temporaryuploadchecker();
                     //latlong();
                     Log.d("latlong", latlong);
-                    //TODO uncomment
-                    //openCamera();
+
+                    storephoto= 1;
+                    openCamera();
                 }
             }
         });
@@ -202,8 +212,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     // temporaryuploadchecker();
                     //latlong();
                     Log.d("latlong", latlong);
-                    //TODO uncomment
-                    //openCamera();
+
+                    storephoto= 2;
+                    openCamera();
                 }
             }
         });
@@ -272,6 +283,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     latlong();
                     Log.d("latlong", latlong);
                     //TODO uncomment
+
+                    storephoto= 3;
                     openCamera();
                 }
             }
@@ -330,6 +343,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("long", longitude);
 
             double area= 0;
+
+            //TODO change after clarification on email
             area= Double.parseDouble(binding.etHeight.getText().toString())*Double.parseDouble(binding.etWidth.getText().toString());
             jsonPayload.put("area", String.valueOf(area));
             FileHelper fh = new FileHelper();
@@ -452,12 +467,20 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
 
                 picturetaken = true;
-                if (locationtaken) {
+                if (locationtaken && storephoto== 3) {//main upload
                     pictureandlatlongready = true;
-                    //apicallforvendorimageupdate(latlong, imageUri);
-                    Log.d("tag22", "activity result works.");
+                    apicall();
 
+                    Log.d("tag22", "activity result works.");
                 }
+                else if(storephoto== 1){//store photo upload
+
+                    apicallforstorephoto();
+                }else if(storephoto== 2){
+
+                    apicallforsign();
+                }
+
                 Log.d("tag22", "activity result works");
 
             } catch (Exception e) {
@@ -468,6 +491,37 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         } else {
             Log.d("tag22", "something went wrong");
         }
+    }
+
+    void apicallforstorephoto(){
+        //TODO continue api call. Enter json.
+        try{
+
+            JSONObject jsonPayload= null;
+            APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, imageUri, "a", "a");
+            imageUri = null;
+        }catch (Exception e){
+            Log.d("tag222", e.toString());
+        }
+
+
+
+
+    }
+
+    void apicallforsign(){
+
+        //TODO continue api call. Enter json.
+        try{
+
+            JSONObject jsonPayload= null;
+            APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, imageUri, "a", "a", "a");
+            imageUri = null;
+        }catch (Exception e){
+            Log.d("tag222", e.toString());
+        }
+
+
     }
 
     void apicallforvendorimageupdate(String latlong, Uri uri) {
@@ -593,6 +647,7 @@ out.close();
             locationtaken = true;
             if (picturetaken) {
                 pictureandlatlongready = true;
+
                 //apicallforvendorimageupdate(latlong, imageUri);
             }
         }
