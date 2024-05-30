@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,11 +26,15 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestingProject"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.dashboard.RecceAsmDashboardSite"
+            android:exported="false"
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.RecceAsmDashboard"
             android:exported="false"
-            android:theme="@style/NoActTheme"/>
+            android:theme="@style/NoActTheme" />
         <activity
             android:name=".activity.dashboard.RecceDashboardActivity"
             android:exported="false"
@@ -40,7 +44,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
@@ -182,7 +186,7 @@
         <activity
             android:name=".activity.login.SplashActivity"
             android:exported="true"
-            android:theme="@style/NoActTheme" >
+            android:theme="@style/NoActTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

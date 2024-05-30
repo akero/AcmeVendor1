@@ -28,15 +28,15 @@ login for asm- pending
 login for client approval- pending
 login for shopkeeper- pending
 
-DESIGN
+>DESIGN
 
->asm approval- same as client
+>asm approval
 type- recceasm
 email rish1994a
 
 
 shopkeeper- pending
-client approval- inform that its same as asm
+client approval- inform that its same as asm and duplicate in code
 
 //recce
 
