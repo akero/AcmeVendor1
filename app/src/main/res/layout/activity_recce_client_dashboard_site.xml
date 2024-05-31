@@ -73,6 +73,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/left"
                     android:clickable="true"
+
+                    android:visibility="gone"
                     android:elevation="2dp"
                     android:layout_below="@id/line1"
                     android:layout_above="@id/llUnit"/>
@@ -82,6 +84,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/right"
+
+                    android:visibility="gone"
                     android:layout_alignParentRight="true"
                     android:clickable="true"
                     android:elevation="2dp"
@@ -567,12 +571,14 @@
                     android:fontFamily="@font/dmsansbold"
                     android:onClick="onDownloadClick"
                     android:text="Reject"
+                    android:visibility="gone"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14ssp" />
 
                 <Button
                     android:id="@+id/btnClose"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btnDownload"

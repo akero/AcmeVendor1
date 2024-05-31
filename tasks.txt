@@ -25,29 +25,25 @@ LOGIN
 https://acme.warburttons.com/api/register-user
 
 //login for recce- rish1994f
-test then onresponse received tag222
-login for asm- pending- type- recceasm, email rish1994a
-login for client approval
-login for shopkeeper
+//login for asm- email rish1994j
+login for client 
+
 
 >DESIGN
 
 //asm approval
 //recceasmdashsite
 //client id dropdown- put in json
-//java
->test
+>java- pending
+test
 
-//client approval- same as asm- xml- dont need approval remove button
+//client- dont need approval remove button
 java
 client doesnt need approval
 
-shopkeeper- pending- xml
-java
-
-//recce- xml
-java
-
+//recce
+//java
+test
 
 change contentotp hardcode back when api done line 212
 

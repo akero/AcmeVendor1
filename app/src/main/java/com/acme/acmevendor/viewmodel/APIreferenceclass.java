@@ -514,6 +514,12 @@ public class APIreferenceclass {
         }
     }
 
+    // asm approval
+    public APIreferenceclass(Context ctxt, String logintoken, JSONObject jsonPayload){
+
+
+
+    }
 
     //add recce details and site image
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int recceid, Uri photo1, Uri photo2, Uri photo3, Uri photo4, Uri photosign, Uri photosite) {

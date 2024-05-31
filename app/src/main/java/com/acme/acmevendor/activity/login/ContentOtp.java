@@ -222,7 +222,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 loadingSpinner();
                 startActivity(intent);
             }
-            else if(loginType.equals("recceasm")){
+            else if(loginType.equals("asm")){
 
                 Intent intent= new Intent(ContentOtp.this, RecceAsmDashboard.class);
                 intent.putExtra("logintoken", token);

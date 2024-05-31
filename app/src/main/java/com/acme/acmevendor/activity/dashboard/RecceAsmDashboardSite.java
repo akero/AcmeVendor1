@@ -60,6 +60,8 @@ import java.util.StringTokenizer;
 public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInterface {
 
 
+    String asm_status, project_id;
+    int asm_approver_id;
     private ActivityRecceAsmDashboardSiteBinding binding;
     private AppBarConfiguration appBarConfiguration;
     private final Context ctxt= this;
@@ -86,6 +88,19 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_recce_asm_dashboard_site);
+
+        asm_approver_id= 0;
+        asm_status= "";
+        project_id= "";
+
+        try{
+            asm_approver_id= getIntent().getIntExtra("asm_approver_id", 1);
+            project_id= getIntent().getStringExtra("project_id");
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         //binding = ActivityRecceAsmDashboardSiteBinding.inflate(getLayoutInflater());
         if (getIntent().getExtras() != null) {
@@ -168,6 +183,48 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
 
         });
 
+        //TODO need project id, asm id and asm status
+        //approved
+        binding.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                asm_status= "approved";
+                JSONObject jsonPayload= new JSONObject();
+                try {
+                    jsonPayload.putOpt("project_id", project_id);
+                    jsonPayload.putOpt("asm_approver_id", asm_approver_id);
+                    jsonPayload.putOpt("asm_status", asm_status);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                APIreferenceclass api= new APIreferenceclass(ctxt, logintoken, jsonPayload);
+
+
+            }
+        });
+
+        //rejected
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                asm_status= "approved";
+                JSONObject jsonPayload= new JSONObject();
+
+                try {
+                    jsonPayload.putOpt("project_id", project_id);
+                    jsonPayload.putOpt("asm_approver_id", asm_approver_id);
+                    jsonPayload.putOpt("asm_status", asm_status);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                APIreferenceclass api= new APIreferenceclass(ctxt, logintoken, jsonPayload);
+
+            }
+        });
 
 
         //= "";

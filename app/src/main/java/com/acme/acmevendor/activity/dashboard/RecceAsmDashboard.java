@@ -36,10 +36,10 @@ import org.json.JSONObject;
 import java.net.URL;
 
 //TODO line 294 api call
-
+//TODO send project id and asm approver id to next class
 public class RecceAsmDashboard extends AppCompatActivity implements ApiInterface {
 
-    int id = 0;
+    //int id = 0;
     String image = "";
     String vendor_id = "";
     int campaign_id = 0;
@@ -67,6 +67,7 @@ public class RecceAsmDashboard extends AppCompatActivity implements ApiInterface
 
     ProgressBar progressBar;
     Animation rotateAnimation;
+    int id; //asm id
 
     //todo access token save to memory add to api call
 
@@ -80,6 +81,13 @@ public class RecceAsmDashboard extends AppCompatActivity implements ApiInterface
         Log.d("whichclass", "ViewVendorSites");
 
         binding.ivPlus.setVisibility(View.GONE);
+        id= 0;
+
+        try{
+            id= getIntent().getIntExtra("recceasmid", 0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         //animation code
         progressBar = findViewById(R.id.progressBar);
@@ -299,6 +307,8 @@ public class RecceAsmDashboard extends AppCompatActivity implements ApiInterface
         Intent intent= new Intent(RecceAsmDashboard.this, RecceAsmDashboardSite.class);
         intent.putExtra("logintoken", logintoken);
         startActivity(intent);
+
+        //TODO CONTINUE HERE
 
         //APIreferenceclass api = new APIreferenceclass(logintoken, this, id);
     }
