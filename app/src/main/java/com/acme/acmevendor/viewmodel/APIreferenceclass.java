@@ -516,10 +516,39 @@ public class APIreferenceclass {
 
     // asm approval
     public APIreferenceclass(Context ctxt, String logintoken, JSONObject jsonPayload){
+        //TODO fill
+
+
+    }
+
+    //asm fetch data for retailer code
+
+    public APIreferenceclass(Context context, String logintoken, String retailercode){
+        //TODO fill
+        String url= "https://acme.warburttons.com/api/retail/"+ retailercode;
+        querytype = 0; //get
+
+        JSONObject jsonPayload;
+
+        try {
+            jsonPayload= new JSONObject();
+            jsonPayload.put("meme", "");
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "application/json");
+
+            String jsonPayload1= jsonPayload.toString();
+            callapi(headers, jsonPayload1, context, 1, url); // Using POST method
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
 
 
 
     }
+
 
     //add recce details and site image
     public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int recceid, Uri photo1, Uri photo2, Uri photo3, Uri photo4, Uri photosign, Uri photosite) {

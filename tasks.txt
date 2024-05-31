@@ -43,6 +43,8 @@ client doesnt need approval
 
 //recce
 //java
+need to add a bar where person can enter retailer code and press fetch button and it auto fills in the form
+send asm name to project upload for identification
 test
 
 change contentotp hardcode back when api done line 212

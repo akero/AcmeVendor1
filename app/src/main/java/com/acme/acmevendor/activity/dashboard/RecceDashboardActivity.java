@@ -63,6 +63,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityRecceDashboardBinding binding;
+    boolean wassendbuttonpressed;
     private static final int REQUEST_CODE_PERMISSIONS = 123;
     static final int REQUEST_TAKE_PHOTO = 1;
     private final Context ctxt = this;
@@ -92,6 +93,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         binding = ActivityRecceDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        wassendbuttonpressed= false;
         clientspinnerboolean= 0;
         piccounter= 0;
         recceid= 0;
@@ -246,6 +248,15 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             }
         });
 
+        //fetch retailer details and populate automatically
+        binding.btnFetch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                APIreferenceclass api= new APIreferenceclass(logintoken, ctxt, binding.etFetch.getText().toString());
+            }
+        });
+
 
         //Signage area
 
@@ -334,6 +345,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                     public void onClick(View view) {
                                                         if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() || binding.etHeight1.getText().toString().isEmpty() || binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() || binding.etTotalArea.getText().toString().isEmpty() || binding.etTotalArea1.getText().toString().isEmpty() || !pictureandlatlongready) {
                                                             Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                                                            wassendbuttonpressed= true;
+                                                            latlong();
                                                         } else {
                                                             //api call
 
@@ -609,7 +622,9 @@ boolean allpicturestaken;
             locationtaken = true;
             if (allpicturestaken) {
                 pictureandlatlongready = true;
-
+                if(wassendbuttonpressed){
+                    apicallmain();
+                }
                // apicallmain(latlong);
             }
         }
@@ -639,7 +654,11 @@ boolean allpicturestaken;
                     clientlist(response);
                 }
             });
-        }else{
+        }else if(jsono.getString("message").equals("Data fetched successfully!")){
+
+            //TODO populate fields with content
+    }
+    else{
         response1 = response;
         Log.d("tag222 response is", response);
         response1 = response;}
