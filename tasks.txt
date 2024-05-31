@@ -1,19 +1,19 @@
 Ship
 
->tell dev to give all stores that need to be approved by client in single call
+
+tell dev to give all stores that need to be approved by client in single call
 ask what happens once client approves and implement
 recce dash install phase- ask
 
-asm dashboard
-shopkeeper dashboard
 
 
 //make recce dashboard
-implement api- pending
-rearrange UI according to data required for store photos -pending
+implement api
+rearrange UI according to data required for store photos
 /rishabh@acmemedia.in
 /type- recce
-have to enter other details before store photo upload- pending
+have to enter other details before store photo upload
+
 
 //enter code for image upload
 //date code
@@ -22,33 +22,38 @@ have to enter other details before store photo upload- pending
 //api call
 
 LOGIN
-login for recce- pending
-test then onresponse received tag222- pending
-login for asm- pending
-login for client approval- pending
-login for shopkeeper- pending
+https://acme.warburttons.com/api/register-user
+
+>login for recce- rish1994f
+test then onresponse received tag222
+login for asm- pending- type- recceasm, email rish1994a
+login for client approval
+login for shopkeeper
 
 >DESIGN
 
->asm approval
->recceasmdashsite
-type- recceasm
-email rish1994a
+//asm approval
+//recceasmdashsite
+java- emailed
+>client id dropdown- put in json
 
+//client approval- same as asm- xml- dont need approval remove button
+java
+client doesnt need approval
 
-client approval- same as asm
+shopkeeper- pending- xml
+java
 
-shopkeeper- pending
-
-//recce
-
-
-
+//recce- xml
+java
 
 
 change contentotp hardcode back when api done line 212
 
 and recce admin dash
+
+
+
 
 
 //admin vendor- only show vendors whos campaigns are live- emailed- api/admin_vendors

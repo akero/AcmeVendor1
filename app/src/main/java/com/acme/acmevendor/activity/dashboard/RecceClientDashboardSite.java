@@ -10,19 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-//import com.acme.acmevendor.databinding.ActivityViewSiteDetailBinding;
-//import com.acme.acmevendor.databinding.ActivityViewSiteDetailVendorBinding;
-import com.acme.acmevendor.databinding.ActivityRecceAsmDashboardSiteBinding;
-import com.acme.acmevendor.utility.RoundRectCornerImageView;
-import com.acme.acmevendor.viewmodel.APIreferenceclass;
-import com.acme.acmevendor.viewmodel.ApiInterface;
-import com.acme.acmevendor.viewmodel.SiteDetail;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -32,18 +19,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+//import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-//import com.acme.acmevendor.databinding.ActivityRecceAsmDashboardSiteBinding;
 
 import com.acme.acmevendor.R;
+import com.acme.acmevendor.databinding.ActivityRecceClientDashboardSiteBinding;
+import com.acme.acmevendor.utility.RoundRectCornerImageView;
+import com.acme.acmevendor.viewmodel.APIreferenceclass;
+import com.acme.acmevendor.viewmodel.ApiInterface;
+import com.acme.acmevendor.viewmodel.SiteDetail;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,10 +48,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInterface {
+public class RecceClientDashboardSite extends AppCompatActivity implements ApiInterface {
 
-
-    private ActivityRecceAsmDashboardSiteBinding binding;
     private AppBarConfiguration appBarConfiguration;
     private final Context ctxt= this;
 
@@ -77,6 +66,7 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
 
     //TODO populate all fields. pass api call data from prev activity
     //have to pass logintoken and siteid
+    private ActivityRecceClientDashboardSiteBinding binding;
 
     String latlong;
     private LocationHelper locationHelper;
@@ -85,7 +75,7 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_recce_asm_dashboard_site);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recce_client_dashboard_site);
 
         //binding = ActivityRecceAsmDashboardSiteBinding.inflate(getLayoutInflater());
         if (getIntent().getExtras() != null) {
@@ -181,18 +171,18 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
 
     boolean locationtaken;
 
-   /* @Override
-    public void callback(String a) {
-        if(!locationtaken) {
-            latlong = a;
-            locationtaken = true;
-            if(picturetaken) {
-                apicallforvendorimageupdate(latlong, imageUri);
-            }
-        }
-        Log.d("tag22", "inside callback, latlong "+ latlong+ "locationtaken"+ locationtaken);
-    }
-*/
+    /* @Override
+     public void callback(String a) {
+         if(!locationtaken) {
+             latlong = a;
+             locationtaken = true;
+             if(picturetaken) {
+                 apicallforvendorimageupdate(latlong, imageUri);
+             }
+         }
+         Log.d("tag22", "inside callback, latlong "+ latlong+ "locationtaken"+ locationtaken);
+     }
+ */
     private static final String[] REQUIRED_PERMISSIONS = {
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_COARSE_LOCATION
@@ -204,7 +194,7 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
 
     //void latlong(){
 
-      //  locationHelper.requestLocationPermission(this, this);
+    //  locationHelper.requestLocationPermission(this, this);
     //}
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 123;
@@ -278,19 +268,19 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
 
     }
 
- /*   private void openCamera1() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
-            } else {
-                Log.d("camera", "no camera app found");
-                Toast.makeText(ViewSiteDetailActivity.this, "No camera app found", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
-        }
-    }*/
+    /*   private void openCamera1() {
+           if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+               Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                   startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
+               } else {
+                   Log.d("camera", "no camera app found");
+                   Toast.makeText(ViewSiteDetailActivity.this, "No camera app found", Toast.LENGTH_SHORT).show();
+               }
+           } else {
+               ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+           }
+       }*/
     Uri photoURI;
 
     private void openCamera() {
@@ -304,7 +294,7 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
                 // Handle error
             }
             if (photoFile != null) {
-                photoURI = FileProvider.getUriForFile(RecceAsmDashboardSite.this,
+                photoURI = FileProvider.getUriForFile(RecceClientDashboardSite.this,
                         "com.example.android.fileprovider",
                         photoFile);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
@@ -314,7 +304,7 @@ public class RecceAsmDashboardSite extends AppCompatActivity implements ApiInter
             }
         } else {
             Log.d("camera", "no permission1");
-            Toast.makeText(RecceAsmDashboardSite.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RecceClientDashboardSite.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -616,7 +606,7 @@ out.close();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(RecceAsmDashboardSite.this, "Error retrieving or parsing data.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RecceClientDashboardSite.this, "Error retrieving or parsing data.", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -625,7 +615,7 @@ out.close();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(RecceAsmDashboardSite.this, "Image updated successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecceClientDashboardSite.this, "Image updated successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
             }else {
@@ -633,7 +623,7 @@ out.close();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(RecceAsmDashboardSite.this, "Error retrieving or parsing data..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecceClientDashboardSite.this, "Error retrieving or parsing data..", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -644,7 +634,7 @@ out.close();
                 @Override
                 public void run() {
                     Log.d("tag123", e.toString());
-                    Toast.makeText(RecceAsmDashboardSite.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecceClientDashboardSite.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -668,7 +658,7 @@ out.close();
             @Override
             public void onClick(View v) {
 
-                Intent intent= new Intent(RecceAsmDashboardSite.this, AddSiteDetailActivity.class);
+                Intent intent= new Intent(RecceClientDashboardSite.this, AddSiteDetailActivity.class);
                 intent.putExtra("loginToken", logintoken);
                 intent.putExtra("campaignId", campaignId);
                 intent.putExtra("editingsite", "yes");

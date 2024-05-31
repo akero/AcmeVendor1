@@ -516,13 +516,13 @@ public class APIreferenceclass {
 
 
     //add recce details and site image
-    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, Uri selectedImage, String a) {
-        String url = "https://acme.warburttons.com/api/campaigns";
+    public APIreferenceclass(JSONObject jsonPayload1, Context context, String logintoken, int recceid, Uri photo1, Uri photo2, Uri photo3, Uri photo4, Uri photosign, Uri photosite) {
+        String url = "https://acme.warburttons.com/api/project";
         querytype = 1; // POST
 
         Log.d("tg912", jsonPayload1.toString());
 
-        if (selectedImage != null) {
+        if (photo1 != null || photo2 != null || photo3 != null || photo4 != null || photosign != null || photosite != null) {
             // Prepare multipart body
             String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
             StringBuilder bodyBuilder = new StringBuilder();
@@ -536,16 +536,13 @@ public class APIreferenceclass {
                 bodyBuilder.append(jsonPayload1.optString(key)).append("\r\n");
             }
 
-            // Read file content from Uri
-            byte[] fileBytes = readFileContent(context, selectedImage);
-            String fileName = getFileName(context, selectedImage);
-
-            // Start image part of multipart body
-            bodyBuilder.append("--").append(boundary).append("\r\n");
-            bodyBuilder.append("Content-Disposition: form-data; name=\"image\"; filename=\"")
-                    .append(fileName).append("\"\r\n");
-            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
-                    .append("\r\n\r\n");
+            // Add photo parts to multipart body
+            addPhotoToMultipart(bodyBuilder, boundary, photo1, "image1", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photo2, "image2", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photo3, "image3", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photo4, "image4", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photosign, "photosign", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photosite, "photosite", context);
 
             // Convert the initial part of the multipart body to bytes
             byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
@@ -554,7 +551,6 @@ public class APIreferenceclass {
                 // Create a ByteArrayOutputStream to combine everything
                 ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
                 multipartOutputStream.write(initialPartBytes);
-                multipartOutputStream.write(fileBytes);
 
                 // Write the final boundary
                 String finalBoundary = "\r\n--" + boundary + "--\r\n";
@@ -570,7 +566,7 @@ public class APIreferenceclass {
                 // Call API with multipart data
                 Log.d("tg97", "multipart");
                 callapi2(headers, multipartBody, context, 1, url); // Using POST method
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
@@ -581,6 +577,23 @@ public class APIreferenceclass {
             headers.put("Content-Type", "application/json");
 
             callapi(headers, jsonPayload, context, 1, url); // Using POST method
+        }
+    }
+
+    private void addPhotoToMultipart(StringBuilder bodyBuilder, String boundary, Uri photoUri, String fieldName, Context context) {
+        if (photoUri != null) {
+            byte[] fileBytes = readFileContent(context, photoUri);
+            String fileName = getFileName(context, photoUri);
+
+            // Start image part of multipart body
+            bodyBuilder.append("--").append(boundary).append("\r\n");
+            bodyBuilder.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"; filename=\"")
+                    .append(fileName).append("\"\r\n");
+            bodyBuilder.append("Content-Type: ").append(guessContentTypeFromName(fileName))
+                    .append("\r\n\r\n");
+
+            // Write file bytes
+            bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
         }
     }
 

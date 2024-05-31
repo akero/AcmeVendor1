@@ -21,6 +21,7 @@ import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.FileHelper;
 import com.acme.acmevendor.activity.dashboard.RecceAsmDashboard;
+import com.acme.acmevendor.activity.dashboard.RecceClientDashboard;
 import com.acme.acmevendor.activity.dashboard.RecceDashboardActivity;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
@@ -205,14 +206,14 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 intent.putExtra("logintoken", token);
                 intent.putExtra("clientid", clientid);
 //TODO remove after login api done
-                Intent intent1= new Intent(ContentOtp.this, RecceAsmDashboard.class);
-                intent1.putExtra("logintoken", token);
-                intent1.putExtra("recceasmid", recceasmid);
+                //Intent intent1= new Intent(ContentOtp.this, RecceDashboardActivity.class);
+                //intent1.putExtra("logintoken", token);
+//                intent1.putExtra("recceasmid", recceasmid);
 
                 loadingSpinner();
 
-                startActivity(intent1);
-            }else if(loginType.equals("recce")){
+                startActivity(intent);
+            }else if(loginType.equals("supervisor")){
 
                 Intent intent= new Intent(ContentOtp.this, RecceDashboardActivity.class);
                 intent.putExtra("logintoken", token);

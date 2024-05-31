@@ -28,6 +28,12 @@
         android:theme="@style/Theme.TestingProject"
         tools:targetApi="31">
         <activity
+            android:name=".activity.dashboard.RecceClientDashboardSite"
+            android:exported="false" />
+        <activity
+            android:name=".activity.dashboard.RecceClientDashboard"
+            android:exported="false" />
+        <activity
             android:name=".activity.dashboard.RecceAsmDashboardSite"
             android:exported="false"
             android:theme="@style/NoActTheme" />

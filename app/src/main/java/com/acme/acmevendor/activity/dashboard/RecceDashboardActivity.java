@@ -74,7 +74,11 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
     Boolean locationtaken, picturetaken;
     String latlong, logintoken;
+    int piccounter; //0 init, 1, 2, 3, 4, 5, 6
+    boolean pic1taken, pic2taken, pic3taken, pic4taken, picsigntaken, picsitetaken;
+    Uri pic1takenURI, pic2takenURI, pic3takenURI, pic4takenURI, picsigntakenURI, picsitetakenURI;
     int storephoto;//0 for init, 1 for store photo, 2 for sign, 3 for main upload with other stuff
+    int recceid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,18 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         binding = ActivityRecceDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        piccounter= 0;
+        recceid= 0;
+        pic1takenURI= null; pic2takenURI= null; pic3takenURI= null; pic4takenURI= null; picsigntakenURI= null; picsitetakenURI= null;
+        allpicturestaken= false; pic1taken= false; pic2taken= false; pic3taken= false; pic4taken= false; picsigntaken= false; picsitetaken= false;
+
+
+        try{
+            recceid= getIntent().getIntExtra("recceid", 0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         //init locationhelper
         locationHelper = new LocationHelper();
@@ -126,6 +142,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     Log.d("latlong", latlong);
 
                     storephoto= 1;
+                    piccounter= 1;
                     openCamera();
                 }
             }
@@ -148,6 +165,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     Log.d("latlong", latlong);
 
                     storephoto= 1;
+                    piccounter= 2;
                     openCamera();
                 }
             }
@@ -170,6 +188,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     Log.d("latlong", latlong);
 
                     storephoto= 1;
+                    piccounter= 3;
                     openCamera();
                 }
             }
@@ -192,6 +211,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     Log.d("latlong", latlong);
 
                     storephoto= 1;
+                    piccounter= 4;
                     openCamera();
                 }
             }
@@ -214,6 +234,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     Log.d("latlong", latlong);
 
                     storephoto= 2;
+                    piccounter= 5;
                     openCamera();
                 }
             }
@@ -265,7 +286,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             }
         });
 
-        //photo
+        //photo of sign
         RoundRectCornerImageView imageButton = findViewById(R.id.ivCampaignImage);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,6 +306,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                     //TODO uncomment
 
                     storephoto= 3;
+                    piccounter= 6;
                     openCamera();
                 }
             }
@@ -339,14 +361,14 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("mobile", binding.etHeight5.getText().toString());
             jsonPayload.put("remarks", binding.etTotalArea.getText().toString());
             jsonPayload.put("location", binding.etTotalArea1.getText().toString());
+            jsonPayload.put("area", binding.area.getText().toString());
             jsonPayload.put("lat", lat);
             jsonPayload.put("long", longitude);
 
-            double area= 0;
-
+            //double area= 0;
             //TODO change after clarification on email
-            area= Double.parseDouble(binding.etHeight.getText().toString())*Double.parseDouble(binding.etWidth.getText().toString());
-            jsonPayload.put("area", String.valueOf(area));
+            //area= Double.parseDouble(binding.etHeight.getText().toString())*Double.parseDouble(binding.etWidth.getText().toString());
+            //jsonPayload.put("area", String.valueOf(area));
             FileHelper fh = new FileHelper();
             jsonPayload.put("created_by", fh.readUserId(this));
 
@@ -358,7 +380,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         Log.d("tg66", jsonPayload.toString());
 
-        APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, imageUri, "a");
+        APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, recceid, pic1takenURI, pic2takenURI,pic3takenURI, pic4takenURI, picsigntakenURI, picsitetakenURI);
         imageUri = null;
     }
 
@@ -419,6 +441,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     }
 
     Uri imageUri;
+boolean allpicturestaken;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -428,11 +451,13 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             // Access the image file using the Uri you provided earlier
 
             Log.d("tag22", data.toString());
+            Uri imageUri1;
 
             try {
                 imageUri = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         createImageFile());
+                imageUri1= imageUri;
                 Log.d("tag222", imageUri.toString());
 
 
@@ -466,20 +491,49 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 */
 
 
+                if(piccounter== 1){
+                    pic1taken= true;
+                    pic1takenURI= imageUri1;
+                }else if(piccounter== 2){
+                    pic2taken= true;
+                    pic2takenURI= imageUri1;
+                }else if(piccounter== 3){
+                    pic3taken= true;
+                    pic3takenURI= imageUri1;
+                }else if(piccounter== 4){
+                    pic4taken= true;
+                    pic4takenURI= imageUri1;
+                }else if(piccounter== 5){
+                    picsigntaken= true;
+                    picsigntakenURI= imageUri1;
+                }else if(piccounter== 6){
+                    picsitetaken= true;
+                    picsitetakenURI= imageUri1;
+                }
+                if(pic1taken&&pic2taken&&pic3taken&&pic4taken&&picsigntaken&&picsitetaken){
+                    allpicturestaken= true;
+                    if(locationtaken){
+                        pictureandlatlongready= true;
+                    }else{
+                        latlong();
+                    }
+                }
+
+
                 picturetaken = true;
-                if (locationtaken && storephoto== 3) {//main upload
-                    pictureandlatlongready = true;
-                    apicall();
+               // if (locationtaken && allpicturestaken) {//main upload
+                 //   pictureandlatlongready = true;
+                   // apicall();
 
-                    Log.d("tag22", "activity result works.");
-                }
-                else if(storephoto== 1){//store photo upload
+                    //Log.d("tag22", "activity result works.");
+                //}
+             //   else if(storephoto== 1){//store photo upload
 
-                    apicallforstorephoto();
-                }else if(storephoto== 2){
+               //     apicallforstorephoto();
+               // }else if(storephoto== 2){
 
-                    apicallforsign();
-                }
+                 //   apicallforsign();
+                //}
 
                 Log.d("tag22", "activity result works");
 
@@ -645,16 +699,21 @@ out.close();
         if (!locationtaken) {
             latlong = a;
             locationtaken = true;
-            if (picturetaken) {
+            if (allpicturestaken) {
                 pictureandlatlongready = true;
 
-                //apicallforvendorimageupdate(latlong, imageUri);
+               // apicallmain(latlong);
             }
         }
         Log.d("tag22", "inside callback, latlong " + latlong + "locationtaken" + locationtaken);
     }
 
+    void apicallmain(){
+
+    }
+
     String response1;
+
 
     @Override
     public void onResponseReceived(String response) {

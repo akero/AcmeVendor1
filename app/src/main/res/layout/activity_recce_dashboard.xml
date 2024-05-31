@@ -638,13 +638,38 @@
                 android:textColorHint="@color/texthintcolor"
                 android:textSize="@dimen/_12ssp" />
 
+
+            <TextView
+                android:id="@+id/txtarea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etTotalArea1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/dmsansregular"
+                android:text="Area"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10ssp" />
+
+            <EditText
+                android:id="@+id/area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtarea"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@drawable/primarystroke"
+                android:fontFamily="@font/dmsansregular"
+                android:padding="@dimen/_8sdp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/texthintcolor"
+                android:textSize="@dimen/_12ssp" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_110sdp"
                 android:id="@+id/rlAddImage"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/primarystroke"
-                android:layout_below="@id/etTotalArea1">
+                android:layout_below="@id/area">
 
                 <View
                     android:id="@+id/view"
