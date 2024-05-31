@@ -24,7 +24,7 @@ have to enter other details before store photo upload
 LOGIN
 https://acme.warburttons.com/api/register-user
 
->login for recce- rish1994f
+//login for recce- rish1994f
 test then onresponse received tag222
 login for asm- pending- type- recceasm, email rish1994a
 login for client approval
@@ -34,8 +34,9 @@ login for shopkeeper
 
 //asm approval
 //recceasmdashsite
-java- emailed
->client id dropdown- put in json
+//client id dropdown- put in json
+//java
+>test
 
 //client approval- same as asm- xml- dont need approval remove button
 java

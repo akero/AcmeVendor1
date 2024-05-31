@@ -664,12 +664,67 @@
                 android:textSize="@dimen/_12ssp" />
 
             <RelativeLayout
+                android:id="@+id/clientspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_below= "@+id/area"
+                android:layout_marginRight="@dimen/_2sdp">
+
+                <TextView
+                    android:id="@+id/tvclientid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Client"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_10ssp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvclientid"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:id="@+id/frame_client_id"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:background="@drawable/primarystroke">
+
+                    <Spinner
+                        android:id="@+id/spinnermediatype1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:background="@null"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_gravity="center|right"
+                        android:src="@drawable/ic_arrow"/>
+                </FrameLayout>
+
+                <!--  <EditText
+                      android:id="@+id/etclientid"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/tvclientid"
+                      android:layout_marginTop="@dimen/_2sdp"
+                      android:background="@drawable/primarystroke"
+                      android:fontFamily="@font/dmsansregular"
+                      android:padding="@dimen/_8sdp"
+                      android:textColor="@color/colorPrimary"
+                      android:textColorHint="@color/texthintcolor"
+                      android:textSize="@dimen/_12ssp" /> -->
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_110sdp"
                 android:id="@+id/rlAddImage"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/primarystroke"
-                android:layout_below="@id/area">
+                android:layout_below="@id/clientspinner">
 
                 <View
                     android:id="@+id/view"

@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -42,6 +44,7 @@ import com.acme.acmevendor.databinding.ActivityRecceDashboardBinding;
 
 import com.acme.acmevendor.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -63,6 +66,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     private static final int REQUEST_CODE_PERMISSIONS = 123;
     static final int REQUEST_TAKE_PHOTO = 1;
     private final Context ctxt = this;
+    String selectedClient;
+
     boolean pictureandlatlongready; //in imageUri and latlong
 
     private static final String[] REQUIRED_PERMISSIONS = {
@@ -78,7 +83,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     boolean pic1taken, pic2taken, pic3taken, pic4taken, picsigntaken, picsitetaken;
     Uri pic1takenURI, pic2takenURI, pic3takenURI, pic4takenURI, picsigntakenURI, picsitetakenURI;
     int storephoto;//0 for init, 1 for store photo, 2 for sign, 3 for main upload with other stuff
-    int recceid;
+    int recceid, clientspinnerboolean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +92,12 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         binding = ActivityRecceDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        clientspinnerboolean= 0;
         piccounter= 0;
         recceid= 0;
         pic1takenURI= null; pic2takenURI= null; pic3takenURI= null; pic4takenURI= null; picsigntakenURI= null; picsitetakenURI= null;
         allpicturestaken= false; pic1taken= false; pic2taken= false; pic3taken= false; pic4taken= false; picsigntaken= false; picsitetaken= false;
-
+        selectedClient= "";
 
         try{
             recceid= getIntent().getIntExtra("recceid", 0);
@@ -313,6 +319,14 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         });
 
+        Context ctxt= this;
+        try {
+            clientspinnerboolean= 1;
+            APIreferenceclass api = new APIreferenceclass(ctxt, logintoken);
+        }catch(Exception e){
+            Log.d("tg343", e.toString());
+        }
+
         Button uploadSignageDetails = findViewById(R.id.btnUpdatePhoto5);
 
         uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
@@ -363,6 +377,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("location", binding.etTotalArea1.getText().toString());
             jsonPayload.put("area", binding.area.getText().toString());
             jsonPayload.put("lat", lat);
+            jsonPayload.put("client_id", selectedClient);
             jsonPayload.put("long", longitude);
 
             //double area= 0;
@@ -547,113 +562,6 @@ boolean allpicturestaken;
         }
     }
 
-    void apicallforstorephoto(){
-        //TODO continue api call. Enter json.
-        try{
-
-            JSONObject jsonPayload= null;
-            APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, imageUri, "a", "a");
-            imageUri = null;
-        }catch (Exception e){
-            Log.d("tag222", e.toString());
-        }
-
-
-
-
-    }
-
-    void apicallforsign(){
-
-        //TODO continue api call. Enter json.
-        try{
-
-            JSONObject jsonPayload= null;
-            APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, imageUri, "a", "a", "a");
-            imageUri = null;
-        }catch (Exception e){
-            Log.d("tag222", e.toString());
-        }
-
-
-    }
-
-    void apicallforvendorimageupdate(String latlong, Uri uri) {
-
-        String logintoken1 = "";
-        //response is response1 (with site)
-
-        try {
-            FileHelper fh = new FileHelper();
-            logintoken1 = fh.readLoginToken(this);
-        } catch (Exception e) {
-            Log.d("tag22", e.toString());
-        }
-        String siteno = "";
-
-        try {
-            JSONObject jsonobj1 = null;
-            Log.d("response1", response1);
-            JSONObject jsonobj = new JSONObject(response1);
-            Log.d("tag44", jsonobj.toString());
-            if (jsonobj.has("site")) {
-                jsonobj1 = jsonobj.getJSONObject("site");
-            } else if (jsonobj.has("datas")) {
-                jsonobj1 = jsonobj.getJSONObject("datas");
-                latlong();
-            }
-            Log.d("tag44", jsonobj1.toString());
-            String latitude = "";
-            String longitude = "";
-
-            StringTokenizer str = new StringTokenizer(latlong, ",");
-            if (str != null) {
-                latitude = str.nextToken();
-                longitude = str.nextToken();
-
-                Log.d("tag44", "latitude" + latitude + "long" + longitude);
-            }
-
-            jsonobj1.putOpt("latitude", latitude);
-            jsonobj1.putOpt("longitute", longitude);
-            Log.d("tag511", "jsonobj" + jsonobj.toString() + " jsonobj1" + jsonobj1.toString() + "siteno" + siteno);
-
-            siteno = Integer.toString(jsonobj1.getInt("id"));
-
-            jsonobj1.remove("image");
-            jsonobj.putOpt("site", jsonobj1);
-
-            JSONObject jsonobj2 = new JSONObject();
-            jsonobj2.putOpt("campaign_id", jsonobj1.getInt("campaign_id"));
-            jsonobj2.putOpt("vendor_id", jsonobj1.getString("vendor_id"));
-            jsonobj2.putOpt("site_id", jsonobj1.getString("id"));
-            jsonobj2.putOpt("longitute", longitude);
-            jsonobj2.putOpt("latitude", latitude);
-
-
-            Log.d("tag333", jsonobj.toString());
-            Log.d("livetest", jsonobj.toString() + "site no" + siteno + uri + "jsonobj2" + jsonobj2.toString());
-
-            /*compress photoURI here
-            // Load the image from a file
-Bitmap bitmap = BitmapFactory.decodeFile("/path/to/your/image.jpg");
-
-// Compress the image
-FileOutputStream out = new FileOutputStream("/path/to/compressed/image.jpg");
-bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out); // 50 is the quality parameter
-
-out.close();
-            * */
-            APIreferenceclass api = new APIreferenceclass(1, ctxt, logintoken1, jsonobj2.toString(), photoURI);
-
-
-        } catch (Exception e) {
-            Log.d("tag41", e.toString());
-            e.printStackTrace();
-        }
-        //TODO handle response
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -717,11 +625,99 @@ out.close();
 
     @Override
     public void onResponseReceived(String response) {
+        JSONObject jsono= null;
+        try {
 
+            jsono = new JSONObject(response);
+
+    if(jsono.getString("message").equals("Clients retrieved successfully.")){
+            clientspinnerboolean=0;
+        response1 = response;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    clientlist(response);
+                }
+            });
+        }else{
         response1 = response;
         Log.d("tag222 response is", response);
-        response1 = response;
+        response1 = response;}
         //implementUI(response);
+        }catch (Exception e){
+        }
+    }
+
+    JSONArray jsonArray;
+
+    void clientlist(String response){
+        //TODO retreive client list
+
+        Log.d("clientlist", response);
+        //TODO put this spinner code after response is received
+
+        String[] items2= null;
+
+        try{
+            JSONObject json= new JSONObject(response);
+            jsonArray= json.getJSONArray("data");
+            items2 = new String[jsonArray.length()];
+
+            for(int i=0; i<jsonArray.length(); i++){
+                JSONObject json1= jsonArray.getJSONObject(i);
+                items2[i]= json1.optString("name");
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        final String[] items3= items2;
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        binding.spinnermediatype1.setAdapter(adapter2);
+
+        // Inside your onCreate method
+        binding.spinnermediatype1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //TODO put the client id of the client in below and then add it to the jsonobject that is sent to api
+
+
+
+                selectedClient = parent.getItemAtPosition(position).toString();
+
+                try {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject json1 = jsonArray.getJSONObject(i);
+                        items3[i] = json1.optString("name");
+                        if(items3[i].equals(selectedClient)){
+                            Log.d("selectedclient", json1.optString("id")+ " "+ selectedClient);
+                            selectedClient= json1.optString("id");
+
+                            break;
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                Log.d("tg92", "selectedClient"+ selectedClient);
+
+
+                //Toast.makeText(AddCampaignDetails.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
+
     }
 
     SiteDetail siteDetail;
