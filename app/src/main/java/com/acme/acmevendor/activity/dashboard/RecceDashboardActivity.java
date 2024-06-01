@@ -345,6 +345,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                     public void onClick(View view) {
                                                         if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() || binding.etHeight1.getText().toString().isEmpty() || binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() || binding.etTotalArea.getText().toString().isEmpty() || binding.etTotalArea1.getText().toString().isEmpty() || !pictureandlatlongready) {
                                                             Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                                                            Log.d("tag222", "1"+ binding.etHeight.getText().toString()+ "2"+ binding.etWidth.getText().toString()+"3"+ binding.etHeight1.getText().toString()+"4"+ binding.etWidth1.getText().toString()+"5"+ binding.etHeight2.getText().toString()+"6"+ binding.etWidth2.getText().toString()+"7"+ binding.etHeight3.getText().toString()+"8"+ binding.etWidth3.getText().toString()+"9"+ binding.etHeight4.getText().toString()+"10"+ binding.etWidth4.getText().toString()+"11"+ binding.etHeight5.getText().toString()+"12"+ binding.etWidth5.getText().toString()+"13"+ binding.etTotalArea.getText().toString()+"14"+ binding.etTotalArea1.getText().toString()+"15"+ Boolean.toString(pictureandlatlongready));
                                                             wassendbuttonpressed= true;
                                                             latlong();
                                                         } else {
@@ -392,6 +393,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("lat", lat);
             jsonPayload.put("client_id", selectedClient);
             jsonPayload.put("long", longitude);
+
+            //TODO replace
+            jsonPayload.put("asm_name", "placeholder_name");
 
             //double area= 0;
             //TODO change after clarification on email
@@ -520,27 +524,35 @@ boolean allpicturestaken;
 
 
                 if(piccounter== 1){
+                    Log.d("pic", "1");
                     pic1taken= true;
                     pic1takenURI= imageUri1;
                 }else if(piccounter== 2){
                     pic2taken= true;
+                    Log.d("pic", "2");
                     pic2takenURI= imageUri1;
                 }else if(piccounter== 3){
                     pic3taken= true;
+                    Log.d("pic", "3");
                     pic3takenURI= imageUri1;
                 }else if(piccounter== 4){
                     pic4taken= true;
+                    Log.d("pic", "4");
                     pic4takenURI= imageUri1;
                 }else if(piccounter== 5){
                     picsigntaken= true;
+                    Log.d("pic", "5");
                     picsigntakenURI= imageUri1;
                 }else if(piccounter== 6){
                     picsitetaken= true;
+                    Log.d("pic", "6");
                     picsitetakenURI= imageUri1;
                 }
                 if(pic1taken&&pic2taken&&pic3taken&&pic4taken&&picsigntaken&&picsitetaken){
                     allpicturestaken= true;
+                    Log.d("pic", "allpicturetakentrue");
                     if(locationtaken){
+                        Log.d("pic", "pictureandlatlongreadytrue");
                         pictureandlatlongready= true;
                     }else{
                         latlong();
@@ -620,9 +632,12 @@ boolean allpicturestaken;
         if (!locationtaken) {
             latlong = a;
             locationtaken = true;
+            Log.d("pic", "locationtakentrue");
             if (allpicturestaken) {
+                Log.d("pic", "pictureandlatlongreadytrue");
                 pictureandlatlongready = true;
                 if(wassendbuttonpressed){
+                    Log.d("wasendbuttonpressed", "true");
                     apicallmain();
                 }
                // apicallmain(latlong);
@@ -640,6 +655,8 @@ boolean allpicturestaken;
 
     @Override
     public void onResponseReceived(String response) {
+
+        Log.d("response", response);
         JSONObject jsono= null;
         try {
 

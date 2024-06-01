@@ -1,5 +1,7 @@
 Ship
 
+implement dropdown and auto fill
+fix image upload
 
 tell dev to give all stores that need to be approved by client in single call
 ask what happens once client approves and implement
