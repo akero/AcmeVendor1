@@ -40,17 +40,18 @@ login for client
 >java- pending
 test
 
-//client- dont need approval remove button
+//client-
 java
-client doesnt need approval
 
 //recce
 //java
 //Also save
 //division and 
 //retailer_code
+//refresh button
+//capitalize code
 >loading spinner delay
-refresh ui after data saved
+
 on new install first pic asks permission then fails first pic taken check. works after first pic is taken again.
 
 

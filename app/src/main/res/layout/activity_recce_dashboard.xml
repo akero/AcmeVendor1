@@ -847,6 +847,20 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_14ssp" />
 
+            <Button
+                android:id="@+id/btnUpdatePhoto6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnUpdatePhoto5"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/primarystroke"
+                android:clickable= "true"
+                android:fontFamily="@font/dmsansregular"
+                android:text="Reset all fields"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_14ssp" />
+
 
         </RelativeLayout>
 

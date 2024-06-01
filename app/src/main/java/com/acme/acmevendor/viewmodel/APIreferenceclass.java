@@ -2,7 +2,9 @@ package com.acme.acmevendor.viewmodel;
 
 import static java.lang.System.out;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +14,7 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 
 import com.acme.acmevendor.api.MyUrlRequestCallback;
@@ -605,7 +608,7 @@ public class APIreferenceclass {
                 Log.d("tg97", "multipart");
 
                 try{
-                    saveByteArrayToFile(context, multipartBody);
+                    saveByteArrayToFile(context, multipartBody, "apicall");
                 }catch (Exception e){
 
                 }
@@ -625,19 +628,15 @@ public class APIreferenceclass {
         }
     }
 
-    public static void saveByteArrayToFile(Context context, byte[] data) {
-        File directory = new File(Environment.getExternalStorageDirectory(), "com.acme.acmevendor");
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-
-        File file = new File(directory, "apicall");
+    private void saveByteArrayToFile(Context context, byte[] data, String fileName) {
+        File directory = context.getFilesDir();
+        File file = new File(directory, fileName);
 
         try (FileOutputStream outputStream = new FileOutputStream(file)) {
             outputStream.write(data);
-            Log.d("TAG", "Byte array saved to file: " + file.getAbsolutePath());
+            Log.d("TAG", "Byte array saved to internal storage: " + file.getAbsolutePath());
         } catch (IOException e) {
-            Log.e("TAG", "Failed to save byte array to file", e);
+            Log.e("TAG", "Failed to save byte array to internal storage", e);
         }
     }
 

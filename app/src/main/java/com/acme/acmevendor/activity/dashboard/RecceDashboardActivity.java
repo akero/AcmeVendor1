@@ -268,7 +268,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View view) {
 
-                APIreferenceclass api= new APIreferenceclass( ctxt, logintoken, binding.etFetch.getText().toString());
+                APIreferenceclass api= new APIreferenceclass( ctxt, logintoken, binding.etFetch.getText().toString().toUpperCase());
             }
         });
 
@@ -380,6 +380,24 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                     }
                                                 }
         );
+
+        binding.btnUpdatePhoto6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetAndReinitialize(view);
+            }
+        });
+    }
+
+    public void resetAndReinitialize(View view) {
+        // Perform any necessary cleanup or data saving operations here
+
+        // Finish the current activity instance
+        finish();
+
+        // Start a new instance of the same activity
+        startActivity(getIntent());
+        //overridePendingTransition(0, 0); // Optionally, you can remove the transition animation
     }
 
     void apicall() {
@@ -444,6 +462,51 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         locationHelper.requestLocationPermission(this, this);
     }
+
+    public void resetFields(View view) {
+        // Reset all EditText fields except "recce" and "signage board"
+        resetEditTextFields(R.id.etFetch, R.id.etHeight, R.id.etWidth, R.id.etHeight1, R.id.etWidth1,
+                R.id.etHeight2, R.id.etWidth2, R.id.etHeight3, R.id.etWidth3, R.id.etHeight4,
+                R.id.etWidth4, R.id.etHeight5, R.id.etWidth5, R.id.etTotalArea, R.id.etTotalArea1,
+                R.id.area);
+
+        // Reset all Button backgrounds
+        //resetButtonBackgrounds(R.id.btnFetch, R.id.btnUpdatePhoto, R.id.btnUpdatePhoto1, R.id.btnUpdatePhoto2,
+          //      R.id.btnUpdatePhoto3, R.id.btnUpdatePhoto4, R.id.btnUpdatePhoto5);
+
+        // Change background resource of all buttons and "rlAddImage" to "drawable/primarystroke"
+        int[] viewIds = {R.id.btnFetch, R.id.btnUpdatePhoto, R.id.btnUpdatePhoto1, R.id.btnUpdatePhoto2,
+                R.id.btnUpdatePhoto3, R.id.btnUpdatePhoto4, R.id.btnUpdatePhoto5, R.id.rlAddImage};
+        setBackgroundResource(viewIds, R.drawable.primarystroke);
+    }
+
+    private void resetEditTextFields(int... editTextIds) {
+        for (int id : editTextIds) {
+            EditText editText = findViewById(id);
+            if (editText != null) {
+                editText.setText("");
+            }
+        }
+    }
+
+    private void resetButtonBackgrounds(int... buttonIds) {
+        for (int id : buttonIds) {
+            View view = findViewById(id);
+            if (view != null) {
+                view.setBackgroundResource(android.R.drawable.btn_default);
+            }
+        }
+    }
+
+    private void setBackgroundResource(int[] viewIds, int backgroundResource) {
+        for (int id : viewIds) {
+            View view = findViewById(id);
+            if (view != null) {
+                view.setBackgroundResource(backgroundResource);
+            }
+        }
+    }
+
 
     Uri photoURI;
 
