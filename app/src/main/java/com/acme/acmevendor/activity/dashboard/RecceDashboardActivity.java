@@ -3,6 +3,7 @@ package com.acme.acmevendor.activity.dashboard;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +25,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +90,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     Uri pic1takenURI, pic2takenURI, pic3takenURI, pic4takenURI, picsigntakenURI, picsitetakenURI;
     int storephoto;//0 for init, 1 for store photo, 2 for sign, 3 for main upload with other stuff
     int recceid, clientspinnerboolean;
+    ProgressBar progressBar;
+    Animation rotateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +100,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         binding = ActivityRecceDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        retailer_code= "";
+        division= "";
+        asm_name= "";
+        asm_contact= "";
         wassendbuttonpressed= false;
         clientspinnerboolean= 0;
         piccounter= 0;
@@ -100,6 +111,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         pic1takenURI= null; pic2takenURI= null; pic3takenURI= null; pic4takenURI= null; picsigntakenURI= null; picsitetakenURI= null;
         allpicturestaken= false; pic1taken= false; pic2taken= false; pic3taken= false; pic4taken= false; picsigntaken= false; picsitetaken= false;
         selectedClient= "";
+        //animation code
+        progressBar= findViewById(R.id.progressBar);
+        rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
+        //animation code
 
         try{
             recceid= getIntent().getIntExtra("recceid", 0);
@@ -253,7 +268,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             @Override
             public void onClick(View view) {
 
-                APIreferenceclass api= new APIreferenceclass(logintoken, ctxt, binding.etFetch.getText().toString());
+                APIreferenceclass api= new APIreferenceclass( ctxt, logintoken, binding.etFetch.getText().toString());
             }
         });
 
@@ -347,10 +362,16 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                             Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                                                             Log.d("tag222", "1"+ binding.etHeight.getText().toString()+ "2"+ binding.etWidth.getText().toString()+"3"+ binding.etHeight1.getText().toString()+"4"+ binding.etWidth1.getText().toString()+"5"+ binding.etHeight2.getText().toString()+"6"+ binding.etWidth2.getText().toString()+"7"+ binding.etHeight3.getText().toString()+"8"+ binding.etWidth3.getText().toString()+"9"+ binding.etHeight4.getText().toString()+"10"+ binding.etWidth4.getText().toString()+"11"+ binding.etHeight5.getText().toString()+"12"+ binding.etWidth5.getText().toString()+"13"+ binding.etTotalArea.getText().toString()+"14"+ binding.etTotalArea1.getText().toString()+"15"+ Boolean.toString(pictureandlatlongready));
                                                             wassendbuttonpressed= true;
+                                                            progressBar.setVisibility(View.VISIBLE);
+                                                            progressBar.startAnimation(rotateAnimation);
                                                             latlong();
                                                         } else {
                                                             //api call
 
+                                                            //animation code
+                                                            progressBar.setVisibility(View.VISIBLE);
+                                                            progressBar.startAnimation(rotateAnimation);
+                                                            //animation code
                                                             apicall();
 
                                                         }
@@ -393,14 +414,12 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("lat", lat);
             jsonPayload.put("client_id", selectedClient);
             jsonPayload.put("long", longitude);
+            jsonPayload.put("retailer_code", retailer_code);
+            jsonPayload.put("asm_name", asm_name);
+            jsonPayload.put("asm_mobile", asm_contact);
+            jsonPayload.put("division", division);
 
-            //TODO replace
-            jsonPayload.put("asm_name", "placeholder_name");
 
-            //double area= 0;
-            //TODO change after clarification on email
-            //area= Double.parseDouble(binding.etHeight.getText().toString())*Double.parseDouble(binding.etWidth.getText().toString());
-            //jsonPayload.put("area", String.valueOf(area));
             FileHelper fh = new FileHelper();
             jsonPayload.put("created_by", fh.readUserId(this));
 
@@ -411,6 +430,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         //apiboolean= 1;
 
         Log.d("tg66", jsonPayload.toString());
+
+
 
         APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, recceid, pic1takenURI, pic2takenURI,pic3takenURI, pic4takenURI, picsigntakenURI, picsitetakenURI);
         imageUri = null;
@@ -475,6 +496,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     Uri imageUri;
 boolean allpicturestaken;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -492,61 +514,41 @@ boolean allpicturestaken;
                 imageUri1= imageUri;
                 Log.d("tag222", imageUri.toString());
 
-
-                //String imageuristring= imageUri.toString();
-                //String[] a= imageuristring.split("Pictures/");
-                //imageuristring= a[1];
-                //imageuristring= "content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.acme.acmevendor%2Ffiles%2FPictures%2F"+ imageuristring;
-                //imageUri= Uri.parse(imageuristring);
-
-               /* try (InputStream in = getContentResolver().openInputStream(imageUri)) {
-                    // Open a private file for writing
-                    try (FileOutputStream out = openFileOutput("ImageName.jpg", Context.MODE_PRIVATE)) {
-                        byte[] buffer = new byte[1024];
-                        Log.d("tag22", "copying file");
-
-                        int read;
-                        while ((read = in.read(buffer)) != -1) {
-                            Log.d("tag22", "copying file");
-
-                            out.write(buffer, 0, read);
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                // Get a Uri for the file in internal storage
-                File file = new File(getFilesDir(), "ImageName.jpg");
-                imageUri = Uri.fromFile(file);
-
-*/
-
-
                 if(piccounter== 1){
                     Log.d("pic", "1");
                     pic1taken= true;
-                    pic1takenURI= imageUri1;
+                    binding.btnUpdatePhoto.setBackgroundResource(R.drawable.primarystrokegreen);
+                    pic1takenURI= photoURI;
                 }else if(piccounter== 2){
                     pic2taken= true;
+                    binding.btnUpdatePhoto1.setBackgroundResource(R.drawable.primarystrokegreen);
+
                     Log.d("pic", "2");
-                    pic2takenURI= imageUri1;
+                    pic2takenURI= photoURI;
                 }else if(piccounter== 3){
                     pic3taken= true;
+                    binding.btnUpdatePhoto2.setBackgroundResource(R.drawable.primarystrokegreen);
+
                     Log.d("pic", "3");
-                    pic3takenURI= imageUri1;
+                    pic3takenURI= photoURI;
                 }else if(piccounter== 4){
                     pic4taken= true;
+                    binding.btnUpdatePhoto3.setBackgroundResource(R.drawable.primarystrokegreen);
+
                     Log.d("pic", "4");
-                    pic4takenURI= imageUri1;
+                    pic4takenURI= photoURI;
                 }else if(piccounter== 5){
                     picsigntaken= true;
+                    binding.btnUpdatePhoto4.setBackgroundResource(R.drawable.primarystrokegreen);
+
                     Log.d("pic", "5");
-                    picsigntakenURI= imageUri1;
+                    picsigntakenURI= photoURI;
                 }else if(piccounter== 6){
                     picsitetaken= true;
+                    binding.rlAddImage.setBackgroundResource(R.drawable.primarystrokegreen);
+
                     Log.d("pic", "6");
-                    picsitetakenURI= imageUri1;
+                    picsitetakenURI= photoURI;
                 }
                 if(pic1taken&&pic2taken&&pic3taken&&pic4taken&&picsigntaken&&picsitetaken){
                     allpicturestaken= true;
@@ -673,16 +675,103 @@ boolean allpicturestaken;
             });
         }else if(jsono.getString("message").equals("Data fetched successfully!")){
 
-            //TODO populate fields with content
-    }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                Toast.makeText(RecceDashboardActivity.this, "Data fetched successfully", Toast.LENGTH_SHORT).show();
+                hideKeyboard();
+                fillretailerdata(response);
+            }
+        });
+
+    }else if(jsono.getString("message").equals("Data saved successfully!")){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //animation code
+                progressBar.clearAnimation();
+                progressBar.setVisibility(View.GONE);
+                //animation code
+
+                Toast.makeText(RecceDashboardActivity.this, "Data saved successfully", Toast.LENGTH_LONG).show();
+            }
+        });
+
+            }
     else{
         response1 = response;
         Log.d("tag222 response is", response);
-        response1 = response;}
+        response1 = response;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //animation code
+                progressBar.clearAnimation();
+                progressBar.setVisibility(View.GONE);
+                //animation code
+
+                Toast.makeText(RecceDashboardActivity.this, "An error occurred", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
         //implementUI(response);
         }catch (Exception e){
         }
     }
+
+    String retailer_code, division, asm_name, asm_contact;
+
+
+    void fillretailerdata(String response){
+
+        try {
+
+            JSONObject jsonobj = new JSONObject(response);
+            JSONObject jsonobj1= jsonobj.getJSONObject("data");
+
+            retailer_code= jsonobj1.optString("retailer_code", "");
+            division= jsonobj1.optString("division", "");
+            asm_name= jsonobj1.optString("asm_name", "");
+            asm_contact= jsonobj1.optString("asm_contact", "");
+            binding.etHeight3.setText(jsonobj1.getString("retailer_name"));
+            binding.etHeight5.setText(jsonobj1.getString("contact"));
+            binding.etTotalArea1.setText(jsonobj1.getString("address"));
+            binding.etWidth2.setText(jsonobj1.getString("city"));
+            binding.etHeight2.setText(jsonobj1.getString("district"));
+            binding.etWidth1.setText(jsonobj1.getString("state"));
+
+
+
+
+
+
+        }catch (Exception e){
+            Log.d("tag333", e.toString());
+        }
+
+    }
+
+
+    // Method to hide the keyboard
+    private void hideKeyboard() {
+        // Get the current focus view
+        View view = this.getCurrentFocus();
+
+        if (view != null) {
+            // Get the InputMethodManager service
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            // Hide the keyboard
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 
     JSONArray jsonArray;
 

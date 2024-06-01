@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -538,7 +539,7 @@ public class APIreferenceclass {
             headers.put("Content-Type", "application/json");
 
             String jsonPayload1= jsonPayload.toString();
-            callapi(headers, jsonPayload1, context, 1, url); // Using POST method
+            callapi(headers, jsonPayload1, context, querytype, url); // Using POST method
 
         }catch (Exception e){
             e.printStackTrace();
@@ -571,13 +572,15 @@ public class APIreferenceclass {
                 bodyBuilder.append(jsonPayload1.optString(key)).append("\r\n");
             }
 
+            Log.d("pics", photo1.toString()+ " "+ photo2.toString()+ " "+ photo3.toString()+ " "+ photo4.toString()+ " "+ photosign.toString()+ " "+ photosite.toString() );
+
             // Add photo parts to multipart body
             addPhotoToMultipart(bodyBuilder, boundary, photo1, "image1", context);
             addPhotoToMultipart(bodyBuilder, boundary, photo2, "image2", context);
             addPhotoToMultipart(bodyBuilder, boundary, photo3, "image3", context);
             addPhotoToMultipart(bodyBuilder, boundary, photo4, "image4", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photosign, "photosign", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photosite, "photosite", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photosign, "ownersignature", context);
+            addPhotoToMultipart(bodyBuilder, boundary, photosite, "image", context);
 
             // Convert the initial part of the multipart body to bytes
             byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
@@ -600,6 +603,13 @@ public class APIreferenceclass {
 
                 // Call API with multipart data
                 Log.d("tg97", "multipart");
+
+                try{
+                    saveByteArrayToFile(context, multipartBody);
+                }catch (Exception e){
+
+                }
+
                 callapi2(headers, multipartBody, context, 1, url); // Using POST method
             } catch (Exception e) {
                 e.printStackTrace();
@@ -612,6 +622,22 @@ public class APIreferenceclass {
             headers.put("Content-Type", "application/json");
 
             callapi(headers, jsonPayload, context, 1, url); // Using POST method
+        }
+    }
+
+    public static void saveByteArrayToFile(Context context, byte[] data) {
+        File directory = new File(Environment.getExternalStorageDirectory(), "com.acme.acmevendor");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        File file = new File(directory, "apicall");
+
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            outputStream.write(data);
+            Log.d("TAG", "Byte array saved to file: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            Log.e("TAG", "Failed to save byte array to file", e);
         }
     }
 
@@ -630,6 +656,51 @@ public class APIreferenceclass {
             // Write file bytes
             bodyBuilder.append(new String(fileBytes, StandardCharsets.UTF_8)).append("\r\n");
         }
+    }
+
+    private byte[] readFileContent1(Context context, Uri uri) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        try {
+            InputStream inputStream = context.getContentResolver().openInputStream(uri);
+            if (inputStream != null) {
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                if (bitmap != null) {
+                    Bitmap compressedBitmap = compressImage(bitmap);
+                    compressedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                    return outputStream.toByteArray();
+                } else {
+                    Log.e("TAG", "Failed to decode bitmap from stream");
+                }
+            } else {
+                Log.e("TAG", "Failed to open input stream from URI");
+            }
+        } catch (IOException e) {
+            Log.e("TAG", "IOException: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    private Bitmap compressImage(Bitmap bitmap) {
+        // Implement your image compression logic here
+        // You can use libraries like Glide, Picasso, or Android's BitmapFactory
+        // to compress or resize the bitmap efficiently
+
+        // Example using BitmapFactory:
+        int maxWidth = 1024; // Set your desired maximum width
+        int maxHeight = 1024; // Set your desired maximum height
+        int currentWidth = bitmap.getWidth();
+        int currentHeight = bitmap.getHeight();
+
+        if (currentWidth > maxWidth || currentHeight > maxHeight) {
+            float ratio = Math.min((float) maxWidth / currentWidth, (float) maxHeight / currentHeight);
+            int newWidth = Math.round(currentWidth * ratio);
+            int newHeight = Math.round(currentHeight * ratio);
+            return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        }
+
+        return bitmap;
     }
 
     //add recce store photo

@@ -1,5 +1,6 @@
 Ship
 
+
 implement dropdown and auto fill
 fix image upload
 
@@ -10,11 +11,11 @@ recce dash install phase- ask
 
 
 //make recce dashboard
-implement api
-rearrange UI according to data required for store photos
-/rishabh@acmemedia.in
-/type- recce
-have to enter other details before store photo upload
+//implement api
+//rearrange UI according to data required for store photos
+//rishabh@acmemedia.in
+//type- recce
+//have to enter other details before store photo upload
 
 
 //enter code for image upload
@@ -45,13 +46,24 @@ client doesnt need approval
 
 //recce
 //java
-need to add a bar where person can enter retailer code and press fetch button and it auto fills in the form
-send asm name to project upload for identification
+//Also save
+//division and 
+//retailer_code
+>loading spinner delay
+refresh ui after data saved
+on new install first pic asks permission then fails first pic taken check. works after first pic is taken again.
+
+
+issue- file upload not working check what the call is that is sent- could be beackend issue
+
+//need to add a bar where person can enter retailer code and press fetch button and it auto //fills in the form
+
+//send asm name to project upload for identification
 test
+
 
 change contentotp hardcode back when api done line 212
 
-and recce admin dash
 
 
 

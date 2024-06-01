@@ -209,7 +209,7 @@
                         android:layout_marginTop="@dimen/_2sdp"
                         android:background="@drawable/primarystroke"
                         android:fontFamily="@font/dmsansregular"
-                        android:hint="(optional)"
+                        android:hint="Enter code and press Fetch"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
                         android:textColor="@color/colorPrimary"
@@ -463,7 +463,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/dmsansregular"
-                        android:text="Retail name"
+                        android:text="Retailer name"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_10ssp" />
 

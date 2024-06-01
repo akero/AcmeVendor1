@@ -14,6 +14,7 @@
     <color name="colorPrimarylight">#0A0089BE</color>
     <color name="hintcolor">#B20089BE</color>
     <color name="colorPrimaryDark">#2174A0</color>
+    <color name="green">#00FF00</color>
     <color name="colorAccent">#2174A0</color>
     <color name="coloryellow">#F7EE24</color>
     <color name="colorred">#DA2829</color>
