@@ -50,12 +50,12 @@ java
 //retailer_code
 //refresh button
 //capitalize code
->loading spinner delay
+//loading spinner delay
 
 on new install first pic asks permission then fails first pic taken check. works after first pic is taken again.
 
 
-issue- file upload not working check what the call is that is sent- could be beackend issue
+//issue- file upload not working check what the call is that is sent- could be beackend issue
 
 //need to add a bar where person can enter retailer code and press fetch button and it auto //fills in the form
 
