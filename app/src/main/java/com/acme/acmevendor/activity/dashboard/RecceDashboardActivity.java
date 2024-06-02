@@ -397,7 +397,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         // Start a new instance of the same activity
         startActivity(getIntent());
-        //overridePendingTransition(0, 0); // Optionally, you can remove the transition animation
+        overridePendingTransition(0, 0); // Optionally, you can remove the transition animation
     }
 
     void apicall() {

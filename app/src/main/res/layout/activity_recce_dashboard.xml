@@ -260,7 +260,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/dmsansregular"
-                        android:text="Dimensions / Size in sq. ft"
+                        android:text="Dimensions / Size in cm"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_10ssp" />
 
@@ -757,13 +757,13 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:id="@+id/frame_client_id"
                     android:paddingRight="@dimen/_8sdp"
-                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingStart="10dp"
                     android:background="@drawable/primarystroke">
 
                     <Spinner
                         android:id="@+id/spinnermediatype1"
                         android:layout_width="match_parent"
-                        android:layout_height="32dp"
+                        android:layout_height="37dp"
                         android:background="@null"/>
 
                     <ImageView
