@@ -164,11 +164,11 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 vendorid= jsonObject1.getInt("id");
             }
 
-            if(loginType.equals("recce")){
+            if(loginType.equals("supervisor")){
                 recceid= jsonObject1.getInt("id");
             }
 
-            if(loginType.equals("recceasm")){
+            if(loginType.equals("asm")){
                 recceasmid= jsonObject1.getInt("id");
             }
 
