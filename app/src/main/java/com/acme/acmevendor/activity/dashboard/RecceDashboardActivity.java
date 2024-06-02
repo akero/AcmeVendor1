@@ -424,8 +424,12 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("width", binding.etWidth.getText().toString());
             jsonPayload.put("date", binding.etWidth3.getText().toString());
             jsonPayload.put("owner_name", binding.etHeight4.getText().toString());
+            Log.d("owner name", binding.etHeight4.getText().toString());
             jsonPayload.put("email", binding.etWidth4.getText().toString());
+
+            Log.d("owner email", binding.etWidth4.getText().toString());
             jsonPayload.put("mobile", binding.etHeight5.getText().toString());
+            Log.d("owner mobile", binding.etHeight5.getText().toString());
             jsonPayload.put("remarks", binding.etTotalArea.getText().toString());
             jsonPayload.put("location", binding.etTotalArea1.getText().toString());
             jsonPayload.put("area", binding.area.getText().toString());
@@ -444,10 +448,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         } catch (Exception e) {
             Log.d("tg6", e.toString());
         }
-        Log.d("tg6", imageUri.toString());
+        //Log.d("tg6", imageUri.toString());
         //apiboolean= 1;
 
-        Log.d("tg66", jsonPayload.toString());
+        //Log.d("tg66", jsonPayload.toString());
 
 
 
@@ -513,7 +517,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoURI = null;
-        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+       // if (cameraIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             try {
                 photoFile = createImageFile();
@@ -529,11 +533,11 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                 Log.d("opencamerauri", photoURI.toString());
                 startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
             }
-        } else {
-            Log.d("camera", "no permission1");
-            Toast.makeText(RecceDashboardActivity.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
+     //   } else {
+   //         Log.d("camera", "no permission1");
+    //        Toast.makeText(RecceDashboardActivity.this, "Don't have camera permissions", Toast.LENGTH_SHORT).show();
 
-        }
+     //   }
     }
 
 
@@ -567,7 +571,7 @@ boolean allpicturestaken;
             // Image captured successfully
             // Access the image file using the Uri you provided earlier
 
-            Log.d("tag22", data.toString());
+           // Log.d("tag22", data.toString());
             Uri imageUri1;
 
             try {
@@ -703,13 +707,24 @@ boolean allpicturestaken;
                 pictureandlatlongready = true;
                 if(wassendbuttonpressed){
                     Log.d("wasendbuttonpressed", "true");
-                    apicallmain();
+                    apicall();
                 }
                // apicallmain(latlong);
             }
+        }else{
+            latlong= a;
+            locationtaken= true;
+            if (allpicturestaken) {
+                Log.d("pic", "pictureandlatlongreadytrue");
+                pictureandlatlongready = true;
+                if(wassendbuttonpressed){
+                    Log.d("wasendbuttonpressed", "true");
+                    apicall();
+                }
+
         }
         Log.d("tag22", "inside callback, latlong " + latlong + "locationtaken" + locationtaken);
-    }
+    }}
 
     void apicallmain(){
 

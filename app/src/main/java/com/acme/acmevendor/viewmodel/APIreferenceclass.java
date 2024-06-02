@@ -575,48 +575,72 @@ public class APIreferenceclass {
                 bodyBuilder.append(jsonPayload1.optString(key)).append("\r\n");
             }
 
-            Log.d("pics", photo1.toString()+ " "+ photo2.toString()+ " "+ photo3.toString()+ " "+ photo4.toString()+ " "+ photosign.toString()+ " "+ photosite.toString() );
+            Log.d("pics", photo1.toString() + " " + photo2.toString() + " " + photo3.toString() + " " + photo4.toString() + " " + photosign.toString() + " " + photosite.toString());
 
             // Add photo parts to multipart body
-            addPhotoToMultipart(bodyBuilder, boundary, photo1, "image1", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photo2, "image2", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photo3, "image3", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photo4, "image4", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photosign, "ownersignature", context);
-            addPhotoToMultipart(bodyBuilder, boundary, photosite, "image", context);
-
-            // Convert the initial part of the multipart body to bytes
+            ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
             byte[] initialPartBytes = bodyBuilder.toString().getBytes(StandardCharsets.UTF_8);
-
             try {
-                // Create a ByteArrayOutputStream to combine everything
-                ByteArrayOutputStream multipartOutputStream = new ByteArrayOutputStream();
+
                 multipartOutputStream.write(initialPartBytes);
-
-                // Write the final boundary
-                String finalBoundary = "\r\n--" + boundary + "--\r\n";
-                multipartOutputStream.write(finalBoundary.getBytes(StandardCharsets.UTF_8));
-                // Final multipart body
-                final byte[] multipartBody = multipartOutputStream.toByteArray();
-
-                // Set headers for multipart request
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + logintoken);
-                headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
-
-                // Call API with multipart data
-                Log.d("tg97", "multipart");
-
-                try{
-                    saveByteArrayToFile(context, multipartBody, "apicall");
-                }catch (Exception e){
-
-                }
-
-                callapi2(headers, multipartBody, context, 1, url); // Using POST method
-            } catch (Exception e) {
+            }catch (Exception e){
                 e.printStackTrace();
             }
+            // Add photo1
+            if (photo1 != null) {
+                addPhotoToMultipart(multipartOutputStream, boundary, photo1, "image1", context);
+            }
+
+            // Add photo2
+            if (photo2 != null) {
+                addPhotoToMultipart(multipartOutputStream, boundary, photo2, "image2", context);
+            }
+
+            // Add photo3
+            if (photo3 != null) {
+                addPhotoToMultipart(multipartOutputStream, boundary, photo3, "image3", context);
+            }
+
+            // Add photo4
+            if (photo4 != null) {
+                addPhotoToMultipart(multipartOutputStream, boundary, photo4, "image4", context);
+            }
+
+            // Add photosign
+            if (photosign != null) {
+                addPhotoToMultipart(multipartOutputStream, boundary, photosign, "owner_signature", context);
+            }
+
+            // Add photosite
+            if (photosite != null) {
+                addPhotoToMultipart(multipartOutputStream, boundary, photosite, "image", context);
+            }
+
+            // Write the final boundary
+            String finalBoundary = "\r\n--" + boundary + "--\r\n";
+            try{
+            multipartOutputStream.write(finalBoundary.getBytes(StandardCharsets.UTF_8));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            // Final multipart body
+            final byte[] multipartBody = multipartOutputStream.toByteArray();
+
+            // Set headers for multipart request
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + logintoken);
+            headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            // Call API with multipart data
+            Log.d("tg97", "multipart");
+
+            try {
+                saveByteArrayToFile(context, multipartBody, "apicall");
+            } catch (Exception e) {
+                // Handle exception
+            }
+
+            callapi2(headers, multipartBody, context, 1, url); // Using POST method
         } else {
             // Existing JSON payload handling
             String jsonPayload = jsonPayload1.toString();
@@ -627,6 +651,25 @@ public class APIreferenceclass {
             callapi(headers, jsonPayload, context, 1, url); // Using POST method
         }
     }
+
+    private void addPhotoToMultipart(ByteArrayOutputStream multipartOutputStream, String boundary, Uri photoUri, String fieldName, Context context) {
+        // Read file content from Uri
+        byte[] fileBytes = readFileContent(context, photoUri);
+        String fileName = getFileName(context, photoUri);
+
+        // Start image part of multipart body
+        try{
+        multipartOutputStream.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
+        multipartOutputStream.write(("Content-Disposition: form-data; name=\"" + fieldName + "\"; filename=\"" + fileName + "\"\r\n").getBytes(StandardCharsets.UTF_8));
+        multipartOutputStream.write(("Content-Type: " + guessContentTypeFromName(fileName) + "\r\n\r\n").getBytes(StandardCharsets.UTF_8));
+
+        // Write file bytes to the multipart output stream
+        multipartOutputStream.write(fileBytes);
+        multipartOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        }
 
     private void saveByteArrayToFile(Context context, byte[] data, String fileName) {
         File directory = context.getFilesDir();
