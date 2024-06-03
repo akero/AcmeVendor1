@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.acme.acmevendor.activity.login.OTP;
 import com.acme.acmevendor.utility.RoundRectCornerImageView;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
@@ -281,6 +282,21 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             }
         });
 
+        binding.etWidth9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                latlong();}
+        });
+
+        binding.etHeight9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                latlong();
+            }
+        });
+
 
         //Signage area
 //date
@@ -346,6 +362,17 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             }
         });
 */
+
+        binding.ivNotification.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View view) {
+
+                                                          logout();
+
+                                                      }
+                                                  }
+        );
+
         //photo of sign
         RoundRectCornerImageView imageButton = findViewById(R.id.ivCampaignImage);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -386,9 +413,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view) {
-                                                        if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() ||  binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() || binding.etTotalArea1.getText().toString().isEmpty() || !pictureandlatlongready) {
+                                                        if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() ||  binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() ||  !pictureandlatlongready) {
                                                             Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                                                            Log.d("tag222", "1"+ binding.etHeight.getText().toString()+ "2"+ binding.etWidth.getText().toString()+"3"+ "4"+ binding.etWidth1.getText().toString()+"5"+ binding.etHeight2.getText().toString()+"6"+ binding.etWidth2.getText().toString()+"7"+ binding.etHeight3.getText().toString()+"8"+ binding.etWidth3.getText().toString()+"9"+ binding.etHeight4.getText().toString()+"10"+ binding.etWidth4.getText().toString()+"11"+ binding.etHeight5.getText().toString()+"12"+ binding.etWidth5.getText().toString()+"13"+ "14"+ binding.etTotalArea1.getText().toString()+"15"+ Boolean.toString(pictureandlatlongready));
+                                                            Log.d("tag222", "1"+ binding.etHeight.getText().toString()+ "2"+ binding.etWidth.getText().toString()+"3"+ "4"+ binding.etWidth1.getText().toString()+"5"+ binding.etHeight2.getText().toString()+"6"+ binding.etWidth2.getText().toString()+"7"+ binding.etHeight3.getText().toString()+"8"+ binding.etWidth3.getText().toString()+"9"+ binding.etHeight4.getText().toString()+"10"+ binding.etWidth4.getText().toString()+"11"+ binding.etHeight5.getText().toString()+"12"+ binding.etWidth5.getText().toString()+"13"+ "14"+"15"+ Boolean.toString(pictureandlatlongready));
                                                             wassendbuttonpressed= true;
                                                             //progressBar.setVisibility(View.VISIBLE);
                                                             //progressBar.startAnimation(rotateAnimation);
@@ -459,7 +486,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             Log.d("owner mobile", binding.etHeight5.getText().toString());
             jsonPayload.put("remarks", binding.etTotalArea.getText().toString());
             jsonPayload.put("location", binding.etTotalArea1.getText().toString());
-            jsonPayload.put("area", binding.area.getText().toString());
+            //jsonPayload.put("area", binding.area.getText().toString());
             jsonPayload.put("lat", lat);
             //jsonPayload.put("client_id", selectedClient);
             jsonPayload.put("long", longitude);
@@ -683,6 +710,20 @@ boolean allpicturestaken;
         }
     }
 
+    void logout() {
+
+        try {
+            FileHelper fh = new FileHelper();
+            fh.writeUserType(this, "");
+
+            Intent intent= new Intent(RecceDashboardActivity.this, OTP.class);
+            startActivity(intent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -751,7 +792,18 @@ boolean allpicturestaken;
 
         }
         Log.d("tag22", "inside callback, latlong " + latlong + "locationtaken" + locationtaken);
-    }}
+    }
+
+        try {
+            StringTokenizer str = new StringTokenizer(latlong, ",");
+            binding.etHeight9.setText(str.nextToken());
+            binding.etWidth9.setText(str.nextToken());
+        } catch (Exception e) {
+            Log.d("foo", e.toString());
+        }
+
+
+    }
 
     void apicallmain(){
 
@@ -850,6 +902,9 @@ boolean allpicturestaken;
             binding.etWidth2.setText(jsonobj1.getString("city"));
             binding.etHeight2.setText(jsonobj1.getString("district"));
             binding.etWidth1.setText(jsonobj1.getString("state"));
+
+            binding.etHeight8.setText(asm_name);
+            binding.etWidth8.setText(asm_contact);
 
 
 

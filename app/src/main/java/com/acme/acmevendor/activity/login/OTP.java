@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
+import com.acme.acmevendor.activity.dashboard.FileHelper;
+import com.acme.acmevendor.activity.dashboard.RecceDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.SelectLoginType;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
@@ -44,6 +46,8 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
     ProgressBar progressBar;
     Animation rotateAnimation;
+    String userTypeCheck;
+    String logintoken, userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,9 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         Log.d("whichclass", "OTP");
 
         int loginType= 1;
+        userTypeCheck= "";
+        logintoken= "";
+        userid= "";
 
         //animation code
         progressBar= findViewById(R.id.progressBar);
@@ -67,6 +74,27 @@ public class OTP extends AppCompatActivity implements ApiInterface {
         Button btn= findViewById(R.id.btnNext);
 
         Context context= this;
+
+        try {
+            userTypeCheck = FileHelper.readUserType(OTP.this);
+            logintoken= FileHelper.readLoginToken(OTP.this);
+            userid= FileHelper.readUserId(OTP.this);
+
+        }catch(Exception e){
+            Log.d("tag23232", e.toString());
+        }
+
+        if(userTypeCheck != null && userTypeCheck.equals("supervisor")){
+
+            Intent intent= new Intent(OTP.this, RecceDashboardActivity.class);
+            intent.putExtra("logintoken", logintoken);
+            intent.putExtra("recceid", userid);
+
+
+            startActivity(intent);
+        }
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +135,9 @@ public class OTP extends AppCompatActivity implements ApiInterface {
                         //view.setVisibility(View.VISIBLE);
                         //animation code
 
-                        APIreferenceclass api= new APIreferenceclass(loginType, context, emailInput, "");
+
+                            APIreferenceclass api = new APIreferenceclass(loginType, context, emailInput, "");
+
                         //startActivity(new Intent(OTP.this, AdminDashboardActivity.class));
                     } else {//vendor
                         Log.d("tag23", "2");

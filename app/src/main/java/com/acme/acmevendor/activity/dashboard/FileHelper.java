@@ -8,6 +8,7 @@ public class FileHelper {
 
     private static final String FILE_NAME = "tokenFile.txt";
     private static final String USER_ID = "userId.txt";
+    private static final String USER_TYPE = "userType.txt";
 
 
     /**
@@ -52,6 +53,52 @@ public class FileHelper {
             if (fos != null) {
                 try {
                     fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static boolean writeUserType(Context context, String usertype) {
+        FileOutputStream fos = null;
+
+        try {
+            fos = context.openFileOutput(USER_TYPE, Context.MODE_PRIVATE);
+            fos.write(usertype.getBytes());
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static String readUserType(Context context) {
+        FileInputStream fis = null;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            fis = context.openFileInput(USER_TYPE);
+            int content;
+            while ((content = fis.read()) != -1) {
+                stringBuilder.append((char) content);
+            }
+            return stringBuilder.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,6 +1,7 @@
 Ship
 
->auto login
+//auto login
+//logout
 //remove project name
 //remove client dropdown
 //remove location

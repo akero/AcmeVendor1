@@ -166,6 +166,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
             if(loginType.equals("supervisor")){
                 recceid= jsonObject1.getInt("id");
+                boolean success2= FileHelper.writeUserType(this, "supervisor");
             }
 
             if(loginType.equals("asm")){
@@ -176,6 +177,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
 
             boolean success = FileHelper.writeLoginToken(this, token);
             boolean success1 = FileHelper.writeUserId(this, userid);
+
 
 
             if(loginType.equals("admin")){

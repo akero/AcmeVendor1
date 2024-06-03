@@ -529,7 +529,7 @@ public class APIreferenceclass {
 
     public APIreferenceclass(Context context, String logintoken, String retailercode){
         //TODO fill
-        String url= "https://acme.warburttons.com/api/retail/"+ retailercode;
+        String url= "https://acme.warburttons.com/api/rcode/"+ retailercode;
         querytype = 0; //get
 
         JSONObject jsonPayload;
