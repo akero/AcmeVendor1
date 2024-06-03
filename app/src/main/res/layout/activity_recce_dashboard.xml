@@ -261,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/dmsansregular"
-                        android:text="Dimensions / Size in cm"
+                        android:text="Dimensions / Size in feet"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_10ssp" />
 
@@ -686,8 +686,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvwidth8"
-                        android:focusable="false"
                         android:layout_marginTop="@dimen/_2sdp"
+                        android:hint="optional"
                         android:background="@drawable/primarystroke"
                         android:fontFamily="@font/dmsansregular"
                         android:textColorHint="@color/texthintcolor"

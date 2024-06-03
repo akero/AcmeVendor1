@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MyUrlRequestCallback extends UrlRequest.Callback {
     private static final String TAG = "MyUrlRequestCallback";
@@ -118,6 +119,15 @@ public class MyUrlRequestCallback extends UrlRequest.Callback {
     public void onFailed(UrlRequest request, UrlResponseInfo info, CronetException error) {
         // The request has failed. If possible, handle the error.
         Log.e(TAG, "The request failed.", error);
+        if (Objects.requireNonNull(error.getMessage()).contains("ERR_INTERNET_DISCONNECTED")) {
+            ai.onResponseReceived("Error- no internet");
+
+        }else if(Objects.requireNonNull(error.getMessage()).contains("Duplicate entry") ){
+            ai.onResponseReceived("Error- owner email must be unique");
+        }
+        else {
+            ai.onResponseReceived("Request failed please recheck all fields");
+        }
     }
 
     @Override

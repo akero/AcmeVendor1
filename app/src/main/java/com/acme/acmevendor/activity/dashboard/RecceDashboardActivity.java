@@ -61,6 +61,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 //TODO rearrange UI accoding to data required for store photos.
@@ -439,12 +440,12 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         binding.btnUpdatePhoto6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resetAndReinitialize(view);
+                resetAndReinitialize();
             }
         });
     }
 
-    public void resetAndReinitialize(View view) {
+    public void resetAndReinitialize() {
         // Perform any necessary cleanup or data saving operations here
 
         // Finish the current activity instance
@@ -476,6 +477,18 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("retail_name", binding.etHeight3.getText().toString());
             jsonPayload.put("length", binding.etHeight.getText().toString());
             jsonPayload.put("width", binding.etWidth.getText().toString());
+            try {
+                double area= Double.parseDouble( binding.etHeight.getText().toString())*Double.parseDouble( binding.etWidth.getText().toString());
+                Log.d("area", String.valueOf(area));
+                jsonPayload.put("area", String.valueOf(area));
+
+            } catch (NumberFormatException e) {
+                // Handle the case where the input is not a valid double
+                e.printStackTrace();
+                //width = 0.0; // or any other default value you prefer
+            }
+
+            //jsonPayload.put("area", binding.etWidth.getText().toString());
             jsonPayload.put("date", binding.etWidth3.getText().toString());
             jsonPayload.put("owner_name", binding.etHeight4.getText().toString());
             Log.d("owner name", binding.etHeight4.getText().toString());
@@ -836,13 +849,30 @@ boolean allpicturestaken;
             @Override
             public void run() {
 
+                Log.d("onresponse", "5");
                 Toast.makeText(RecceDashboardActivity.this, "Data fetched successfully", Toast.LENGTH_SHORT).show();
                 hideKeyboard();
                 fillretailerdata(response);
             }
         });
 
-    }else if(jsono.getString("message").equals("Data saved successfully!")){
+    }else if(response.equals("Error- no internet")){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //animation code
+                progressBar.clearAnimation();
+                progressBar.setVisibility(View.GONE);
+                //animation code
+                Log.d("onresponse", "4");
+
+                Toast.makeText(RecceDashboardActivity.this, response, Toast.LENGTH_LONG).show();
+            }
+        });
+
+            }else if(jsono.getString("message").equals("Data saved successfully!")){
 
         runOnUiThread(new Runnable() {
             @Override
@@ -853,11 +883,29 @@ boolean allpicturestaken;
                 progressBar.setVisibility(View.GONE);
                 //animation code
 
+                Log.d("onresponse", "3");
+
                 Toast.makeText(RecceDashboardActivity.this, "Data saved successfully", Toast.LENGTH_LONG).show();
+                resetAndReinitialize();
             }
         });
 
+    }else if(Objects.requireNonNull(response.contains("The asm_name field is mandatory."))){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //animation code
+                progressBar.clearAnimation();
+                progressBar.setVisibility(View.GONE);
+                //animation code
+                Log.d("onresponse", "2");
+
+                Toast.makeText(RecceDashboardActivity.this, "The ASM name field is mandatory", Toast.LENGTH_LONG).show();
             }
+        });
+
+    }
     else{
         response1 = response;
         Log.d("tag222 response is", response);
@@ -871,7 +919,9 @@ boolean allpicturestaken;
                 progressBar.setVisibility(View.GONE);
                 //animation code
 
-                Toast.makeText(RecceDashboardActivity.this, "An error occurred", Toast.LENGTH_LONG).show();
+                Log.d("onresponse", "1");
+
+                Toast.makeText(RecceDashboardActivity.this, response, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -879,6 +929,69 @@ boolean allpicturestaken;
     }
         //implementUI(response);
         }catch (Exception e){
+            e.printStackTrace();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    //animation code
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.GONE);
+                    //animation code
+                    if(response.equals("Error- no internet")){
+
+
+
+                                //animation code
+                                progressBar.clearAnimation();
+                                progressBar.setVisibility(View.GONE);
+                                //animation code
+                                Log.d("onresponse", "4");
+
+                                Toast.makeText(RecceDashboardActivity.this, response, Toast.LENGTH_LONG).show();
+                            }
+
+
+                    else if(Objects.requireNonNull(response.contains("The asm_name field is mandatory."))){
+
+
+                                //animation code
+                                progressBar.clearAnimation();
+                                progressBar.setVisibility(View.GONE);
+                                //animation code
+                                Log.d("onresponse", "2");
+
+                                Toast.makeText(RecceDashboardActivity.this, "The ASM name field is mandatory", Toast.LENGTH_LONG).show();
+
+
+                    }else if(response.equals("Error- owner email must be unique")){
+
+                                //animation code
+                                progressBar.clearAnimation();
+                                progressBar.setVisibility(View.GONE);
+                                //animation code
+                                Log.d("onresponse", "3");
+                                Toast.makeText(RecceDashboardActivity.this, "Error- owner email must be unique", Toast.LENGTH_LONG).show();
+
+                           }else if(Objects.requireNonNull(response.contains("Duplicate entry"))){
+
+
+                        //animation code
+                        progressBar.clearAnimation();
+                        progressBar.setVisibility(View.GONE);
+                        //animation code
+                        Log.d("onresponse", "2");
+
+                        Toast.makeText(RecceDashboardActivity.this, "Error- Duplicate email entry", Toast.LENGTH_LONG).show();
+
+
+                    }else{
+                        Toast.makeText(RecceDashboardActivity.this, response, Toast.LENGTH_LONG).show();
+
+                    }
+
+                }
+            });
         }
     }
 
