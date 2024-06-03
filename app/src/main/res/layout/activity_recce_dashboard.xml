@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:elevation="2dp"
             android:visibility="gone"/>
         <!-- Loading code end -->
 
@@ -318,35 +319,7 @@
                 android:layout_below="@id/llDimensions"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginRight="@dimen/_2sdp">
 
-                    <TextView
-                        android:id="@+id/tvHeight1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/dmsansregular"
-                        android:text="Project name"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_10ssp" />
-
-                    <EditText
-                        android:id="@+id/etHeight1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tvHeight1"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:background="@drawable/primarystroke"
-                        android:fontFamily="@font/dmsansregular"
-                        android:padding="@dimen/_8sdp"
-                        android:textColor="@color/colorPrimary"
-                        android:textColorHint="@color/texthintcolor"
-                        android:textSize="@dimen/_12ssp" />
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -511,7 +484,6 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:fontFamily="@font/dmsansregular"
-                        android:onClick="showCalendar"
                         android:textColorHint="@color/texthintcolor"
                         android:padding="@dimen/_8sdp"
                         android:textColor="@color/colorPrimary"
@@ -674,6 +646,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTotalArea"
                 android:layout_marginTop="@dimen/_2sdp"
+                android:hint="(optional)"
                 android:background="@drawable/primarystroke"
                 android:fontFamily="@font/dmsansregular"
                 android:padding="@dimen/_8sdp"
@@ -712,6 +685,7 @@
                 android:id="@+id/txtarea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_below="@id/etTotalArea1"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/dmsansregular"
@@ -737,6 +711,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_below= "@+id/area"
                 android:layout_marginRight="@dimen/_2sdp">
 

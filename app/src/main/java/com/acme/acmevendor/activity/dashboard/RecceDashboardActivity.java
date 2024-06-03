@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +56,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,11 +66,13 @@ import java.util.StringTokenizer;
 //TODO implement all api calls.
 
 
+
 public class RecceDashboardActivity extends AppCompatActivity implements ApiInterface, LocationCallback {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityRecceDashboardBinding binding;
     boolean wassendbuttonpressed;
+    String currentDate;
     private static final int REQUEST_CODE_PERMISSIONS = 123;
     static final int REQUEST_TAKE_PHOTO = 1;
     private final Context ctxt = this;
@@ -104,6 +108,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         division= "";
         asm_name= "";
         asm_contact= "";
+        currentDate= "";
         wassendbuttonpressed= false;
         clientspinnerboolean= 0;
         piccounter= 0;
@@ -115,6 +120,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
         //animation code
+
+        binding.etTotalArea.setText("");
+
+
 
         try{
             recceid= getIntent().getIntExtra("recceid", 0);
@@ -274,13 +283,32 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
 
         //Signage area
-
+//date
 
         //EditText height, width, remarks, projectname, state, district, city, retailname, ownername, owneremail, ownerphone, yourname, location;
 
+        // Get the current date
+        Calendar calendar = Calendar.getInstance();
 
-        //date
-        binding.etWidth3.setOnClickListener(new View.OnClickListener() {
+// Get the year, month, and day components of the date
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; // Month is 0-based, so we add 1
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+// Create a string representation of the date
+        currentDate = year + "-" + month + "-" + day;
+
+// You can also use DateFormat to get a formatted date string
+        DateFormat dateFormat = DateFormat.getDateInstance();
+        String formattedDate = dateFormat.format(calendar.getTime());
+
+// Print the current date
+        System.out.println("Current date: " + currentDate);
+        System.out.println("Formatted date: " + formattedDate);
+        binding.etWidth3.setText(currentDate);
+
+
+       /* binding.etWidth3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // on below line we are getting
@@ -317,7 +345,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                 datePickerDialog.show();
             }
         });
-
+*/
         //photo of sign
         RoundRectCornerImageView imageButton = findViewById(R.id.ivCampaignImage);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -345,25 +373,25 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
         });
 
-        Context ctxt= this;
+        /*Context ctxt= this;
         try {
             clientspinnerboolean= 1;
             APIreferenceclass api = new APIreferenceclass(ctxt, logintoken);
         }catch(Exception e){
             Log.d("tg343", e.toString());
         }
-
+*/
         Button uploadSignageDetails = findViewById(R.id.btnUpdatePhoto5);
 
         uploadSignageDetails.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view) {
-                                                        if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() || binding.etHeight1.getText().toString().isEmpty() || binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() || binding.etTotalArea.getText().toString().isEmpty() || binding.etTotalArea1.getText().toString().isEmpty() || !pictureandlatlongready) {
+                                                        if (binding.etHeight.getText().toString().isEmpty() || binding.etWidth.getText().toString().isEmpty() ||  binding.etWidth1.getText().toString().isEmpty() || binding.etHeight2.getText().toString().isEmpty() || binding.etWidth2.getText().toString().isEmpty() || binding.etHeight3.getText().toString().isEmpty() || binding.etWidth3.getText().toString().isEmpty() || binding.etHeight4.getText().toString().isEmpty() || binding.etWidth4.getText().toString().isEmpty() || binding.etHeight5.getText().toString().isEmpty() || binding.etWidth5.getText().toString().isEmpty() || binding.etTotalArea1.getText().toString().isEmpty() || !pictureandlatlongready) {
                                                             Toast.makeText(ctxt, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                                                            Log.d("tag222", "1"+ binding.etHeight.getText().toString()+ "2"+ binding.etWidth.getText().toString()+"3"+ binding.etHeight1.getText().toString()+"4"+ binding.etWidth1.getText().toString()+"5"+ binding.etHeight2.getText().toString()+"6"+ binding.etWidth2.getText().toString()+"7"+ binding.etHeight3.getText().toString()+"8"+ binding.etWidth3.getText().toString()+"9"+ binding.etHeight4.getText().toString()+"10"+ binding.etWidth4.getText().toString()+"11"+ binding.etHeight5.getText().toString()+"12"+ binding.etWidth5.getText().toString()+"13"+ binding.etTotalArea.getText().toString()+"14"+ binding.etTotalArea1.getText().toString()+"15"+ Boolean.toString(pictureandlatlongready));
+                                                            Log.d("tag222", "1"+ binding.etHeight.getText().toString()+ "2"+ binding.etWidth.getText().toString()+"3"+ "4"+ binding.etWidth1.getText().toString()+"5"+ binding.etHeight2.getText().toString()+"6"+ binding.etWidth2.getText().toString()+"7"+ binding.etHeight3.getText().toString()+"8"+ binding.etWidth3.getText().toString()+"9"+ binding.etHeight4.getText().toString()+"10"+ binding.etWidth4.getText().toString()+"11"+ binding.etHeight5.getText().toString()+"12"+ binding.etWidth5.getText().toString()+"13"+ "14"+ binding.etTotalArea1.getText().toString()+"15"+ Boolean.toString(pictureandlatlongready));
                                                             wassendbuttonpressed= true;
-                                                            progressBar.setVisibility(View.VISIBLE);
-                                                            progressBar.startAnimation(rotateAnimation);
+                                                            //progressBar.setVisibility(View.VISIBLE);
+                                                            //progressBar.startAnimation(rotateAnimation);
                                                             latlong();
                                                         } else {
                                                             //api call
@@ -403,7 +431,6 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     void apicall() {
         String lat = "";
         String longitude = "";
-
         try {
             StringTokenizer str = new StringTokenizer(latlong, ",");
             lat = str.nextToken();
@@ -415,7 +442,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         JSONObject jsonPayload = new JSONObject();
         try {
 
-            jsonPayload.put("project", binding.etHeight1.getText().toString());
+            //jsonPayload.put("project", binding.etHeight1.getText().toString());
             jsonPayload.put("state", binding.etWidth1.getText().toString());
             jsonPayload.put("district", binding.etHeight2.getText().toString());
             jsonPayload.put("city", binding.etWidth2.getText().toString());
@@ -434,7 +461,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             jsonPayload.put("location", binding.etTotalArea1.getText().toString());
             jsonPayload.put("area", binding.area.getText().toString());
             jsonPayload.put("lat", lat);
-            jsonPayload.put("client_id", selectedClient);
+            //jsonPayload.put("client_id", selectedClient);
             jsonPayload.put("long", longitude);
             jsonPayload.put("retailer_code", retailer_code);
             jsonPayload.put("asm_name", asm_name);
@@ -469,7 +496,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
     public void resetFields(View view) {
         // Reset all EditText fields except "recce" and "signage board"
-        resetEditTextFields(R.id.etFetch, R.id.etHeight, R.id.etWidth, R.id.etHeight1, R.id.etWidth1,
+        resetEditTextFields(R.id.etFetch, R.id.etHeight, R.id.etWidth, R.id.etWidth1,
                 R.id.etHeight2, R.id.etWidth2, R.id.etHeight3, R.id.etWidth3, R.id.etHeight4,
                 R.id.etWidth4, R.id.etHeight5, R.id.etWidth5, R.id.etTotalArea, R.id.etTotalArea1,
                 R.id.area);
@@ -926,174 +953,5 @@ boolean allpicturestaken;
     SiteDetail siteDetail;
     JSONObject jsonobj;
 
-    private void implementUI(String response) {
-        try {
 
-            Log.d("tagresponse is", response);
-            JSONObject jsonResponse = new JSONObject(response);
-
-            if (jsonResponse.getString("message").equals("Sites retrieved successfully.")) {
-                JSONObject dataArray = new JSONObject(jsonResponse.getString("site"));
-                if (dataArray != null && dataArray.length() > 0) {
-                    JSONObject dataObject = dataArray;
-                    jsonobj = dataObject;
-                    if (dataObject != null) {
-                        siteDetail = new SiteDetail();
-                        siteDetail.setId(dataObject.optInt("id"));
-                        siteDetail.setVendorId(dataObject.optString("vendor_id"));
-                        siteDetail.setLocation(dataObject.optString("location"));
-                        siteDetail.setCreatedAt(dataObject.optString("created_at"));
-                        siteDetail.setEndDate(dataObject.optString("end_date"));
-                        siteDetail.setLatitude(dataObject.optString("latitude"));
-                        siteDetail.setLongitude(dataObject.optString("longitute")); // Consider renaming "longitute" to "longitude" in your JSON or code for consistency
-                        siteDetail.setMediaType(dataObject.optString("media_type"));
-                        siteDetail.setIllumination(dataObject.optString("illumination"));
-                        siteDetail.setStartDate(dataObject.optString("start_date"));
-                        siteDetail.setEndDate(dataObject.optString("end_date"));
-                        siteDetail.setName(dataObject.optString("name"));
-                        siteDetail.setSiteNo(dataObject.optString("site_no"));
-                        siteDetail.setWidth(dataObject.optString("width"));
-                        siteDetail.setHeight(dataObject.optString("height"));
-                        siteDetail.setTotalArea(dataObject.optString("total_area"));
-                        siteDetail.setUpdatedAt(dataObject.optString("updated_at"));
-
-                        Log.d("SiteDetailLog",
-                                "ID: " + siteDetail.getId() +
-                                        ", Vendor ID: " + siteDetail.getVendorId() +
-                                        ", Location: " + siteDetail.getLocation() +
-                                        ", Created At: " + siteDetail.getCreatedAt() +
-                                        ", End Date: " + siteDetail.getEndDate() +
-                                        ", Latitude: " + siteDetail.getLatitude() +
-                                        ", Longitude: " + siteDetail.getLongitude() +
-                                        ", Media Type: " + siteDetail.getMediaType() +
-                                        ", Illumination: " + siteDetail.getIllumination() +
-                                        ", Start Date: " + siteDetail.getStartDate() +
-                                        ", Name: " + siteDetail.getName() +
-                                        ", Site No: " + siteDetail.getSiteNo() +
-                                        ", Width: " + siteDetail.getWidth() +
-                                        ", Height: " + siteDetail.getHeight() +
-                                        ", Total Area: " + siteDetail.getTotalArea() +
-                                        ", Updated At: " + siteDetail.getUpdatedAt());
-
-
-                        try {
-                            String imageUrl = dataObject.optString("image");
-                            imageUrl = "https://acme.warburttons.com/" + imageUrl;
-                            Log.d("tag41", "imageurl is " + imageUrl);
-                            Log.d("tg2", "image code not executing 1");
-
-                            if (imageUrl != "null" && !imageUrl.isEmpty()) {
-                                URL url = new URL(imageUrl);
-                                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                Log.d("tg2", "image code executing");
-                                siteDetail.setImage(bitmap);
-                            }
-                        } catch (Exception e) {
-                            Log.d("tg2", "image code not executing 2");
-                            Log.d("tag41", "error in implementui" + e.toString());
-                            Log.e("tag41", "sdfdg", e);
-                            // Handle error
-                        }
-
-                        // Update UI
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                TextView tvSiteId = findViewById(R.id.etSiteNo);
-                                //TODO after person implements site name then change this
-                                tvSiteId.setText(String.valueOf(siteDetail.getSiteNo()));
-
-                                TextView tvLocation = findViewById(R.id.tvLocation);
-                                tvLocation.setText(siteDetail.getLocation());
-
-                                TextView tvSiteName = findViewById(R.id.tvAddSiteDetail);
-                                tvSiteName.setText(siteDetail.getName());
-
-                                //TextView tvLastInspection = findViewById(R.id.tvStartDate);
-                                //tvLastInspection.setText(siteDetail.getCreatedAt());
-
-                                TextView tvLatitude = findViewById(R.id.tvLatitude);
-                                tvLatitude.setText(siteDetail.getLatitude());
-
-                                TextView tvLongitude = findViewById(R.id.tvLongitude);
-                                tvLongitude.setText(siteDetail.getLongitude());
-
-                                TextView tvMediaType = findViewById(R.id.tvMediaType);
-                                tvMediaType.setText(siteDetail.getMediaType());
-
-                                TextView tvIllumination = findViewById(R.id.tvIllumination);
-                                tvIllumination.setText(siteDetail.getIllumination());
-
-                                TextView tvStartDate = findViewById(R.id.tvStartDate);
-                                tvStartDate.setText(siteDetail.getStartDate());
-
-                                TextView tvEndDate = findViewById(R.id.tvEndDate);
-                                tvEndDate.setText(siteDetail.getEndDate());
-
-                                // Set the site number
-                                TextView tvSiteNo = findViewById(R.id.etSiteNo);
-                                tvSiteNo.setText(String.valueOf(siteDetail.getSiteNo())); // assuming getter method exists
-
-                                // Set the width
-                                TextView tvWidth = findViewById(R.id.tvWidth);
-                                tvWidth.setText(siteDetail.getWidth()); // assuming getter method exists
-
-                                // Set the height
-                                TextView tvHeight = findViewById(R.id.tvHeight);
-                                tvHeight.setText(siteDetail.getHeight()); // assuming getter method exists
-
-                                // Set the total area
-                                TextView tvTotalArea = findViewById(R.id.tvTotalArea);
-                                tvTotalArea.setText(siteDetail.getTotalArea()); // assuming getter method exists
-                                Log.d("tg2", "image code not executing");
-
-                                RoundRectCornerImageView tvImage = findViewById(R.id.ivCampaignImage);
-                                if (siteDetail.getImage() != null) {
-                                    Log.d("tg2", "image code executing");
-                                    tvImage.setImageBitmap(siteDetail.getImage());
-                                }
-                            }
-                        });
-                    }
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(RecceDashboardActivity.this, "Error retrieving or parsing data.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
-            } else if (jsonResponse.getString("message").equals("Data Saved successfully.")) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(RecceDashboardActivity.this, "Image updated successfully", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(RecceDashboardActivity.this, "Error retrieving or parsing data..", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        } catch (Exception e) {
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d("tag123", e.toString());
-                    Toast.makeText(RecceDashboardActivity.this, "Error retrieving or parsing data", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-
-    }
 }
