@@ -651,34 +651,40 @@ boolean allpicturestaken;
                 if(piccounter== 1){
                     Log.d("pic", "1");
                     pic1taken= true;
+                    binding.btnUpdatePhoto.setText("Retake Store Photo 1");
                     binding.btnUpdatePhoto.setBackgroundResource(R.drawable.primarystrokegreen);
                     pic1takenURI= photoURI;
                 }else if(piccounter== 2){
                     pic2taken= true;
+                    binding.btnUpdatePhoto1.setText("Retake Store Photo 2");
                     binding.btnUpdatePhoto1.setBackgroundResource(R.drawable.primarystrokegreen);
 
                     Log.d("pic", "2");
                     pic2takenURI= photoURI;
                 }else if(piccounter== 3){
                     pic3taken= true;
+                    binding.btnUpdatePhoto2.setText("Retake Store Photo 3");
                     binding.btnUpdatePhoto2.setBackgroundResource(R.drawable.primarystrokegreen);
 
                     Log.d("pic", "3");
                     pic3takenURI= photoURI;
                 }else if(piccounter== 4){
                     pic4taken= true;
+                    binding.btnUpdatePhoto3.setText("Retake Store Photo 4");
                     binding.btnUpdatePhoto3.setBackgroundResource(R.drawable.primarystrokegreen);
 
                     Log.d("pic", "4");
                     pic4takenURI= photoURI;
                 }else if(piccounter== 5){
                     picsigntaken= true;
+                    binding.btnUpdatePhoto4.setText("Retake Signature of owner");
                     binding.btnUpdatePhoto4.setBackgroundResource(R.drawable.primarystrokegreen);
 
                     Log.d("pic", "5");
                     picsigntakenURI= photoURI;
                 }else if(piccounter== 6){
                     picsitetaken= true;
+                    binding.tvAddSite.setText("Retake Site Photograph");
                     binding.rlAddImage.setBackgroundResource(R.drawable.primarystrokegreen);
 
                     Log.d("pic", "6");
