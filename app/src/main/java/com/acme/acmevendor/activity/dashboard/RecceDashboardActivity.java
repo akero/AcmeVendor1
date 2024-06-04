@@ -374,6 +374,18 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                   }
         );
 
+        binding.ivHistory.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View view) {
+
+                                                          Intent intent= new Intent(RecceDashboardActivity.this, RecceHistory.class);
+                                                          intent.putExtra("logintoken", logintoken);
+                                                          intent.putExtra("id", recceid);
+                                                          startActivity(intent);
+                                                      }
+                                                  }
+        );
+
         //photo of sign
         RoundRectCornerImageView imageButton = findViewById(R.id.ivCampaignImage);
         imageButton.setOnClickListener(new View.OnClickListener() {
