@@ -178,6 +178,28 @@ public class APIreferenceclass {
 
     }
 
+    //recce history details
+    public APIreferenceclass(String logintoken, Context context, int id, String projectid){
+
+        //TODO change url
+
+        String url= "https://acme.warburttons.com/api/supervisor-project/"+ projectid;
+        querytype= 0;
+
+        Log.d("tg01", "a");
+
+        String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
+
+        Map<String, String> headers= new HashMap<>();
+        headers.put("Authorization", "Bearer "+logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+
+        callapi(headers, jsonPayload, context, querytype, url);
+
+    }
+
 
     //to fetch client's campaigns in clientdashfirstpage
     public APIreferenceclass(int clientId, int vendorclientorcampaign, String logintoken, Context context) {

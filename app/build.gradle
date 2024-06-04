@@ -46,7 +46,6 @@ dependencies {
     implementation 'org.chromium.net:cronet-api:119.6045.31'
 
 
-
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'androidx.core:core:1.7.0'
