@@ -128,7 +128,10 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
 
         try{
-            recceid= getIntent().getIntExtra("recceid", 0);
+            FileHelper fh= new FileHelper();
+
+
+            recceid= Integer.parseInt(fh.readUserId(this));
         }catch (Exception e){
             e.printStackTrace();
         }

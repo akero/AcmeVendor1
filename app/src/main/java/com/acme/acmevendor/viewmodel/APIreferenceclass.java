@@ -179,11 +179,11 @@ public class APIreferenceclass {
     }
 
     //recce history details
-    public APIreferenceclass(String logintoken, Context context, int id, String projectid){
+    public APIreferenceclass(String logintoken, Context context, int id, String projectid, int i){
 
         //TODO change url
 
-        String url= "https://acme.warburttons.com/api/supervisor-project/"+ projectid;
+        String url= "https://acme.warburttons.com/api/project/"+ projectid;
         querytype= 0;
 
         Log.d("tg01", "a");

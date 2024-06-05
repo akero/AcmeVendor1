@@ -30,7 +30,8 @@
 
         <activity
             android:name=".activity.dashboard.RecceHistoryDetails"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/NoActTheme"/>
         <activity
             android:name=".activity.dashboard.RecceHistory"
             android:exported="false"
