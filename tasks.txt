@@ -2,7 +2,6 @@ Ship
 
 
 history
-edit
 
 afs different icon
 

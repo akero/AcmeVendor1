@@ -381,6 +381,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                           Intent intent= new Intent(RecceDashboardActivity.this, RecceHistory.class);
                                                           intent.putExtra("logintoken", logintoken);
                                                           intent.putExtra("id", recceid);
+                                                          Log.d("id", Integer.toString(recceid));
                                                           startActivity(intent);
                                                       }
                                                   }
