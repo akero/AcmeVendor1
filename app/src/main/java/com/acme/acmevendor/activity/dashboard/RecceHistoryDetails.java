@@ -46,15 +46,6 @@ public class RecceHistoryDetails extends AppCompatActivity implements ApiInterfa
             Log.d("asdsad", e.toString());
         }
 
-        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
-                                                   @Override
-                                                   public void onClick(View view) {
-
-
-                                                   }
-                                               });
-
-
         APIreferenceclass api= new APIreferenceclass(logintoken, this, id, projectId);
 
     }

@@ -553,28 +553,6 @@
                             android:textSize="@dimen/_12ssp" />
                     </RelativeLayout>
                 </LinearLayout>
-
-
-
-
-
-
-                <Button
-                    android:id="@+id/btnDownload"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/llLocation"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:background="@drawable/primarystroke"
-                    android:fontFamily="@font/dmsansbold"
-                    android:onClick="onDownloadClick"
-                    android:text="Edit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_14ssp" />
-
-
-
             </RelativeLayout>
 
         </ScrollView>
