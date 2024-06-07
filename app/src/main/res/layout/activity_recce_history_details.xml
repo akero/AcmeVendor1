@@ -73,8 +73,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/left"
                     android:clickable="true"
-                    android:elevation="2dp"
                     android:visibility="gone"
+                    android:elevation="2dp"
                     android:layout_below="@id/line1"
                     android:layout_above="@id/llUnit"/>
 
@@ -83,10 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/right"
-                    android:visibility="gone"
                     android:layout_alignParentRight="true"
                     android:clickable="true"
-
+                    android:visibility="gone"
                     android:elevation="2dp"
                     android:layout_below="@id/line1"
                     android:layout_above="@id/llUnit"/>
@@ -574,6 +573,21 @@
                     android:scaleType="fitCenter"
                     android:layout_below="@id/line11"
                     android:src="@drawable/temp_campaign" />
+
+                <Button
+                    android:id="@+id/btnDownload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivCampaignImage1"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/primarystroke"
+                    android:clickable= "true"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Download"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
 
             </RelativeLayout>
 

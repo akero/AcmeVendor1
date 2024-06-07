@@ -1,9 +1,11 @@
 package com.acme.acmevendor.activity.dashboard;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import com.acme.acmevendor.activity.login.OTP;
 import com.acme.acmevendor.databinding.ActivityRecceHistoryBinding;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -43,18 +46,23 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
 
     ProgressBar progressBar;
     Animation rotateAnimation;
+    int btn; // 0 for all, 1 for pending, 2 for approved, 3 for rejected
 
     String campaignName;
     JSONArray jsonArray1;
     ActivityRecceHistoryBinding binding;
-
+    int whiteColor;
+    int blackColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_recce_history);
         campaignName="";
+        btn= 0;
 
+        whiteColor = ContextCompat.getColor(this, R.color.white);
+        blackColor = ContextCompat.getColor(this, R.color.black);
 
         id= 0;
         logintoken= "";
@@ -132,10 +140,127 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
         CampaignListAdapter adapter = new CampaignListAdapter(this, jsonArray1, false);
         binding.rvCampaignList.setAdapter(adapter);
 
-        APIreferenceclass api= new APIreferenceclass(logintoken, this, id, 1);
+        APIreferenceclass api= new APIreferenceclass(logintoken, ctxt, id, btn, 0);
+
 
     }
 
+
+    @SuppressLint("ResourceAsColor")
+    public void btnAllClick(View view) {
+        clearUi();
+        btn= 0;
+
+        binding.btnAll.setBackgroundResource(R.drawable.primaryround);
+        binding.btnAll.setTextColor(whiteColor);
+
+        binding.btnPending.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnPending.setTextColor(blackColor);
+
+        binding.btnApproved.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnApproved.setTextColor(blackColor);
+
+        binding.btnRejected.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnRejected.setTextColor(blackColor);
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+
+        allClick();
+        // ... your logic ...
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void btnPendingClick(View view) {
+        clearUi();
+        btn= 1;
+
+        binding.btnPending.setBackgroundResource(R.drawable.primaryround);
+        binding.btnPending.setTextColor(whiteColor);
+
+        binding.btnAll.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnAll.setTextColor(blackColor);
+
+        binding.btnApproved.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnApproved.setTextColor(blackColor);
+
+        binding.btnRejected.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnRejected.setTextColor(blackColor);
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+
+        allClick();
+        // ... your logic ...
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void btnApprovedClick(View view) {
+        clearUi();
+        btn= 2;
+
+        binding.btnApproved.setBackgroundResource(R.drawable.primaryround);
+        binding.btnApproved.setTextColor(whiteColor);
+
+        binding.btnPending.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnPending.setTextColor(blackColor);
+
+        binding.btnAll.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnAll.setTextColor(blackColor);
+
+        binding.btnRejected.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnRejected.setTextColor(blackColor);
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+
+        allClick();
+        // ... your logic ...
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void btnRejectedClick(View view) {
+        clearUi();
+        btn= 3;
+
+        binding.btnRejected.setBackgroundResource(R.drawable.primaryround);
+        binding.btnRejected.setTextColor(whiteColor);
+
+        binding.btnPending.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnPending.setTextColor(blackColor);
+
+        binding.btnApproved.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnApproved.setTextColor(blackColor);
+
+        binding.btnAll.setBackgroundResource(R.drawable.primarystroke);
+        binding.btnAll.setTextColor(blackColor);
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.startAnimation(rotateAnimation);
+
+        allClick();
+        // ... your logic ...
+    }
+
+    void allClick(){
+        //vendorclientorcampaign=0;
+        //TODO pass correct logintoken here
+        //logintoken="211|fcsu2C90hfOUduHNXDSZRxu7394NaQhOpiG3zMeM";
+        Log.d("tg5","fin");
+
+        APIreferenceclass api= new APIreferenceclass(logintoken, ctxt, id, btn, 0);
+    }
+
+    private void clearUi() {
+        // Clear the RecyclerView
+        if (binding.rvCampaignList.getAdapter() != null) {
+            CampaignListAdapter adapter = (CampaignListAdapter) binding.rvCampaignList.getAdapter();
+            adapter.clearData(); // You'll need to implement a method 'clearData()' in your adapter class
+
+                jsonArray1 = new JSONArray();
+
+        }
+    }
 
     void logout() {
 
@@ -267,7 +392,31 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
         try {
             JSONObject jsonobj = new JSONObject(response);
 
-            if (jsonobj.getString("message").equals("Data fetched successfully!")) {
+            if (jsonobj.getString("message").equals("Data fetched successfully!")&&btn==0) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        implementUI(response);
+                    }
+                });
+            }else if (jsonobj.getString("message").equals("Data fetched successfully!")&&btn==1) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        implementUI(response);
+                    }
+                });
+            }else if (jsonobj.getString("message").equals("Data fetched successfully!")&&btn==2) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        implementUI(response);
+                    }
+                });
+            }else if (jsonobj.getString("message").equals("Data fetched successfully!")&&btn==3) {
 
                 runOnUiThread(new Runnable() {
                     @Override

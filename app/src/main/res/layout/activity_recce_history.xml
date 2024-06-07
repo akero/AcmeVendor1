@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/ivNotification"
                 android:clickable= "true"
+                android:visibility="gone"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:src="@drawable/search" />
@@ -68,37 +69,102 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvCampaign"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:layout_weight="1"
-            android:fontFamily="@font/dmsansregular"
-            android:layout_below="@id/topBar"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginLeft="16dp"
-            android:text="History"
-            android:textColor="#071116"
-            android:textSize="24sp" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvCampaign"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@id/topBar"
+            android:layout_marginTop="24dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
 
             android:layout_marginBottom="@dimen/_5sdp"
             >
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llTopbuttons"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                app:layout_constraintWidth_default="spread"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                >
+
+                <Button
+                    android:id="@+id/btnAll"
+                    android:layout_width="74dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/primaryround"
+                    android:fontFamily="@font/dmsansregular"
+                    android:onClick="btnAllClick"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btnPending"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="All"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+
+
+                <Button
+                    android:id="@+id/btnPending"
+                    android:layout_width="74dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintStart_toEndOf="@id/btnAll"
+                    app:layout_constraintEnd_toStartOf="@id/btnApproved"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Pending"
+                    android:onClick="btnPendingClick"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnApproved"
+                    android:layout_width="74dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintStart_toEndOf="@id/btnPending"
+                    app:layout_constraintEnd_toStartOf="@id/btnRejected"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/black"
+                    android:onClick="btnApprovedClick"
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Approved"
+                    android:textAllCaps="false"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnRejected"
+                    android:layout_width="74dp"
+                    android:layout_height="30dp"
+                    android:onClick="btnRejectedClick"
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintStart_toEndOf="@id/btnApproved"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    android:background="@drawable/primarystroke"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Rejected"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCampaignList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below= "@id/llTopbuttons"
                 android:layout_marginBottom="@dimen/_5sdp" />
 
         </RelativeLayout>

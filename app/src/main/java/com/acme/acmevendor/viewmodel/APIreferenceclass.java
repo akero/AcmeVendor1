@@ -178,6 +178,37 @@ public class APIreferenceclass {
 
     }
 
+    //recce history- buttons
+    public APIreferenceclass(String logintoken, Context context, int id,  int btn, int j){
+        String url= "https://acme.warburttons.com/api/supervisor-project/"+ id;
+        if(btn== 0){
+            url= "https://acme.warburttons.com/api/supervisor-project/"+ id;
+        }else if(btn== 1){
+            url= "https://acme.warburttons.com/api/supervisor-pending-project/"+id;
+        }
+        else if(btn== 2){
+            url= "https://acme.warburttons.com/api/supervisor-approved-project/"+id;
+        }
+        else if(btn== 3){
+            url= "https://acme.warburttons.com/api/supervisor-rejected-project/"+id;
+        }
+
+        querytype= 0;
+
+        Log.d("tg01", "a");
+
+        String jsonPayload= "{\"Authorization\":\"" +logintoken+"\"}";
+
+        Map<String, String> headers= new HashMap<>();
+        headers.put("Authorization", "Bearer "+logintoken);
+        headers.put("Content-Type", "application/json");
+
+        Log.d("cldbatest","jsonpayload is "+ jsonPayload);
+
+        callapi(headers, jsonPayload, context, querytype, url);
+
+    }
+
     //recce history details
     public APIreferenceclass(String logintoken, Context context, int id, String projectid, int i){
 

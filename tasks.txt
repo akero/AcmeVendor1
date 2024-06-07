@@ -1,12 +1,27 @@
 Ship
 
 
+//date and time, remove icon- code
+//area- code
+//editable if no content fetched otherwise not
+//width first
+
+remove unit id
+
+//e signature
+
 history- add all 4 pics
-afs- change splash and logo
+>afs- change splash and logo
 
 download button in history
 
-more changes figma
+history changes
+//four types of result
+search with retailer code and name
+
+pixellation
+
+asm login
 
 
 //auto login

@@ -10,14 +10,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import com.acme.acmevendor.activity.login.OTP;
+import com.acme.acmevendor.adapters.CampaignListAdapter;
 import com.acme.acmevendor.utility.RoundRectCornerImageView;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
 import com.acme.acmevendor.viewmodel.SiteDetail;
+import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
@@ -25,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -55,6 +59,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -98,6 +103,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
     int recceid, clientspinnerboolean;
     ProgressBar progressBar;
     Animation rotateAnimation;
+    Bitmap signatureBitmap;
+    Uri signatureUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +125,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         pic1takenURI= null; pic2takenURI= null; pic3takenURI= null; pic4takenURI= null; picsigntakenURI= null; picsitetakenURI= null;
         allpicturestaken= false; pic1taken= false; pic2taken= false; pic3taken= false; pic4taken= false; picsigntaken= false; picsitetaken= false;
         selectedClient= "";
+
+        picsigntaken= true;
         //animation code
         progressBar= findViewById(R.id.progressBar);
         rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
@@ -161,6 +170,26 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         storePhotoButton3 = findViewById(R.id.btnUpdatePhoto3);
         ownerSignButton = findViewById(R.id.btnUpdatePhoto4);
 
+binding.signaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
+
+            @Override
+            public void onStartSigning() {
+                //Event triggered when the pad is touched
+                Log.d("sign", "sign3");
+            }
+
+            @Override
+            public void onSigned() {
+                //Event triggered when the pad is signed
+                Log.d("sign", "sign");
+            }
+
+            @Override
+            public void onClear() {
+                //Event triggered when the pad is cleared
+                Log.d("sign", "sign2");
+            }
+        });
 
         storePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,14 +286,14 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         ownerSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("camera", "click registered");
-                if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+                Log.d("signature", "click registered");
+                //if (ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecceDashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//||ContextCompat.checkSelfPermission(ViewSiteDetailActivity.this, WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 
-                    Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(RecceDashboardActivity.this, "Please give camera permissions", Toast.LENGTH_SHORT).show();
 
-                    ActivityCompat.requestPermissions(RecceDashboardActivity.this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+                    //ActivityCompat.requestPermissions(RecceDashboardActivity.this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
                     Log.d("camera", "dont have permission");
-                } else {
+                //} else {
 
                     // temporaryuploadchecker();
                     //latlong();
@@ -272,9 +301,64 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
                     storephoto= 2;
                     piccounter= 5;
-                    openCamera();
+                    //openCamera();
+
+
+                    signatureBitmap = binding.signaturePad.getSignatureBitmap();
+                signatureUri = null;
+                try {
+                    File externalFilesDir = getExternalFilesDir(null);
+                    if (externalFilesDir != null) {
+                        File signatureFile = new File(externalFilesDir, "signature.png");
+                        FileOutputStream fos = new FileOutputStream(signatureFile);
+                        signatureBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                        fos.flush();
+                        fos.close();
+
+                        signatureUri = FileProvider.getUriForFile(RecceDashboardActivity.this,
+                                "com.example.android.fileprovider",
+                                signatureFile);
+
+                        Log.d("SignaturePad", "Signature file path: " + signatureFile.getAbsolutePath());
+                        Log.d("SignaturePad", "Signature URI: " + signatureUri);
+                    } else {
+                        Log.e("SignaturePad", "External files directory is null");
+                    }
+                } catch (IOException e) {
+                    Log.e("SignaturePad", "Error getting signature URI", e);
                 }
-            }
+
+
+
+                    // Log bitmap details
+                    String tag = "SignaturePad";  // Tag for filtering logs
+
+                    if (signatureBitmap != null) {
+                        Log.d(tag, "Bitmap captured successfully");
+                        Log.d(tag, "Bitmap dimensions: " + signatureBitmap.getWidth() + "x" + signatureBitmap.getHeight());
+                        Log.d(tag, "Bitmap config: " + signatureBitmap.getConfig());
+                        Log.d(tag, "Bitmap size: " + signatureBitmap.getByteCount() + " bytes");
+
+                        // Check if the bitmap is empty (all pixels are the background color)
+                        boolean isEmpty = true;
+                        int backgroundColor = Color.WHITE;  // Assuming white background
+                        for (int x = 0; x < signatureBitmap.getWidth(); x++) {
+                            for (int y = 0; y < signatureBitmap.getHeight(); y++) {
+                                if (signatureBitmap.getPixel(x, y) != backgroundColor) {
+                                    isEmpty = false;
+                                    break;
+                                }
+                            }
+                            if (!isEmpty) break;
+                        }
+                        Log.d(tag, "Is bitmap empty? " + (isEmpty ? "Yes" : "No"));
+                    } else {
+                        Log.e(tag, "Failed to capture bitmap");
+                    }
+
+                }
+
+
         });
 
         //fetch retailer details and populate automatically
@@ -301,13 +385,9 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             }
         });
 
-
-        //Signage area
 //date
 
-        //EditText height, width, remarks, projectname, state, district, city, retailname, ownername, owneremail, ownerphone, yourname, location;
-
-        // Get the current date
+        // Get the current date and time
         Calendar calendar = Calendar.getInstance();
 
 // Get the year, month, and day components of the date
@@ -315,57 +395,24 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
         int month = calendar.get(Calendar.MONTH) + 1; // Month is 0-based, so we add 1
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-// Create a string representation of the date
-        currentDate = year + "-" + month + "-" + day;
+// Get the hour and minute components of the time
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24-hour format
+        int minute = calendar.get(Calendar.MINUTE);
 
-// You can also use DateFormat to get a formatted date string
-        DateFormat dateFormat = DateFormat.getDateInstance();
-        String formattedDate = dateFormat.format(calendar.getTime());
+// Create a string representation of the date and time
+        String currentDateTime = String.format("%04d-%02d-%02d, %02d:%02d",
+                year, month, day, hour, minute);
 
-// Print the current date
-        System.out.println("Current date: " + currentDate);
-        System.out.println("Formatted date: " + formattedDate);
-        binding.etWidth3.setText(currentDate);
+// You can also use SimpleDateFormat to get a formatted date and time string
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
+        String formattedDateTime = dateTimeFormat.format(calendar.getTime());
 
+// Print the current date and time
+        System.out.println("Current date and time: " + currentDateTime);
+        System.out.println("Formatted date and time: " + formattedDateTime);
 
-       /* binding.etWidth3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // on below line we are getting
-                // the instance of our calendar.
-                final Calendar c = Calendar.getInstance();
-
-                // on below line we are getting
-                // our day, month and year.
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                // on below line we are creating a variable for date picker dialog.
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        // on below line we are passing context.
-                        RecceDashboardActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                // on below line we are setting date to our text view.
-                                Log.d("date", year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
-                                binding.etWidth3.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                                Log.d("date", String.valueOf(binding.etWidth3.getText()));
-
-
-                            }
-                        },
-                        // on below line we are passing year,
-                        // month and day for selected date in our date picker.
-                        year, month, day);
-                // at last we are calling show to
-                // display our date picker dialog.
-                datePickerDialog.show();
-            }
-        });
-*/
+// Set the formatted date and time to the EditText
+        binding.etWidth3.setText(formattedDateTime);
 
         binding.ivNotification.setOnClickListener(new View.OnClickListener() {
                                                       @Override
@@ -389,6 +436,27 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
                                                       }
                                                   }
         );
+
+        binding.etHeight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    // code to execute when EditText loses focus
+                    try {
+                        double area= Double.parseDouble( binding.etHeight.getText().toString())*Double.parseDouble( binding.etWidth.getText().toString());
+                        Log.d("area", String.valueOf(area));
+                        //jsonPayload.put("area", String.valueOf(area));
+                        binding.etarea.setText(String.valueOf(area));
+
+                    } catch (NumberFormatException e) {
+                        // Handle the case where the input is not a valid double
+                        e.printStackTrace();
+                        //width = 0.0; // or any other default value you prefer
+                    }
+
+                }
+            }
+        });
 
         //photo of sign
         RoundRectCornerImageView imageButton = findViewById(R.id.ivCampaignImage);
@@ -460,6 +528,8 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
             }
         });
     }
+
+
 
     public void resetAndReinitialize() {
         // Perform any necessary cleanup or data saving operations here
@@ -538,7 +608,7 @@ public class RecceDashboardActivity extends AppCompatActivity implements ApiInte
 
 
 
-        APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, recceid, pic1takenURI, pic2takenURI,pic3takenURI, pic4takenURI, picsigntakenURI, picsitetakenURI);
+        APIreferenceclass api = new APIreferenceclass(jsonPayload, this, logintoken, recceid, pic1takenURI, pic2takenURI,pic3takenURI, pic4takenURI, signatureUri, picsitetakenURI);
         imageUri = null;
     }
 
@@ -693,7 +763,7 @@ boolean allpicturestaken;
                     pic4takenURI= photoURI;
                 }else if(piccounter== 5){
                     picsigntaken= true;
-                    binding.btnUpdatePhoto4.setText("Retake Signature of owner");
+                    binding.btnUpdatePhoto4.setText("Retake Signature");
                     binding.btnUpdatePhoto4.setBackgroundResource(R.drawable.primarystrokegreen);
 
                     Log.d("pic", "5");
@@ -1031,15 +1101,47 @@ boolean allpicturestaken;
             division= jsonobj1.optString("division", "");
             asm_name= jsonobj1.optString("asm_name", "");
             asm_contact= jsonobj1.optString("asm_contact", "");
+
             binding.etHeight3.setText(jsonobj1.getString("retailer_name"));
+            if(!TextUtils.isEmpty(binding.etHeight3.getText())){
+                binding.etHeight3.setFocusable( View.NOT_FOCUSABLE);
+            }
+
             binding.etHeight5.setText(jsonobj1.getString("contact"));
+            if(!TextUtils.isEmpty(binding.etHeight5.getText())){
+                binding.etHeight5.setFocusable( View.NOT_FOCUSABLE);
+            }
+
             binding.etTotalArea1.setText(jsonobj1.getString("address"));
+            if(!TextUtils.isEmpty(binding.etTotalArea1.getText())){
+                binding.etTotalArea1.setFocusable( View.NOT_FOCUSABLE);
+            }
+
             binding.etWidth2.setText(jsonobj1.getString("city"));
+            if(!TextUtils.isEmpty(binding.etWidth2.getText())){
+                binding.etWidth2.setFocusable( View.NOT_FOCUSABLE);
+            }
+
             binding.etHeight2.setText(jsonobj1.getString("district"));
+            if(!TextUtils.isEmpty(binding.etHeight2.getText())){
+                binding.etHeight2.setFocusable( View.NOT_FOCUSABLE);
+            }
+
             binding.etWidth1.setText(jsonobj1.getString("state"));
+            if(!TextUtils.isEmpty(binding.etWidth1.getText())){
+                binding.etWidth1.setFocusable( View.NOT_FOCUSABLE);
+            }
 
             binding.etHeight8.setText(asm_name);
+            if(!TextUtils.isEmpty(binding.etHeight8.getText())){
+                binding.etHeight8.setFocusable( View.NOT_FOCUSABLE);
+            }
+
             binding.etWidth8.setText(asm_contact);
+            if(!TextUtils.isEmpty(binding.etWidth8.getText())){
+                binding.etWidth8.setFocusable( View.NOT_FOCUSABLE);
+            }
+
 
 
 
