@@ -1,9 +1,13 @@
 Ship
 
 
-history
+history- add all 4 pics
+afs- change splash and logo
 
-afs different icon
+download button in history
+
+more changes figma
+
 
 //auto login
 //logout

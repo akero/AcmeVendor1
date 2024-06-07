@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.acme.acmevendor.activity.login.OTP;
 import com.acme.acmevendor.databinding.ActivityRecceHistoryBinding;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -47,6 +48,7 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
     JSONArray jsonArray1;
     ActivityRecceHistoryBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +61,49 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
 
         try{
 
-            id= getIntent().getIntExtra("id", 0);
-            logintoken= getIntent().getStringExtra("logintoken");
+            FileHelper fh= new FileHelper();
+            id= Integer.parseInt(fh.readUserId(this));
+            logintoken = fh.readLoginToken(this);
 
         }catch(Exception e){
             Log.d("asdsad", e.toString());
         }
 
+        binding.ivNotification.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View view) {
+
+                                                          logout();
+
+                                                      }
+                                                  }
+        );
+
+        binding.ivPlusicon.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View view) {
+
+                                                          Intent intent= new Intent(RecceHistory.this, RecceDashboardActivity.class);
+                                                          startActivity(intent);
+                                                      }
+                                                  }
+        );
+
+        binding.ivSearchicon.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View view) {
+
+
+                                                      }
+                                                  }
+        );
+
+
+
         Log.d("id", Integer.toString(id));
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2
+        );
         binding.rvCampaignList.setLayoutManager(layoutManager);
 
         Log.d("whichclass", "ViewVendorSites");
@@ -98,6 +133,22 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
         binding.rvCampaignList.setAdapter(adapter);
 
         APIreferenceclass api= new APIreferenceclass(logintoken, this, id, 1);
+
+    }
+
+
+    void logout() {
+
+        try {
+            FileHelper fh = new FileHelper();
+            fh.writeUserType(this, "");
+
+            Intent intent= new Intent(RecceHistory.this, OTP.class);
+            startActivity(intent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -196,7 +247,7 @@ public class RecceHistory extends AppCompatActivity implements ApiInterface {
             public void run() {
                 // Your UI update code goes here
 
-                GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 1);
+                GridLayoutManager layoutManager = new GridLayoutManager(ctxt, 2);
                 binding.rvCampaignList.setLayoutManager(layoutManager);
                 CampaignListAdapter adapter = new CampaignListAdapter(ctxt, jsonArray1, false);
 

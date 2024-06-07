@@ -23,6 +23,7 @@ import com.acme.acmevendor.activity.dashboard.FileHelper;
 import com.acme.acmevendor.activity.dashboard.RecceAsmDashboard;
 import com.acme.acmevendor.activity.dashboard.RecceClientDashboard;
 import com.acme.acmevendor.activity.dashboard.RecceDashboardActivity;
+import com.acme.acmevendor.activity.dashboard.RecceHistory;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
 import com.acme.acmevendor.viewmodel.ApiInterface;
@@ -217,7 +218,7 @@ public class ContentOtp extends AppCompatActivity implements ApiInterface {
                 startActivity(intent);
             }else if(loginType.equals("supervisor")){
 
-                Intent intent= new Intent(ContentOtp.this, RecceDashboardActivity.class);
+                Intent intent= new Intent(ContentOtp.this, RecceHistory.class);
                 intent.putExtra("logintoken", token);
                 intent.putExtra("recceid", recceid);
 

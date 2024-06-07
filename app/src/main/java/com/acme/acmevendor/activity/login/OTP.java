@@ -10,6 +10,7 @@ import com.acme.acmevendor.activity.dashboard.AdminDashboardActivity;
 import com.acme.acmevendor.activity.dashboard.ClientDashBoardActivity;
 import com.acme.acmevendor.activity.dashboard.FileHelper;
 import com.acme.acmevendor.activity.dashboard.RecceDashboardActivity;
+import com.acme.acmevendor.activity.dashboard.RecceHistory;
 import com.acme.acmevendor.activity.dashboard.SelectLoginType;
 import com.acme.acmevendor.activity.vender.VenderDashBoardActivity;
 import com.acme.acmevendor.viewmodel.APIreferenceclass;
@@ -86,7 +87,7 @@ public class OTP extends AppCompatActivity implements ApiInterface {
 
         if(userTypeCheck != null && userTypeCheck.equals("supervisor")){
 
-            Intent intent= new Intent(OTP.this, RecceDashboardActivity.class);
+            Intent intent= new Intent(OTP.this, RecceHistory.class);
             intent.putExtra("logintoken", logintoken);
             intent.putExtra("recceid", userid);
 
