@@ -15,6 +15,8 @@ history- add all 4 pics
 
 download button in history
 
+latlong not fetching andy phone
+
 history changes
 //four types of result
 search with retailer code and name
